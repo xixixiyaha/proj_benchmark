@@ -8,7 +8,7 @@ public class PageFull<T> {
     private int total;
     private List<T> result;
     // NOTICE: 联合查询
-    private List<Long> readedUsers;
+    private List<Long> readUsers;
 
     public int getPageNo() {
         return pageNo;
@@ -34,8 +34,8 @@ public class PageFull<T> {
         this.result = result;
     }
 
-    public List<Long> getReadedUsers(){return readedUsers;}
+    public List<Long> getReadUsers(){return readUsers;}
 
-    public void setReadedUsers(List<Long> readedUsers){this.readedUsers = readedUsers;}
+    public void setReadUsers(List<Long> readedUsers){this.readUsers = readedUsers;}
 
 }

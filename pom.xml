@@ -6,19 +6,12 @@
 
     <groupId>org.example</groupId>
     <artifactId>proj_benchmark</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
-    <dependencies>
-        <dependency>
-            <groupId>redis.clients</groupId>
-            <artifactId>jedis</artifactId>
-            <version>2.8.1</version>
-        </dependency>
+    <modules>
+        <module>base-benchmark</module>
+        <module>thrift-client</module>
+    </modules>
 
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.15</version>
-        </dependency>
-    </dependencies>
 
 </project>

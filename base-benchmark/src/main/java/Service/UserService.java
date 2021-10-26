@@ -1,6 +1,5 @@
 package Service;
 
-import Bean.Page;
 import Bean.User;
 import Bean.UserFull;
 

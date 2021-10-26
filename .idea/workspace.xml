@@ -2,23 +2,40 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e7402edc-f985-409d-9734-d8a746f29253" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/lib/mysql-connector-java-5.0.8-bin.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Bean/NForm.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Bean/NFormFull.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Cache/CacheConnection.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Dao/SqlConnection.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Dao/UserDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Service/PageService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Service/UserService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/TestSqlConnection.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/thriftCompiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/base-benchmark/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/base-benchmark/src/lib/mysql-connector-java-5.0.8-bin.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/base-benchmark/src/main/java/Clients/AbstractUserClient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/base-benchmark/src/main/java/CommuteProtocol/Request.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/base-benchmark/src/main/java/CommuteProtocol/Response.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/base-benchmark/src/main/java/CommuteUtils/ByteBufferUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/base-benchmark/src/main/java/CommuteUtils/HttpClientUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/base-benchmark/src/main/java/CommuteUtils/JsonUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/base-benchmark/src/main/java/Dao/UserDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/base-benchmark/src/main/java/Service/UserServiceClientJsonImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/base-benchmark/src/main/java/Service/UserServiceServerImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/thrift-client/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/thrift-client/src/main/resources/logback.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/thrift-client/src/main/thrift/UserService.thrift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/thrift-client/thrift-client.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Bean/Page.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Bean/Page.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Bean/PageFull.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Bean/PageFull.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/CommuteUtils/ConcurActionsPool.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/CommuteUtils/UnsafeUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/CommuteUtils/ViberObjectPool.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/CommuteUtils/WaitStrategy.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Bean/NForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/base-benchmark/src/main/java/Bean/NForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Bean/NFormFull.java" beforeDir="false" afterPath="$PROJECT_DIR$/base-benchmark/src/main/java/Bean/NFormFull.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Bean/Page.java" beforeDir="false" afterPath="$PROJECT_DIR$/base-benchmark/src/main/java/Bean/Page.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Bean/PageFull.java" beforeDir="false" afterPath="$PROJECT_DIR$/base-benchmark/src/main/java/Bean/PageFull.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Bean/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/base-benchmark/src/main/java/Bean/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Bean/UserFull.java" beforeDir="false" afterPath="$PROJECT_DIR$/base-benchmark/src/main/java/Bean/UserFull.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Cache/CacheConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/base-benchmark/src/main/java/Cache/CacheConnection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/CommuteUtils/LockObjectPool.java" beforeDir="false" afterPath="$PROJECT_DIR$/base-benchmark/src/main/java/CommuteUtils/LockObjectPool.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Dao/SqlConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/base-benchmark/src/main/java/Dao/SqlConnection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Dao/UserDao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Service/PageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/base-benchmark/src/main/java/Service/PageService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/base-benchmark/src/main/java/Service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SimpleActions/SingleActions.java" beforeDir="false" afterPath="$PROJECT_DIR$/base-benchmark/src/main/java/SimpleActions/SingleActions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/TestSqlConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/base-benchmark/src/test/java/TestSqlConnection.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,6 +53,13 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="vmOptionsForImporter" value="-Xmx768m" />
+      </MavenImportingSettings>
+    </option>
+  </component>
   <component name="ProjectId" id="1zoGfTyqh0qG1jl9ZcMA8AUO3Ss" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -48,7 +72,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src" />
+    <property name="last_opened_file_path" value="D:/aPathSWs/thrift.exe" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -58,15 +82,19 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="intellij-thrift" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\0_4th\proj_benchmark\thrift-client\src\main\thrift" />
       <recent name="D:\0_4th\proj_benchmark\src" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\0_4th\proj_benchmark\lib" />
+      <recent name="D:\0_4th\proj_benchmark\thrift-client\src\main\resources" />
+      <recent name="D:\0_4th\proj_benchmark\base-benchmark" />
+      <recent name="D:\0_4th\proj_benchmark\src\main\java\CommuteProtocol" />
       <recent name="D:\0_4th\proj_benchmark\src\main\java\CommuteUtils" />
+      <recent name="D:\0_4th\proj_benchmark\lib" />
     </key>
   </component>
   <component name="SvnConfiguration">
@@ -81,7 +109,9 @@
       <updated>1634807130535</updated>
       <workItem from="1634807134386" duration="2035000" />
       <workItem from="1634809360285" duration="4362000" />
-      <workItem from="1634860872353" duration="9019000" />
+      <workItem from="1634860872353" duration="19045000" />
+      <workItem from="1635218624941" duration="1700000" />
+      <workItem from="1635227825943" duration="1229000" />
     </task>
     <servers />
   </component>
@@ -89,30 +119,50 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="722" y="77" key="#Project_Structure" timestamp="1634954181104">
+    <state x="722" y="77" key="#Project_Structure" timestamp="1635228847359">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="722" y="77" key="#Project_Structure/0.0.1536.824@0.0.1536.824" timestamp="1634954181104" />
+    <state x="722" y="77" key="#Project_Structure/0.0.1536.824@0.0.1536.824" timestamp="1635228847359" />
+    <state x="659" y="97" key="#SQL_Dialects" timestamp="1634958627556">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="659" y="97" key="#SQL_Dialects/0.0.1536.824@0.0.1536.824" timestamp="1634958627556" />
+    <state x="958" y="124" key="#com.intellij.ide.util.MemberChooser" timestamp="1635214062108">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="958" y="124" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1635214062108" />
     <state x="499" y="162" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1634861398758">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="499" y="162" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1634861398758" />
-    <state x="933" y="117" key="FileChooserDialogImpl" timestamp="1634953838754">
+    <state x="933" y="117" key="FileChooserDialogImpl" timestamp="1635227434835">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="933" y="117" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1634953838754" />
-    <state x="282" y="0" key="SettingsEditor" timestamp="1634950361249">
+    <state x="933" y="117" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1635227434835" />
+    <state x="384" y="95" key="Maven.ArtifactSearchDialog" timestamp="1635218108000">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="282" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1634950361249" />
-    <state x="461" y="240" key="com.intellij.ide.util.TipDialog" timestamp="1634809364413">
+    <state x="384" y="95" key="Maven.ArtifactSearchDialog/0.0.1536.824@0.0.1536.824" timestamp="1635218108000" />
+    <state x="426" y="115" key="SettingsEditor" timestamp="1635228459016">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="461" y="240" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1634809364413" />
-    <state x="775" y="141" width="755" height="548" key="find.popup" timestamp="1634953861342">
+    <state x="426" y="115" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1635228459016" />
+    <state x="461" y="240" key="com.intellij.ide.util.TipDialog" timestamp="1635218627479">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="775" y="141" width="755" height="548" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1634953861342" />
+    <state x="461" y="240" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1635218627479" />
+    <state x="775" y="141" width="755" height="548" key="find.popup" timestamp="1635215391161">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="775" y="141" width="755" height="548" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1635215391161" />
+    <state x="356" y="119" key="new project wizard" timestamp="1635217315424">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="356" y="119" key="new project wizard/0.0.1536.824@0.0.1536.824" timestamp="1635217315424" />
+    <state x="862" y="48" key="refactoring.ChangeSignatureDialog" timestamp="1635216676480">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="862" y="48" key="refactoring.ChangeSignatureDialog/0.0.1536.824@0.0.1536.824" timestamp="1635216676480" />
     <state x="814" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1634954368282">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

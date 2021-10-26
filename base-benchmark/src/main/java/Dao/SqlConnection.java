@@ -11,6 +11,8 @@ public class SqlConnection {
 
     private static final String driver = "com.mysql.jdbc.Driver";
 
+
+
     public void TestSqlConnection(){
         //加载驱动
         try{

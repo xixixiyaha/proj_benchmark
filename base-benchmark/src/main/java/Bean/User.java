@@ -16,6 +16,19 @@ public class User {
     private String name;
     private String profile;
 
+    public User(){
+
+    }
+
+    public User(long uuid,int apartId,int age,String name,String profile){
+        super();
+        this.uuid=uuid;
+        this.apartId = apartId;
+        this.age = age;
+        this.name=name;
+        this.profile = profile;
+    }
+
     public long getUuid() {
         return uuid;
     }

@@ -1,4 +1,4 @@
-namespace java thrift
+namespace java benchmark.rpc.thrift
  
 struct User {
 	1: i64 uuid,

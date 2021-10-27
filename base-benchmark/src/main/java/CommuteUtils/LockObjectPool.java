@@ -9,8 +9,6 @@ import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.Supplier;
 
 /**
- * @author Hank
- *
  * @param <T>
  */
 @SuppressWarnings("unchecked")

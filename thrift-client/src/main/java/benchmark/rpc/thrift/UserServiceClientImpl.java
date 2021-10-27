@@ -12,9 +12,9 @@ import java.io.IOException;
 public class UserServiceClientImpl implements Service.UserService, Closeable {
 
     // TODO
-
-    private static String host = "{benchmark-server}";
+    private static String host = "benchmark-server";
     private static int port = 8080;
+
     private final LockObjectPool<ThriftUserServiceClient> clientPool = new LockObjectPool<>(32,()->new ThriftUserServiceClient(host,port));
 
     @Override

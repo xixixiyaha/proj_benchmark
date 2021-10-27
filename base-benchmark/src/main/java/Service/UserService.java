@@ -9,8 +9,6 @@ public interface UserService {
 
     public boolean createUser(UserFull userFull);
 
-
-
     public User getUser(Long uuid);
 
 //    public boolean existUser(Long uuid);

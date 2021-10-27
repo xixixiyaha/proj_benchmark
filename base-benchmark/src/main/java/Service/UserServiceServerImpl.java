@@ -2,10 +2,7 @@ package Service;
 
 import Bean.User;
 import Bean.UserFull;
-import Dao.UserDao;
 import Generater.BeanGenerator;
-
-import java.util.List;
 
 public class UserServiceServerImpl implements UserService {
 

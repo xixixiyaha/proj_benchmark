@@ -1,30 +1,24 @@
-package benchmark.rpc;
+package benchmark.rpc.pipe;
 
-import java.io.IOException;
-import java.util.concurrent.TimeUnit;
 
-import org.openjdk.jmh.annotations.Benchmark;
-import org.openjdk.jmh.annotations.BenchmarkMode;
-import org.openjdk.jmh.annotations.Mode;
-import org.openjdk.jmh.annotations.OutputTimeUnit;
-import org.openjdk.jmh.annotations.Scope;
-import org.openjdk.jmh.annotations.State;
-import org.openjdk.jmh.annotations.TearDown;
+import Bean.User;
+import Clients.AbstractUserClient;
+import benchmark.rpc.thrift.UserServiceClientImpl;
+import Service.UserService;
+import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
 import org.openjdk.jmh.runner.options.TimeValue;
 
-import benchmark.bean.Page;
-import benchmark.bean.User;
-import benchmark.rpc.thrift.UserServiceThriftClientImpl;
-import benchmark.service.UserService;
+import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 @State(Scope.Benchmark)
-public class Client extends AbstractClient {
+public class Client extends AbstractUserClient {
 	public static final int CONCURRENCY = 32;
 
-	private final UserServiceThriftClientImpl userService = new UserServiceThriftClientImpl();
+	private final UserServiceClientImpl userService = new UserServiceClientImpl();
 
 	@Override
 	protected UserService getUserService() {
@@ -34,14 +28,6 @@ public class Client extends AbstractClient {
 	@TearDown
 	public void close() throws IOException {
 		userService.close();
-	}
-
-	@Benchmark
-	@BenchmarkMode({ Mode.Throughput, Mode.AverageTime, Mode.SampleTime })
-	@OutputTimeUnit(TimeUnit.MILLISECONDS)
-	@Override
-	public boolean existUser() throws Exception {
-		return super.existUser();
 	}
 
 	@Benchmark
@@ -60,13 +46,6 @@ public class Client extends AbstractClient {
 		return super.getUser();
 	}
 
-	@Benchmark
-	@BenchmarkMode({ Mode.Throughput, Mode.AverageTime, Mode.SampleTime })
-	@OutputTimeUnit(TimeUnit.MILLISECONDS)
-	@Override
-	public Page<User> listUser() throws Exception {
-		return super.listUser();
-	}
 
 	public static void main(String[] args) throws Exception {
 		Client client = new Client();

@@ -1,12 +1,7 @@
-package thrift;
+package benchmark.rpc.thrift;
 
 
-import CommuteUtils.LockObjectPool;
 import org.apache.thrift.TException;
-
-
-import java.io.Closeable;
-import java.io.IOException;
 
 
 public class UserServiceServerImpl implements UserService.Iface {
@@ -15,12 +10,14 @@ public class UserServiceServerImpl implements UserService.Iface {
 
     @Override
     public boolean createUser(UserFull userFull) throws TException {
-        Bean.User user = TypeConvertor.
-        return false;
+        Bean.UserFull user = TypeConvertor.convertUserFullThrift2Bean(userFull);
+        return userService.createUser(user);
     }
 
     @Override
     public User getUser(long uuid) throws TException {
-        return null;
+
+        Bean.User user = userService.getUser(uuid);
+        return TypeConvertor.convertUserBean2Thrift(user);
     }
 }

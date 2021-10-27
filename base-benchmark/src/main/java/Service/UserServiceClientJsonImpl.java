@@ -20,8 +20,8 @@ import java.util.List;
 
 public class UserServiceClientJsonImpl implements UserService {
 
-    private static String URL_CREATE_USER = "http://{benchmark-server-ip}:{benchmark-server-port}/user-create";
-    private static String URL_GET_USER = "http://{benchmark-server-ip}:{benchmark-server-port}/user-get";
+    private static String URL_CREATE_USER = "http://benchmark-server:8080/user-create";
+    private static String URL_GET_USER = "http://benchmark-server:8080/user-get=?";
 
     private final CloseableHttpClient client;
     private final ObjectMapper objectMapper = JsonUtils.objectMapper;
@@ -50,10 +50,6 @@ public class UserServiceClientJsonImpl implements UserService {
         }
     }
 
-    @Override
-    public boolean existUser(Long uuid) {
-        return false;
-    }
 
     @Override
     public User getUser(Long uuid) {
@@ -71,20 +67,25 @@ public class UserServiceClientJsonImpl implements UserService {
         }
     }
 
-    @Override
-    public List<User> getUsers(List<Long> uuids) {
-        return null;
-    }
-
-    @Override
-    public UserFull getUserFull(Long uuid) {
-        return null;
-    }
-
-    @Override
-    public List<UserFull> getUserFulls(List<Long> uuids) {
-        return null;
-    }
+//    @Override
+//    public List<User> getUsers(List<Long> uuids) {
+//        return null;
+//    }
+//
+//    @Override
+//    public UserFull getUserFull(Long uuid) {
+//        return null;
+//    }
+//
+//    @Override
+//    public List<UserFull> getUserFulls(List<Long> uuids) {
+//        return null;
+//    }
+//
+//    @Override
+//    public boolean existUser(Long uuid) {
+//        return false;
+//    }
 
     public static void main(String[] args) throws Exception{
         UserService userService = new UserServiceClientJsonImpl(256);

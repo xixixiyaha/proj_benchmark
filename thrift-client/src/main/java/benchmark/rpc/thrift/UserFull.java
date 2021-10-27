@@ -4,7 +4,7 @@
  * DO NOT EDIT UNLESS YOU ARE SURE THAT YOU KNOW WHAT YOU ARE DOING
  *  @generated
  */
-package thrift;
+package benchmark.rpc.thrift;
 
 import org.apache.thrift.scheme.IScheme;
 import org.apache.thrift.scheme.SchemeFactory;
@@ -42,7 +42,7 @@ public class UserFull implements org.apache.thrift.TBase<UserFull, UserFull._Fie
   private static final org.apache.thrift.protocol.TField NAME_FIELD_DESC = new org.apache.thrift.protocol.TField("name", org.apache.thrift.protocol.TType.STRING, (short)2);
   private static final org.apache.thrift.protocol.TField SEX_FIELD_DESC = new org.apache.thrift.protocol.TField("sex", org.apache.thrift.protocol.TType.I32, (short)3);
   private static final org.apache.thrift.protocol.TField EMAIL_FIELD_DESC = new org.apache.thrift.protocol.TField("email", org.apache.thrift.protocol.TType.STRING, (short)4);
-  private static final org.apache.thrift.protocol.TField MOBILE_FIELD_DESC = new org.apache.thrift.protocol.TField("mobile", org.apache.thrift.protocol.TType.I32, (short)5);
+  private static final org.apache.thrift.protocol.TField MOBILE_FIELD_DESC = new org.apache.thrift.protocol.TField("mobile", org.apache.thrift.protocol.TType.STRING, (short)5);
   private static final org.apache.thrift.protocol.TField PROFILE_FIELD_DESC = new org.apache.thrift.protocol.TField("profile", org.apache.thrift.protocol.TType.STRING, (short)6);
   private static final org.apache.thrift.protocol.TField STATUS_FIELD_DESC = new org.apache.thrift.protocol.TField("status", org.apache.thrift.protocol.TType.I32, (short)7);
   private static final org.apache.thrift.protocol.TField PERMISSIONS_FIELD_DESC = new org.apache.thrift.protocol.TField("permissions", org.apache.thrift.protocol.TType.LIST, (short)8);
@@ -57,7 +57,7 @@ public class UserFull implements org.apache.thrift.TBase<UserFull, UserFull._Fie
   public String name; // required
   public int sex; // required
   public String email; // required
-  public int mobile; // required
+  public String mobile; // required
   public String profile; // required
   public int status; // required
   public List<Long> permissions; // required
@@ -144,8 +144,7 @@ public class UserFull implements org.apache.thrift.TBase<UserFull, UserFull._Fie
   // isset id assignments
   private static final int __UUID_ISSET_ID = 0;
   private static final int __SEX_ISSET_ID = 1;
-  private static final int __MOBILE_ISSET_ID = 2;
-  private static final int __STATUS_ISSET_ID = 3;
+  private static final int __STATUS_ISSET_ID = 2;
   private byte __isset_bitfield = 0;
   public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
   static {
@@ -159,7 +158,7 @@ public class UserFull implements org.apache.thrift.TBase<UserFull, UserFull._Fie
     tmpMap.put(_Fields.EMAIL, new org.apache.thrift.meta_data.FieldMetaData("email", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
     tmpMap.put(_Fields.MOBILE, new org.apache.thrift.meta_data.FieldMetaData("mobile", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I32)));
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
     tmpMap.put(_Fields.PROFILE, new org.apache.thrift.meta_data.FieldMetaData("profile", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
     tmpMap.put(_Fields.STATUS, new org.apache.thrift.meta_data.FieldMetaData("status", org.apache.thrift.TFieldRequirementType.DEFAULT, 
@@ -179,7 +178,7 @@ public class UserFull implements org.apache.thrift.TBase<UserFull, UserFull._Fie
     String name,
     int sex,
     String email,
-    int mobile,
+    String mobile,
     String profile,
     int status,
     List<Long> permissions)
@@ -192,7 +191,6 @@ public class UserFull implements org.apache.thrift.TBase<UserFull, UserFull._Fie
     setSexIsSet(true);
     this.email = email;
     this.mobile = mobile;
-    setMobileIsSet(true);
     this.profile = profile;
     this.status = status;
     setStatusIsSet(true);
@@ -212,7 +210,9 @@ public class UserFull implements org.apache.thrift.TBase<UserFull, UserFull._Fie
     if (other.isSetEmail()) {
       this.email = other.email;
     }
-    this.mobile = other.mobile;
+    if (other.isSetMobile()) {
+      this.mobile = other.mobile;
+    }
     if (other.isSetProfile()) {
       this.profile = other.profile;
     }
@@ -235,8 +235,7 @@ public class UserFull implements org.apache.thrift.TBase<UserFull, UserFull._Fie
     setSexIsSet(false);
     this.sex = 0;
     this.email = null;
-    setMobileIsSet(false);
-    this.mobile = 0;
+    this.mobile = null;
     this.profile = null;
     setStatusIsSet(false);
     this.status = 0;
@@ -337,27 +336,28 @@ public class UserFull implements org.apache.thrift.TBase<UserFull, UserFull._Fie
     }
   }
 
-  public int getMobile() {
+  public String getMobile() {
     return this.mobile;
   }
 
-  public UserFull setMobile(int mobile) {
+  public UserFull setMobile(String mobile) {
     this.mobile = mobile;
-    setMobileIsSet(true);
     return this;
   }
 
   public void unsetMobile() {
-    __isset_bitfield = EncodingUtils.clearBit(__isset_bitfield, __MOBILE_ISSET_ID);
+    this.mobile = null;
   }
 
   /** Returns true if field mobile is set (has been assigned a value) and false otherwise */
   public boolean isSetMobile() {
-    return EncodingUtils.testBit(__isset_bitfield, __MOBILE_ISSET_ID);
+    return this.mobile != null;
   }
 
   public void setMobileIsSet(boolean value) {
-    __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __MOBILE_ISSET_ID, value);
+    if (!value) {
+      this.mobile = null;
+    }
   }
 
   public String getProfile() {
@@ -484,7 +484,7 @@ public class UserFull implements org.apache.thrift.TBase<UserFull, UserFull._Fie
       if (value == null) {
         unsetMobile();
       } else {
-        setMobile((Integer)value);
+        setMobile((String)value);
       }
       break;
 
@@ -621,12 +621,12 @@ public class UserFull implements org.apache.thrift.TBase<UserFull, UserFull._Fie
         return false;
     }
 
-    boolean this_present_mobile = true;
-    boolean that_present_mobile = true;
+    boolean this_present_mobile = true && this.isSetMobile();
+    boolean that_present_mobile = true && that.isSetMobile();
     if (this_present_mobile || that_present_mobile) {
       if (!(this_present_mobile && that_present_mobile))
         return false;
-      if (this.mobile != that.mobile)
+      if (!this.mobile.equals(that.mobile))
         return false;
     }
 
@@ -684,7 +684,7 @@ public class UserFull implements org.apache.thrift.TBase<UserFull, UserFull._Fie
     if (present_email)
       list.add(email);
 
-    boolean present_mobile = true;
+    boolean present_mobile = true && (isSetMobile());
     list.add(present_mobile);
     if (present_mobile)
       list.add(mobile);
@@ -802,11 +802,11 @@ public class UserFull implements org.apache.thrift.TBase<UserFull, UserFull._Fie
     return _Fields.findByThriftId(fieldId);
   }
 
-  public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+  public void read(org.apache.thrift.protocol.TProtocol iprot) throws TException {
     schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
   }
 
-  public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+  public void write(org.apache.thrift.protocol.TProtocol oprot) throws TException {
     schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
   }
 
@@ -840,7 +840,11 @@ public class UserFull implements org.apache.thrift.TBase<UserFull, UserFull._Fie
     first = false;
     if (!first) sb.append(", ");
     sb.append("mobile:");
-    sb.append(this.mobile);
+    if (this.mobile == null) {
+      sb.append("null");
+    } else {
+      sb.append(this.mobile);
+    }
     first = false;
     if (!first) sb.append(", ");
     sb.append("profile:");
@@ -866,7 +870,7 @@ public class UserFull implements org.apache.thrift.TBase<UserFull, UserFull._Fie
     return sb.toString();
   }
 
-  public void validate() throws org.apache.thrift.TException {
+  public void validate() throws TException {
     // check for required fields
     // check for sub-struct validity
   }
@@ -874,7 +878,7 @@ public class UserFull implements org.apache.thrift.TBase<UserFull, UserFull._Fie
   private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
     try {
       write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-    } catch (org.apache.thrift.TException te) {
+    } catch (TException te) {
       throw new java.io.IOException(te);
     }
   }
@@ -884,7 +888,7 @@ public class UserFull implements org.apache.thrift.TBase<UserFull, UserFull._Fie
       // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
       __isset_bitfield = 0;
       read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-    } catch (org.apache.thrift.TException te) {
+    } catch (TException te) {
       throw new java.io.IOException(te);
     }
   }
@@ -897,7 +901,7 @@ public class UserFull implements org.apache.thrift.TBase<UserFull, UserFull._Fie
 
   private static class UserFullStandardScheme extends StandardScheme<UserFull> {
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot, UserFull struct) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot, UserFull struct) throws TException {
       org.apache.thrift.protocol.TField schemeField;
       iprot.readStructBegin();
       while (true)
@@ -940,8 +944,8 @@ public class UserFull implements org.apache.thrift.TBase<UserFull, UserFull._Fie
             }
             break;
           case 5: // MOBILE
-            if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
-              struct.mobile = iprot.readI32();
+            if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+              struct.mobile = iprot.readString();
               struct.setMobileIsSet(true);
             } else { 
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
@@ -992,7 +996,7 @@ public class UserFull implements org.apache.thrift.TBase<UserFull, UserFull._Fie
       struct.validate();
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot, UserFull struct) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot, UserFull struct) throws TException {
       struct.validate();
 
       oprot.writeStructBegin(STRUCT_DESC);
@@ -1012,9 +1016,11 @@ public class UserFull implements org.apache.thrift.TBase<UserFull, UserFull._Fie
         oprot.writeString(struct.email);
         oprot.writeFieldEnd();
       }
-      oprot.writeFieldBegin(MOBILE_FIELD_DESC);
-      oprot.writeI32(struct.mobile);
-      oprot.writeFieldEnd();
+      if (struct.mobile != null) {
+        oprot.writeFieldBegin(MOBILE_FIELD_DESC);
+        oprot.writeString(struct.mobile);
+        oprot.writeFieldEnd();
+      }
       if (struct.profile != null) {
         oprot.writeFieldBegin(PROFILE_FIELD_DESC);
         oprot.writeString(struct.profile);
@@ -1050,7 +1056,7 @@ public class UserFull implements org.apache.thrift.TBase<UserFull, UserFull._Fie
   private static class UserFullTupleScheme extends TupleScheme<UserFull> {
 
     @Override
-    public void write(org.apache.thrift.protocol.TProtocol prot, UserFull struct) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol prot, UserFull struct) throws TException {
       TTupleProtocol oprot = (TTupleProtocol) prot;
       BitSet optionals = new BitSet();
       if (struct.isSetUuid()) {
@@ -1091,7 +1097,7 @@ public class UserFull implements org.apache.thrift.TBase<UserFull, UserFull._Fie
         oprot.writeString(struct.email);
       }
       if (struct.isSetMobile()) {
-        oprot.writeI32(struct.mobile);
+        oprot.writeString(struct.mobile);
       }
       if (struct.isSetProfile()) {
         oprot.writeString(struct.profile);
@@ -1111,7 +1117,7 @@ public class UserFull implements org.apache.thrift.TBase<UserFull, UserFull._Fie
     }
 
     @Override
-    public void read(org.apache.thrift.protocol.TProtocol prot, UserFull struct) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol prot, UserFull struct) throws TException {
       TTupleProtocol iprot = (TTupleProtocol) prot;
       BitSet incoming = iprot.readBitSet(8);
       if (incoming.get(0)) {
@@ -1131,7 +1137,7 @@ public class UserFull implements org.apache.thrift.TBase<UserFull, UserFull._Fie
         struct.setEmailIsSet(true);
       }
       if (incoming.get(4)) {
-        struct.mobile = iprot.readI32();
+        struct.mobile = iprot.readString();
         struct.setMobileIsSet(true);
       }
       if (incoming.get(5)) {

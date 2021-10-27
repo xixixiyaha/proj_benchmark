@@ -1,9 +1,11 @@
 package Bean;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
 
-public class UserFull {
+public class UserFull implements Serializable {
     // NOTICE uuid 用来进行联合查询
 
     /**
@@ -25,12 +27,26 @@ public class UserFull {
     private String name;
     private int sex;
     private String email;
-    private int mobile;
+    private String mobile;
     private String profile;
     private int status;
-    private Date createTime;
-    private Date updateTime;
-    private List<Integer> permissions;
+//    private Date createTime;
+//    private Date updateTime;
+    private List<Long> permissions;
+
+    public UserFull(){
+    }
+    public UserFull(long uuid,String name,int sex,String email,String mobile,String profile,int status){
+        super();
+        this.uuid=uuid;
+        this.name=name;
+        this.sex = sex;
+        this.email=email;
+        this.mobile = mobile;
+        this.profile = profile;
+        this.status=status;
+        this.permissions = new ArrayList<>();
+    }
 
     public long getUuid() {
         return uuid;
@@ -64,11 +80,11 @@ public class UserFull {
         this.email = email;
     }
 
-    public int getMobile() {
+    public String getMobile() {
         return mobile;
     }
 
-    public void setMobile(int mobile) {
+    public void setMobile(String mobile) {
         this.mobile = mobile;
     }
 
@@ -88,27 +104,34 @@ public class UserFull {
         this.status = status;
     }
 
-    public Date getCreateTime() {
-        return createTime;
-    }
+//    public Date getCreateTime() {
+//        return createTime;
+//    }
+//
+//    public void setCreateTime(Date createTime) {
+//        this.createTime = createTime;
+//    }
+//
+//    public Date getUpdateTime() {
+//        return updateTime;
+//    }
+//
+//    public void setUpdateTime(Date updateTime) {
+//        this.updateTime = updateTime;
+//    }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public Date getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
-
-    public List<Integer> getPermissions() {
+    public List<Long> getPermissions() {
         return permissions;
     }
 
-    public void setPermissions(List<Integer> permissions) {
+    public void setPermissions(List<Long> permissions) {
         this.permissions = permissions;
     }
+
+    @Override
+    public String toString() {
+        return "UserFull [uuid" + uuid +" , name = "+ name +"]";
+    }
+
+
 }

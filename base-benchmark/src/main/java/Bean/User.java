@@ -1,7 +1,9 @@
 package Bean;
 
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
     /**
      * uuid : 1234567
      * apartId : 20
@@ -67,5 +69,10 @@ public class User {
 
     public void setProfile(String profile) {
         this.profile = profile;
+    }
+
+    @Override
+    public String toString() {
+        return "User [uuid" + uuid + ", apartId=" + apartId + ", name =" + name + "]";
     }
 }

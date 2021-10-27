@@ -4,28 +4,29 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 <!--    <parent>-->
 <!--        <artifactId>proj_benchmark</artifactId>-->
-<!--        <groupId>org.example</groupId>-->
-<!--        <version>1.0-SNAPSHOT</version>-->
+    <groupId>benchmark.rpc.benchmark.rpc.thrift</groupId>
+    <version>1.0-SNAPSHOT</version>
 <!--    </parent>-->
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>thrift-client</artifactId>
+    <artifactId>benchmark.rpc.thrift-client</artifactId>
 
     <properties>
-        <version.thrift>0.12.0</version.thrift>
+        <version.benchmark.rpc.thrift>0.9.3</version.benchmark.rpc.thrift>
+        <version.benchmark-base>1.0-SNAPSHOT</version.benchmark-base>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>org.example</groupId>
             <artifactId>base-benchmark</artifactId>
-        <!--    <version>${version.benchmark-base}</version> -->
+            <version>${version.benchmark-base}</version>
         </dependency>
-        <dependency>
-            <groupId>org.apache.thrift</groupId>
-            <artifactId>libthrift</artifactId>
-            <version>${version.thrift}</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.apache.benchmark.rpc.thrift</groupId>-->
+<!--            <artifactId>libthrift</artifactId>-->
+<!--            <version>${version.benchmark.rpc.thrift}</version>-->
+<!--        </dependency>-->
 
         <dependency>
             <groupId>junit</groupId>
@@ -37,6 +38,31 @@
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-assembly-plugin</artifactId>
             <version>3.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.7.32</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.32</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.thrift</groupId>
+            <artifactId>thrift-maven-plugin</artifactId>
+            <version>0.9.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>org.osgi.core</artifactId>
+            <version>6.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjdk.jmh</groupId>
+            <artifactId>jmh-core</artifactId>
+            <version>1.21</version>
         </dependency>
 
     </dependencies>
@@ -91,7 +117,7 @@
                 <directory>src/main/resources</directory>
             </resource>
             <resource>
-                <directory>src/main/thrift</directory>
+                <directory>src/main/benchmark.rpc.thrift</directory>
             </resource>
         </resources>
     </build>

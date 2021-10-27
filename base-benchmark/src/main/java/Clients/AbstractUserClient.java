@@ -2,6 +2,7 @@ package Clients;
 
 import Bean.User;
 import Bean.UserFull;
+import Generater.BeanGenerator;
 import Service.UserService;
 import Service.UserServiceServerImpl;
 
@@ -17,7 +18,7 @@ public abstract class AbstractUserClient {
 
     public boolean createUser() throws Exception {
         int id = counter.getAndIncrement();
-        UserFull userFull = _serviceUserService.getUserFull((long) id);
+        UserFull userFull = BeanGenerator.genUserFull(1).get(0); //_serviceUserService.getUserFull((long) id);
         return getUserService().createUser(userFull);
     }
 

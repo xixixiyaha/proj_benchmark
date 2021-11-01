@@ -7,6 +7,7 @@
     <groupId>free.benchmark</groupId>
     <artifactId>thrift-client</artifactId>
 
+    <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
     <modelVersion>4.0.0</modelVersion>
 

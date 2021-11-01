@@ -167,6 +167,7 @@ public class benchmark{
     }
 
     private static void exec(File file, String command, File redirect) throws Exception {
+        System.out.println("[file]:"+file.name()+"[command]:"+command)
         var process = Runtime.getRuntime().exec(command, null, file);
 
         if (redirect != null && !redirect.exists()) {

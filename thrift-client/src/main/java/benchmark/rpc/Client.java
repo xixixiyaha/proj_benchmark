@@ -11,6 +11,7 @@ import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
 import org.openjdk.jmh.runner.options.TimeValue;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
@@ -49,7 +50,7 @@ public class Client extends AbstractUserClient {
 
 	public static void main(String[] args) throws Exception {
 		Client client = new Client();
-
+		System.out.println("in thrift Client main() ");
 		for (int i = 0; i < 60; i++) {
 			try {
 				System.out.println(client.getUser());

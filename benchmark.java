@@ -149,7 +149,7 @@ public class benchmark{
         var resultFile = new File(resultFolder, taskName(clientPackage) + ".log");
 
         var command = jvmOps + " -jar " + name;
-
+        System.out.println("[client result file] "+resultFile.getPath());
         //启动客户端
         exec(clientPackage.getParentFile(), command, resultFile);
     }

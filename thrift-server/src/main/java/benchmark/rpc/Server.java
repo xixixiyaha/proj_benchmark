@@ -1,4 +1,4 @@
-package benchmark.rpc.pipe;
+package benchmark.rpc;
 
 
 import benchmark.rpc.thrift.UserService;

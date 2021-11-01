@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e7402edc-f985-409d-9734-d8a746f29253" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/thrift-client/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/thrift-client/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/thrift-server/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/thrift-server/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -137,7 +139,7 @@
       <workItem from="1635255355035" duration="2215000" />
       <workItem from="1635312225435" duration="8515000" />
       <workItem from="1635321522419" duration="5407000" />
-      <workItem from="1635726591241" duration="7764000" />
+      <workItem from="1635726591241" duration="8069000" />
     </task>
     <servers />
   </component>

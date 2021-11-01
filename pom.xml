@@ -2,17 +2,22 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+
+    <groupId>free.benchmark</groupId>
+    <artifactId>proj_benchmark</artifactId>
+
+    <version>1.0-SNAPSHOT</version>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.example</groupId>
-    <artifactId>proj_benchmark</artifactId>
     <packaging>pom</packaging>
-    <version>1.0-SNAPSHOT</version>
+
     <modules>
         <module>base-benchmark</module>
         <module>thrift-client</module>
         <module>thrift-server</module>
     </modules>
+
     <properties>
         <project.build.sourceEncoding>
             UTF-8

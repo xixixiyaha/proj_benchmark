@@ -8,7 +8,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>base-benchmark</artifactId>
-
+    <properties>
+        <project.build.sourceEncoding>
+            UTF-8
+        </project.build.sourceEncoding>
+    </properties>
     <dependencies>
         <dependency>
             <groupId>redis.clients</groupId>

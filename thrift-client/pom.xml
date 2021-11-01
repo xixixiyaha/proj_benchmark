@@ -14,6 +14,9 @@
     <properties>
         <version.benchmark.rpc.thrift>0.9.3</version.benchmark.rpc.thrift>
         <version.benchmark-base>1.0-SNAPSHOT</version.benchmark-base>
+        <project.build.sourceEncoding>
+            UTF-8
+        </project.build.sourceEncoding>
     </properties>
 
     <dependencies>

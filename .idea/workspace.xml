@@ -7,7 +7,6 @@
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/thrift-client/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/thrift-client/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/thrift-server/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/thrift-server/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thrift-server/src/main/java/pom.xml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -141,7 +140,7 @@
       <workItem from="1635255355035" duration="2215000" />
       <workItem from="1635312225435" duration="8515000" />
       <workItem from="1635321522419" duration="5407000" />
-      <workItem from="1635726591241" duration="3883000" />
+      <workItem from="1635726591241" duration="6454000" />
     </task>
     <servers />
   </component>
@@ -188,22 +187,22 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="933" y="117" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1635227434835" />
-    <state width="1493" height="296" key="GridCell.Tab.0.bottom" timestamp="1635727908205">
+    <state width="1493" height="296" key="GridCell.Tab.0.bottom" timestamp="1635752711448">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="296" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1635727908205" />
-    <state width="1493" height="296" key="GridCell.Tab.0.center" timestamp="1635727908205">
+    <state width="1493" height="296" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1635752711448" />
+    <state width="1493" height="296" key="GridCell.Tab.0.center" timestamp="1635752711448">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="296" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1635727908205" />
-    <state width="1493" height="296" key="GridCell.Tab.0.left" timestamp="1635727908205">
+    <state width="1493" height="296" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1635752711448" />
+    <state width="1493" height="296" key="GridCell.Tab.0.left" timestamp="1635752711447">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="296" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1635727908205" />
-    <state width="1493" height="296" key="GridCell.Tab.0.right" timestamp="1635727908205">
+    <state width="1493" height="296" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1635752711447" />
+    <state width="1493" height="296" key="GridCell.Tab.0.right" timestamp="1635752711448">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="296" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1635727908205" />
+    <state width="1493" height="296" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1635752711448" />
     <state x="557" y="141" key="Maven.ArtifactSearchDialog" timestamp="1635314483548">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -216,10 +215,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="461" y="240" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1635321527758" />
-    <state x="775" y="141" width="755" height="548" key="find.popup" timestamp="1635749385745">
+    <state x="775" y="141" width="755" height="548" key="find.popup" timestamp="1635752736635">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="775" y="141" width="755" height="548" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1635749385745" />
+    <state x="775" y="141" width="755" height="548" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1635752736635" />
     <state x="356" y="119" key="new project wizard" timestamp="1635256192958">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

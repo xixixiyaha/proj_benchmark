@@ -53,6 +53,7 @@ public class benchmark{
 
     private static void benchmark(String taskName) {
         try {
+            System.out.println("<benchmark> [taskName]:"+taskName.getName());
             var serverPackage = packageAndGet(new File(taskName + "-server"));
             var clientPackage = packageAndGet(new File(taskName + "-client"));
 
@@ -72,6 +73,9 @@ public class benchmark{
 
         var childList = new File(project, "target").listFiles();
 
+        for(File f:childList){
+            System.out.println("<packageAndGet> [f]:"+f.getName());
+        }
         var opt = Stream.of(childList)
                 .filter(f -> f.getName().endsWith("-jar-with-dependencies.jar"))
                 .findFirst();

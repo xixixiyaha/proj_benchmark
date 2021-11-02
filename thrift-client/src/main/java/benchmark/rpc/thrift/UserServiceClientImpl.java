@@ -52,10 +52,11 @@ public class UserServiceClientImpl implements Service.UserService, Closeable {
     }
 
     public static void main(String[] args) throws IOException{
+        System.out.println("in UserServiceClientImpl == 1 == ");
         try(UserServiceClientImpl userService= new UserServiceClientImpl()){
             Bean.UserFull testUserFull = new Bean.UserFull((long)5,"Anna",1,"abc@gmail","12345678910","http://url",0);
-
-            System.out.println(userService.createUser(new Bean.UserFull()));
+            System.out.println("in UserServiceClientImpl == 2 == ");
+            System.out.println(userService.createUser(testUserFull));
             System.out.println(userService.getUser((long) 5));
         }
     }

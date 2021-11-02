@@ -49,8 +49,10 @@ public class Client extends AbstractUserClient {
 
 
 	public static void main(String[] args) throws Exception {
+
+		System.out.println("in thrift Client main() === 1 === ");
 		Client client = new Client();
-		System.out.println("in thrift Client main() ");
+		System.out.println("in thrift Client main() === 2 === ");
 		for (int i = 0; i < 60; i++) {
 			try {
 				System.out.println(client.getUser());
@@ -62,6 +64,7 @@ public class Client extends AbstractUserClient {
 		}
 		
 		client.close();
+		System.out.println("in thrift Client main() === 3 === ");
 
 		Options opt = new OptionsBuilder()//
 				.include(Client.class.getSimpleName())//
@@ -72,8 +75,11 @@ public class Client extends AbstractUserClient {
 				.threads(CONCURRENCY)//
 				.forks(1)//
 				.build();
+		System.out.println("in thrift Client main() === 4 === ");
 
 		new Runner(opt).run();
+		System.out.println("in thrift Client main() === 5 === ");
+
 	}
 
 }

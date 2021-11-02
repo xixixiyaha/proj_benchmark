@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e7402edc-f985-409d-9734-d8a746f29253" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/benchmark.java" beforeDir="false" afterPath="$PROJECT_DIR$/benchmark.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thrift-client/src/main/java/benchmark/rpc/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/thrift-client/src/main/java/benchmark/rpc/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thrift-server/src/main/java/benchmark/rpc/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/thrift-server/src/main/java/benchmark/rpc/Server.java" afterDir="false" />
-    </list>
+    <list default="true" id="e7402edc-f985-409d-9734-d8a746f29253" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -139,7 +134,7 @@
       <workItem from="1635255355035" duration="2215000" />
       <workItem from="1635312225435" duration="8515000" />
       <workItem from="1635321522419" duration="5407000" />
-      <workItem from="1635726591241" duration="20621000" />
+      <workItem from="1635726591241" duration="20889000" />
     </task>
     <servers />
   </component>

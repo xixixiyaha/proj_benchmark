@@ -61,7 +61,7 @@ public class benchmark{
             startServer(serverPackage);
 //            startLocalServer(serverPackage);
             //等服务器启动起来在启动客户端
-            TimeUnit.SECONDS.sleep(5);
+            TimeUnit.SECONDS.sleep(10);
 
             startClient(clientPackage);
             stopServer(serverPackage);
@@ -114,7 +114,7 @@ public class benchmark{
 
     private static void startServer(File serverPackage) throws Exception {
         var name = serverPackage.getName();
-        System.out.printf("start %s\r\n", name);
+        System.out.printf("[start server] %s\r\n", name);
 
         var resultPath = taskName(serverPackage) + ".log";
 

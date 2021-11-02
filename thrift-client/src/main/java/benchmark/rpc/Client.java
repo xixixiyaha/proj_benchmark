@@ -49,30 +49,31 @@ public class Client extends AbstractUserClient {
 
 
 	public static void main(String[] args) throws Exception {
-		Client client = new Client();
+//		Client client = new Client();
 		System.out.println("in thrift Client main() ");
 		for (int i = 0; i < 60; i++) {
 			try {
-				System.out.println(client.getUser());
+//				System.out.println(client.getUser());
+				System.out.println("in thrift Client loop");
 				break;
 			} catch (Exception e) {
 				Thread.sleep(1000);
 			}
 		}
 		
-		client.close();
+//		client.close();
 
-		Options opt = new OptionsBuilder()//
-				.include(Client.class.getSimpleName())//
-				.warmupIterations(3)//
-				.warmupTime(TimeValue.seconds(10))//
-				.measurementIterations(3)//
-				.measurementTime(TimeValue.seconds(10))//
-				.threads(CONCURRENCY)//
-				.forks(1)//
-				.build();
-
-		new Runner(opt).run();
+//		Options opt = new OptionsBuilder()//
+//				.include(Client.class.getSimpleName())//
+//				.warmupIterations(3)//
+//				.warmupTime(TimeValue.seconds(10))//
+//				.measurementIterations(3)//
+//				.measurementTime(TimeValue.seconds(10))//
+//				.threads(CONCURRENCY)//
+//				.forks(1)//
+//				.build();
+//
+//		new Runner(opt).run();
 	}
 
 }

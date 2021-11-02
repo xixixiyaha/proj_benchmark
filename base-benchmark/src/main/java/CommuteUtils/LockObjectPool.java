@@ -29,11 +29,13 @@ public class LockObjectPool<T> implements Closeable {
 	private final int poolSize;
 
 	public LockObjectPool(int poolSize, Supplier<T> producer) {
+		System.out.println("in LockObjectPool == 1 ==");
 		this.poolSize = poolSize;
 
 		lockMap = new IdentityHashMap<>(poolSize * 2);
 
 		array = new ObjectWithLock[poolSize];
+		System.out.println("in LockObjectPool == 2 ==");
 		for (int i = 0; i < poolSize; i++) {
 			T t = producer.get();
 			ObjectWithLock objectWithLock = new ObjectWithLock(t);
@@ -41,6 +43,7 @@ public class LockObjectPool<T> implements Closeable {
 			array[i] = objectWithLock;
 			lockMap.put(t, objectWithLock);
 		}
+		System.out.println("in LockObjectPool == 3 ==");
 	}
 
 	public T borrow() {

@@ -18,15 +18,18 @@ public class ThriftUserServiceClient implements Closeable {
 	public final UserService.Client client;
 
 	public ThriftUserServiceClient(String host, int port) {
+		System.out.println("in ThriftUserServiceClient == 1 ==");
 		transport = new TFramedTransport(new TSocket(host, port));
 		protocol = new TBinaryProtocol(transport);
+		System.out.println("in ThriftUserServiceClient == 2 ==");
 		client = new UserService.Client(protocol);
-
+		System.out.println("in ThriftUserServiceClient == 3 ==");
 		try {
 			transport.open();
 		} catch (TTransportException e) {
 			throw new Error(e);
 		}
+		System.out.println("in ThriftUserServiceClient == 4 ==");
 	}
 
 	@Override

@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="e7402edc-f985-409d-9734-d8a746f29253" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/benchmark.java" beforeDir="false" afterPath="$PROJECT_DIR$/benchmark.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thrift-client/src/main/java/benchmark/rpc/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/thrift-client/src/main/java/benchmark/rpc/Client.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -138,7 +136,7 @@
       <workItem from="1635255355035" duration="2215000" />
       <workItem from="1635312225435" duration="8515000" />
       <workItem from="1635321522419" duration="5407000" />
-      <workItem from="1635726591241" duration="16033000" />
+      <workItem from="1635726591241" duration="16792000" />
     </task>
     <servers />
   </component>
@@ -153,6 +151,31 @@
             <State />
           </value>
         </entry>
+        <entry key="2">
+          <value>
+            <State>
+              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
+                  <entry key="roots">
+                    <value>
+                      <list>
+                        <option value="$PROJECT_DIR$" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
         <entry key="MAIN">
           <value>
             <State />
@@ -163,6 +186,7 @@
     <option name="OPEN_TABS">
       <set>
         <option value="1" />
+        <option value="2" />
       </set>
     </option>
   </component>

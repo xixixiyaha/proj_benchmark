@@ -53,7 +53,7 @@ public class benchmark{
 
     private static void benchmark(String taskName) {
         try {
-            System.out.println("<benchmark> [taskName]:"+taskName.getName());
+            System.out.println("<benchmark> [taskName]:"+taskName);
             var serverPackage = packageAndGet(new File(taskName + "-server"));
             var clientPackage = packageAndGet(new File(taskName + "-client"));
 

@@ -17,6 +17,7 @@ public class benchmark{
 
     private final static File resultFolder = new File("benchmark-result");
 
+
     private final static List<String> funOrder = Arrays.asList("createUser", "getUser");
 
     Item emptyItem = new Item(null, Typ.Thrpt, null, 0D);
@@ -58,7 +59,7 @@ public class benchmark{
             var clientPackage = packageAndGet(new File(taskName + "-client"));
 
 //            startServer(serverPackage);
-
+            startLocalServer(serverPackage);
             //等服务器启动起来在启动客户端
             TimeUnit.SECONDS.sleep(5);
 
@@ -98,6 +99,17 @@ public class benchmark{
         } else {
             return name.substring(0, name.length() - ".jar".length());
         }
+    }
+    private static void startLocalServer(File serverPackage) throws Exception{
+        var name = serverPackage.getName();
+        System.out.println("start server:" + name);
+
+        var resultFile = new File(resultFolder, taskName(serverPackage) + ".log");
+
+        var command = jvmOps + " -jar " + name;
+        System.out.println("[server result file] "+resultFile.getPath());
+        //启动客户端
+        exec(serverPackage.getParentFile(), command, resultFile);
     }
 
     private static void startServer(File serverPackage) throws Exception {
@@ -145,6 +157,7 @@ public class benchmark{
             exec("ssh", "benchmark@benchmark-server", "killall service-center");
         }
     }
+
 
     private static void startClient(File clientPackage) throws Exception {
         var name = clientPackage.getName();

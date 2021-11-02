@@ -15,14 +15,14 @@ import java.net.InetSocketAddress;
 public class Server {
 	public static void main(String[] args) throws TTransportException {
 		System.out.println("in thrift Server main() ");
-//		InetSocketAddress serverAddress = new InetSocketAddress("benchmark-server", 8080);
-//
-//		TNonblockingServerTransport serverSocket = new TNonblockingServerSocket(serverAddress);
-//		TThreadedSelectorServer.Args serverParams = new TThreadedSelectorServer.Args(serverSocket);
-//		serverParams.protocolFactory(new TBinaryProtocol.Factory());
-//		serverParams.processor(new UserService.Processor<UserService.Iface>(new UserServiceServerImpl()));
-//		TServer server = new TThreadedSelectorServer(serverParams);
-//		server.serve();
+		InetSocketAddress serverAddress = new InetSocketAddress("benchmark-server", 8080);
+
+		TNonblockingServerTransport serverSocket = new TNonblockingServerSocket(serverAddress);
+		TThreadedSelectorServer.Args serverParams = new TThreadedSelectorServer.Args(serverSocket);
+		serverParams.protocolFactory(new TBinaryProtocol.Factory());
+		serverParams.processor(new UserService.Processor<UserService.Iface>(new UserServiceServerImpl()));
+		TServer server = new TThreadedSelectorServer(serverParams);
+		server.serve();
 	}
 
 }

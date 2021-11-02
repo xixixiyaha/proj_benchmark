@@ -58,13 +58,13 @@ public class benchmark{
             var serverPackage = packageAndGet(new File(taskName + "-server"));
             var clientPackage = packageAndGet(new File(taskName + "-client"));
 
-//            startServer(serverPackage);
-            startLocalServer(serverPackage);
+            startServer(serverPackage);
+//            startLocalServer(serverPackage);
             //等服务器启动起来在启动客户端
             TimeUnit.SECONDS.sleep(5);
 
             startClient(clientPackage);
-//            stopServer(serverPackage);
+            stopServer(serverPackage);
         } catch (Exception e) {
             e.printStackTrace();
         }

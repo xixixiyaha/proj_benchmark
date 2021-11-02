@@ -49,11 +49,11 @@ public class Client extends AbstractUserClient {
 
 
 	public static void main(String[] args) throws Exception {
-//		Client client = new Client();
+		Client client = new Client();
 		System.out.println("in thrift Client main() ");
 		for (int i = 0; i < 60; i++) {
 			try {
-//				System.out.println(client.getUser());
+				System.out.println(client.getUser());
 				System.out.println("in thrift Client loop");
 				break;
 			} catch (Exception e) {
@@ -61,7 +61,7 @@ public class Client extends AbstractUserClient {
 			}
 		}
 		
-//		client.close();
+		client.close();
 
 		Options opt = new OptionsBuilder()//
 				.include(Client.class.getSimpleName())//

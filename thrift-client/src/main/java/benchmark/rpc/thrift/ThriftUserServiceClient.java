@@ -27,6 +27,7 @@ public class ThriftUserServiceClient implements Closeable {
 		try {
 			transport.open();
 		} catch (TTransportException e) {
+			System.out.println(e.getMessage());
 			throw new Error(e);
 		}
 		System.out.println("in ThriftUserServiceClient == 4 ==");

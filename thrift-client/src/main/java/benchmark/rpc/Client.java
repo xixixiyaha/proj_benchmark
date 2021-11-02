@@ -13,6 +13,7 @@ import org.openjdk.jmh.runner.options.TimeValue;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.concurrent.TimeUnit;
 
 @State(Scope.Benchmark)
@@ -64,7 +65,9 @@ public class Client extends AbstractUserClient {
 		}
 		
 		client.close();
-		System.out.println("in thrift Client main() === 3 === ");
+
+		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+		System.out.println("in thrift Client main() === 3 === "+timestamp.toString());
 
 		Options opt = new OptionsBuilder()//
 				.include(Client.class.getSimpleName())//

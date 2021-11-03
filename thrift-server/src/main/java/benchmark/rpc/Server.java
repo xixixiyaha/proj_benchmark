@@ -19,7 +19,7 @@ public class Server {
 		try {
 
 			System.out.println("in thrift Server main() ");
-			InetSocketAddress serverAddress = new InetSocketAddress("172.24.206.246", 8081);
+			InetSocketAddress serverAddress = new InetSocketAddress("172.24.206.246", 8080);
 			System.out.println("in thrift Server main() ==2==");
 			TNonblockingServerTransport serverSocket = new TNonblockingServerSocket(serverAddress);
 			System.out.println("in thrift Server main() ==2.5==");

@@ -18,21 +18,18 @@ public class Server {
 	public static void main(String[] args) {
 		try {
 
-			System.out.println("in thrift Server main() ");
+
 			InetSocketAddress serverAddress = new InetSocketAddress("172.24.206.246", 8080);
-			System.out.println("in thrift Server main() ==2==");
+
 			TNonblockingServerTransport serverSocket = new TNonblockingServerSocket(serverAddress);
-			System.out.println("in thrift Server main() ==2.5==");
+
 			TThreadedSelectorServer.Args serverParams = new TThreadedSelectorServer.Args(serverSocket);
-			System.out.println("in thrift Server main() ==3==");
 			serverParams.protocolFactory(new TBinaryProtocol.Factory());
 			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-			System.out.println("in thrift Server main() ==4=="+timestamp.toString());
 			serverParams.processor(new UserService.Processor<UserService.Iface>(new UserServiceServerImpl()));
-			System.out.println("in thrift Server main() ==5==");
 			TServer server = new TThreadedSelectorServer(serverParams);
 			timestamp = new Timestamp(System.currentTimeMillis());
-			System.out.println("in thrift Server main() ==6=="+timestamp.toString());
+			System.out.println("in thrift Server main() ==  =="+timestamp.toString());
 			server.serve();
 		}catch (TTransportException e){
 			System.out.println("Server Exception is "+e.getMessage());

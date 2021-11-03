@@ -5,11 +5,18 @@ import Bean.User;
 import Clients.AbstractUserClient;
 import benchmark.rpc.thrift.UserServiceClientImpl;
 import Service.UserService;
-import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
 import org.openjdk.jmh.runner.options.TimeValue;
+
+import org.openjdk.jmh.annotations.Benchmark;
+import org.openjdk.jmh.annotations.BenchmarkMode;
+import org.openjdk.jmh.annotations.Mode;
+import org.openjdk.jmh.annotations.OutputTimeUnit;
+import org.openjdk.jmh.annotations.Scope;
+import org.openjdk.jmh.annotations.State;
+import org.openjdk.jmh.annotations.TearDown;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,7 +26,7 @@ import java.util.concurrent.TimeUnit;
 @State(Scope.Benchmark)
 public class Client extends AbstractUserClient {
 	public static final int CONCURRENCY = 32;
-
+	public static int callNum = 0;
 	private final UserServiceClientImpl userService = new UserServiceClientImpl();
 
 	@Override
@@ -37,6 +44,7 @@ public class Client extends AbstractUserClient {
 	@OutputTimeUnit(TimeUnit.MILLISECONDS)
 	@Override
 	public boolean createUser() throws Exception {
+		System.out.println("<Client.createUser>"+callNum++);
 		return super.createUser();
 	}
 
@@ -45,6 +53,7 @@ public class Client extends AbstractUserClient {
 	@OutputTimeUnit(TimeUnit.MILLISECONDS)
 	@Override
 	public User getUser() throws Exception {
+		System.out.println("<Client.getUser>"+callNum++);
 		return super.getUser();
 	}
 

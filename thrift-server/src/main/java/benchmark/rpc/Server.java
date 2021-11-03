@@ -28,7 +28,7 @@ public class Server {
 			serverParams.protocolFactory(new TBinaryProtocol.Factory());
 			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 			System.out.println("in thrift Server main() ==4=="+timestamp.toString());
-//			serverParams.processor(new UserService.Processor<UserService.Iface>(new UserServiceServerImpl()));
+			serverParams.processor(new UserService.Processor<UserService.Iface>(new UserServiceServerImpl()));
 			System.out.println("in thrift Server main() ==5==");
 			TServer server = new TThreadedSelectorServer(serverParams);
 			timestamp = new Timestamp(System.currentTimeMillis());

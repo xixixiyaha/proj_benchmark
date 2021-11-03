@@ -12,6 +12,7 @@ import org.apache.thrift.transport.TTransportException;
 
 import java.net.InetSocketAddress;
 import java.sql.Timestamp;
+import java.util.Arrays;
 
 public class Server {
 	public static void main(String[] args) {
@@ -36,6 +37,7 @@ public class Server {
 			System.out.println("in thrift Server main() ==7=="+timestamp.toString());
 		}catch (TTransportException e){
 			System.out.println("Server Exception is "+e.getMessage());
+			System.out.println(Arrays.toString(e.getStackTrace()));
 		}
 	}
 

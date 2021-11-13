@@ -1,4 +1,4 @@
-package Service;
+package com.freeb.Service;
 
 import Bean.User;
 import Bean.UserFull;

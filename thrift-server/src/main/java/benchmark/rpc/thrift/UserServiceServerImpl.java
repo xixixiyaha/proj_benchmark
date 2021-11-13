@@ -6,7 +6,7 @@ import org.apache.thrift.TException;
 
 public class UserServiceServerImpl implements UserService.Iface {
 
-    private final Service.UserService userService = new Service.UserServiceServerImpl();
+    private final com.freeb.Service.UserService userService = new com.freeb.Service.UserServiceServerImpl();
     private int createNum = 0;
     private int getNum = 0;
     @Override

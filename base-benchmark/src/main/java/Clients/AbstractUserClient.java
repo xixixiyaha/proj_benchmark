@@ -3,8 +3,8 @@ package Clients;
 import Bean.User;
 import Bean.UserFull;
 import Generater.BeanGenerator;
-import Service.UserService;
-import Service.UserServiceServerImpl;
+import com.freeb.Service.UserService;
+import com.freeb.Service.UserServiceServerImpl;
 
 import java.util.concurrent.atomic.AtomicInteger;
 

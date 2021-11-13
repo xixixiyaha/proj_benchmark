@@ -1,9 +1,7 @@
-package Service;
+package com.freeb.Service;
 
 import Bean.User;
 import Bean.UserFull;
-
-import java.util.List;
 
 public interface UserService {
 

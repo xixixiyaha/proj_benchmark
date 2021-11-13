@@ -4,12 +4,13 @@ package benchmark.rpc.thrift;
 import Bean.User;
 import Bean.UserFull;
 import CommuteUtils.LockObjectPool;
+import com.freeb.Service.UserService;
 
 import java.io.Closeable;
 import java.io.IOException;
 
 
-public class UserServiceClientImpl implements Service.UserService, Closeable {
+public class UserServiceClientImpl implements UserService, Closeable {
 
     // TODO
     private static String host = "benchmark-server";

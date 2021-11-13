@@ -1,9 +1,7 @@
-package Service;
+package com.freeb.Service;
 
 import Bean.NForm;
 import Bean.Page;
-import Bean.User;
-import Bean.UserFull;
 
 import java.util.List;
 

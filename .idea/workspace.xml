@@ -2,40 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e7402edc-f985-409d-9734-d8a746f29253" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ecom-accounts/ecom-accounts.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ecom-accounts/src/main/java/com/freeb/Service/AccountsService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ecom-accounts/src/main/java/com/freeb/Service/AccountsServiceServerImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ecom-common/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ecom-common/src/main/java/com/freeb/Entity/BaseResp.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ecom-common/src/main/java/com/freeb/Enum/IdType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ecom-common/src/main/java/com/freeb/Enum/RespCode.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ecom-common/src/main/java/com/freeb/Utils/IdGenerator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ecom-common/src/main/java/com/freeb/Utils/PackResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ecom-orders/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ecom-orders/src/main/java/com/freeb/Clients/AccountsClient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ecom-orders/src/main/java/com/freeb/Clients/PaymentClient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ecom-orders/src/main/java/com/freeb/Dao/OrderInfoCache.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ecom-orders/src/main/java/com/freeb/Dao/OrderInfoStorage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ecom-orders/src/main/java/com/freeb/Entity/OrderInfo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ecom-orders/src/main/java/com/freeb/Entity/OrderReq.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ecom-orders/src/main/java/com/freeb/Entity/OrderResp.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ecom-orders/src/main/java/com/freeb/Service/OrderServiceServerImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ecom-orders/src/main/java/com/freeb/Service/OrdersService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ecom-orders/src/main/sql/OrderInfo.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ecom-accounts/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ecom-orders/src/main/java/com/freeb/Entity/OrderSearchKey.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ecom-orders/src/main/java/com/freeb/Orders/Orders.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ecom-orders/src/main/java/com/freeb/Utils/MarshalUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ecom-orders/src/main/resources/log4j.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resource/log4j.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base-benchmark/src/main/java/Clients/AbstractUserClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/base-benchmark/src/main/java/Clients/AbstractUserClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base-benchmark/src/main/java/Service/PageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/base-benchmark/src/main/java/com/freeb/Service/PageService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base-benchmark/src/main/java/Service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/base-benchmark/src/main/java/com/freeb/Service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base-benchmark/src/main/java/Service/UserServiceClientJsonImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/base-benchmark/src/main/java/com/freeb/Service/UserServiceClientJsonImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base-benchmark/src/main/java/Service/UserServiceServerImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/base-benchmark/src/main/java/com/freeb/Service/UserServiceServerImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecom-accounts/ecom-accounts.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecom-accounts/src/main/java/com/freeb/Service/AccountsServiceServerImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecom-accounts/src/main/java/com/freeb/Service/AccountsServiceServerImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecom-orders/src/main/java/com/freeb/Dao/OrderInfoCache.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecom-orders/src/main/java/com/freeb/Dao/OrderInfoCache.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thrift-client/src/main/java/benchmark/rpc/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/thrift-client/src/main/java/benchmark/rpc/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thrift-client/src/main/java/benchmark/rpc/thrift/UserServiceClientImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/thrift-client/src/main/java/benchmark/rpc/thrift/UserServiceClientImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thrift-server/src/main/java/benchmark/rpc/thrift/UserServiceServerImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/thrift-server/src/main/java/benchmark/rpc/thrift/UserServiceServerImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,7 +71,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="jdk.selected.JAVA_MODULE" value="13" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/thrift-server/src/main/java" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/ecom-orders/src/main/resources" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -104,23 +84,37 @@
     <property name="settings.editor.selected.configurable" value="preferences.toDoOptions" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\0_4th\proj_benchmark\thrift-server\src\main\java" />
-      <recent name="D:\0_4th\proj_benchmark\thrift-client\src\main\java\benchmark\rpc\thrift" />
-      <recent name="D:\0_4th\proj_benchmark\thrift-client\src\main\resources" />
-      <recent name="D:\0_4th\proj_benchmark\base-benchmark" />
-      <recent name="D:\0_4th\proj_benchmark\src\main\java\CommuteProtocol" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\0_4th\proj_benchmark\resource" />
+      <recent name="D:\0_4th\proj_benchmark\thrift-client\src\main\thrift" />
+      <recent name="D:\0_4th\proj_benchmark\src" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="benchmark.rpc.pipe" />
       <recent name="benchmark.rpc.thrift" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\0_4th\proj_benchmark\thrift-client\src\main\thrift" />
-      <recent name="D:\0_4th\proj_benchmark\src" />
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\0_4th\proj_benchmark\ecom-orders\src\main\resources" />
+      <recent name="D:\0_4th\proj_benchmark\thrift-server\src\main\java" />
+      <recent name="D:\0_4th\proj_benchmark\thrift-client\src\main\java\benchmark\rpc\thrift" />
+      <recent name="D:\0_4th\proj_benchmark\thrift-client\src\main\resources" />
+      <recent name="D:\0_4th\proj_benchmark\base-benchmark" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.OrderInfoCache">
+    <configuration name="OrderInfoCache" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.freeb.Dao.OrderInfoCache" />
+      <module name="ecom-orders" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.freeb.Dao.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Server" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="benchmark.rpc.Server" />
       <module name="thrift-server" />
@@ -183,6 +177,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.OrderInfoCache" />
         <item itemvalue="Application.Server" />
       </list>
     </recent_temporary>
@@ -207,7 +202,8 @@
       <workItem from="1635312225435" duration="8515000" />
       <workItem from="1635321522419" duration="5407000" />
       <workItem from="1635726591241" duration="41343000" />
-      <workItem from="1636779618787" duration="13032000" />
+      <workItem from="1636779618787" duration="13308000" />
+      <workItem from="1636851055625" duration="7149000" />
     </task>
     <servers />
   </component>
@@ -283,9 +279,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="399" y="105" key="#com.intellij.ide.fileTemplates.ui.ConfigureTemplatesDialog/0.0.1536.824@0.0.1536.824" timestamp="1636788265426" />
-    <state x="958" y="124" key="#com.intellij.ide.util.MemberChooser" timestamp="1636800022534">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="-722" y="157" key="#com.intellij.ide.util.MemberChooser" timestamp="1636859364147">
+      <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
+    <state x="-722" y="157" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1636859364147" />
     <state x="958" y="124" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1636800022534" />
     <state x="575" y="340" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1636787876900">
       <screen x="0" y="0" width="1536" height="824" />
@@ -307,29 +304,35 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="933" y="117" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1635227434835" />
-    <state width="1493" height="158" key="GridCell.Tab.0.bottom" timestamp="1635943691759">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1172" height="205" key="GridCell.Tab.0.bottom" timestamp="1636856394874">
+      <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
+    <state width="1172" height="205" key="GridCell.Tab.0.bottom/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1636856394874" />
     <state width="1493" height="158" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1635943691759" />
-    <state width="1493" height="158" key="GridCell.Tab.0.center" timestamp="1635943691759">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1172" height="205" key="GridCell.Tab.0.center" timestamp="1636856394873">
+      <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
+    <state width="1172" height="205" key="GridCell.Tab.0.center/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1636856394873" />
     <state width="1493" height="158" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1635943691759" />
-    <state width="1493" height="158" key="GridCell.Tab.0.left" timestamp="1635943691757">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1172" height="205" key="GridCell.Tab.0.left" timestamp="1636856394873">
+      <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
+    <state width="1172" height="205" key="GridCell.Tab.0.left/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1636856394873" />
     <state width="1493" height="158" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1635943691757" />
-    <state width="1493" height="158" key="GridCell.Tab.0.right" timestamp="1635943691759">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1172" height="205" key="GridCell.Tab.0.right" timestamp="1636856394874">
+      <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
+    <state width="1172" height="205" key="GridCell.Tab.0.right/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1636856394874" />
     <state width="1493" height="158" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1635943691759" />
-    <state x="557" y="141" key="Maven.ArtifactSearchDialog" timestamp="1635314483548">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="-1224" y="178" key="Maven.ArtifactSearchDialog" timestamp="1636855879210">
+      <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
+    <state x="-1224" y="178" key="Maven.ArtifactSearchDialog/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1636855879210" />
     <state x="557" y="141" key="Maven.ArtifactSearchDialog/0.0.1536.824@0.0.1536.824" timestamp="1635314483548" />
-    <state x="426" y="0" key="SettingsEditor" timestamp="1636786144200">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="-1040" y="81" key="SettingsEditor" timestamp="1636855190523">
+      <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
+    <state x="-1040" y="81" key="SettingsEditor/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1636855190523" />
     <state x="426" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1636786144200" />
     <state x="440" y="149" key="VcsDiffUtil.ChangesDialog" timestamp="1635811459960">
       <screen x="0" y="0" width="1536" height="824" />
@@ -351,9 +354,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="862" y="48" key="refactoring.ChangeSignatureDialog/0.0.1536.824@0.0.1536.824" timestamp="1635216676480" />
-    <state x="814" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1636797289863">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="-902" y="183" width="840" height="856" key="search.everywhere.popup" timestamp="1636858314530">
+      <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
+    <state x="-902" y="183" width="840" height="856" key="search.everywhere.popup/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1636858314530" />
     <state x="814" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1636797289863" />
   </component>
 </project>

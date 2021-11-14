@@ -14,8 +14,5 @@
         <module name="base-benchmark" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="ecom-accounts" target="11" />
-    </bytecodeTargetLevel>
   </component>
 </project>

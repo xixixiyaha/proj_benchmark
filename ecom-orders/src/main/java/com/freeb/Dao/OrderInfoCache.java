@@ -8,9 +8,7 @@ import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+
 import java.util.Arrays;
 
 public class OrderInfoCache {
@@ -42,24 +40,15 @@ public class OrderInfoCache {
 
 
 //    static Jedis jedis;
+    public OrderInfoCache(){
 
-    OrderInfoCache(String ip, Integer port, String psw){
+            pool = getPool();
+        }
+    public OrderInfoCache(String ip, Integer port, String psw){
         ORDER_CACHE_IP =ip;
         ORDER_CACHE_PORT =port;
         ORDER_PSW=psw;
-//
-//        jedis = new Jedis(ORDER_CACHE_IP, ORDER_CACHE_PORT);
-//        jedis.auth(ORDER_PSW);
-//
-//
-//
-//        try(Connection conn = DriverManager.getConnection(ORDER_CACHE_IP,ORDER_USER,ORDER_PSW)){
-//            logger.info("redis connected!");
-//        }catch (SQLException e){
-//            logger.error(String.format("redis connect failure %s",e.toString()));
-//            // Notice here
-//            e.printStackTrace();
-//        }
+
         pool = getPool();
     }
 

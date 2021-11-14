@@ -1,14 +1,19 @@
 package com.freeb.Service;
 
 import com.freeb.Clients.AccountsClient;
+import com.freeb.Entity.OrderInfo;
 import com.freeb.Entity.OrderReq;
 import com.freeb.Entity.OrderResp;
 import com.freeb.Enum.IdType;
+import com.freeb.Orders.Orders;
 import com.freeb.Utils.PackResponse;
+
+import java.util.List;
 
 public class OrderServiceServerImpl implements OrdersService{
     // TODO 初始化
     private static AccountsClient accountsClient;
+    private Orders orders = new Orders();
 
     @Override
     public OrderResp GetOrderListByAccountId(OrderReq orderReq){
@@ -20,7 +25,15 @@ public class OrderServiceServerImpl implements OrdersService{
             return orderResp;
         }
 
-        //TODO
+        List<OrderInfo> infos = orders.getOrderListByAccountId(orderReq.getAccountId(),orderReq.getStatus());
+        if(infos == null){
+            orderResp.setBaseResp(PackResponse.packUnknownFailure());
+            return orderResp;
+        }
+
+        orderResp.setBaseResp(PackResponse.packSuccess());
+        orderResp.setOrderInfos(infos);
+        //TODO has more
         return orderResp;
     }
 
@@ -32,8 +45,14 @@ public class OrderServiceServerImpl implements OrdersService{
             orderResp.setHasMore(false);
             return orderResp;
         }
-        //TODO
-        return null;
+        List<OrderInfo> infos = orders.getOrderByPaymentId(orderReq.getAccountId(),orderReq.getPaymentId(),orderReq.getStatus());
+        if(infos == null){
+            orderResp.setBaseResp(PackResponse.packUnknownFailure());
+            return orderResp;
+        }
+        orderResp.setBaseResp(PackResponse.packSuccess());
+        orderResp.setOrderInfos(infos);
+        return orderResp;
     }
 
     @Override
@@ -56,8 +75,15 @@ public class OrderServiceServerImpl implements OrdersService{
             orderResp.setHasMore(false);
             return orderResp;
         }
-        //TODO
-        return null;
+        List<OrderInfo> infos = orders.getOrderByOrderId(orderReq.getAccountId(),orderReq.getOrderId(),orderReq.getStatus());
+        if(infos == null){
+            orderResp.setBaseResp(PackResponse.packUnknownFailure());
+            return orderResp;
+        }
+
+        orderResp.setBaseResp(PackResponse.packSuccess());
+        orderResp.setOrderInfos(infos);
+        return orderResp;
     }
 
 

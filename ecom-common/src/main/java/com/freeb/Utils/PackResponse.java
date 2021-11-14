@@ -17,4 +17,10 @@ public class PackResponse {
         return baseResp;
     }
 
+    public static BaseResp packUnknownFailure(){
+        BaseResp baseResp = new BaseResp();
+        baseResp.setStatus(RespCode.FAILURE_UNKNOWN);
+        return baseResp;
+    }
+
 }

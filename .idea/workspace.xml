@@ -2,11 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e7402edc-f985-409d-9734-d8a746f29253" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/ecom-accounts/src/main/java/com/freeb/Dao/AccountsInfoCache.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ecom-accounts/src/main/java/com/freeb/Dao/AccountsInfoStorage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ecom-accounts/src/main/java/com/freeb/Entity/AccountsInfo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ecom-accounts/src/main/sql/AccounInfo.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecom-accounts/src/main/java/com/freeb/Dao/AccountsInfoStorage.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecom-accounts/src/main/java/com/freeb/Dao/AccountsInfoStorage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecom-accounts/src/main/java/com/freeb/Service/AccountsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecom-accounts/src/main/java/com/freeb/Service/AccountsService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecom-accounts/src/main/java/com/freeb/Service/AccountsServiceServerImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecom-accounts/src/main/java/com/freeb/Service/AccountsServiceServerImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecom-accounts/src/main/sql/AccounInfo.sql" beforeDir="false" afterPath="$PROJECT_DIR$/ecom-accounts/src/main/sql/AccounInfo.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -198,7 +198,7 @@
       <workItem from="1636943998592" duration="1839000" />
       <workItem from="1637134940015" duration="1343000" />
       <workItem from="1637196382658" duration="1203000" />
-      <workItem from="1638317275753" duration="4630000" />
+      <workItem from="1638317275753" duration="9829000" />
     </task>
     <servers />
   </component>
@@ -275,11 +275,11 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="399" y="105" key="#com.intellij.ide.fileTemplates.ui.ConfigureTemplatesDialog/0.0.1536.824@0.0.1536.824" timestamp="1636788265426" />
-    <state x="958" y="124" key="#com.intellij.ide.util.MemberChooser" timestamp="1638320916780">
+    <state x="958" y="124" key="#com.intellij.ide.util.MemberChooser" timestamp="1638326616381">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="-722" y="157" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1636859364147" />
-    <state x="958" y="124" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1638320916780" />
+    <state x="958" y="124" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1638326616381" />
     <state x="575" y="340" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1636787876900">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

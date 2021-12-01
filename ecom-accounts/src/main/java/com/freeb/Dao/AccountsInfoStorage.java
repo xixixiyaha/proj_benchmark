@@ -39,12 +39,29 @@ public class AccountsInfoStorage {
     }
 
     static final String GET_ACCOUNT_BY_ID ="SELECT account_id, user_name, user_pwd, user_description FROM ACCOUNT_INFOS WHERE account_id = ?";
+    static final String GET_ACCOUNT_BY_NAME ="SELECT account_id, user_name, user_pwd, user_description FROM ACCOUNT_INFOS WHERE user_name = ?";
+
     static final String UPDATE_ACCOUNT_BY_ID ="UPDATE ACCOUNT_INFOS SET user_name =?, user_pwd = ?, user_description = ? WHERE account_id = ?";
     static final String DELETE_ACCOUNT_BY_ID ="DELETE FROM ACCOUNT_INFOS WHERE account_id = ?";
     static final String CREATE_ACCOUNT="INSERT INTO ACCOUNT_INFOS (account_id, user_name, user_pwd, user_description) VALUES(?,?,?,?)";
     static final String EXISTS_ACCOUNT_BY_ID ="SELECT account_id FROM ACCOUNT_INFOS WHERE account_id = ?";
 
 
+    public AccountsInfo GetAccountInfoByName(String name){
+
+        ResultSet rs=null;
+        try(Connection conn = DriverManager.getConnection(ACCOUNT_DB_URL, ACCOUNT_USER, ACCOUNT_PWD)){
+            PreparedStatement stmt = conn.prepareStatement(GET_ACCOUNT_BY_NAME);
+            stmt.setString(1,name);
+            rs = stmt.executeQuery();
+            return MarshalUtil.convertRs2Account(rs);
+        }catch (SQLException e){
+            logger.error(String.format("DB connect failure %s",e.toString()));
+            // Notice here
+            e.printStackTrace();
+            return null;
+        }
+    }
     public AccountsInfo GetAccountInfoById(Integer id){
 
         ResultSet rs=null;
@@ -52,7 +69,6 @@ public class AccountsInfoStorage {
             PreparedStatement stmt = conn.prepareStatement(GET_ACCOUNT_BY_ID);
             stmt.setInt(1,id);
             rs = stmt.executeQuery();
-            // TODO true / false
             return MarshalUtil.convertRs2Account(rs);
         }catch (SQLException e){
             logger.error(String.format("DB connect failure %s",e.toString()));

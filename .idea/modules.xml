@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/ecom-carts/ecom-carts.iml" filepath="$PROJECT_DIR$/ecom-carts/ecom-carts.iml" />
       <module fileurl="file://$PROJECT_DIR$/ecom-payment/ecom-payment.iml" filepath="$PROJECT_DIR$/ecom-payment/ecom-payment.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ecom-search/ecom-search.iml" filepath="$PROJECT_DIR$/ecom-search/ecom-search.iml" />
     </modules>
   </component>
 </project>

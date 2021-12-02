@@ -21,6 +21,7 @@
         <module>ecom-accounts</module>
         <module>ecom-payment</module>
         <module>ecom-carts</module>
+        <module>ecom-search</module>
     </modules>
 
     <properties>

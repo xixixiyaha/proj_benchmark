@@ -1,6 +1,6 @@
 package com.freeb.Service;
 
-import com.freeb.Dao.AccountsInfoStorage;
+import com.freeb.Dao.AccountInfoStorage;
 import com.freeb.Entity.AccountsInfo;
 import com.freeb.Enum.IdType;
 
@@ -8,7 +8,7 @@ import java.util.UUID;
 
 public class AccountsServiceServerImpl implements AccountsService {
 
-    private AccountsInfoStorage storage = new AccountsInfoStorage();
+    private AccountInfoStorage storage = new AccountInfoStorage();
     private Boolean useStorage = true;
 
     @Override

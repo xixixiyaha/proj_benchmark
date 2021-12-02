@@ -6,7 +6,8 @@ CREATE TABLE ORDER_INFOS(
     merchant_name VARCHAR(255),
     obj_id INT NOT NULL,
     obj_name VARCHAR (255),
-    payment_id INT,
+    payment_id LONG,
+--     shipping_id LONG,
     CREATE_TIME DATETIME,
     UPDATE_TIME DATETIME ,
 )

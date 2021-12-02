@@ -1,20 +1,20 @@
 package com.freeb.Dao;
 
 import com.freeb.Entity.AccountsInfo;
-import com.freeb.utils.MarshalUtil;
+import com.freeb.Utils.MarshalUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.sql.*;
 
-public class AccountsInfoStorage {
-    private static final Logger logger = LoggerFactory.getLogger(AccountsInfoStorage.class);
+public class AccountInfoStorage {
+    private static final Logger logger = LoggerFactory.getLogger(AccountInfoStorage.class);
 
     static String ACCOUNT_DB_URL;
     static String ACCOUNT_USER;
     static String ACCOUNT_PWD;
 
-    public AccountsInfoStorage(){
+    public AccountInfoStorage(){
         try(Connection conn = DriverManager.getConnection(ACCOUNT_DB_URL, ACCOUNT_USER, ACCOUNT_PWD)){
             logger.info("DB connected!");
         }catch (SQLException e){
@@ -24,7 +24,7 @@ public class AccountsInfoStorage {
         }
     }
 
-    public AccountsInfoStorage(String url, String name, String psw){
+    public AccountInfoStorage(String url, String name, String psw){
         ACCOUNT_DB_URL =url;
         ACCOUNT_USER =name;
         ACCOUNT_PWD =psw;

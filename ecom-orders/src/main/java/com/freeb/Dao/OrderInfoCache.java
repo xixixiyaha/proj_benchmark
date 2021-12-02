@@ -2,6 +2,7 @@ package com.freeb.Dao;
 
 
 
+import com.freeb.Entity.OrderSearchKey;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import redis.clients.jedis.Jedis;
@@ -12,6 +13,11 @@ import redis.clients.jedis.JedisPoolConfig;
 import java.util.Arrays;
 
 public class OrderInfoCache {
+
+    //TODO
+    public static String convertSearchKey2String(OrderSearchKey key){
+        return "123";
+    }
 
     private static final Logger logger = LoggerFactory.getLogger(OrderInfoCache.class);
 

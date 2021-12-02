@@ -19,6 +19,8 @@
         <module>ecom-orders</module>
         <module>ecom-common</module>
         <module>ecom-accounts</module>
+        <module>ecom-payment</module>
+        <module>ecom-carts</module>
     </modules>
 
     <properties>

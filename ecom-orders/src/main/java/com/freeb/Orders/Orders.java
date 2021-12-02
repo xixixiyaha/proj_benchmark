@@ -23,7 +23,7 @@ public class Orders {
         OrderSearchKey key = new OrderSearchKey();
         key.setAccountId(accountId);
         key.setStatus(paymentStatus);
-        String skey = MarshalUtil.convertSearchKey2String(key);
+        String skey = cache.convertSearchKey2String(key);
 
         return getOrderList(skey,accountId,SearchType.ACCOUNT_ID);
     }
@@ -31,7 +31,7 @@ public class Orders {
         OrderSearchKey key = new OrderSearchKey();
         key.setAccountId(accountId);
         key.setObjId(orderId);
-        String skey = MarshalUtil.convertSearchKey2String(key);
+        String skey = cache.convertSearchKey2String(key);
 
         List<OrderInfo> info =  getOrderList(skey,orderId,SearchType.ORDER_ID);
         if(info==null||info.size()>1){
@@ -43,7 +43,7 @@ public class Orders {
         OrderSearchKey key = new OrderSearchKey();
         key.setAccountId(accountId);
         key.setObjId(paymentId);
-        String skey = MarshalUtil.convertSearchKey2String(key);
+        String skey = cache.convertSearchKey2String(key);
 
         List<OrderInfo> info =  getOrderList(skey,paymentId,SearchType.PAYMENT_ID);
         if(info==null||info.size()>1){
@@ -56,7 +56,7 @@ public class Orders {
         key.setAccountId(accountId);
         key.setObjId(objId);
         key.setStatus(paymentStatus);
-        String skey = MarshalUtil.convertSearchKey2String(key);
+        String skey = cache.convertSearchKey2String(key);
 
         return getOrderList(skey,objId,SearchType.OBJ_ID);
     }
@@ -66,7 +66,7 @@ public class Orders {
         key.setAccountId(accountId);
         key.setObjName(objName);
         key.setStatus(paymentStatus);
-        String skey = MarshalUtil.convertSearchKey2String(key);
+        String skey = cache.convertSearchKey2String(key);
         return getOrderList(skey,objName,SearchType.OBJ_NAME);
     }
 
@@ -75,7 +75,7 @@ public class Orders {
         key.setAccountId(accountId);
         key.setMerchantId(merchantId);
         key.setStatus(paymentStatus);
-        String skey = MarshalUtil.convertSearchKey2String(key);
+        String skey = cache.convertSearchKey2String(key);
 
         return getOrderList(skey,merchantId,SearchType.MERCHANT_ID);
     }
@@ -85,7 +85,7 @@ public class Orders {
         key.setAccountId(accountId);
         key.setMerchantName(merchantName);
         key.setStatus(paymentStatus);
-        String skey = MarshalUtil.convertSearchKey2String(key);
+        String skey = cache.convertSearchKey2String(key);
         return getOrderList(skey,merchantName,SearchType.MERCHANT_NAME);
     }
 
@@ -93,6 +93,7 @@ public class Orders {
         String str = OrderInfoCache.getOrderListString(key);
         if(str!=null){
             return MarshalUtil.convertString2OrderList(key);
+
         }
         switch (type){
             case ORDER_ID:

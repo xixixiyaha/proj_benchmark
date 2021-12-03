@@ -1,9 +1,6 @@
 package com.freeb.Utils;
 
-import com.freeb.Entity.AccountsInfo;
-import com.freeb.Entity.CartInfo;
-import com.freeb.Entity.OrderInfo;
-import com.freeb.Entity.PaymentInfo;
+import com.freeb.Entity.*;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -100,5 +97,27 @@ public class MarshalUtil {
         return lst;
     }
 
+    public static List<ProductInfo> convertRs2ProdList(ResultSet rs){
+
+        List<ProductInfo> lst=new ArrayList<>();
+        try{
+            while(rs.next()){
+                ProductInfo info = new ProductInfo();
+                info.setProdId(rs.getLong(1));
+                info.setProdName(rs.getString(2));
+                //TODO DB only stores the path. Tags should be read from .txt/.csv/.json/ ...
+//                info.setProdTag(rs.get(3));
+                info.setProdPrice(rs.getDouble(4));
+                info.setProdSales(rs.getInt(5));
+                info.setDiscountsId(rs.getLong(6));
+                info.setMerchantId(rs.getLong(7));
+                lst.add(info);
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+            return null;
+        }
+        return lst;
+    }
 
 }

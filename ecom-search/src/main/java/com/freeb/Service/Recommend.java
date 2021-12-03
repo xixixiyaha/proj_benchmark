@@ -4,6 +4,7 @@ import com.freeb.Clients.SearchClients;
 import com.freeb.Entity.ProductInfo;
 import com.freeb.Entity.UserActive;
 import com.freeb.Entity.UserSimilarity;
+import com.freeb.Enum.SearchOrder;
 import com.freeb.Utils.MapUtil;
 
 import java.util.*;
@@ -17,13 +18,13 @@ public class Recommend {
         this.clients = c;
     }
 
-    public static boolean updateActiveBehavior(Long userId, Long itemId) {
+    public static boolean UpdateActiveBehavior(Long userId, Long itemId) {
         boolean flag = false;
         // TODO 数据库/json 添加数据
         return flag;
     }
 
-    public ConcurrentHashMap<Long, ConcurrentHashMap<Long, Long>> assembleUserBehavior(List<UserActive> userActiveList) {
+    public ConcurrentHashMap<Long, ConcurrentHashMap<Long, Long>> AssembleUserBehavior(List<UserActive> userActiveList) {
         ConcurrentHashMap<Long, ConcurrentHashMap<Long, Long>> activeMap = new ConcurrentHashMap<Long, ConcurrentHashMap<Long, Long>>();
         // 遍历查询到的用户点击行为数据
         for (UserActive userActive : userActiveList) {
@@ -131,7 +132,7 @@ public class Recommend {
      * @param topN 与userId相似用户的数量
      * @return 与usereId最相似的topN个用户
      */
-    public List<Long> getTopNSimilarityUsers(Map<Long,Double> userSimilarityMap, Integer topN) {
+    public List<Long> GetTopNSimilarityUsers(Map<Long,Double> userSimilarityMap, Integer topN) {
         // 用来记录与userId相似度最高的前N个用户的id
         List<Long> similarityList = new ArrayList<>(topN);
 
@@ -169,7 +170,7 @@ public class Recommend {
         return similarityList;
     }
 
-    public List<Map.Entry<Long,Double>> getTopNSimilarityUserSimilarity(Map<Long,Double> userSimilarityMap, Integer topN) {
+    public List<Map.Entry<Long,Double>> GetTopNSimilarityUserSimilarity(Map<Long,Double> userSimilarityMap, Integer topN) {
         // 用来记录与userId相似度最高的前N个用户的id
         List<Map.Entry<Long,Double>> similarityList = new ArrayList<>(topN);
 
@@ -214,7 +215,7 @@ public class Recommend {
      * @param calTagNum 相似用户计算前 calTagNum 个分类的权重
      * @return 可以推荐给userId的类目id
      */
-    public List<Integer> getRecommendCategory(Long userId, HashMap<Long,Double> similarUserMap,Integer calTagNum,Integer categoryNum) {
+    public List<Integer> GetRecommendCategory(Long userId, HashMap<Long,Double> similarUserMap,Integer calTagNum,Integer categoryNum) {
         List<Integer> recommedCategoryList = new ArrayList<>();
 
         // userId的浏览行为列表
@@ -266,6 +267,11 @@ public class Recommend {
         return recommedCategoryList;
     }
 
+
+
+    public List<ProductInfo> GetProductByCategory(Integer categoryId, SearchOrder order,String words){
+        return null;
+    }
 
 
     /**

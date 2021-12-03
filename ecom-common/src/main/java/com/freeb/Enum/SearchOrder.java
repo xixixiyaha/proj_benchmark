@@ -1,5 +1,5 @@
 package com.freeb.Enum;
 
 public enum SearchOrder {
-    PRICE_DESC,PRICE_ASC,SIMILARITY,SALES
+    PRICE_DESC,PRICE_ASC,SIMILARITY,SALES,UPDATE_TIME
 }

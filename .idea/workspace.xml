@@ -2,23 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e7402edc-f985-409d-9734-d8a746f29253" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/ecom-common/src/main/java/com/freeb/Utils/MapUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ecom-search/src/main/java/com/freeb/Entity/UserActive.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ecom-search/src/main/java/com/freeb/Entity/UserSimilarity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ecom-search/src/main/java/com/freeb/Service/Recommend.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ecom-search/src/main/java/com/freeb/Dao/ProductInfoStorage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecom-accounts/src/main/java/com/freeb/Dao/AccountInfoStorage.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecom-accounts/src/main/java/com/freeb/Dao/AccountInfoStorage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecom-accounts/src/main/java/com/freeb/Service/AccountsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecom-accounts/src/main/java/com/freeb/Service/AccountsService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecom-accounts/src/main/java/com/freeb/Service/AccountsServiceServerImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecom-accounts/src/main/java/com/freeb/Service/AccountsServiceServerImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecom-accounts/src/main/sql/AccounInfo.sql" beforeDir="false" afterPath="$PROJECT_DIR$/ecom-accounts/src/main/sql/AccounInfo.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecom-common/src/main/java/com/freeb/Entity/AccountsInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecom-common/src/main/java/com/freeb/Entity/AccountsInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecom-common/src/main/java/com/freeb/Entity/ObjInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecom-common/src/main/java/com/freeb/Entity/ProductInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecom-common/src/main/java/com/freeb/Utils/MarshalUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecom-common/src/main/java/com/freeb/Utils/MarshalUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecom-payment/src/main/java/com.freeb/Service/PaymentServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecom-payment/src/main/java/com.freeb/Service/PaymentServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecom-search/ecom-search.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ecom-search/ecom-search.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecom-search/src/main/java/com/freeb/Clients/SearchClients.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecom-search/src/main/java/com/freeb/Clients/SearchClients.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecom-search/src/main/java/com/freeb/Service/SearchService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecom-search/src/main/java/com/freeb/Service/SearchService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecom-search/src/main/java/com/freeb/Service/SearchServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecom-search/src/main/java/com/freeb/Service/SearchServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecom-common/src/main/java/com/freeb/Enum/SearchOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecom-common/src/main/java/com/freeb/Enum/SearchOrder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecom-search/src/main/java/com/freeb/Service/Recommend.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecom-search/src/main/java/com/freeb/Service/Recommend.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -210,7 +197,7 @@
       <workItem from="1636943998592" duration="1839000" />
       <workItem from="1637134940015" duration="1343000" />
       <workItem from="1637196382658" duration="1203000" />
-      <workItem from="1638317275753" duration="49433000" />
+      <workItem from="1638317275753" duration="52924000" />
     </task>
     <servers />
   </component>

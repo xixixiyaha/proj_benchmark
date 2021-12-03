@@ -17,7 +17,7 @@ public class MarshalUtil {
         AccountsInfo info=new AccountsInfo();
         try{
             while(rs.next()){
-                info.setAccountId(rs.getInt(1));
+                info.setUserId(rs.getLong(1));
                 info.setUserName(rs.getString(2));
                 info.setUserPwd(rs.getString(3));
                 info.setUserDescription(rs.getString(4));

@@ -1,22 +1,26 @@
 package com.freeb.Entity;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 
 public class AccountsInfo {
 
-    private Integer accountId;
+    private Long userId;
     private String userName;
     private String userPwd;
     private String userDescription;
+    // 懒更新
+    private HashMap<Integer,Double> userTag;
     private Date createTime;
     private Date updateTime;
 
-    public Integer getAccountId() {
-        return accountId;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setAccountId(Integer accountId) {
-        this.accountId = accountId;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getUserName() {
@@ -57,5 +61,13 @@ public class AccountsInfo {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public HashMap<Integer,Double> getUserTag() {
+        return userTag;
+    }
+
+    public void setUserTag(HashMap<Integer,Double> userTag) {
+        this.userTag = userTag;
     }
 }

@@ -82,7 +82,7 @@ public class AccountInfoStorage {
         ResultSet rs=null;
         try(Connection conn = DriverManager.getConnection(ACCOUNT_DB_URL, ACCOUNT_USER, ACCOUNT_PWD)){
             PreparedStatement stmt = conn.prepareStatement(UPDATE_ACCOUNT_BY_ID);
-            stmt.setInt(4,info.getAccountId());
+            stmt.setLong(4,info.getUserId());
             stmt.setString(1,info.getUserName());
             stmt.setString(2,info.getUserPwd());
             stmt.setString(3,info.getUserDescription());
@@ -122,7 +122,7 @@ public class AccountInfoStorage {
         ResultSet rs=null;
         try(Connection conn = DriverManager.getConnection(ACCOUNT_DB_URL, ACCOUNT_USER, ACCOUNT_PWD)){
             PreparedStatement stmt = conn.prepareStatement(CREATE_ACCOUNT);
-            stmt.setInt(1,info.getAccountId());
+            stmt.setLong(1,info.getUserId());
             stmt.setString(2,info.getUserName());
             stmt.setString(3,info.getUserPwd());
             stmt.setString(4,info.getUserDescription());

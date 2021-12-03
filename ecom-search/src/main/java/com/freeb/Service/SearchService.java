@@ -1,6 +1,6 @@
 package com.freeb.Service;
 
-import com.freeb.Entity.ObjInfo;
+import com.freeb.Entity.ProductInfo;
 import com.freeb.Enum.SearchOrder;
 import com.freeb.Enum.SearchType;
 
@@ -12,6 +12,6 @@ public interface SearchService {
     /*
     * CPU contention 预计使用计算密集 cache可选
     * */
-    List<ObjInfo> GetRecommendObjByName(Long accoundId, String words, SearchType type, SearchOrder order);
+    List<ProductInfo> GetRecommendByName(Long accoundId, String words, SearchType type, SearchOrder order);
 
 }

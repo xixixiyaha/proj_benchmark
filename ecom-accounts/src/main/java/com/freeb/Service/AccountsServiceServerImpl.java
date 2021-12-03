@@ -4,6 +4,8 @@ import com.freeb.Dao.AccountInfoStorage;
 import com.freeb.Entity.AccountsInfo;
 import com.freeb.Enum.IdType;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 
 public class AccountsServiceServerImpl implements AccountsService {
@@ -41,13 +43,29 @@ public class AccountsServiceServerImpl implements AccountsService {
     }
 
     @Override
+    public List<Integer> GetAccountTag(Long id) {
+        // todo
+        return null;
+    }
+
+    @Override
+    public HashMap<Integer, Double> GetUserTags(Long id) {
+        return null;
+    }
+
+    @Override
+    public Boolean SetUserTags(Long id, HashMap<Integer, Double> tags) {
+        return null;
+    }
+
+    @Override
     public Boolean CreateAccount(AccountsInfo info) {
         if(storage.GetAccountInfoByName(info.getUserName())!=null)return false;
         UUID uuid = UUID.randomUUID();
         String strUuid = String.valueOf(uuid).replace("-","");
-        Integer accountId = strUuid.hashCode();
+        long accountId = (long) strUuid.hashCode();
         accountId = accountId < 0 ? -accountId : accountId;
-        info.setAccountId(accountId);
+        info.setUserId(accountId);
         return storage.CreateAccountInfo(info);
     }
 

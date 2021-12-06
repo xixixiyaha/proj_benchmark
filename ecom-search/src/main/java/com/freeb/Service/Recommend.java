@@ -1,29 +1,53 @@
 package com.freeb.Service;
 
 import com.freeb.Clients.SearchClients;
+import com.freeb.Dao.ProductInfoStorage;
 import com.freeb.Entity.ProductInfo;
 import com.freeb.Entity.UserActive;
 import com.freeb.Entity.UserSimilarity;
 import com.freeb.Enum.SearchOrder;
 import com.freeb.Utils.MapUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class Recommend {
 
+    private static final Logger logger = LoggerFactory.getLogger(ProductInfoStorage.class);
+
     SearchClients clients;
+    ProductInfoStorage storage = new ProductInfoStorage();
 
     Recommend(SearchClients c){
         this.clients = c;
     }
 
-    public static boolean UpdateActiveBehavior(Long userId, Long itemId) {
+    public static boolean UpdateActiveBehavior(Long userId, Long prodId) {
         boolean flag = false;
-        // TODO 数据库/json 添加数据
+        //TODO 数据库/json 添加数据
+        // 现在 user + prod => 查物品表 categoryId => 更新
+        // 改进 直接给出 三者
+
+        //TODO & NOTICE 目前一个用户重复点击一个商品会重复计数
+
         return flag;
     }
 
+    public boolean UpdateActiveBehavior(Long userId, Long prodId, Integer categoryId) {
+        boolean flag = false;
+        //TODO 数据库/json 添加数据
+        return storage .CreateActiveBehavior(userId,prodId,categoryId);
+
+        //TODO & NOTICE 目前一个用户重复点击一个商品会重复计数
+    }
+
+    /**
+     * 计算一个 userId 的浏览行为
+     * @param userActiveList 一个用户浏览行为输入
+     * @return 这个用户的 各个 categoryId 的点击频率
+     */
     public ConcurrentHashMap<Long, ConcurrentHashMap<Long, Long>> AssembleUserBehavior(List<UserActive> userActiveList) {
         ConcurrentHashMap<Long, ConcurrentHashMap<Long, Long>> activeMap = new ConcurrentHashMap<Long, ConcurrentHashMap<Long, Long>>();
         // 遍历查询到的用户点击行为数据
@@ -268,8 +292,41 @@ public class Recommend {
     }
 
 
+    private static Integer REDUNDANCY_CATEGORY_NUM = 10;
+    private static List<Integer> DEFAULT_CATEGORY_WEIGHT = List.of(60,30,10);
+    /**
+     * 根据userId给出推荐商品 Recommend.Class 向外提供的函数
+     * @param words 搜索关键词
+     * @param categoryWeight 根据分类推荐商品，List的长度len决定了要推荐top(Len)分类下的商品，权重是一共推荐x%*总推荐数
+     *                       目前写死 len = 3 (0.6,0.3,0.1)
+     * @param prodNum 推荐总数 目前写死 num = 50
+     */
+    public List<ProductInfo> GetRecommendProductsByUser(Long userId,SearchOrder order,String words,List<Integer> categoryWeight,Integer prodNum){
+        List<ProductInfo> prodList = new ArrayList<>();
+        int categoryLen = categoryWeight.size();
+        /*
+        * TODO : Full Recommend Process
+        * */
+        List<Integer> rcmdCategory = GetRecommendCategory(userId,null,categoryLen+REDUNDANCY_CATEGORY_NUM,categoryLen);
+        // TODO: null 兜底逻辑
+        for(int i=0;i<categoryLen;i++){
+            List<ProductInfo> prodSubList = GetProductByCategory(rcmdCategory.get(i),order,words,prodNum*categoryWeight.get(i));
+            prodList.addAll(prodSubList);
+        }
+        return prodList;
+    }
 
-    public List<ProductInfo> GetProductByCategory(Integer categoryId, SearchOrder order,String words){
+    // Todo 现阶段提供两种 order: by SALES 和 模糊搜索
+    public List<ProductInfo> GetProductByCategory(Integer categoryId, SearchOrder order,String words,Integer prodNum){
+        switch (order){
+            case SALES:
+                return storage.GetProductByCategory(categoryId,order,prodNum);
+            case SIMILARITY:
+                return storage.GetProductBySimilarity(categoryId,order,words,prodNum);
+            default:
+                logger.warn("Unsupported recommend type !");
+        }
+
         return null;
     }
 

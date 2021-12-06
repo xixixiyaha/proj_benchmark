@@ -24,7 +24,7 @@ public class Recommend {
         this.clients = c;
     }
 
-    public static boolean UpdateActiveBehavior(Long userId, Long prodId) {
+    public boolean CreateUserClickBehavior(Long userId, Long prodId) {
         boolean flag = false;
         //TODO 数据库/json 添加数据
         // 现在 user + prod => 查物品表 categoryId => 更新
@@ -35,14 +35,14 @@ public class Recommend {
         return flag;
     }
 
-    public boolean UpdateActiveBehavior(Long userId, Long prodId, Integer categoryId) {
+    public boolean CreateUserClickBehavior(Long userId, Long prodId, Integer categoryId) {
         boolean flag = false;
         //TODO 数据库/json 添加数据
         return storage .CreateActiveBehavior(userId,prodId,categoryId);
 
         //TODO & NOTICE 目前一个用户重复点击一个商品会重复计数
     }
-    public ConcurrentHashMap<Long, ConcurrentHashMap<Long, Long>> AssembleUserBehavior(List<UserActive> userActiveList) {
+    private ConcurrentHashMap<Long, ConcurrentHashMap<Long, Long>> AssembleUserBehavior(List<UserActive> userActiveList) {
         ConcurrentHashMap<Long, ConcurrentHashMap<Long, Long>> activeMap = new ConcurrentHashMap<>();
         // 遍历查询到的用户点击行为数据
         for (UserActive userActive : userActiveList) {
@@ -76,7 +76,7 @@ public class Recommend {
      * 计算一个 userId 的浏览行为
      * @return 用户的 各个 categoryId 的点击频率
      */
-    public ConcurrentHashMap<Long, ConcurrentHashMap<Long, Long>> AssembleUserBehavior() {
+    private ConcurrentHashMap<Long, ConcurrentHashMap<Long, Long>> AssembleUserBehavior() {
         ConcurrentHashMap<Long, ConcurrentHashMap<Long, Long>> activeMap = new ConcurrentHashMap<>();
         // 遍历查询到的用户点击行为数据
         // 获取最近活跃的 1000 个用户
@@ -92,7 +92,7 @@ public class Recommend {
      * @param activeMap 用户对各个二级类目的购买行为的一个map集合
      * @return 计算出的用户与用户之间的相似度的对象存储形式
      */
-    public HashMap<Long,Double> calcSimilarityBetweenUsers(Long userId,ConcurrentHashMap<Long, ConcurrentHashMap<Long, Long>> activeMap) {
+    private HashMap<Long,Double> calcSimilarityBetweenUsers(Long userId,ConcurrentHashMap<Long, ConcurrentHashMap<Long, Long>> activeMap) {
         // 用户之间的相似度对集合
         HashMap<Long,Double> similarityMap = new HashMap<>();
 
@@ -166,7 +166,7 @@ public class Recommend {
      * @param topN 与userId相似用户的数量
      * @return 与usereId最相似的topN个用户
      */
-    public List<Long> GetTopNSimilarityUsers(Map<Long,Double> userSimilarityMap, Integer topN) {
+    private List<Long> GetTopNSimilarityUsers(Map<Long,Double> userSimilarityMap, Integer topN) {
         // 用来记录与userId相似度最高的前N个用户的id
         List<Long> similarityList = new ArrayList<>(topN);
 
@@ -204,7 +204,7 @@ public class Recommend {
         return similarityList;
     }
 
-    public List<Map.Entry<Long,Double>> GetTopNSimilarityUserSimilarity(Map<Long,Double> userSimilarityMap, Integer topN) {
+    private List<Map.Entry<Long,Double>> GetTopNSimilarityUserSimilarity(Map<Long,Double> userSimilarityMap, Integer topN) {
         // 用来记录与userId相似度最高的前N个用户的id
         List<Map.Entry<Long,Double>> similarityList = new ArrayList<>(topN);
 
@@ -249,7 +249,7 @@ public class Recommend {
      * @param calTagNum 相似用户计算前 calTagNum 个分类的权重
      * @return 可以推荐给userId的类目id
      */
-    public List<Integer> GetRecommendCategory(Long userId, List<Map.Entry<Long,Double>> similarUserMap,Integer calTagNum,Integer categoryNum) {
+    private List<Integer> GetRecommendCategory(Long userId, List<Map.Entry<Long,Double>> similarUserMap,Integer calTagNum,Integer categoryNum) {
         List<Integer> recommedCategoryList = new ArrayList<>();
 
         // userId的浏览行为列表
@@ -312,7 +312,7 @@ public class Recommend {
      *                       目前写死 len = 3 (0.6,0.3,0.1)
      * @param prodNum 推荐总数 目前写死 num = 50
      */
-    public List<ProductInfo> GetRecommendProductsByUser(Long userId,SearchOrder order,String words,List<Integer> categoryWeight,Integer prodNum){
+    public List<ProductInfo> GetRecommendProductsByProdName(Long userId, SearchOrder order, String words, List<Integer> categoryWeight, Integer prodNum){
         List<ProductInfo> prodList = new ArrayList<>();
         int categoryLen = categoryWeight.size();
 
@@ -325,6 +325,24 @@ public class Recommend {
         // TODO: null 兜底逻辑
         for(int i=0;i<categoryLen;i++){
             List<ProductInfo> prodSubList = GetProductByCategory(rcmdCategory.get(i),order,words,prodNum*categoryWeight.get(i));
+            prodList.addAll(prodSubList);
+        }
+        return prodList;
+    }
+
+    public List<ProductInfo> GetRecommendProductsByProdName(Long userId, SearchOrder order, String words){
+        List<ProductInfo> prodList = new ArrayList<>();
+        int categoryLen = DEFAULT_CATEGORY_WEIGHT.size();
+
+        // 1. & 2. 获取最近活跃的1000名用户 & 计算当前用户与他们的相似度
+        HashMap<Long,Double> similarities =  calcSimilarityBetweenUsers(userId,AssembleUserBehavior());
+        // 3. 获取最相似的 DEFAUALT_SIMILARITY_NUM 个用户
+        List<Map.Entry<Long,Double>> topSimilarities = GetTopNSimilarityUserSimilarity(similarities,DEFAUALT_SIMILARITY_NUM);
+        // 4. 获取用户可能最喜欢的类别
+        List<Integer> rcmdCategory = GetRecommendCategory(userId,topSimilarities,categoryLen+REDUNDANCY_CATEGORY_NUM,categoryLen);
+        // TODO: null 兜底逻辑
+        for(int i=0;i<categoryLen;i++){
+            List<ProductInfo> prodSubList = GetProductByCategory(rcmdCategory.get(i),order,words,50*DEFAULT_CATEGORY_WEIGHT.get(i));
             prodList.addAll(prodSubList);
         }
         return prodList;

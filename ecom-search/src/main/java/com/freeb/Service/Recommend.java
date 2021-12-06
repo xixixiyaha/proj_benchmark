@@ -42,14 +42,8 @@ public class Recommend {
 
         //TODO & NOTICE 目前一个用户重复点击一个商品会重复计数
     }
-
-    /**
-     * 计算一个 userId 的浏览行为
-     * @param userActiveList 一个用户浏览行为输入
-     * @return 这个用户的 各个 categoryId 的点击频率
-     */
     public ConcurrentHashMap<Long, ConcurrentHashMap<Long, Long>> AssembleUserBehavior(List<UserActive> userActiveList) {
-        ConcurrentHashMap<Long, ConcurrentHashMap<Long, Long>> activeMap = new ConcurrentHashMap<Long, ConcurrentHashMap<Long, Long>>();
+        ConcurrentHashMap<Long, ConcurrentHashMap<Long, Long>> activeMap = new ConcurrentHashMap<>();
         // 遍历查询到的用户点击行为数据
         for (UserActive userActive : userActiveList) {
             // 1.获取用户id
@@ -75,6 +69,23 @@ public class Recommend {
             }
         }
 
+        return activeMap;
+    }
+
+    /**
+     * 计算一个 userId 的浏览行为
+     * @param userId 目标用户
+     * @return 用户的 各个 categoryId 的点击频率
+     */
+    public ConcurrentHashMap<Long, ConcurrentHashMap<Long, Long>> AssembleUserBehavior(Long userId) {
+        ConcurrentHashMap<Long, ConcurrentHashMap<Long, Long>> activeMap = new ConcurrentHashMap<>();
+        // 遍历查询到的用户点击行为数据
+        // 获取最近活跃的 1000 个用户
+        List<Long> activeUsers = storage.GetLastestAvtiveUsers(1000);
+        activeUsers.add(userId);
+        for(Long uid:activeUsers){
+            activeMap.put(uid,storage.GetUserActiveByCategory(uid));
+        }
         return activeMap;
     }
 
@@ -336,22 +347,5 @@ public class Recommend {
      * @param productList 商品列表
      * @return 点击量最高的商品
      */
-//    public static ProductInfo findMaxHitsProduct(List<? extends ProductInfo> productList) {
-//        if (productList == null || productList.size() == 0) {
-//            return null;
-//        }
-//        // 记录当前最大的点击量
-//        Long maxHits = 0L;
-//
-//        // 记录当前点击量最大的商品
-//        ProductInfo product = null;
-//        for (ProductInfo temp : productList) {
-//            if (temp.getHits() >= maxHits) {
-//                maxHits = temp.getHits();
-//                product = temp;
-//            }
-//        }
-//        return product;
-//    }
 
 }

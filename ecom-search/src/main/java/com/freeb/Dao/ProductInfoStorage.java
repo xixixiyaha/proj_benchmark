@@ -8,7 +8,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class ProductInfoStorage {
 
@@ -114,6 +117,8 @@ public class ProductInfoStorage {
     }
 
     private static String CREATE_USER_ACTIVE = "INSERT INTO USER_ACTIVE_INFOS (user_id,prod_id,category_id) VALUES (?,?,?)";
+    private static String GET_USER_ACTIVE_BY_USER_GROUPBY_CATEGORY = "SELECT category_id,COUNT(*) FROM USER_ACTIVE_INFOS WHERE user_id = ? GROUPBY category_id";
+    private static String GET_LASTEST_ACTIVE_USERS = "SELECT DISTINCT user_id FROM FROM USER_ACTIVE_INFOS ORDER_BY update_time";
 
     public Boolean CreateActiveBehavior(Long userId,Long prodId,Integer categoryId){
         ResultSet rs=null;
@@ -131,5 +136,53 @@ public class ProductInfoStorage {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public ConcurrentHashMap<Long, Long> GetUserActiveByCategory(Long userId){
+        ConcurrentHashMap<Long, Long> userActives = new ConcurrentHashMap<>();
+        ResultSet rs=null;
+        try(Connection conn = DriverManager.getConnection(PROD_DB_URL, PROD_USER, PROD_PWD)){
+            PreparedStatement stmt = conn.prepareStatement(GET_USER_ACTIVE_BY_USER_GROUPBY_CATEGORY);
+            stmt.setLong(1,userId);
+            rs = stmt.executeQuery();
+            //todo
+            while(rs.next()){
+                userActives.put(rs.getLong(1), (long) rs.getInt(2));
+            }
+        }catch (SQLException e){
+            logger.error(String.format("DB connect failure %s",e.toString()));
+            // Notice here
+            e.printStackTrace();
+        }
+        return userActives;
+    }
+
+    public List<Long> GetLastestAvtiveUsers(int limit){
+        List<Long> users = new ArrayList<>();
+        ResultSet rs=null;
+        try(Connection conn = DriverManager.getConnection(PROD_DB_URL, PROD_USER, PROD_PWD)){
+            PreparedStatement stmt;
+            StringBuilder builder = new StringBuilder(GET_LASTEST_ACTIVE_USERS);
+            // 2. check topN "-1" means no limit
+            if(limit!=-1){
+                builder.append(" LIMIT = ?");
+                stmt = conn.prepareStatement(builder.toString());
+                stmt.setInt(1,limit);
+            }else {
+                stmt = conn.prepareStatement(builder.toString());
+            }
+            rs = stmt.executeQuery();
+            // 4. convert into ProdInfo
+            while (rs.next()){
+                users.add(rs.getLong(1));
+            }
+
+        }catch (SQLException e){
+            logger.error(String.format("DB connect failure %s",e.toString()));
+            // Notice here
+            e.printStackTrace();
+            return null;
+        }
+        return users;
     }
 }

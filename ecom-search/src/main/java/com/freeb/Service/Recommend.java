@@ -74,15 +74,13 @@ public class Recommend {
 
     /**
      * 计算一个 userId 的浏览行为
-     * @param userId 目标用户
      * @return 用户的 各个 categoryId 的点击频率
      */
-    public ConcurrentHashMap<Long, ConcurrentHashMap<Long, Long>> AssembleUserBehavior(Long userId) {
+    public ConcurrentHashMap<Long, ConcurrentHashMap<Long, Long>> AssembleUserBehavior() {
         ConcurrentHashMap<Long, ConcurrentHashMap<Long, Long>> activeMap = new ConcurrentHashMap<>();
         // 遍历查询到的用户点击行为数据
         // 获取最近活跃的 1000 个用户
         List<Long> activeUsers = storage.GetLastestAvtiveUsers(1000);
-        activeUsers.add(userId);
         for(Long uid:activeUsers){
             activeMap.put(uid,storage.GetUserActiveByCategory(uid));
         }
@@ -110,52 +108,53 @@ public class Recommend {
         }
 
         // 计算所有的用户之间的相似度对
-        if(activeMap.containsKey(userId)){
-            ConcurrentHashMap<Long, Long> userCategory2Map = activeMap.get(userId);
-            Set<Long> key1Set = userCategory2Map.keySet();
-            Iterator<Long> it1;
+        if(!activeMap.containsKey(userId)) {
+            activeMap.put(userId,storage.GetUserActiveByCategory(userId));
+        }
+        ConcurrentHashMap<Long, Long> userCategory2Map = activeMap.get(userId);
+        Set<Long> key1Set = userCategory2Map.keySet();
+        Iterator<Long> it1;
 
-            for (Long refUserId : userIdList) {
-                if (userId.equals(refUserId)) {
-                    continue;
-                }
-                 it1 = key1Set.iterator();
-                // 分别获取两个用户对每个二级类目的点击量
-                ConcurrentHashMap<Long, Long> userRefCategory2Map = activeMap.get(refUserId);
-
-                // 获取map中二级类目id的集合
-                Set<Long> key2Set = userRefCategory2Map.keySet();
-                Iterator<Long> it2 = key2Set.iterator();
-
-                // 两用户之间的相似度
-                double similarity = 0.0;
-                // 余弦相似度公式中的分子
-                double molecule = 0.0;
-                // 余弦相似度公式中的分母
-                double denominator = 1.0;
-                // 余弦相似度公式中分母根号下的两个向量的模的值
-                double vector1 = 0.0;
-                double vector2 = 0.0;
-
-                while (it1.hasNext() && it2.hasNext()) {
-                    Long it1Id = it1.next();
-                    Long it2Id = it2.next();
-                    // 获取二级类目对应的点击次数
-                    Long hits1 = userCategory2Map.get(it1Id);
-                    Long hits2 = userRefCategory2Map.get(it2Id);
-                    // 累加分子
-                    molecule += hits1 * hits2;
-                    // 累加分母中的两个向量的模
-                    vector1 += Math.pow(hits1, 2);
-                    vector2 += Math.pow(hits2, 2);
-                }
-                // 计算分母
-                denominator = Math.sqrt(vector1) * Math.sqrt(vector2);
-                // 计算整体相似度
-                similarity = molecule / denominator;
-
-                similarityMap.put(refUserId,similarity);
+        for (Long refUserId : userIdList) {
+            if (userId.equals(refUserId)) {
+                continue;
             }
+             it1 = key1Set.iterator();
+            // 分别获取两个用户对每个二级类目的点击量
+            ConcurrentHashMap<Long, Long> userRefCategory2Map = activeMap.get(refUserId);
+
+            // 获取map中二级类目id的集合
+            Set<Long> key2Set = userRefCategory2Map.keySet();
+            Iterator<Long> it2 = key2Set.iterator();
+
+            // 两用户之间的相似度
+            double similarity = 0.0;
+            // 余弦相似度公式中的分子
+            double molecule = 0.0;
+            // 余弦相似度公式中的分母
+            double denominator = 1.0;
+            // 余弦相似度公式中分母根号下的两个向量的模的值
+            double vector1 = 0.0;
+            double vector2 = 0.0;
+
+            while (it1.hasNext() && it2.hasNext()) {
+                Long it1Id = it1.next();
+                Long it2Id = it2.next();
+                // 获取二级类目对应的点击次数
+                Long hits1 = userCategory2Map.get(it1Id);
+                Long hits2 = userRefCategory2Map.get(it2Id);
+                // 累加分子
+                molecule += hits1 * hits2;
+                // 累加分母中的两个向量的模
+                vector1 += Math.pow(hits1, 2);
+                vector2 += Math.pow(hits2, 2);
+            }
+            // 计算分母
+            denominator = Math.sqrt(vector1) * Math.sqrt(vector2);
+            // 计算整体相似度
+            similarity = molecule / denominator;
+
+            similarityMap.put(refUserId,similarity);
         }
 
         return similarityMap;
@@ -250,7 +249,7 @@ public class Recommend {
      * @param calTagNum 相似用户计算前 calTagNum 个分类的权重
      * @return 可以推荐给userId的类目id
      */
-    public List<Integer> GetRecommendCategory(Long userId, HashMap<Long,Double> similarUserMap,Integer calTagNum,Integer categoryNum) {
+    public List<Integer> GetRecommendCategory(Long userId, List<Map.Entry<Long,Double>> similarUserMap,Integer calTagNum,Integer categoryNum) {
         List<Integer> recommedCategoryList = new ArrayList<>();
 
         // userId的浏览行为列表
@@ -261,7 +260,7 @@ public class Recommend {
         Double sumWeight = 0.0;
         Double weight;
         // 1.
-        for (Map.Entry<Long, Double> simEntry: similarUserMap.entrySet()) {
+        for (Map.Entry<Long, Double> simEntry: similarUserMap) {
             Double similarity = simEntry.getValue();
             if(similarity<0.5){
                 // Todo: Notice the threshold - Is 0.5 reasonable ?
@@ -304,6 +303,7 @@ public class Recommend {
 
 
     private static Integer REDUNDANCY_CATEGORY_NUM = 10;
+    private static Integer DEFAUALT_SIMILARITY_NUM = 50;
     private static List<Integer> DEFAULT_CATEGORY_WEIGHT = List.of(60,30,10);
     /**
      * 根据userId给出推荐商品 Recommend.Class 向外提供的函数
@@ -315,10 +315,13 @@ public class Recommend {
     public List<ProductInfo> GetRecommendProductsByUser(Long userId,SearchOrder order,String words,List<Integer> categoryWeight,Integer prodNum){
         List<ProductInfo> prodList = new ArrayList<>();
         int categoryLen = categoryWeight.size();
-        /*
-        * TODO : Full Recommend Process
-        * */
-        List<Integer> rcmdCategory = GetRecommendCategory(userId,null,categoryLen+REDUNDANCY_CATEGORY_NUM,categoryLen);
+
+        // 1. & 2. 获取最近活跃的1000名用户 & 计算当前用户与他们的相似度
+        HashMap<Long,Double> similarities =  calcSimilarityBetweenUsers(userId,AssembleUserBehavior());
+        // 3. 获取最相似的 DEFAUALT_SIMILARITY_NUM 个用户
+        List<Map.Entry<Long,Double>> topSimilarities = GetTopNSimilarityUserSimilarity(similarities,DEFAUALT_SIMILARITY_NUM);
+        // 4. 获取用户可能最喜欢的类别
+        List<Integer> rcmdCategory = GetRecommendCategory(userId,topSimilarities,categoryLen+REDUNDANCY_CATEGORY_NUM,categoryLen);
         // TODO: null 兜底逻辑
         for(int i=0;i<categoryLen;i++){
             List<ProductInfo> prodSubList = GetProductByCategory(rcmdCategory.get(i),order,words,prodNum*categoryWeight.get(i));

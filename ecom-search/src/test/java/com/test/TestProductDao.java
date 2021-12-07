@@ -37,7 +37,7 @@ public class TestProductDao {
         assert storage.TestConnection();
     }
 
-    private void CreateData(Long userNum,Long prodNum,Integer categoryNum){
+    public void CreateData(Long userNum,Long prodNum,Integer categoryNum){
         HashMap<Long,Integer> obj2Category = new HashMap<>();
 
         Random rand =new Random(25);
@@ -118,7 +118,7 @@ public class TestProductDao {
 
     @After
     public void finale(){
-
+        TruncateDB();
 
     }
 

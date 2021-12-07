@@ -137,7 +137,7 @@ public class ProductInfoStorage {
     }
 
     private static String CREATE_USER_ACTIVE = "INSERT INTO USER_ACTIVE_INFOS (user_id,prod_id,category_id) VALUES (?,?,?)";
-    private static String GET_USER_ACTIVE_BY_USER_GROUPBY_CATEGORY = "SELECT category_id,COUNT(*) FROM USER_ACTIVE_INFOS WHERE user_id = ? GROUP BY category_id ORDER BY COUNT(*) LIMIT 10";
+    private static String GET_USER_ACTIVE_BY_USER_GROUPBY_CATEGORY = "SELECT category_id,COUNT(*) FROM USER_ACTIVE_INFOS WHERE user_id = ? GROUP BY category_id ORDER BY COUNT(*) DESC LIMIT 10";
     private static String GET_LASTEST_ACTIVE_USERS = "SELECT user_id FROM USER_ACTIVE_INFOS GROUP BY user_id ORDER BY MAX(update_time) DESC";
     //TODO 记得改
     private static String GET_USER_ACTIVE_BY_USER_GROUPBY_PRODUCT = "SELECT prod_id FROM USER_ACTIVE_INFOS WHERE user_id = ? ORDER BY UPDATE_TIME DESC LIMIT 50";

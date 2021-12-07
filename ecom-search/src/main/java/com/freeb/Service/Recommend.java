@@ -23,16 +23,36 @@ public class Recommend {
     public Recommend(SearchClients c){
         this.clients = c;
     }
-    public Recommend(SearchClients c,String url,String user,String pwd) throws ClassNotFoundException {
+    public Recommend(ProductInfoStorage s){
+        storage = s;
+        this.clients = new SearchClients();
+    }
+    public Recommend(String url,String user,String pwd) throws ClassNotFoundException {
 
         storage = new ProductInfoStorage(url,user,pwd);
-        this.clients = c;
+        this.clients = new SearchClients();
     }
 
     public Recommend(SearchClients c,ProductInfoStorage s){
         clients = c;
         storage =s;
     }
+
+    public Map<Integer,Double> GetUserTags(Long id){
+        // TODO & NOTICE : This is local version -- should in account
+        ConcurrentHashMap<Integer, Integer> categoryTags = storage.GetUserActiveByCategory(id);
+        Integer sumClicks = 0;
+        Map<Integer,Double> tags = new HashMap<>();
+        Iterator<Map.Entry<Integer, Integer>> it = categoryTags.entrySet().iterator();
+        while (it.hasNext()){
+            sumClicks+=it.next().getValue();
+        }
+        for(Map.Entry<Integer,Integer> entry:categoryTags.entrySet()){
+            tags.put(entry.getKey(),(entry.getValue()*1.0)/sumClicks);
+        }
+        return tags;
+    }
+
     public boolean CreateUserClickBehavior(Long userId, Long prodId) {
         boolean flag = false;
         //TODO 数据库/json 添加数据
@@ -48,6 +68,7 @@ public class Recommend {
         logger.info(String.format("userId={%d} prodId={%d} categoryId={%d}",userId,prodId,categoryId));
         return storage.CreateActiveBehavior(userId,prodId,categoryId);
     }
+
     public ConcurrentHashMap<Long, ConcurrentHashMap<Long, Long>> AssembleUserBehavior(List<UserActive> userActiveList) {
         ConcurrentHashMap<Long, ConcurrentHashMap<Long, Long>> activeMap = new ConcurrentHashMap<>();
         // 遍历查询到的用户点击行为数据
@@ -271,7 +292,7 @@ public class Recommend {
             cnter++;
             // 找到当前这个用户的浏览行为
             // TODO 要获得 refUser的偏好
-            Map<Integer,Double> refTagsMap = clients.GetUserTags(simEntry.getKey());
+            Map<Integer,Double> refTagsMap = GetUserTags(simEntry.getKey());
             // 排序
             refTagsMap = (LinkedHashMap<Integer, Double>) MapUtil.sortByBigValue(refTagsMap);
 

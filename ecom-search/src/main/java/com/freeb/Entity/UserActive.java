@@ -6,11 +6,10 @@ public class UserActive {
     private Long userActiveId;
     // 用户id AKA accountId
     private Long userId;
-
     // 点击物品的id
     private Long prodId;
 
-    // 二级类目的id
+    // 类目的id
     private Long categoryId;
 
     public Long getUserId() {

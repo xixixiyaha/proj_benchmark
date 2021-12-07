@@ -3,6 +3,7 @@ package com.freeb.Entity;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class AccountsInfo {
 
@@ -10,8 +11,8 @@ public class AccountsInfo {
     private String userName;
     private String userPwd;
     private String userDescription;
-    // 懒更新
-    private HashMap<Integer,Double> userTag;
+    // 懒更新 alg: 最近的浏览中 top10 category的占比
+    private Map<Integer,Double> userTag;
     private Date createTime;
     private Date updateTime;
 
@@ -63,11 +64,11 @@ public class AccountsInfo {
         this.updateTime = updateTime;
     }
 
-    public HashMap<Integer,Double> getUserTag() {
+    public Map<Integer,Double> getUserTag() {
         return userTag;
     }
 
-    public void setUserTag(HashMap<Integer,Double> userTag) {
+    public void setUserTag(Map<Integer,Double> userTag) {
         this.userTag = userTag;
     }
 }

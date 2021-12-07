@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -20,23 +21,21 @@ public class ProductInfoStorage {
     static String PROD_USER;
     static String PROD_PWD;
 
-    StringBuilder prodBuilder = new StringBuilder();
+    private static final String GET_PRODUCT_BY_CATEGORY = "SELECT * FROM PRODUCT_INFOS WHERE category_id = ?";
 
-    private static String GET_PRODUCT_BY_CATEGORY = "SELECT * FROM PRODUCT_INFOS WHERE category_id = ?";
+    private static final String GET_PRODUCT_BY_CATEGORY_ORDER_BY_UPDATE_TIME_DESC = "SELECT * FROM PRODUCT_INFOS WHERE category_id = ? ORDER BY update_time DESC";
 
-    private static String GET_PRODUCT_BY_CATEGORY_ORDER_BY_UPDATE_TIME_DESC = "SELECT * FROM PRODUCT_INFOS WHERE category_id = ? ORDER BY update_time DESC";
+    private static final String GET_PRODUCT_BY_CATEGORY_ORDER_BY_PRICE_ASC = "SELECT * FROM PRODUCT_INFOS WHERE category_id = ? ORDER BY prod_price ASC";
+    private static final String GET_PRODUCT_BY_CATEGORY_ORDER_BY_PRICE_DESC = "SELECT * FROM PRODUCT_INFOS WHERE category_id = ? ORDER BY prod_price DESC";
 
-    private static String GET_PRODUCT_BY_CATEGORY_ORDER_BY_PRICE_ASC = "SELECT * FROM PRODUCT_INFOS WHERE category_id = ? ORDER BY prod_price ASC";
-    private static String GET_PRODUCT_BY_CATEGORY_ORDER_BY_PRICE_DESC = "SELECT * FROM PRODUCT_INFOS WHERE category_id = ? ORDER BY prod_price DESC";
-
-    private static String GET_PRODUCT_BY_CATEGORY_ORDER_BY_SALES_DESC = "SELECT * FROM PRODUCT_INFOS WHERE category_id = ? ORDER BY prod_sales DESC";
+    private static final String GET_PRODUCT_BY_CATEGORY_ORDER_BY_SALES_DESC = "SELECT * FROM PRODUCT_INFOS WHERE category_id = ? ORDER BY prod_sales DESC";
 
     // TODO & NOTICE: 小数据量使用 like 避免大炮打蚊子
-    private static String GET_PRODUCT_BY_SIMILARITY = "SELECT * FROM PRODUCT_INFOS WHERE category_id = ? AND prod_name LIKE %?% ORDER BY prod_sales DESC";
+    private static final String GET_PRODUCT_BY_SIMILARITY = "SELECT * FROM PRODUCT_INFOS WHERE category_id = ? AND prod_name LIKE %?% ORDER BY prod_sales DESC";
 
 
     public List<ProductInfo> GetProductByCategory(Integer categoryId, SearchOrder order, Integer topN){
-        ResultSet rs=null;
+        ResultSet rs;
         try(Connection conn = DriverManager.getConnection(PROD_DB_URL, PROD_USER, PROD_PWD)){
             PreparedStatement stmt;
             StringBuilder builder;
@@ -117,8 +116,9 @@ public class ProductInfoStorage {
     }
 
     private static String CREATE_USER_ACTIVE = "INSERT INTO USER_ACTIVE_INFOS (user_id,prod_id,category_id) VALUES (?,?,?)";
-    private static String GET_USER_ACTIVE_BY_USER_GROUPBY_CATEGORY = "SELECT category_id,COUNT(*) FROM USER_ACTIVE_INFOS WHERE user_id = ? GROUPBY category_id";
+    private static String GET_USER_ACTIVE_BY_USER_GROUPBY_CATEGORY = "SELECT category_id,COUNT(*) FROM USER_ACTIVE_INFOS WHERE user_id = ? GROUPBY category_id ORDER BY COUNT(*) LIMIT 10";
     private static String GET_LASTEST_ACTIVE_USERS = "SELECT DISTINCT user_id FROM FROM USER_ACTIVE_INFOS ORDER_BY update_time";
+    private static String GET_USER_ACTIVE_BY_USER_GROUPBY_PRODUCT = "SELECT product_id FROM FROM USER_ACTIVE_INFOS WHERE user_id = ? LIMIT 50";
 
     public Boolean CreateActiveBehavior(Long userId,Long prodId,Integer categoryId){
         ResultSet rs=null;
@@ -138,8 +138,8 @@ public class ProductInfoStorage {
         return false;
     }
 
-    public ConcurrentHashMap<Long, Long> GetUserActiveByCategory(Long userId){
-        ConcurrentHashMap<Long, Long> userActives = new ConcurrentHashMap<>();
+    public ConcurrentHashMap<Integer, Integer> GetUserActiveByCategory(Long userId){
+        ConcurrentHashMap<Integer, Integer> userActives = new ConcurrentHashMap<>();
         ResultSet rs=null;
         try(Connection conn = DriverManager.getConnection(PROD_DB_URL, PROD_USER, PROD_PWD)){
             PreparedStatement stmt = conn.prepareStatement(GET_USER_ACTIVE_BY_USER_GROUPBY_CATEGORY);
@@ -147,7 +147,25 @@ public class ProductInfoStorage {
             rs = stmt.executeQuery();
             //todo
             while(rs.next()){
-                userActives.put(rs.getLong(1), (long) rs.getInt(2));
+                userActives.put(rs.getInt(1), rs.getInt(2));
+            }
+        }catch (SQLException e){
+            logger.error(String.format("DB connect failure %s",e.toString()));
+            // Notice here
+            e.printStackTrace();
+        }
+        return userActives;
+    }
+
+    public HashSet<Long> GetUserActiveByProduct(Long userId){
+        HashSet<Long> userActives = new HashSet<>();
+        ResultSet rs=null;
+        try(Connection conn = DriverManager.getConnection(PROD_DB_URL, PROD_USER, PROD_PWD)){
+            PreparedStatement stmt = conn.prepareStatement(GET_USER_ACTIVE_BY_USER_GROUPBY_PRODUCT);
+            stmt.setLong(1,userId);
+            rs = stmt.executeQuery();
+            while(rs.next()){
+                userActives.add(rs.getLong(1));
             }
         }catch (SQLException e){
             logger.error(String.format("DB connect failure %s",e.toString()));

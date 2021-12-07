@@ -24,7 +24,7 @@ public class SearchServiceImpl implements SearchService {
 
         List<ProductInfo> lst = new ArrayList<>();
         if(!clients.AccountExists(userId))return lst;
-        List<Integer> tags = clients.GetAccountTag(userId);
+//        List<Integer> tags = clients.GetAccountTag(userId);
 
         if(!forceSearch){
             //TODO buffer
@@ -39,13 +39,14 @@ public class SearchServiceImpl implements SearchService {
                     break;
             }
         }
-
+        logger.warn("unsupported type");
         return null;
     }
 
 
     @Override
     public Boolean CreateUserClick(Long userId, Long prodId, Integer categoryId) {
+        logger.info("CreateUserClick userId=%d"+userId);
         if(!clients.AccountExists(userId)){
             return false;
         }

@@ -7,7 +7,15 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class SearchClients {
 
-    private ProductInfoStorage storage = new ProductInfoStorage();
+
+    private ProductInfoStorage storage ;
+    public SearchClients(){
+        storage = new ProductInfoStorage();
+    }
+    public SearchClients(ProductInfoStorage storage){
+        this.storage = storage;
+    }
+
 
     public Boolean AccountExists(Long id){
         return true;

@@ -15,15 +15,24 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class Recommend {
 
-    private static final Logger logger = LoggerFactory.getLogger(ProductInfoStorage.class);
+    private static final Logger logger = LoggerFactory.getLogger(Recommend.class);
 
     SearchClients clients;
-    ProductInfoStorage storage = new ProductInfoStorage();
+    ProductInfoStorage storage;
 
-    Recommend(SearchClients c){
+    public Recommend(SearchClients c){
+        this.clients = c;
+    }
+    public Recommend(SearchClients c,String url,String user,String pwd) throws ClassNotFoundException {
+
+        storage = new ProductInfoStorage(url,user,pwd);
         this.clients = c;
     }
 
+    public Recommend(SearchClients c,ProductInfoStorage s){
+        clients = c;
+        storage =s;
+    }
     public boolean CreateUserClickBehavior(Long userId, Long prodId) {
         boolean flag = false;
         //TODO 数据库/json 添加数据
@@ -39,7 +48,7 @@ public class Recommend {
         logger.info(String.format("userId={%d} prodId={%d} categoryId={%d}",userId,prodId,categoryId));
         return storage.CreateActiveBehavior(userId,prodId,categoryId);
     }
-    private ConcurrentHashMap<Long, ConcurrentHashMap<Long, Long>> AssembleUserBehavior(List<UserActive> userActiveList) {
+    public ConcurrentHashMap<Long, ConcurrentHashMap<Long, Long>> AssembleUserBehavior(List<UserActive> userActiveList) {
         ConcurrentHashMap<Long, ConcurrentHashMap<Long, Long>> activeMap = new ConcurrentHashMap<>();
         // 遍历查询到的用户点击行为数据
         for (UserActive userActive : userActiveList) {
@@ -73,7 +82,7 @@ public class Recommend {
      * 计算一个 userId 的浏览行为
      * @return 用户的 各个 categoryId 的点击频率
      */
-    private ConcurrentHashMap<Long, ConcurrentHashMap<Integer, Integer>> AssembleUserBehavior() {
+    public ConcurrentHashMap<Long, ConcurrentHashMap<Integer, Integer>> AssembleUserBehavior() {
         ConcurrentHashMap<Long, ConcurrentHashMap<Integer, Integer>> activeMap = new ConcurrentHashMap<>();
         // 遍历查询到的用户点击行为数据
         // 获取最近活跃的 1000 个用户
@@ -85,7 +94,7 @@ public class Recommend {
         return activeMap;
     }
 
-    private ConcurrentHashMap<Long, HashSet<Long>> AssembleUserClicks(){
+    public ConcurrentHashMap<Long, HashSet<Long>> AssembleUserClicks(){
         ConcurrentHashMap<Long, HashSet<Long>> activeMap = new ConcurrentHashMap<>();
 
         List<Long> activeUsers = storage.GetLastestAvtiveUsers(1000);

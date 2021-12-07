@@ -6,11 +6,14 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="ecom-carts" />
         <module name="ecom-common" />
         <module name="thrift-server" />
         <module name="ecom-accounts" />
         <module name="thrift-client" />
         <module name="ecom-orders" />
+        <module name="ecom-search" />
+        <module name="ecom-payment" />
         <module name="base-benchmark" />
       </profile>
     </annotationProcessing>

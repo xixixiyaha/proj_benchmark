@@ -1,4 +1,4 @@
-package java.com.test;
+package com.test;
 import com.freeb.Clients.SearchClients;
 import com.freeb.Service.Recommend;
 import org.junit.Before;

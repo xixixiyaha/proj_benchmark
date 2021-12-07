@@ -3,7 +3,6 @@ package com.freeb.Dao;
 import com.freeb.Entity.ProductInfo;
 import com.freeb.Enum.SearchOrder;
 import com.freeb.Utils.MarshalUtil;
-import jdk.dynalink.beans.StaticClass;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,7 +10,6 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class ProductInfoStorage {
@@ -21,6 +19,28 @@ public class ProductInfoStorage {
     static String PROD_USER;
     static String PROD_PWD;
 
+    public ProductInfoStorage(){
+        logger.error("unsupported initialization method");
+    }
+
+    public ProductInfoStorage(String url,String user,String pwd) throws ClassNotFoundException {
+        PROD_DB_URL = url;
+        PROD_USER=user;
+        PROD_PWD = pwd;
+        Class.forName("com.mysql.cj.jdbc.Driver");
+    }
+
+    public Boolean TestConnection() {
+        try (Connection conn = DriverManager.getConnection(PROD_DB_URL, PROD_USER, PROD_PWD)) {
+            return true;
+        }catch (SQLException e){
+            logger.error(String.format("DB connect failure %s",e.toString()));
+            // Notice here
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     private static final String GET_PRODUCT_BY_CATEGORY = "SELECT * FROM PRODUCT_INFOS WHERE category_id = ?";
 
     private static final String GET_PRODUCT_BY_CATEGORY_ORDER_BY_UPDATE_TIME_DESC = "SELECT * FROM PRODUCT_INFOS WHERE category_id = ? ORDER BY update_time DESC";
@@ -29,6 +49,7 @@ public class ProductInfoStorage {
     private static final String GET_PRODUCT_BY_CATEGORY_ORDER_BY_PRICE_DESC = "SELECT * FROM PRODUCT_INFOS WHERE category_id = ? ORDER BY prod_price DESC";
 
     private static final String GET_PRODUCT_BY_CATEGORY_ORDER_BY_SALES_DESC = "SELECT * FROM PRODUCT_INFOS WHERE category_id = ? ORDER BY prod_sales DESC";
+
 
     // TODO & NOTICE: 小数据量使用 like 避免大炮打蚊子
     private static final String GET_PRODUCT_BY_SIMILARITY = "SELECT * FROM PRODUCT_INFOS WHERE category_id = ? AND prod_name LIKE %?% ORDER BY prod_sales DESC";
@@ -116,20 +137,20 @@ public class ProductInfoStorage {
     }
 
     private static String CREATE_USER_ACTIVE = "INSERT INTO USER_ACTIVE_INFOS (user_id,prod_id,category_id) VALUES (?,?,?)";
-    private static String GET_USER_ACTIVE_BY_USER_GROUPBY_CATEGORY = "SELECT category_id,COUNT(*) FROM USER_ACTIVE_INFOS WHERE user_id = ? GROUPBY category_id ORDER BY COUNT(*) LIMIT 10";
-    private static String GET_LASTEST_ACTIVE_USERS = "SELECT DISTINCT user_id FROM FROM USER_ACTIVE_INFOS ORDER_BY update_time";
-    private static String GET_USER_ACTIVE_BY_USER_GROUPBY_PRODUCT = "SELECT product_id FROM FROM USER_ACTIVE_INFOS WHERE user_id = ? LIMIT 50";
+    private static String GET_USER_ACTIVE_BY_USER_GROUPBY_CATEGORY = "SELECT category_id,COUNT(*) FROM USER_ACTIVE_INFOS WHERE user_id = ? GROUP BY category_id ORDER BY COUNT(*) LIMIT 10";
+    private static String GET_LASTEST_ACTIVE_USERS = "SELECT user_id FROM USER_ACTIVE_INFOS GROUP BY user_id ORDER BY MAX(update_time) DESC";
+    //TODO 记得改
+    private static String GET_USER_ACTIVE_BY_USER_GROUPBY_PRODUCT = "SELECT prod_id FROM USER_ACTIVE_INFOS WHERE user_id = ? ORDER BY UPDATE_TIME DESC LIMIT 50";
 
     public Boolean CreateActiveBehavior(Long userId,Long prodId,Integer categoryId){
-        ResultSet rs=null;
         try(Connection conn = DriverManager.getConnection(PROD_DB_URL, PROD_USER, PROD_PWD)){
             PreparedStatement stmt = conn.prepareStatement(CREATE_USER_ACTIVE);
             stmt.setLong(1,userId);
             stmt.setLong(2,prodId);
             stmt.setInt(3,categoryId);
-            rs = stmt.executeQuery();
-            //todo
-            return true;
+            int rs = stmt.executeUpdate();
+            if(rs>0)return true;
+
         }catch (SQLException e){
             logger.error(String.format("DB connect failure %s",e.toString()));
             // Notice here
@@ -183,7 +204,7 @@ public class ProductInfoStorage {
             StringBuilder builder = new StringBuilder(GET_LASTEST_ACTIVE_USERS);
             // 2. check topN "-1" means no limit
             if(limit!=-1){
-                builder.append(" LIMIT = ?");
+                builder.append(" LIMIT ?");
                 stmt = conn.prepareStatement(builder.toString());
                 stmt.setInt(1,limit);
             }else {

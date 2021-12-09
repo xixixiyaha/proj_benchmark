@@ -115,6 +115,11 @@ public class Recommend {
         return activeMap;
     }
 
+
+    /**
+     *
+     * @return 获取最近活跃的1000名用户和他们最近点击的50个商品
+     */
     public ConcurrentHashMap<Long, HashSet<Long>> AssembleUserClicks(){
         ConcurrentHashMap<Long, HashSet<Long>> activeMap = new ConcurrentHashMap<>();
 
@@ -131,7 +136,7 @@ public class Recommend {
      * @param activeMap 用户对各个二级类目的购买行为的一个map集合
      * @return 计算出的用户与用户之间的相似度的对象存储形式
      */
-    private HashMap<Long,Double> calcSimilarityBetweenUsers(Long userId,ConcurrentHashMap<Long, HashSet<Long>> activeMap) {
+    public HashMap<Long,Double> calcSimilarityBetweenUsers(Long userId,ConcurrentHashMap<Long, HashSet<Long>> activeMap) {
         // 用户之间的相似度对集合
         HashMap<Long,Double> similarityMap = new HashMap<>();
 
@@ -228,7 +233,7 @@ public class Recommend {
         return similarityList;
     }
 
-    private List<Map.Entry<Long,Double>> GetTopNSimilarityUserSimilarity(Map<Long,Double> userSimilarityMap, Integer topN) {
+    public List<Map.Entry<Long,Double>> GetTopNSimilarityUserSimilarity(Map<Long,Double> userSimilarityMap, Integer topN) {
         // 用来记录与userId相似度最高的前N个用户的id
         List<Map.Entry<Long,Double>> similarityList = new ArrayList<>(topN);
         // 堆排序找出最高的前N个用户，建立小根堆，遍历的时候当前的这个相似度比堆顶元素大就剔掉堆顶的值，把这个数入堆(把小的都删除干净,所以要建立小根堆)
@@ -275,7 +280,7 @@ public class Recommend {
      * @param calTagNum 相似用户计算前 calTagNum 个分类的权重
      * @return 可以推荐给userId的类目id
      */
-    private List<Integer> GetRecommendCategory(Long userId, List<Map.Entry<Long,Double>> similarUserList,Integer calTagNum,Integer categoryNum) {
+    public List<Integer> GetRecommendCategory(Long userId, List<Map.Entry<Long,Double>> similarUserList,Integer calTagNum,Integer categoryNum) {
         List<Integer> rcmdCategoryList = new ArrayList<>();
 
         LinkedHashMap<Integer,Double> currUserTags = new LinkedHashMap<>();
@@ -325,6 +330,7 @@ public class Recommend {
                 break;
             }
         }
+        cnter--;
         logger.info("valid rcmdCategoeyNum="+cnter);
         return rcmdCategoryList;
     }

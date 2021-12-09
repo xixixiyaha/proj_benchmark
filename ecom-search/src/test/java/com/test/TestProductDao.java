@@ -93,15 +93,6 @@ public class TestProductDao {
 
     }
 
-    private void ConstructSimilarUsers(Long userStart,Long userEnd){
-
-    }
-
-    @Test
-    public void TestUserSimilarity(){
-
-    }
-
     private void TruncateDB(){
         try(Connection conn = DriverManager.getConnection(PROD_DB_URL, PROD_USER, PROD_PWD)){
             PreparedStatement stmt = conn.prepareStatement("truncate table USER_ACTIVE_INFOS");

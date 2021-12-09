@@ -139,7 +139,7 @@ public class ProductInfoStorage {
     private static String CREATE_USER_ACTIVE = "INSERT INTO USER_ACTIVE_INFOS (user_id,prod_id,category_id) VALUES (?,?,?)";
     private static String GET_USER_ACTIVE_BY_USER_GROUPBY_CATEGORY = "SELECT category_id,COUNT(*) FROM USER_ACTIVE_INFOS WHERE user_id = ? GROUP BY category_id ORDER BY COUNT(*) DESC LIMIT 10";
     private static String GET_LASTEST_ACTIVE_USERS = "SELECT user_id FROM USER_ACTIVE_INFOS GROUP BY user_id ORDER BY MAX(update_time) DESC";
-    //TODO 记得改
+
     private static String GET_USER_ACTIVE_BY_USER_GROUPBY_PRODUCT = "SELECT prod_id FROM USER_ACTIVE_INFOS WHERE user_id = ? ORDER BY UPDATE_TIME DESC LIMIT 50";
 
     public Boolean CreateActiveBehavior(Long userId,Long prodId,Integer categoryId){
@@ -159,6 +159,10 @@ public class ProductInfoStorage {
         return false;
     }
 
+    /**
+     * @return userId最活跃的前10个category
+     * TODO : 从最近 x 条该用户的点击记录里找 ↖
+     */
     public ConcurrentHashMap<Integer, Integer> GetUserActiveByCategory(Long userId){
         ConcurrentHashMap<Integer, Integer> userActives = new ConcurrentHashMap<>();
         ResultSet rs=null;
@@ -178,6 +182,9 @@ public class ProductInfoStorage {
         return userActives;
     }
 
+    /**
+     * @return userId 最近点击的 50 个商品 prodId
+     */
     public HashSet<Long> GetUserActiveByProduct(Long userId){
         HashSet<Long> userActives = new HashSet<>();
         ResultSet rs=null;
@@ -196,6 +203,9 @@ public class ProductInfoStorage {
         return userActives;
     }
 
+    /**
+     * @param limit 获取最近活跃的 limit 名用户
+     */
     public List<Long> GetLastestAvtiveUsers(int limit){
         List<Long> users = new ArrayList<>();
         ResultSet rs=null;

@@ -13,6 +13,7 @@
         <module name="thrift-client" />
         <module name="ecom-orders" />
         <module name="thrift-server" />
+        <module name="ecom-category" />
         <module name="ecom-payment" />
         <module name="base-benchmark" />
       </profile>

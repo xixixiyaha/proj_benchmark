@@ -1,10 +1,11 @@
 CREATE TABLE CART_INFOS(
-        cart_id LONG PRIMARY KEY NOT NULL,
-        account_id LONG ,
-        obj_id LONG,
-        merchant_id LONG,
-        incart_quantity MEDIUMINT,
-        incart_select TINYINT,
-        CREATE_TIME DATETIME,
-        UPDATE_TIME DATETIME
-)
+                           cart_id BIGINT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+                           user_id BIGINT NOT NULL ,
+                           prod_id BIGINT NOT NULL ,
+                           merchant_id BIGINT NOT NULL ,
+                           incart_quantity MEDIUMINT COMMENT '购物车内的数量',
+                           incart_select TINYINT COMMENT '是否被计入购买优惠',
+                           CREATE_TIME DATETIME,
+                           UPDATE_TIME DATETIME,
+                           INDEX (user_id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;

@@ -1,5 +1,6 @@
 package com.freeb.Dao;
 
+import com.alibaba.druid.pool.DruidDataSource;
 import com.freeb.Entity.ProductInfo;
 import com.freeb.Enum.SearchOrder;
 import com.freeb.Utils.MarshalUtil;
@@ -18,7 +19,7 @@ public class ProductInfoStorage {
     static String PROD_DB_URL;
     static String PROD_USER;
     static String PROD_PWD;
-
+    DruidUtil druidUtil;
     public ProductInfoStorage(){
         logger.error("unsupported initialization method");
     }
@@ -28,10 +29,11 @@ public class ProductInfoStorage {
         PROD_USER=user;
         PROD_PWD = pwd;
         Class.forName("com.mysql.cj.jdbc.Driver");
+        druidUtil=new DruidUtil(url,user,pwd);
     }
 
-    public Boolean TestConnection() {
-        try (Connection conn = DriverManager.getConnection(PROD_DB_URL, PROD_USER, PROD_PWD)) {
+    public Boolean TestConn() {
+        try (Connection conn = druidUtil.GetConnection()) {
             return true;
         }catch (SQLException e){
             logger.error(String.format("DB connect failure %s",e.toString()));
@@ -57,7 +59,7 @@ public class ProductInfoStorage {
 
     public List<ProductInfo> GetProductByCategory(Integer categoryId, SearchOrder order, Integer topN){
         ResultSet rs;
-        try(Connection conn = DriverManager.getConnection(PROD_DB_URL, PROD_USER, PROD_PWD)){
+        try(Connection conn = druidUtil.GetConnection()){
             PreparedStatement stmt;
             StringBuilder builder;
             // 1. Select products WHERE categoryId and order matches
@@ -102,7 +104,7 @@ public class ProductInfoStorage {
 
     public List<ProductInfo> GetProductBySimilarity(Integer categoryId, SearchOrder order,String words, Integer topN){
         ResultSet rs=null;
-        try(Connection conn = DriverManager.getConnection(PROD_DB_URL, PROD_USER, PROD_PWD)){
+        try(Connection conn = druidUtil.GetConnection()){
             PreparedStatement stmt;
             StringBuilder builder;
             // 1. Select products WHERE categoryId and order matches
@@ -143,7 +145,7 @@ public class ProductInfoStorage {
     private static String GET_USER_ACTIVE_BY_USER_GROUPBY_PRODUCT = "SELECT prod_id FROM USER_ACTIVE_INFOS WHERE user_id = ? ORDER BY UPDATE_TIME DESC LIMIT 50";
 
     public Boolean CreateActiveBehavior(Long userId,Long prodId,Integer categoryId){
-        try(Connection conn = DriverManager.getConnection(PROD_DB_URL, PROD_USER, PROD_PWD)){
+        try(Connection conn = druidUtil.GetConnection()){
             PreparedStatement stmt = conn.prepareStatement(CREATE_USER_ACTIVE);
             stmt.setLong(1,userId);
             stmt.setLong(2,prodId);
@@ -166,7 +168,7 @@ public class ProductInfoStorage {
     public ConcurrentHashMap<Integer, Integer> GetUserActiveByCategory(Long userId){
         ConcurrentHashMap<Integer, Integer> userActives = new ConcurrentHashMap<>();
         ResultSet rs=null;
-        try(Connection conn = DriverManager.getConnection(PROD_DB_URL, PROD_USER, PROD_PWD)){
+        try(Connection conn = druidUtil.GetConnection()){
             PreparedStatement stmt = conn.prepareStatement(GET_USER_ACTIVE_BY_USER_GROUPBY_CATEGORY);
             stmt.setLong(1,userId);
             rs = stmt.executeQuery();
@@ -188,7 +190,7 @@ public class ProductInfoStorage {
     public HashSet<Long> GetUserActiveByProduct(Long userId){
         HashSet<Long> userActives = new HashSet<>();
         ResultSet rs=null;
-        try(Connection conn = DriverManager.getConnection(PROD_DB_URL, PROD_USER, PROD_PWD)){
+        try(Connection conn = druidUtil.GetConnection()){
             PreparedStatement stmt = conn.prepareStatement(GET_USER_ACTIVE_BY_USER_GROUPBY_PRODUCT);
             stmt.setLong(1,userId);
             rs = stmt.executeQuery();
@@ -209,7 +211,7 @@ public class ProductInfoStorage {
     public List<Long> GetLastestAvtiveUsers(int limit){
         List<Long> users = new ArrayList<>();
         ResultSet rs=null;
-        try(Connection conn = DriverManager.getConnection(PROD_DB_URL, PROD_USER, PROD_PWD)){
+        try(Connection conn = druidUtil.GetConnection()){
             PreparedStatement stmt;
             StringBuilder builder = new StringBuilder(GET_LASTEST_ACTIVE_USERS);
             // 2. check topN "-1" means no limit

@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>ecom-carts</artifactId>
+    <artifactId>ecom-category</artifactId>
     <dependencies>
         <dependency>
             <groupId>free.benchmark</groupId>

@@ -1,8 +1,6 @@
 package com.test;
 
 import com.freeb.Dao.ProductInfoStorage;
-import com.freeb.Entity.ProductInfo;
-import com.freeb.Service.Recommend;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -34,7 +32,7 @@ public class TestProductDao {
 
     @Test
     public void TestConnection(){
-        assert storage.TestConnection();
+        assert storage.TestConn();
     }
 
     public void CreateData(Long userNum,Long prodNum,Integer categoryNum){

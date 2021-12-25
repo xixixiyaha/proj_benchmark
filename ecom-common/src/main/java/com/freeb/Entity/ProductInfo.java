@@ -6,7 +6,7 @@ import java.util.List;
 public class ProductInfo {
     Long prodId;
     String prodName;
-    List<Integer> prodTag;
+    Long prodCategory;
     Double prodPrice;
     Integer prodSales;
     Long discountsId;
@@ -30,12 +30,12 @@ public class ProductInfo {
         this.prodName = prodName;
     }
 
-    public List<Integer> getProdTag() {
-        return prodTag;
+    public Long getProdCategory() {
+        return prodCategory;
     }
 
-    public void setProdTag(List<Integer> prodTag) {
-        this.prodTag = prodTag;
+    public void setProdCategory(Long prodCategory) {
+        this.prodCategory = prodCategory;
     }
 
     public Double getProdPrice() {

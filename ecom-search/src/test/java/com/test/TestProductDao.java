@@ -7,14 +7,12 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class TestProductDao {
 
@@ -25,9 +23,12 @@ public class TestProductDao {
     static String PROD_PWD = "1204Adzq";
 
     private ProductInfoStorage storage;
+
+    private HashMap<Integer,Integer> prod2Category;
     @Before
     public void Init() throws ClassNotFoundException {
         storage = new ProductInfoStorage(PROD_DB_URL,PROD_USER,PROD_PWD);
+        prod2Category = new HashMap<>();
     }
 
     @Test
@@ -103,6 +104,63 @@ public class TestProductDao {
             // Notice here
             e.printStackTrace();
         }
+    }
+
+    private void loadProd2Category(String filepath) throws IOException {
+        File file = new File(filepath);
+        try{
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            while (reader.ready()){
+                String line = reader.readLine();
+                String[] splitline = line.split(",");
+                int dim = splitline.length;
+                assert dim==2;
+                this.prod2Category.put(Integer.valueOf(splitline[0]),Integer.valueOf(splitline[1]));
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void writeProd2Category(String filepath){
+        try {
+            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(filepath)));
+            for(Map.Entry<Integer,Integer> entry:this.prod2Category.entrySet()){
+                writer.write(entry.getKey());
+                writer.write(",");
+                writer.write(entry.getValue());
+                writer.newLine();
+            }
+            writer.flush();
+            writer.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    private void createProduct(int prodNum){
+        Random rand =new Random(25);
+        Integer prodSales,categoryId;
+        Integer upperProdNum = prodNum/1000;
+        Integer cnter =0;
+        Double prodPrice;
+        String prodName = "pdname:";
+
+        for(int merchantId=0;merchantId<1000;merchantId++){
+            for(int i=0;i<upperProdNum;i++){
+                prodPrice = rand.nextInt(1000)*1.0 / 10.0;
+                prodSales = rand.nextInt(10000);
+                categoryId = rand.nextInt(50);
+                 Boolean re = storage.CreateProductInfo(prodName+cnter,categoryId,prodPrice,prodSales,(long)0,(long)merchantId);
+                 if(!re){
+                     logger.error("insert failed round"+merchantId+" "+i);                                                                                     
+                 }
+                 this.prod2Category.put(cnter,categoryId);
+                 cnter++;
+            }
+        }
+
     }
 
     @After

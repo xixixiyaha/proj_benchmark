@@ -52,11 +52,30 @@ public class ProductInfoStorage {
 
     private static final String GET_PRODUCT_BY_CATEGORY_ORDER_BY_SALES_DESC = "SELECT * FROM PRODUCT_INFOS WHERE category_id = ? ORDER BY prod_sales DESC";
 
+    private static final String CREATE_PRODUCT = "INSERT INTO PRODUCT_INFOS (prod_name,category_id,prod_price,prod_sales,discounts_id,merchant_id) VALUES (?,?,?,?,?,?)";
 
     // TODO & NOTICE: 小数据量使用 like 避免大炮打蚊子
     private static final String GET_PRODUCT_BY_SIMILARITY = "SELECT * FROM PRODUCT_INFOS WHERE category_id = ? AND prod_name LIKE %?% ORDER BY prod_sales DESC";
 
+    public Boolean CreateProductInfo(String prodName,Integer categoryId,Double prodPrice,Integer prodSales,Long discountsId,Long merchantId){
+        try(Connection conn = druidUtil.GetConnection()){
+            PreparedStatement stmt = conn.prepareStatement(CREATE_PRODUCT);
+            stmt.setString(1,prodName);
+            stmt.setInt(2,categoryId);
+            stmt.setDouble(3,prodPrice);
+            stmt.setInt(4,prodSales);
+            stmt.setLong(5,discountsId);
+            stmt.setLong(6,merchantId);
+            int rs = stmt.executeUpdate();
+            if(rs>0)return true;
 
+        }catch (SQLException e){
+            logger.error(String.format("DB connect failure %s",e.toString()));
+            // Notice here
+            e.printStackTrace();
+        }
+        return false;
+    }
     public List<ProductInfo> GetProductByCategory(Integer categoryId, SearchOrder order, Integer topN){
         ResultSet rs;
         try(Connection conn = druidUtil.GetConnection()){

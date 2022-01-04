@@ -90,6 +90,7 @@ public class SearchServiceImpl implements SearchService {
 
     @Override
     public List<Long> IdealResEfficiencyTest(Integer totalComputationLoad, Integer threadNum) {
+        long bengintime = System.currentTimeMillis();
         List<Long> results = new ArrayList<>(threadNum);
         Integer loopPerThread = totalComputationLoad/threadNum;
         List<IdealComputationThread> threads = new ArrayList<>(threadNum);
@@ -108,7 +109,9 @@ public class SearchServiceImpl implements SearchService {
         for(Integer i=0;i<threadNum;i++){
             results.set(i,threads.get(i).getComputationRe());
         }
-
+        long endtime = System.currentTimeMillis();
+        long costtime = (endtime-bengintime)/1000;
+        logger.info("costTime = "+costtime);
         return results;
     }
 }

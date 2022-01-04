@@ -246,7 +246,7 @@ public class AccountsServiceServerImpl implements AccountsService {
     @Override
     public void CompareResEfficiencyBM1(String remoteFilePath,Integer testType) {
         List<Long> results;
-
+        long bengintime = System.nanoTime();
         Integer totalWorkLoad=0,threadNum = 1;
         // 1.
         boolean conn = preConnection(IP,PORT,USER_Name,PASSWORD);
@@ -275,6 +275,10 @@ public class AccountsServiceServerImpl implements AccountsService {
             e.printStackTrace();
         }
 
+        long midtime = System.currentTimeMillis();
+        long fetchtime = (midtime-bengintime)/1000;
+        logger.info("fetchtime = "+fetchtime);
+
         if(testType==0){
             results = LocalIdealResEfficiencyTest(totalWorkLoad,threadNum);
 
@@ -282,5 +286,8 @@ public class AccountsServiceServerImpl implements AccountsService {
             results = client.IdealResEfficiencyTest(totalWorkLoad,threadNum);
         }
 
+        long endtime = System.currentTimeMillis();
+        long costtime = (endtime-bengintime)/1000;
+        logger.info("costTime = "+costtime);
     }
 }

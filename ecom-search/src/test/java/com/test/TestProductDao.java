@@ -160,12 +160,17 @@ public class TestProductDao {
                  cnter++;
             }
         }
+        writeProd2Category(".//prod2category.csv");
+    }
 
+    @Test
+    public void CreateProductInfo(){
+        createProduct(100000);
     }
 
     @After
     public void finale(){
-        TruncateDB();
+//        TruncateDB();
 
     }
 

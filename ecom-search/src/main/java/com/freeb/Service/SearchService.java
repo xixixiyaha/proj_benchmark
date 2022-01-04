@@ -19,4 +19,6 @@ public interface SearchService {
     * */
     Boolean CreateUserClick(Long userId,Long prodId,Integer categoryId);
 
+    List<Long> IdealResEfficiencyTest(Integer totalComputationLoad, Integer threadNum);
+
 }

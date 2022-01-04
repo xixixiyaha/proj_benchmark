@@ -34,6 +34,8 @@ public interface AccountsService {
     * */
     public AccountsInfo GetAccountInfo(Integer id);
 
+    public void CompareResEfficiencyBM1(String remoteFilePath,Integer testType);
+
 
 
 }

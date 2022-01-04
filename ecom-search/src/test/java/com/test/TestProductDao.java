@@ -8,11 +8,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.*;
+import java.util.function.DoubleUnaryOperator;
 
 public class TestProductDao {
 
@@ -37,19 +40,19 @@ public class TestProductDao {
     }
 
     public void CreateData(Long userNum,Long prodNum,Integer categoryNum){
-        HashMap<Long,Integer> obj2Category = new HashMap<>();
+//        HashMap<Long,Integer> obj2Category = new HashMap<>();
 
         Random rand =new Random(25);
         Long pid;
         Integer cid;
         for(Long uid=0L;uid<userNum;uid++){
             for(int i=0;i<prodNum;i++){
-                pid = (long)rand.nextInt(500);
-                if( obj2Category.containsKey(pid)){
-                    cid = obj2Category.get(pid);
-                }else {
-                    cid=rand.nextInt(categoryNum);
-                    obj2Category.put(pid,cid);
+                pid = (long)rand.nextInt(100000);
+
+                //Notice 可复用
+                cid = storage.GetCategoryByProduct(pid);
+                if(cid==-1){
+                    System.out.println("get Category failed at uid = "+uid+" round = "+i);
                 }
                 Boolean re = storage.CreateActiveBehavior(uid,pid,cid);
                 if(!re){
@@ -61,10 +64,10 @@ public class TestProductDao {
 
     @Test
     public void TestCreateData(){
-        // 插入 param=100个用户 * param=100 个物品 => 1w条 => 20MB
+        // 插入 param=1000个用户 * param=100 个物品 => 10w条 => 20MB
         // 物品 [0,1000]
         // category [0,50]
-        this.CreateData(100L,100L,50);
+        this.CreateData(1000L,100L,50);
     }
 
     @Test
@@ -106,6 +109,11 @@ public class TestProductDao {
         }
     }
 
+    @Test
+    public void TestLoadData() throws IOException {
+        loadProd2Category(".//prod2category.csv");
+    }
+
     private void loadProd2Category(String filepath) throws IOException {
         File file = new File(filepath);
         try{
@@ -115,7 +123,9 @@ public class TestProductDao {
                 String[] splitline = line.split(",");
                 int dim = splitline.length;
                 assert dim==2;
+
                 this.prod2Category.put(Integer.valueOf(splitline[0]),Integer.valueOf(splitline[1]));
+                System.out.println(Integer.valueOf(splitline[0])+"===+==="+Integer.valueOf(splitline[1]));
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -174,6 +184,76 @@ public class TestProductDao {
 
     }
 
+    //TODO 移入另一个TestDao
+    @Test
+    public void CreateUser() throws NoSuchAlgorithmException {
+        String description = "description#description#description#description#description#description#description#description#description#description#" +
+                "description#description#description#description#description#description#description#description#description#description#description#" +
+                "description#description#description#description#description#description#description#description#description#description#description#";
+        String userName = "username";
+        MessageDigest messageDigest = MessageDigest.getInstance("MD5");
+        for(int merchantId=0;merchantId<1000;merchantId++){
+            for(int i=0;i<100000;i++){
+                String content = "password"+i;
+                String a = messageDigest.digest(content.getBytes()).toString();
+                Boolean re = storage.CreateAccountInfo(userName+i,a,description);
+                if(!re){
+                    logger.error("insert failed round"+merchantId+" "+i);
+                }
+            }
+        }
+    }
 
+    private String genCardNum(){
+        Random r= new Random(5L);
+        Integer fir = r.nextInt(3000)+1000;
+        Integer sec = r.nextInt(3000)+1000;
+        return (fir +String.valueOf(sec));
+    }
+
+    @Test
+    public void CreatePayment(){
+        int record = 10000; // 1w
+        Random r = new Random(13L);
+        for(int i=0;i<record;i++){
+            Double price = 1.0*r.nextInt(1000)+5;
+            Double dicounts = price/((i&4)+1);
+            Long uid = (long)r.nextInt(1000);
+
+            storage.CreatePaymentInfo((i&4),price,dicounts,genCardNum(),uid);
+        }
+    }
+
+    @Test
+    public void CreateDiscounts(){
+        for(int i=0;i<5000;i++){
+            double price = (i*2+1)*1.0/((i&3)+1);
+            System.out.println("1="+(i&2)+"2="+i+"3="+price);
+            storage.CreateDiscountInfo(i&2, (long) i,price);
+            if((i&7)>3){
+                Double aprice = price/2;
+                storage.CreateDiscountInfo(i&3, (long) i,aprice);
+            }
+        }
+    }
+
+    @Test
+    public void CreateComments(){
+        Random r=new Random(25);
+        // 50*500 = 2w5
+        String detail = "comment details ";
+        for(int i=0;i<50;i++){
+            Long pid = (long)r.nextInt(10000);
+            for(int j=0;j<500;j++){
+                Long uid = (long)r.nextInt(1000);
+                storage.CreateComments(uid,pid,detail+uid+detail+pid,"invalid");
+            }
+        }
+        for(int i=0;i<10000;i++){
+            Long pid = (long)r.nextInt(10000);
+            Long uid = (long)r.nextInt(100000);
+            storage.CreateComments(uid,pid,detail+uid+detail+pid,"invalid");
+        }
+    }
 
 }

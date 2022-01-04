@@ -57,6 +57,42 @@ public class ProductInfoStorage {
     // TODO & NOTICE: 小数据量使用 like 避免大炮打蚊子
     private static final String GET_PRODUCT_BY_SIMILARITY = "SELECT * FROM PRODUCT_INFOS WHERE category_id = ? AND prod_name LIKE %?% ORDER BY prod_sales DESC";
 
+    //todo 挪入accountDao
+    private static final String CREATE_USER = "INSERT INTO ACCOUNT_INFOS (user_name,user_pwd,user_description) VALUES (?,?,?)";
+    public Boolean CreateAccountInfo(String userName,String pwd,String description){
+        try(Connection conn = druidUtil.GetConnection()){
+            PreparedStatement stmt = conn.prepareStatement(CREATE_USER);
+            stmt.setString(1,userName);
+            stmt.setString(2,pwd);
+            stmt.setString(3,description);
+            int rs = stmt.executeUpdate();
+            if(rs>0)return true;
+
+        }catch (SQLException e){
+            logger.error(String.format("DB connect failure %s",e.toString()));
+            // Notice here
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    //todo 挪入productDao
+    private static final String GET_CATEGORY_BY_PRODUCT = "SELECT category_id FROM PRODUCT_INFOS WHERE prod_id = ?";
+    public Integer GetCategoryByProduct(Long productId) {
+        ResultSet rs = null;
+        try (Connection conn = druidUtil.GetConnection()) {
+            PreparedStatement stmt = conn.prepareStatement(GET_CATEGORY_BY_PRODUCT);
+            stmt.setLong(1, productId);
+            rs = stmt.executeQuery();
+            while (rs.next()){
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
     public Boolean CreateProductInfo(String prodName,Integer categoryId,Double prodPrice,Integer prodSales,Long discountsId,Long merchantId){
         try(Connection conn = druidUtil.GetConnection()){
             PreparedStatement stmt = conn.prepareStatement(CREATE_PRODUCT);
@@ -76,6 +112,69 @@ public class ProductInfoStorage {
         }
         return false;
     }
+
+    //todo 挪入payment
+    private static final String CREATE_PAYMENT = "INSERT INTO PAYMENT_INFOS(payment_status,payment_val,discounts_val,payment_card,user_id) VALUES(?,?,?,?,?)";
+    public Boolean CreatePaymentInfo(Integer status,Double pval,Double dval,String cardNum,Long userId){
+        try(Connection conn = druidUtil.GetConnection()){
+            PreparedStatement stmt = conn.prepareStatement(CREATE_PAYMENT);
+            stmt.setInt(1,status);
+            stmt.setDouble(2,pval);
+            stmt.setDouble(3,dval);
+            stmt.setString(4,cardNum);
+            stmt.setLong(5,userId);
+            int rs = stmt.executeUpdate();
+            if(rs>0)return true;
+
+        }catch (SQLException e){
+            logger.error(String.format("DB connect failure %s",e.toString()));
+            // Notice here
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    //todo 挪入disocounts
+    private static final String CREATE_DISCOUNT = "INSERT INTO DISCOUNT_INFOS(discount_type,prod_id,discount_price) VALUES(?,?,?)";
+    public Boolean CreateDiscountInfo(Integer type,Long prodId,Double price){
+        try(Connection conn = druidUtil.GetConnection()){
+            PreparedStatement stmt = conn.prepareStatement(CREATE_DISCOUNT);
+            stmt.setInt(1,type);
+            stmt.setLong(2,prodId);
+            stmt.setDouble(3,price);
+            int rs = stmt.executeUpdate();
+            if(rs>0)return true;
+
+        }catch (SQLException e){
+            logger.error(String.format("DB connect failure %s",e.toString()));
+            // Notice here
+            e.printStackTrace();
+        }
+        return false;
+    }
+    //todo 挪入products
+    public static final String CREATE_COMMENTS = "INSERT INTO COMMENT_INFOS(user_id,prod_id,comment_detail,comment_media) VALUES(?,?,?,?)";
+    public Boolean CreateComments(Long userId,Long prodId,String commentDetail,String commentMedia){
+        try(Connection conn = druidUtil.GetConnection()){
+            PreparedStatement stmt = conn.prepareStatement(CREATE_COMMENTS);
+            stmt.setLong(1,userId);
+            stmt.setLong(2,prodId);
+            stmt.setString(3,commentDetail);
+            stmt.setString(4,commentMedia);
+            int rs = stmt.executeUpdate();
+            if(rs>0)return true;
+
+        }catch (SQLException e){
+            logger.error(String.format("DB connect failure %s",e.toString()));
+            // Notice here
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+
+
+
     public List<ProductInfo> GetProductByCategory(Integer categoryId, SearchOrder order, Integer topN){
         ResultSet rs;
         try(Connection conn = druidUtil.GetConnection()){

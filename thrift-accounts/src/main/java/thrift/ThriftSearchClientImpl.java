@@ -1,4 +1,4 @@
-package benchmark.rpc.thrift;
+package thrift;
 
 import org.apache.thrift.protocol.TBinaryProtocol;
 import org.apache.thrift.protocol.TProtocol;
@@ -10,25 +10,25 @@ import org.apache.thrift.transport.TTransportException;
 import java.io.Closeable;
 import java.io.IOException;
 
-public class ThriftUserServiceClient implements Closeable {
+public class ThriftSearchClientImpl implements Closeable {
 
 	// not thread safe
 	public final TTransport transport;
 	public final TProtocol protocol;
-	public final UserService.Client client;
+	public final SearchService.Client client;
 	private int clientNum = 0;
-	public ThriftUserServiceClient(String host, int port) {
+	public ThriftSearchClientImpl(String host, int port) {
 
 		transport = new TFramedTransport(new TSocket(host, port));
 		protocol = new TBinaryProtocol(transport);
-		client = new UserService.Client(protocol);
+		client = new SearchService.Client(protocol);
 		try {
 			transport.open();
 		} catch (TTransportException e) {
 			System.out.println(e.getMessage());
 			throw new Error(e);
 		}
-		System.out.println("in ThriftUserServiceClient "+ clientNum++);
+		System.out.println("in ThriftSearchClientImpl "+ clientNum++);
 	}
 
 	@Override

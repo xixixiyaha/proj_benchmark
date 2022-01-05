@@ -1,8 +1,8 @@
-package benchmark.rpc;
+package com.freeb;
 
 
-import benchmark.rpc.thrift.UserService;
-import benchmark.rpc.thrift.UserServiceServerImpl;
+import com.freeb.thrift.SearchService;
+import com.freeb.thrift.SearchServiceServerImpl;
 import org.apache.thrift.protocol.TBinaryProtocol;
 import org.apache.thrift.server.TServer;
 import org.apache.thrift.server.TThreadedSelectorServer;
@@ -26,7 +26,7 @@ public class Server {
 			TThreadedSelectorServer.Args serverParams = new TThreadedSelectorServer.Args(serverSocket);
 			serverParams.protocolFactory(new TBinaryProtocol.Factory());
 			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-			serverParams.processor(new UserService.Processor<UserService.Iface>(new UserServiceServerImpl()));
+			serverParams.processor(new SearchService.Processor<SearchService.Iface>(new SearchServiceServerImpl()));
 			TServer server = new TThreadedSelectorServer(serverParams);
 			timestamp = new Timestamp(System.currentTimeMillis());
 			System.out.println("in thrift Server main() ==  =="+timestamp.toString());

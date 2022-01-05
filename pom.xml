@@ -23,6 +23,8 @@
         <module>ecom-carts</module>
         <module>ecom-search</module>
         <module>ecom-category</module>
+        <module>thrift-accounts</module>
+        <module>thrift-search</module>
     </modules>
 
     <properties>

@@ -25,20 +25,21 @@ public class AccountsServiceServerImpl implements AccountsService {
 
     private AccountInfoStorage storage = new AccountInfoStorage();
     private Boolean useStorage = true;
+    private AccountsClients client ;
+
+    AccountsServiceServerImpl(AccountsClients accClient){
+        this.client = accClient;
+    }
 
     //Notice Tag1
-    private AccountsClients client = new AccountsClients();
-
     @Override
     public Boolean AccountExists(Integer id) {
-        if(storage.GetAccountInfoById(id)==null)return false;
-        return true;
+        return storage.GetAccountInfoById(id) != null;
     }
 
     @Override
     public Boolean AccountExists(String name) {
-        if(storage.GetAccountInfoByName(name)==null)return false;
-        return true;
+        return storage.GetAccountInfoByName(name) != null;
     }
 
     @Override

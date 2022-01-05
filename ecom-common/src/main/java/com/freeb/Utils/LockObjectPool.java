@@ -1,4 +1,4 @@
-package CommuteUtils;
+package com.freeb.Utils;
 
 import java.io.Closeable;
 import java.io.IOException;

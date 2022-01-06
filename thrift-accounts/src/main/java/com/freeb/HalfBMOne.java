@@ -1,16 +1,10 @@
-import com.freeb.Clients.AccountsClients;
+package com.freeb;
+
+import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
 import org.openjdk.jmh.runner.options.TimeValue;
-
-import org.openjdk.jmh.annotations.Benchmark;
-import org.openjdk.jmh.annotations.BenchmarkMode;
-import org.openjdk.jmh.annotations.Mode;
-import org.openjdk.jmh.annotations.OutputTimeUnit;
-import org.openjdk.jmh.annotations.Scope;
-import org.openjdk.jmh.annotations.State;
-import org.openjdk.jmh.annotations.TearDown;
 import thrift.AccountsForeignClients;
 
 import java.io.IOException;
@@ -64,9 +58,9 @@ public class HalfBMOne{
                 .forks(1)//
                 .build();
 
-        System.out.println("in thrift HalfBMOne main() === 4 === ");
+        System.out.println("in thrift com.freeb.HalfBMOne main() === 4 === ");
         new Runner(opt).run();
-        System.out.println("in thrift HalfBMOne main() === 5 === ");
+        System.out.println("in thrift com.freeb.HalfBMOne main() === 5 === ");
 
     }
 

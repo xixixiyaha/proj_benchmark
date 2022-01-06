@@ -10,8 +10,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class acc2searchTest{
 
+public class DelNoUseTest {
 
     // TODO 查找命令行
     private final static String jvmOps = "java -server -Xmx1g -Xms1g -XX:MaxDirectMemorySize=1g -XX:+UseG1GC";
@@ -42,7 +42,6 @@ public class acc2searchTest{
 
     private static void installSearchService() throws Exception {
         //TODO 看一下 proj_bm 要不要 install
-        exec("proj-benchmark","mvn clean install");
         exec("ecom-common","mvn clean install");
         exec("ecom-search", "mvn clean install");
         exec("ecom-accounts","mvn clean install");
@@ -417,6 +416,7 @@ public class acc2searchTest{
     }
 }
 
+
 enum Typ {
     Thrpt("Thrpt"), Avgt("Avgt"), P90("P90"), P99("P99"), P999("P999");
 
@@ -459,3 +459,4 @@ class Record {
         this.p999 = p999;
     }
 }
+

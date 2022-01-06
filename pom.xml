@@ -17,8 +17,8 @@
         <module>thrift-client</module>
         <module>thrift-server</module>
         <module>ecom-orders</module>
-        <module>ecom-common</module>
         <module>ecom-accounts</module>
+        <module>ecom-common</module>
         <module>ecom-payment</module>
         <module>ecom-carts</module>
         <module>ecom-search</module>

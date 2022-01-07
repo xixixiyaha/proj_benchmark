@@ -21,21 +21,22 @@ public class HalfBMOne{
     @TearDown
     public void close() throws IOException {
         accClients.close();
+        System.out.println("<AccClient.testSearchRe>"+callNum++);
+
     }
 
     @Benchmark
     @BenchmarkMode({ Mode.Throughput, Mode.AverageTime, Mode.SampleTime })
     @OutputTimeUnit(TimeUnit.MILLISECONDS)
     public boolean testSearchRe() throws Exception {
-        System.out.println("<AccClient.testSearchRe>"+callNum++);
-        List<Long> re = accClients.IdealResEfficiencyTest(10000,10);
+        List<Long> re = accClients.IdealResEfficiencyTest(1000000,10);
         return re != null;
     }
 
     public static void main(String[] args) throws Exception {
 
         HalfBMOne client = new HalfBMOne();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 1; i++) {
             try {
                 System.out.println(client.testSearchRe());
                 break;

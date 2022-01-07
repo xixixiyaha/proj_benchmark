@@ -19,7 +19,7 @@ public class Server {
 		try {
 
 
-			InetSocketAddress serverAddress = new InetSocketAddress("172.24.206.246", 8080);
+			InetSocketAddress serverAddress = new InetSocketAddress("10.0.16.14", 8080);
 
 			TNonblockingServerTransport serverSocket = new TNonblockingServerSocket(serverAddress);
 

@@ -1,0 +1,6 @@
+JMH S 20 benchmark.rpc.Client S 53 benchmark.rpc.jmh_generated.Client_createUser_jmhTest S 10 createUser S 10 Throughput E A 1 1 1 E E E E E E E E E E E E E E U 12 MILLISECONDS E E 
+JMH S 20 benchmark.rpc.Client S 50 benchmark.rpc.jmh_generated.Client_getUser_jmhTest S 7 getUser S 10 Throughput E A 1 1 1 E E E E E E E E E E E E E E U 12 MILLISECONDS E E 
+JMH S 20 benchmark.rpc.Client S 53 benchmark.rpc.jmh_generated.Client_createUser_jmhTest S 10 createUser S 11 AverageTime E A 1 1 1 E E E E E E E E E E E E E E U 12 MILLISECONDS E E 
+JMH S 20 benchmark.rpc.Client S 50 benchmark.rpc.jmh_generated.Client_getUser_jmhTest S 7 getUser S 11 AverageTime E A 1 1 1 E E E E E E E E E E E E E E U 12 MILLISECONDS E E 
+JMH S 20 benchmark.rpc.Client S 53 benchmark.rpc.jmh_generated.Client_createUser_jmhTest S 10 createUser S 10 SampleTime E A 1 1 1 E E E E E E E E E E E E E E U 12 MILLISECONDS E E 
+JMH S 20 benchmark.rpc.Client S 50 benchmark.rpc.jmh_generated.Client_getUser_jmhTest S 7 getUser S 10 SampleTime E A 1 1 1 E E E E E E E E E E E E E E U 12 MILLISECONDS E E 

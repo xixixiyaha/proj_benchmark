@@ -20,6 +20,11 @@ public class SearchServiceImpl implements SearchService {
     private Recommend rcmd = new Recommend(clients);
     private Boolean forceSearch = true;
 
+    public SearchServiceImpl(){
+        System.out.println("DBG@ init SearchServiceImpl");
+    }
+
+
     @Override
     public List<ProductInfo> GetRecommendByProdName(Long userId, String words, SearchType type, SearchOrder order) {
 
@@ -69,15 +74,18 @@ public class SearchServiceImpl implements SearchService {
             Integer a = seed.nextInt(100)+50;
             Integer b= seed.nextInt(100)+50;
             long temp = 0L;
+            System.out.println("DBG@ loopTime "+loopTime);
             for(int time = 0; time<this.loopTime; time++){
+                a = seed.nextInt(100)+50;
+                b= seed.nextInt(100)+50;
                 if((time&3)==0){
-                    temp = a+b;
+                    temp += a+b;
                 }else if((time&3)==1){
-                    temp = a-b;
+                    temp += a-b;
                 }else if((time&3)==2){
-                    temp = a*b;
+                    temp += a*b;
                 }else {
-                    temp = a/b;
+                    temp += a/b;
                 }
             }
             this.computationRe=temp;
@@ -90,14 +98,16 @@ public class SearchServiceImpl implements SearchService {
 
     @Override
     public List<Long> IdealResEfficiencyTest(Integer totalComputationLoad, Integer threadNum) {
-        long bengintime = System.currentTimeMillis();
-        List<Long> results = new ArrayList<>(threadNum);
+        long begintime = System.currentTimeMillis();
+        List<Long> results = new ArrayList<>();
         Integer loopPerThread = totalComputationLoad/threadNum;
-        List<IdealComputationThread> threads = new ArrayList<>(threadNum);
+        List<IdealComputationThread> threads = new ArrayList<>();
         for(int i=0;i<threadNum;i++){
             IdealComputationThread thread = new IdealComputationThread(loopPerThread);
             thread.start();
-            threads.set(i,thread);
+            System.out.println("DBG@ threads len = "+threads.size());
+            threads.add(thread);
+            System.out.println("DBG@ put "+i+" thread");
         }
         for(IdealComputationThread thread:threads){
             try {
@@ -107,10 +117,12 @@ public class SearchServiceImpl implements SearchService {
             }
         }
         for(Integer i=0;i<threadNum;i++){
-            results.set(i,threads.get(i).getComputationRe());
+            results.add(threads.get(i).getComputationRe());
         }
         long endtime = System.currentTimeMillis();
-        long costtime = (endtime-bengintime)/1000;
+        long costtime = (endtime-begintime);
+        logger.info("beginTime = "+begintime);
+        logger.info("endTime = "+endtime);
         logger.info("costTime = "+costtime);
         return results;
     }

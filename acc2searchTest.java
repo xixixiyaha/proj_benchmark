@@ -34,18 +34,18 @@ public class acc2searchTest{
 
         System.out.println("找到以下benchmark项目:");
         System.out.println(allTasks);
-        //TODO Notice Here
-        allTasks.forEach(DelNoUseTest::benchmark);
+        // //TODO Notice Here
+        allTasks.forEach(acc2searchTest::benchmark);
 
-        report();
+        // report();
     }
 
     private static void installSearchService() throws Exception {
         //TODO 看一下 proj_bm 要不要 install
-        exec("proj-benchmark","mvn clean install");
-        exec("ecom-common","mvn clean install");
-        exec("ecom-search", "mvn clean install");
-        exec("ecom-accounts","mvn clean install");
+        exec("mvn clean install");
+        // exec("ecom-common","mvn clean install");
+        // exec("ecom-search", "mvn clean install");
+        // exec("ecom-accounts","mvn clean install");
     }
 
     private static Stream<String> getAllTasks() {
@@ -189,8 +189,16 @@ public class acc2searchTest{
     }
 
     private static void exec(File file, String command, File redirect) throws Exception {
-        System.out.println("[file]:"+file.getName()+"[command]:"+command);
-        var process = Runtime.getRuntime().exec(command, null, file);
+        java.lang.Process process;
+        if(file !=null){
+            
+            process = Runtime.getRuntime().exec(command, null, file);
+            System.out.println("[file]:"+file.getName()+"[command]:"+command);
+        }else{
+            process = Runtime.getRuntime().exec(command);
+            System.out.println("[file]: Null [command]:"+command);
+        }
+        
 
         if (redirect != null && !redirect.exists()) {
             redirect.getParentFile().mkdirs();

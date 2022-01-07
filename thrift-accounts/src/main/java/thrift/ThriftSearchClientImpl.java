@@ -16,7 +16,7 @@ public class ThriftSearchClientImpl implements Closeable {
 	public final TTransport transport;
 	public final TProtocol protocol;
 	public final SearchService.Client client;
-	private int clientNum = 0;
+	private static int clientNum = 0;
 	public ThriftSearchClientImpl(String host, int port) {
 
 		transport = new TFramedTransport(new TSocket(host, port));

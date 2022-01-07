@@ -20,7 +20,7 @@ public class AccountsForeignClients extends AccountsClients implements Closeable
     public List<Long> IdealResEfficiencyTest(int totalComputationLoad, int threadName){
         ThriftSearchClientImpl client = clientPool.borrow();
         try{
-            List<Long> reults = client.client.IdealResEfficiencyTest(totalComputationLoad,threadName);
+            return client.client.IdealResEfficiencyTest(totalComputationLoad,threadName);
         } catch (TException e) {
             e.printStackTrace();
         }finally {

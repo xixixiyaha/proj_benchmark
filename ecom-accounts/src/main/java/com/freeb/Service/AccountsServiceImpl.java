@@ -17,16 +17,16 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 
-public class AccountsServiceServerImpl implements AccountsService {
+public class AccountsServiceImpl implements AccountsService {
 
-    private static final Logger logger = LoggerFactory.getLogger(AccountsServiceServerImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(AccountsServiceImpl.class);
 
 
     private AccountInfoStorage storage = new AccountInfoStorage();
     private Boolean useStorage = true;
     private AccountsClients client ;
 
-    AccountsServiceServerImpl(AccountsClients accClient){
+    public AccountsServiceImpl(AccountsClients accClient){
         this.client = accClient;
     }
 
@@ -45,10 +45,10 @@ public class AccountsServiceServerImpl implements AccountsService {
     public Boolean ChangeAccountPwd(AccountsInfo info, String newPwd) {
         AccountsInfo oldInfo;
         if((oldInfo=storage.GetAccountInfoByName(info.getUserName()))==null)return false;
-        if(!oldInfo.getUserPwd().equals(info.getUserPwd())){
+        if(!oldInfo.getUserPasswd().equals(info.getUserPasswd())){
             return false;
         }
-        oldInfo.setUserPwd(newPwd);
+        oldInfo.setUserPasswd(newPwd);
         return storage.UpdateAccountInfoById(oldInfo);
     }
 

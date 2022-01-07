@@ -1,14 +1,26 @@
 package com.freeb;
 
+import com.freeb.Service.AccountsServiceImpl;
+import org.apache.thrift.protocol.TBinaryProtocol;
+import org.apache.thrift.server.TServer;
+import org.apache.thrift.server.TThreadedSelectorServer;
+import org.apache.thrift.transport.TNonblockingServerSocket;
+import org.apache.thrift.transport.TNonblockingServerTransport;
+import org.apache.thrift.transport.TTransportException;
 import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.runner.Runner;
+import org.openjdk.jmh.runner.RunnerException;
 import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
 import org.openjdk.jmh.runner.options.TimeValue;
+import thrift.accounts.AccountsService;
+import thrift.accounts.AccountsServiceServerImpl;
 import thrift.search.AccountsForeignClients;
 
 import java.io.IOException;
+import java.net.InetSocketAddress;
 import java.sql.Timestamp;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -33,8 +45,29 @@ public class HalfBMOne{
         return re != null;
     }
 
-    public static void main(String[] args) throws Exception {
+    private static void initAccountService(){
+        try {
 
+
+            InetSocketAddress serverAddress = new InetSocketAddress("TODO@ Accounts Private Address", 8080);
+
+            TNonblockingServerTransport serverSocket = new TNonblockingServerSocket(serverAddress);
+
+            TThreadedSelectorServer.Args serverParams = new TThreadedSelectorServer.Args(serverSocket);
+            serverParams.protocolFactory(new TBinaryProtocol.Factory());
+            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+            serverParams.processor(new AccountsService.Processor<AccountsService.Iface>(new AccountsServiceServerImpl()));
+            TServer server = new TThreadedSelectorServer(serverParams);
+            timestamp = new Timestamp(System.currentTimeMillis());
+            System.out.println("in thrift Server main() ==  =="+timestamp.toString());
+            server.serve();
+        }catch (TTransportException e){
+            System.out.println("Server Exception is "+e.getMessage());
+            System.out.println(Arrays.toString(e.getStackTrace()));
+        }
+    }
+
+    public static void HalfTest() throws InterruptedException, RunnerException, IOException {
         HalfBMOne client = new HalfBMOne();
         for (int i = 0; i < 1; i++) {
             try {
@@ -62,6 +95,11 @@ public class HalfBMOne{
         System.out.println("in thrift com.freeb.HalfBMOne main() === 4 === ");
         new Runner(opt).run();
         System.out.println("in thrift com.freeb.HalfBMOne main() === 5 === ");
+    }
+
+    public static void main(String[] args) throws Exception {
+
+//        HalfTest();
 
     }
 

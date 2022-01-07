@@ -84,7 +84,7 @@ public class AccountInfoStorage {
             PreparedStatement stmt = conn.prepareStatement(UPDATE_ACCOUNT_BY_ID);
             stmt.setLong(4,info.getUserId());
             stmt.setString(1,info.getUserName());
-            stmt.setString(2,info.getUserPwd());
+            stmt.setString(2,info.getUserPasswd());
             stmt.setString(3,info.getUserDescription());
             rs = stmt.executeQuery();
             // TODO true / false
@@ -124,7 +124,7 @@ public class AccountInfoStorage {
             PreparedStatement stmt = conn.prepareStatement(CREATE_ACCOUNT);
             stmt.setLong(1,info.getUserId());
             stmt.setString(2,info.getUserName());
-            stmt.setString(3,info.getUserPwd());
+            stmt.setString(3,info.getUserPasswd());
             stmt.setString(4,info.getUserDescription());
             rs = stmt.executeQuery();
             // TODO true / false

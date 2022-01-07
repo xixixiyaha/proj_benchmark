@@ -1,15 +1,13 @@
 package com.freeb.Entity;
 
 import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class AccountsInfo {
 
     private Long userId;
     private String userName;
-    private String userPwd;
+    private String userPasswd;
     private String userDescription;
     // 懒更新 alg: 最近的浏览中 top10 category的占比
     private Map<Integer,Double> userTag;
@@ -32,12 +30,12 @@ public class AccountsInfo {
         this.userName = userName;
     }
 
-    public String getUserPwd() {
-        return userPwd;
+    public String getUserPasswd() {
+        return userPasswd;
     }
 
-    public void setUserPwd(String userPwd) {
-        this.userPwd = userPwd;
+    public void setUserPasswd(String userPasswd) {
+        this.userPasswd = userPasswd;
     }
 
     public String getUserDescription() {

@@ -29,7 +29,7 @@ service AccountsService{
 
     bool SetUserTags(1:i64 id,2:map<i32,double> tags),
 
-    bool ChangeAccountPwd(1:string passwd),
+    bool ChangeAccountPwd(1:AccountsInfo info,2:string passwd),
 
 
     bool CreateAccount(1:AccountsInfo info),

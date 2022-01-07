@@ -39,45 +39,45 @@ public class AccountsService {
 
   public interface Iface {
 
-    public boolean AccountExists(long id) throws org.apache.thrift.TException;
+    public boolean AccountExists(long id) throws TException;
 
-    public boolean VerifyAccessByAccount(long accountId, long targetId, IdType idType) throws org.apache.thrift.TException;
+    public boolean VerifyAccessByAccount(long accountId, long targetId, IdType idType) throws TException;
 
-    public List<Integer> GetAccountTag(long id) throws org.apache.thrift.TException;
+    public List<Integer> GetAccountTag(long id) throws TException;
 
-    public Map<Integer,Double> GetUserTags(long id) throws org.apache.thrift.TException;
+    public Map<Integer,Double> GetUserTags(long id) throws TException;
 
-    public boolean SetUserTags(long id, Map<Integer, Double> tags) throws org.apache.thrift.TException;
+    public boolean SetUserTags(long id, Map<Integer, Double> tags) throws TException;
 
-    public boolean ChangeAccountPwd(String passwd) throws org.apache.thrift.TException;
+    public boolean ChangeAccountPwd(AccountsInfo info, String passwd) throws TException;
 
-    public boolean CreateAccount(AccountsInfo info) throws org.apache.thrift.TException;
+    public boolean CreateAccount(AccountsInfo info) throws TException;
 
-    public AccountsInfo GetAccountInfo(long id) throws org.apache.thrift.TException;
+    public AccountsInfo GetAccountInfo(long id) throws TException;
 
-    public String CompareResEfficiencyBM1(String remoteFilePath, int testType) throws org.apache.thrift.TException;
+    public String CompareResEfficiencyBM1(String remoteFilePath, int testType) throws TException;
 
   }
 
   public interface AsyncIface {
 
-    public void AccountExists(long id, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void AccountExists(long id, AsyncMethodCallback resultHandler) throws TException;
 
-    public void VerifyAccessByAccount(long accountId, long targetId, IdType idType, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void VerifyAccessByAccount(long accountId, long targetId, IdType idType, AsyncMethodCallback resultHandler) throws TException;
 
-    public void GetAccountTag(long id, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void GetAccountTag(long id, AsyncMethodCallback resultHandler) throws TException;
 
-    public void GetUserTags(long id, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void GetUserTags(long id, AsyncMethodCallback resultHandler) throws TException;
 
-    public void SetUserTags(long id, Map<Integer, Double> tags, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void SetUserTags(long id, Map<Integer, Double> tags, AsyncMethodCallback resultHandler) throws TException;
 
-    public void ChangeAccountPwd(String passwd, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void ChangeAccountPwd(AccountsInfo info, String passwd, AsyncMethodCallback resultHandler) throws TException;
 
-    public void CreateAccount(AccountsInfo info, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void CreateAccount(AccountsInfo info, AsyncMethodCallback resultHandler) throws TException;
 
-    public void GetAccountInfo(long id, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void GetAccountInfo(long id, AsyncMethodCallback resultHandler) throws TException;
 
-    public void CompareResEfficiencyBM1(String remoteFilePath, int testType, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void CompareResEfficiencyBM1(String remoteFilePath, int testType, AsyncMethodCallback resultHandler) throws TException;
 
   }
 
@@ -101,20 +101,20 @@ public class AccountsService {
       super(iprot, oprot);
     }
 
-    public boolean AccountExists(long id) throws org.apache.thrift.TException
+    public boolean AccountExists(long id) throws TException
     {
       send_AccountExists(id);
       return recv_AccountExists();
     }
 
-    public void send_AccountExists(long id) throws org.apache.thrift.TException
+    public void send_AccountExists(long id) throws TException
     {
       AccountExists_args args = new AccountExists_args();
       args.setId(id);
       sendBase("AccountExists", args);
     }
 
-    public boolean recv_AccountExists() throws org.apache.thrift.TException
+    public boolean recv_AccountExists() throws TException
     {
       AccountExists_result result = new AccountExists_result();
       receiveBase(result, "AccountExists");
@@ -124,13 +124,13 @@ public class AccountsService {
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "AccountExists failed: unknown result");
     }
 
-    public boolean VerifyAccessByAccount(long accountId, long targetId, IdType idType) throws org.apache.thrift.TException
+    public boolean VerifyAccessByAccount(long accountId, long targetId, IdType idType) throws TException
     {
       send_VerifyAccessByAccount(accountId, targetId, idType);
       return recv_VerifyAccessByAccount();
     }
 
-    public void send_VerifyAccessByAccount(long accountId, long targetId, IdType idType) throws org.apache.thrift.TException
+    public void send_VerifyAccessByAccount(long accountId, long targetId, IdType idType) throws TException
     {
       VerifyAccessByAccount_args args = new VerifyAccessByAccount_args();
       args.setAccountId(accountId);
@@ -139,7 +139,7 @@ public class AccountsService {
       sendBase("VerifyAccessByAccount", args);
     }
 
-    public boolean recv_VerifyAccessByAccount() throws org.apache.thrift.TException
+    public boolean recv_VerifyAccessByAccount() throws TException
     {
       VerifyAccessByAccount_result result = new VerifyAccessByAccount_result();
       receiveBase(result, "VerifyAccessByAccount");
@@ -149,20 +149,20 @@ public class AccountsService {
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "VerifyAccessByAccount failed: unknown result");
     }
 
-    public List<Integer> GetAccountTag(long id) throws org.apache.thrift.TException
+    public List<Integer> GetAccountTag(long id) throws TException
     {
       send_GetAccountTag(id);
       return recv_GetAccountTag();
     }
 
-    public void send_GetAccountTag(long id) throws org.apache.thrift.TException
+    public void send_GetAccountTag(long id) throws TException
     {
       GetAccountTag_args args = new GetAccountTag_args();
       args.setId(id);
       sendBase("GetAccountTag", args);
     }
 
-    public List<Integer> recv_GetAccountTag() throws org.apache.thrift.TException
+    public List<Integer> recv_GetAccountTag() throws TException
     {
       GetAccountTag_result result = new GetAccountTag_result();
       receiveBase(result, "GetAccountTag");
@@ -172,20 +172,20 @@ public class AccountsService {
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "GetAccountTag failed: unknown result");
     }
 
-    public Map<Integer,Double> GetUserTags(long id) throws org.apache.thrift.TException
+    public Map<Integer,Double> GetUserTags(long id) throws TException
     {
       send_GetUserTags(id);
       return recv_GetUserTags();
     }
 
-    public void send_GetUserTags(long id) throws org.apache.thrift.TException
+    public void send_GetUserTags(long id) throws TException
     {
       GetUserTags_args args = new GetUserTags_args();
       args.setId(id);
       sendBase("GetUserTags", args);
     }
 
-    public Map<Integer,Double> recv_GetUserTags() throws org.apache.thrift.TException
+    public Map<Integer,Double> recv_GetUserTags() throws TException
     {
       GetUserTags_result result = new GetUserTags_result();
       receiveBase(result, "GetUserTags");
@@ -195,13 +195,13 @@ public class AccountsService {
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "GetUserTags failed: unknown result");
     }
 
-    public boolean SetUserTags(long id, Map<Integer,Double> tags) throws org.apache.thrift.TException
+    public boolean SetUserTags(long id, Map<Integer,Double> tags) throws TException
     {
       send_SetUserTags(id, tags);
       return recv_SetUserTags();
     }
 
-    public void send_SetUserTags(long id, Map<Integer,Double> tags) throws org.apache.thrift.TException
+    public void send_SetUserTags(long id, Map<Integer,Double> tags) throws TException
     {
       SetUserTags_args args = new SetUserTags_args();
       args.setId(id);
@@ -209,7 +209,7 @@ public class AccountsService {
       sendBase("SetUserTags", args);
     }
 
-    public boolean recv_SetUserTags() throws org.apache.thrift.TException
+    public boolean recv_SetUserTags() throws TException
     {
       SetUserTags_result result = new SetUserTags_result();
       receiveBase(result, "SetUserTags");
@@ -219,20 +219,21 @@ public class AccountsService {
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "SetUserTags failed: unknown result");
     }
 
-    public boolean ChangeAccountPwd(String passwd) throws org.apache.thrift.TException
+    public boolean ChangeAccountPwd(AccountsInfo info, String passwd) throws TException
     {
-      send_ChangeAccountPwd(passwd);
+      send_ChangeAccountPwd(info, passwd);
       return recv_ChangeAccountPwd();
     }
 
-    public void send_ChangeAccountPwd(String passwd) throws org.apache.thrift.TException
+    public void send_ChangeAccountPwd(AccountsInfo info, String passwd) throws TException
     {
       ChangeAccountPwd_args args = new ChangeAccountPwd_args();
+      args.setInfo(info);
       args.setPasswd(passwd);
       sendBase("ChangeAccountPwd", args);
     }
 
-    public boolean recv_ChangeAccountPwd() throws org.apache.thrift.TException
+    public boolean recv_ChangeAccountPwd() throws TException
     {
       ChangeAccountPwd_result result = new ChangeAccountPwd_result();
       receiveBase(result, "ChangeAccountPwd");
@@ -242,20 +243,20 @@ public class AccountsService {
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "ChangeAccountPwd failed: unknown result");
     }
 
-    public boolean CreateAccount(AccountsInfo info) throws org.apache.thrift.TException
+    public boolean CreateAccount(AccountsInfo info) throws TException
     {
       send_CreateAccount(info);
       return recv_CreateAccount();
     }
 
-    public void send_CreateAccount(AccountsInfo info) throws org.apache.thrift.TException
+    public void send_CreateAccount(AccountsInfo info) throws TException
     {
       CreateAccount_args args = new CreateAccount_args();
       args.setInfo(info);
       sendBase("CreateAccount", args);
     }
 
-    public boolean recv_CreateAccount() throws org.apache.thrift.TException
+    public boolean recv_CreateAccount() throws TException
     {
       CreateAccount_result result = new CreateAccount_result();
       receiveBase(result, "CreateAccount");
@@ -265,20 +266,20 @@ public class AccountsService {
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "CreateAccount failed: unknown result");
     }
 
-    public AccountsInfo GetAccountInfo(long id) throws org.apache.thrift.TException
+    public AccountsInfo GetAccountInfo(long id) throws TException
     {
       send_GetAccountInfo(id);
       return recv_GetAccountInfo();
     }
 
-    public void send_GetAccountInfo(long id) throws org.apache.thrift.TException
+    public void send_GetAccountInfo(long id) throws TException
     {
       GetAccountInfo_args args = new GetAccountInfo_args();
       args.setId(id);
       sendBase("GetAccountInfo", args);
     }
 
-    public AccountsInfo recv_GetAccountInfo() throws org.apache.thrift.TException
+    public AccountsInfo recv_GetAccountInfo() throws TException
     {
       GetAccountInfo_result result = new GetAccountInfo_result();
       receiveBase(result, "GetAccountInfo");
@@ -288,13 +289,13 @@ public class AccountsService {
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "GetAccountInfo failed: unknown result");
     }
 
-    public String CompareResEfficiencyBM1(String remoteFilePath, int testType) throws org.apache.thrift.TException
+    public String CompareResEfficiencyBM1(String remoteFilePath, int testType) throws TException
     {
       send_CompareResEfficiencyBM1(remoteFilePath, testType);
       return recv_CompareResEfficiencyBM1();
     }
 
-    public void send_CompareResEfficiencyBM1(String remoteFilePath, int testType) throws org.apache.thrift.TException
+    public void send_CompareResEfficiencyBM1(String remoteFilePath, int testType) throws TException
     {
       CompareResEfficiencyBM1_args args = new CompareResEfficiencyBM1_args();
       args.setRemoteFilePath(remoteFilePath);
@@ -302,7 +303,7 @@ public class AccountsService {
       sendBase("CompareResEfficiencyBM1", args);
     }
 
-    public String recv_CompareResEfficiencyBM1() throws org.apache.thrift.TException
+    public String recv_CompareResEfficiencyBM1() throws TException
     {
       CompareResEfficiencyBM1_result result = new CompareResEfficiencyBM1_result();
       receiveBase(result, "CompareResEfficiencyBM1");
@@ -330,7 +331,7 @@ public class AccountsService {
       super(protocolFactory, clientManager, transport);
     }
 
-    public void AccountExists(long id, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+    public void AccountExists(long id, AsyncMethodCallback resultHandler) throws TException {
       checkReady();
       AccountExists_call method_call = new AccountExists_call(id, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
@@ -339,12 +340,12 @@ public class AccountsService {
 
     public static class AccountExists_call extends org.apache.thrift.async.TAsyncMethodCall {
       private long id;
-      public AccountExists_call(long id, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      public AccountExists_call(long id, AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws TException {
         super(client, protocolFactory, transport, resultHandler, false);
         this.id = id;
       }
 
-      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws TException {
         prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("AccountExists", org.apache.thrift.protocol.TMessageType.CALL, 0));
         AccountExists_args args = new AccountExists_args();
         args.setId(id);
@@ -352,8 +353,8 @@ public class AccountsService {
         prot.writeMessageEnd();
       }
 
-      public boolean getResult() throws org.apache.thrift.TException {
-        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+      public boolean getResult() throws TException {
+        if (getState() != State.RESPONSE_READ) {
           throw new IllegalStateException("Method call not finished!");
         }
         org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
@@ -362,7 +363,7 @@ public class AccountsService {
       }
     }
 
-    public void VerifyAccessByAccount(long accountId, long targetId, IdType idType, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+    public void VerifyAccessByAccount(long accountId, long targetId, IdType idType, AsyncMethodCallback resultHandler) throws TException {
       checkReady();
       VerifyAccessByAccount_call method_call = new VerifyAccessByAccount_call(accountId, targetId, idType, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
@@ -373,14 +374,14 @@ public class AccountsService {
       private long accountId;
       private long targetId;
       private IdType idType;
-      public VerifyAccessByAccount_call(long accountId, long targetId, IdType idType, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      public VerifyAccessByAccount_call(long accountId, long targetId, IdType idType, AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws TException {
         super(client, protocolFactory, transport, resultHandler, false);
         this.accountId = accountId;
         this.targetId = targetId;
         this.idType = idType;
       }
 
-      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws TException {
         prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("VerifyAccessByAccount", org.apache.thrift.protocol.TMessageType.CALL, 0));
         VerifyAccessByAccount_args args = new VerifyAccessByAccount_args();
         args.setAccountId(accountId);
@@ -390,8 +391,8 @@ public class AccountsService {
         prot.writeMessageEnd();
       }
 
-      public boolean getResult() throws org.apache.thrift.TException {
-        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+      public boolean getResult() throws TException {
+        if (getState() != State.RESPONSE_READ) {
           throw new IllegalStateException("Method call not finished!");
         }
         org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
@@ -400,7 +401,7 @@ public class AccountsService {
       }
     }
 
-    public void GetAccountTag(long id, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+    public void GetAccountTag(long id, AsyncMethodCallback resultHandler) throws TException {
       checkReady();
       GetAccountTag_call method_call = new GetAccountTag_call(id, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
@@ -409,12 +410,12 @@ public class AccountsService {
 
     public static class GetAccountTag_call extends org.apache.thrift.async.TAsyncMethodCall {
       private long id;
-      public GetAccountTag_call(long id, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      public GetAccountTag_call(long id, AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws TException {
         super(client, protocolFactory, transport, resultHandler, false);
         this.id = id;
       }
 
-      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws TException {
         prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("GetAccountTag", org.apache.thrift.protocol.TMessageType.CALL, 0));
         GetAccountTag_args args = new GetAccountTag_args();
         args.setId(id);
@@ -422,8 +423,8 @@ public class AccountsService {
         prot.writeMessageEnd();
       }
 
-      public List<Integer> getResult() throws org.apache.thrift.TException {
-        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+      public List<Integer> getResult() throws TException {
+        if (getState() != State.RESPONSE_READ) {
           throw new IllegalStateException("Method call not finished!");
         }
         org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
@@ -432,7 +433,7 @@ public class AccountsService {
       }
     }
 
-    public void GetUserTags(long id, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+    public void GetUserTags(long id, AsyncMethodCallback resultHandler) throws TException {
       checkReady();
       GetUserTags_call method_call = new GetUserTags_call(id, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
@@ -441,12 +442,12 @@ public class AccountsService {
 
     public static class GetUserTags_call extends org.apache.thrift.async.TAsyncMethodCall {
       private long id;
-      public GetUserTags_call(long id, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      public GetUserTags_call(long id, AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws TException {
         super(client, protocolFactory, transport, resultHandler, false);
         this.id = id;
       }
 
-      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws TException {
         prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("GetUserTags", org.apache.thrift.protocol.TMessageType.CALL, 0));
         GetUserTags_args args = new GetUserTags_args();
         args.setId(id);
@@ -454,8 +455,8 @@ public class AccountsService {
         prot.writeMessageEnd();
       }
 
-      public Map<Integer,Double> getResult() throws org.apache.thrift.TException {
-        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+      public Map<Integer,Double> getResult() throws TException {
+        if (getState() != State.RESPONSE_READ) {
           throw new IllegalStateException("Method call not finished!");
         }
         org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
@@ -464,7 +465,7 @@ public class AccountsService {
       }
     }
 
-    public void SetUserTags(long id, Map<Integer,Double> tags, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+    public void SetUserTags(long id, Map<Integer,Double> tags, AsyncMethodCallback resultHandler) throws TException {
       checkReady();
       SetUserTags_call method_call = new SetUserTags_call(id, tags, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
@@ -474,13 +475,13 @@ public class AccountsService {
     public static class SetUserTags_call extends org.apache.thrift.async.TAsyncMethodCall {
       private long id;
       private Map<Integer,Double> tags;
-      public SetUserTags_call(long id, Map<Integer,Double> tags, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      public SetUserTags_call(long id, Map<Integer,Double> tags, AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws TException {
         super(client, protocolFactory, transport, resultHandler, false);
         this.id = id;
         this.tags = tags;
       }
 
-      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws TException {
         prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("SetUserTags", org.apache.thrift.protocol.TMessageType.CALL, 0));
         SetUserTags_args args = new SetUserTags_args();
         args.setId(id);
@@ -489,8 +490,8 @@ public class AccountsService {
         prot.writeMessageEnd();
       }
 
-      public boolean getResult() throws org.apache.thrift.TException {
-        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+      public boolean getResult() throws TException {
+        if (getState() != State.RESPONSE_READ) {
           throw new IllegalStateException("Method call not finished!");
         }
         org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
@@ -499,30 +500,33 @@ public class AccountsService {
       }
     }
 
-    public void ChangeAccountPwd(String passwd, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+    public void ChangeAccountPwd(AccountsInfo info, String passwd, AsyncMethodCallback resultHandler) throws TException {
       checkReady();
-      ChangeAccountPwd_call method_call = new ChangeAccountPwd_call(passwd, resultHandler, this, ___protocolFactory, ___transport);
+      ChangeAccountPwd_call method_call = new ChangeAccountPwd_call(info, passwd, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
       ___manager.call(method_call);
     }
 
     public static class ChangeAccountPwd_call extends org.apache.thrift.async.TAsyncMethodCall {
+      private AccountsInfo info;
       private String passwd;
-      public ChangeAccountPwd_call(String passwd, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      public ChangeAccountPwd_call(AccountsInfo info, String passwd, AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws TException {
         super(client, protocolFactory, transport, resultHandler, false);
+        this.info = info;
         this.passwd = passwd;
       }
 
-      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws TException {
         prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("ChangeAccountPwd", org.apache.thrift.protocol.TMessageType.CALL, 0));
         ChangeAccountPwd_args args = new ChangeAccountPwd_args();
+        args.setInfo(info);
         args.setPasswd(passwd);
         args.write(prot);
         prot.writeMessageEnd();
       }
 
-      public boolean getResult() throws org.apache.thrift.TException {
-        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+      public boolean getResult() throws TException {
+        if (getState() != State.RESPONSE_READ) {
           throw new IllegalStateException("Method call not finished!");
         }
         org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
@@ -531,7 +535,7 @@ public class AccountsService {
       }
     }
 
-    public void CreateAccount(AccountsInfo info, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+    public void CreateAccount(AccountsInfo info, AsyncMethodCallback resultHandler) throws TException {
       checkReady();
       CreateAccount_call method_call = new CreateAccount_call(info, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
@@ -540,12 +544,12 @@ public class AccountsService {
 
     public static class CreateAccount_call extends org.apache.thrift.async.TAsyncMethodCall {
       private AccountsInfo info;
-      public CreateAccount_call(AccountsInfo info, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      public CreateAccount_call(AccountsInfo info, AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws TException {
         super(client, protocolFactory, transport, resultHandler, false);
         this.info = info;
       }
 
-      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws TException {
         prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("CreateAccount", org.apache.thrift.protocol.TMessageType.CALL, 0));
         CreateAccount_args args = new CreateAccount_args();
         args.setInfo(info);
@@ -553,8 +557,8 @@ public class AccountsService {
         prot.writeMessageEnd();
       }
 
-      public boolean getResult() throws org.apache.thrift.TException {
-        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+      public boolean getResult() throws TException {
+        if (getState() != State.RESPONSE_READ) {
           throw new IllegalStateException("Method call not finished!");
         }
         org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
@@ -563,7 +567,7 @@ public class AccountsService {
       }
     }
 
-    public void GetAccountInfo(long id, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+    public void GetAccountInfo(long id, AsyncMethodCallback resultHandler) throws TException {
       checkReady();
       GetAccountInfo_call method_call = new GetAccountInfo_call(id, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
@@ -572,12 +576,12 @@ public class AccountsService {
 
     public static class GetAccountInfo_call extends org.apache.thrift.async.TAsyncMethodCall {
       private long id;
-      public GetAccountInfo_call(long id, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      public GetAccountInfo_call(long id, AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws TException {
         super(client, protocolFactory, transport, resultHandler, false);
         this.id = id;
       }
 
-      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws TException {
         prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("GetAccountInfo", org.apache.thrift.protocol.TMessageType.CALL, 0));
         GetAccountInfo_args args = new GetAccountInfo_args();
         args.setId(id);
@@ -585,8 +589,8 @@ public class AccountsService {
         prot.writeMessageEnd();
       }
 
-      public AccountsInfo getResult() throws org.apache.thrift.TException {
-        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+      public AccountsInfo getResult() throws TException {
+        if (getState() != State.RESPONSE_READ) {
           throw new IllegalStateException("Method call not finished!");
         }
         org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
@@ -595,7 +599,7 @@ public class AccountsService {
       }
     }
 
-    public void CompareResEfficiencyBM1(String remoteFilePath, int testType, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+    public void CompareResEfficiencyBM1(String remoteFilePath, int testType, AsyncMethodCallback resultHandler) throws TException {
       checkReady();
       CompareResEfficiencyBM1_call method_call = new CompareResEfficiencyBM1_call(remoteFilePath, testType, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
@@ -605,13 +609,13 @@ public class AccountsService {
     public static class CompareResEfficiencyBM1_call extends org.apache.thrift.async.TAsyncMethodCall {
       private String remoteFilePath;
       private int testType;
-      public CompareResEfficiencyBM1_call(String remoteFilePath, int testType, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      public CompareResEfficiencyBM1_call(String remoteFilePath, int testType, AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws TException {
         super(client, protocolFactory, transport, resultHandler, false);
         this.remoteFilePath = remoteFilePath;
         this.testType = testType;
       }
 
-      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws TException {
         prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("CompareResEfficiencyBM1", org.apache.thrift.protocol.TMessageType.CALL, 0));
         CompareResEfficiencyBM1_args args = new CompareResEfficiencyBM1_args();
         args.setRemoteFilePath(remoteFilePath);
@@ -620,8 +624,8 @@ public class AccountsService {
         prot.writeMessageEnd();
       }
 
-      public String getResult() throws org.apache.thrift.TException {
-        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+      public String getResult() throws TException {
+        if (getState() != State.RESPONSE_READ) {
           throw new IllegalStateException("Method call not finished!");
         }
         org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
@@ -668,7 +672,7 @@ public class AccountsService {
         return false;
       }
 
-      public AccountExists_result getResult(I iface, AccountExists_args args) throws org.apache.thrift.TException {
+      public AccountExists_result getResult(I iface, AccountExists_args args) throws TException {
         AccountExists_result result = new AccountExists_result();
         result.success = iface.AccountExists(args.id);
         result.setSuccessIsSet(true);
@@ -689,7 +693,7 @@ public class AccountsService {
         return false;
       }
 
-      public VerifyAccessByAccount_result getResult(I iface, VerifyAccessByAccount_args args) throws org.apache.thrift.TException {
+      public VerifyAccessByAccount_result getResult(I iface, VerifyAccessByAccount_args args) throws TException {
         VerifyAccessByAccount_result result = new VerifyAccessByAccount_result();
         result.success = iface.VerifyAccessByAccount(args.accountId, args.targetId, args.idType);
         result.setSuccessIsSet(true);
@@ -710,7 +714,7 @@ public class AccountsService {
         return false;
       }
 
-      public GetAccountTag_result getResult(I iface, GetAccountTag_args args) throws org.apache.thrift.TException {
+      public GetAccountTag_result getResult(I iface, GetAccountTag_args args) throws TException {
         GetAccountTag_result result = new GetAccountTag_result();
         result.success = iface.GetAccountTag(args.id);
         return result;
@@ -730,7 +734,7 @@ public class AccountsService {
         return false;
       }
 
-      public GetUserTags_result getResult(I iface, GetUserTags_args args) throws org.apache.thrift.TException {
+      public GetUserTags_result getResult(I iface, GetUserTags_args args) throws TException {
         GetUserTags_result result = new GetUserTags_result();
         result.success = iface.GetUserTags(args.id);
         return result;
@@ -750,7 +754,7 @@ public class AccountsService {
         return false;
       }
 
-      public SetUserTags_result getResult(I iface, SetUserTags_args args) throws org.apache.thrift.TException {
+      public SetUserTags_result getResult(I iface, SetUserTags_args args) throws TException {
         SetUserTags_result result = new SetUserTags_result();
         result.success = iface.SetUserTags(args.id, args.tags);
         result.setSuccessIsSet(true);
@@ -771,9 +775,9 @@ public class AccountsService {
         return false;
       }
 
-      public ChangeAccountPwd_result getResult(I iface, ChangeAccountPwd_args args) throws org.apache.thrift.TException {
+      public ChangeAccountPwd_result getResult(I iface, ChangeAccountPwd_args args) throws TException {
         ChangeAccountPwd_result result = new ChangeAccountPwd_result();
-        result.success = iface.ChangeAccountPwd(args.passwd);
+        result.success = iface.ChangeAccountPwd(args.info, args.passwd);
         result.setSuccessIsSet(true);
         return result;
       }
@@ -792,7 +796,7 @@ public class AccountsService {
         return false;
       }
 
-      public CreateAccount_result getResult(I iface, CreateAccount_args args) throws org.apache.thrift.TException {
+      public CreateAccount_result getResult(I iface, CreateAccount_args args) throws TException {
         CreateAccount_result result = new CreateAccount_result();
         result.success = iface.CreateAccount(args.info);
         result.setSuccessIsSet(true);
@@ -813,7 +817,7 @@ public class AccountsService {
         return false;
       }
 
-      public GetAccountInfo_result getResult(I iface, GetAccountInfo_args args) throws org.apache.thrift.TException {
+      public GetAccountInfo_result getResult(I iface, GetAccountInfo_args args) throws TException {
         GetAccountInfo_result result = new GetAccountInfo_result();
         result.success = iface.GetAccountInfo(args.id);
         return result;
@@ -833,7 +837,7 @@ public class AccountsService {
         return false;
       }
 
-      public CompareResEfficiencyBM1_result getResult(I iface, CompareResEfficiencyBM1_args args) throws org.apache.thrift.TException {
+      public CompareResEfficiencyBM1_result getResult(I iface, CompareResEfficiencyBM1_args args) throws TException {
         CompareResEfficiencyBM1_result result = new CompareResEfficiencyBM1_result();
         result.success = iface.CompareResEfficiencyBM1(args.remoteFilePath, args.testType);
         return result;
@@ -912,7 +916,7 @@ public class AccountsService {
         return false;
       }
 
-      public void start(I iface, AccountExists_args args, org.apache.thrift.async.AsyncMethodCallback<Boolean> resultHandler) throws TException {
+      public void start(I iface, AccountExists_args args, AsyncMethodCallback<Boolean> resultHandler) throws TException {
         iface.AccountExists(args.id,resultHandler);
       }
     }
@@ -964,7 +968,7 @@ public class AccountsService {
         return false;
       }
 
-      public void start(I iface, VerifyAccessByAccount_args args, org.apache.thrift.async.AsyncMethodCallback<Boolean> resultHandler) throws TException {
+      public void start(I iface, VerifyAccessByAccount_args args, AsyncMethodCallback<Boolean> resultHandler) throws TException {
         iface.VerifyAccessByAccount(args.accountId, args.targetId, args.idType,resultHandler);
       }
     }
@@ -1015,7 +1019,7 @@ public class AccountsService {
         return false;
       }
 
-      public void start(I iface, GetAccountTag_args args, org.apache.thrift.async.AsyncMethodCallback<List<Integer>> resultHandler) throws TException {
+      public void start(I iface, GetAccountTag_args args, AsyncMethodCallback<List<Integer>> resultHandler) throws TException {
         iface.GetAccountTag(args.id,resultHandler);
       }
     }
@@ -1066,7 +1070,7 @@ public class AccountsService {
         return false;
       }
 
-      public void start(I iface, GetUserTags_args args, org.apache.thrift.async.AsyncMethodCallback<Map<Integer,Double>> resultHandler) throws TException {
+      public void start(I iface, GetUserTags_args args, AsyncMethodCallback<Map<Integer,Double>> resultHandler) throws TException {
         iface.GetUserTags(args.id,resultHandler);
       }
     }
@@ -1118,7 +1122,7 @@ public class AccountsService {
         return false;
       }
 
-      public void start(I iface, SetUserTags_args args, org.apache.thrift.async.AsyncMethodCallback<Boolean> resultHandler) throws TException {
+      public void start(I iface, SetUserTags_args args, AsyncMethodCallback<Boolean> resultHandler) throws TException {
         iface.SetUserTags(args.id, args.tags,resultHandler);
       }
     }
@@ -1170,8 +1174,8 @@ public class AccountsService {
         return false;
       }
 
-      public void start(I iface, ChangeAccountPwd_args args, org.apache.thrift.async.AsyncMethodCallback<Boolean> resultHandler) throws TException {
-        iface.ChangeAccountPwd(args.passwd,resultHandler);
+      public void start(I iface, ChangeAccountPwd_args args, AsyncMethodCallback<Boolean> resultHandler) throws TException {
+        iface.ChangeAccountPwd(args.info, args.passwd,resultHandler);
       }
     }
 
@@ -1222,7 +1226,7 @@ public class AccountsService {
         return false;
       }
 
-      public void start(I iface, CreateAccount_args args, org.apache.thrift.async.AsyncMethodCallback<Boolean> resultHandler) throws TException {
+      public void start(I iface, CreateAccount_args args, AsyncMethodCallback<Boolean> resultHandler) throws TException {
         iface.CreateAccount(args.info,resultHandler);
       }
     }
@@ -1273,7 +1277,7 @@ public class AccountsService {
         return false;
       }
 
-      public void start(I iface, GetAccountInfo_args args, org.apache.thrift.async.AsyncMethodCallback<AccountsInfo> resultHandler) throws TException {
+      public void start(I iface, GetAccountInfo_args args, AsyncMethodCallback<AccountsInfo> resultHandler) throws TException {
         iface.GetAccountInfo(args.id,resultHandler);
       }
     }
@@ -1324,7 +1328,7 @@ public class AccountsService {
         return false;
       }
 
-      public void start(I iface, CompareResEfficiencyBM1_args args, org.apache.thrift.async.AsyncMethodCallback<String> resultHandler) throws TException {
+      public void start(I iface, CompareResEfficiencyBM1_args args, AsyncMethodCallback<String> resultHandler) throws TException {
         iface.CompareResEfficiencyBM1(args.remoteFilePath, args.testType,resultHandler);
       }
     }
@@ -1563,11 +1567,11 @@ public class AccountsService {
       return _Fields.findByThriftId(fieldId);
     }
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws TException {
       schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws TException {
       schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
     }
 
@@ -1583,7 +1587,7 @@ public class AccountsService {
       return sb.toString();
     }
 
-    public void validate() throws org.apache.thrift.TException {
+    public void validate() throws TException {
       // check for required fields
       // check for sub-struct validity
     }
@@ -1591,7 +1595,7 @@ public class AccountsService {
     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
       try {
         write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -1601,7 +1605,7 @@ public class AccountsService {
         // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
         __isset_bitfield = 0;
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -1614,7 +1618,7 @@ public class AccountsService {
 
     private static class AccountExists_argsStandardScheme extends StandardScheme<AccountExists_args> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, AccountExists_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, AccountExists_args struct) throws TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -1643,7 +1647,7 @@ public class AccountsService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, AccountExists_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, AccountExists_args struct) throws TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -1665,7 +1669,7 @@ public class AccountsService {
     private static class AccountExists_argsTupleScheme extends TupleScheme<AccountExists_args> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, AccountExists_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, AccountExists_args struct) throws TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetId()) {
@@ -1678,7 +1682,7 @@ public class AccountsService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, AccountExists_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, AccountExists_args struct) throws TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
@@ -1922,11 +1926,11 @@ public class AccountsService {
       return _Fields.findByThriftId(fieldId);
     }
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws TException {
       schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws TException {
       schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
       }
 
@@ -1942,7 +1946,7 @@ public class AccountsService {
       return sb.toString();
     }
 
-    public void validate() throws org.apache.thrift.TException {
+    public void validate() throws TException {
       // check for required fields
       // check for sub-struct validity
     }
@@ -1950,7 +1954,7 @@ public class AccountsService {
     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
       try {
         write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -1960,7 +1964,7 @@ public class AccountsService {
         // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
         __isset_bitfield = 0;
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -1973,7 +1977,7 @@ public class AccountsService {
 
     private static class AccountExists_resultStandardScheme extends StandardScheme<AccountExists_result> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, AccountExists_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, AccountExists_result struct) throws TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -2002,7 +2006,7 @@ public class AccountsService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, AccountExists_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, AccountExists_result struct) throws TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -2026,7 +2030,7 @@ public class AccountsService {
     private static class AccountExists_resultTupleScheme extends TupleScheme<AccountExists_result> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, AccountExists_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, AccountExists_result struct) throws TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetSuccess()) {
@@ -2039,7 +2043,7 @@ public class AccountsService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, AccountExists_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, AccountExists_result struct) throws TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
@@ -2447,11 +2451,11 @@ public class AccountsService {
       return _Fields.findByThriftId(fieldId);
     }
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws TException {
       schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws TException {
       schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
     }
 
@@ -2479,7 +2483,7 @@ public class AccountsService {
       return sb.toString();
     }
 
-    public void validate() throws org.apache.thrift.TException {
+    public void validate() throws TException {
       // check for required fields
       // check for sub-struct validity
     }
@@ -2487,7 +2491,7 @@ public class AccountsService {
     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
       try {
         write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -2497,7 +2501,7 @@ public class AccountsService {
         // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
         __isset_bitfield = 0;
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -2510,7 +2514,7 @@ public class AccountsService {
 
     private static class VerifyAccessByAccount_argsStandardScheme extends StandardScheme<VerifyAccessByAccount_args> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, VerifyAccessByAccount_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, VerifyAccessByAccount_args struct) throws TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -2555,7 +2559,7 @@ public class AccountsService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, VerifyAccessByAccount_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, VerifyAccessByAccount_args struct) throws TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -2585,7 +2589,7 @@ public class AccountsService {
     private static class VerifyAccessByAccount_argsTupleScheme extends TupleScheme<VerifyAccessByAccount_args> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, VerifyAccessByAccount_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, VerifyAccessByAccount_args struct) throws TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetAccountId()) {
@@ -2610,7 +2614,7 @@ public class AccountsService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, VerifyAccessByAccount_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, VerifyAccessByAccount_args struct) throws TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(3);
         if (incoming.get(0)) {
@@ -2862,11 +2866,11 @@ public class AccountsService {
       return _Fields.findByThriftId(fieldId);
     }
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws TException {
       schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws TException {
       schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
       }
 
@@ -2882,7 +2886,7 @@ public class AccountsService {
       return sb.toString();
     }
 
-    public void validate() throws org.apache.thrift.TException {
+    public void validate() throws TException {
       // check for required fields
       // check for sub-struct validity
     }
@@ -2890,7 +2894,7 @@ public class AccountsService {
     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
       try {
         write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -2900,7 +2904,7 @@ public class AccountsService {
         // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
         __isset_bitfield = 0;
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -2913,7 +2917,7 @@ public class AccountsService {
 
     private static class VerifyAccessByAccount_resultStandardScheme extends StandardScheme<VerifyAccessByAccount_result> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, VerifyAccessByAccount_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, VerifyAccessByAccount_result struct) throws TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -2942,7 +2946,7 @@ public class AccountsService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, VerifyAccessByAccount_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, VerifyAccessByAccount_result struct) throws TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -2966,7 +2970,7 @@ public class AccountsService {
     private static class VerifyAccessByAccount_resultTupleScheme extends TupleScheme<VerifyAccessByAccount_result> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, VerifyAccessByAccount_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, VerifyAccessByAccount_result struct) throws TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetSuccess()) {
@@ -2979,7 +2983,7 @@ public class AccountsService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, VerifyAccessByAccount_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, VerifyAccessByAccount_result struct) throws TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
@@ -3223,11 +3227,11 @@ public class AccountsService {
       return _Fields.findByThriftId(fieldId);
     }
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws TException {
       schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws TException {
       schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
     }
 
@@ -3243,7 +3247,7 @@ public class AccountsService {
       return sb.toString();
     }
 
-    public void validate() throws org.apache.thrift.TException {
+    public void validate() throws TException {
       // check for required fields
       // check for sub-struct validity
     }
@@ -3251,7 +3255,7 @@ public class AccountsService {
     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
       try {
         write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -3261,7 +3265,7 @@ public class AccountsService {
         // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
         __isset_bitfield = 0;
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -3274,7 +3278,7 @@ public class AccountsService {
 
     private static class GetAccountTag_argsStandardScheme extends StandardScheme<GetAccountTag_args> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, GetAccountTag_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, GetAccountTag_args struct) throws TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -3303,7 +3307,7 @@ public class AccountsService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, GetAccountTag_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, GetAccountTag_args struct) throws TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -3325,7 +3329,7 @@ public class AccountsService {
     private static class GetAccountTag_argsTupleScheme extends TupleScheme<GetAccountTag_args> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, GetAccountTag_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, GetAccountTag_args struct) throws TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetId()) {
@@ -3338,7 +3342,7 @@ public class AccountsService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, GetAccountTag_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, GetAccountTag_args struct) throws TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
@@ -3597,11 +3601,11 @@ public class AccountsService {
       return _Fields.findByThriftId(fieldId);
     }
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws TException {
       schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws TException {
       schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
       }
 
@@ -3621,7 +3625,7 @@ public class AccountsService {
       return sb.toString();
     }
 
-    public void validate() throws org.apache.thrift.TException {
+    public void validate() throws TException {
       // check for required fields
       // check for sub-struct validity
     }
@@ -3629,7 +3633,7 @@ public class AccountsService {
     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
       try {
         write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -3637,7 +3641,7 @@ public class AccountsService {
     private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
       try {
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -3650,7 +3654,7 @@ public class AccountsService {
 
     private static class GetAccountTag_resultStandardScheme extends StandardScheme<GetAccountTag_result> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, GetAccountTag_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, GetAccountTag_result struct) throws TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -3689,7 +3693,7 @@ public class AccountsService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, GetAccountTag_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, GetAccountTag_result struct) throws TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -3720,7 +3724,7 @@ public class AccountsService {
     private static class GetAccountTag_resultTupleScheme extends TupleScheme<GetAccountTag_result> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, GetAccountTag_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, GetAccountTag_result struct) throws TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetSuccess()) {
@@ -3739,7 +3743,7 @@ public class AccountsService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, GetAccountTag_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, GetAccountTag_result struct) throws TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
@@ -3992,11 +3996,11 @@ public class AccountsService {
       return _Fields.findByThriftId(fieldId);
     }
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws TException {
       schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws TException {
       schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
     }
 
@@ -4012,7 +4016,7 @@ public class AccountsService {
       return sb.toString();
     }
 
-    public void validate() throws org.apache.thrift.TException {
+    public void validate() throws TException {
       // check for required fields
       // check for sub-struct validity
     }
@@ -4020,7 +4024,7 @@ public class AccountsService {
     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
       try {
         write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -4030,7 +4034,7 @@ public class AccountsService {
         // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
         __isset_bitfield = 0;
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -4043,7 +4047,7 @@ public class AccountsService {
 
     private static class GetUserTags_argsStandardScheme extends StandardScheme<GetUserTags_args> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, GetUserTags_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, GetUserTags_args struct) throws TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -4072,7 +4076,7 @@ public class AccountsService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, GetUserTags_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, GetUserTags_args struct) throws TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -4094,7 +4098,7 @@ public class AccountsService {
     private static class GetUserTags_argsTupleScheme extends TupleScheme<GetUserTags_args> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, GetUserTags_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, GetUserTags_args struct) throws TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetId()) {
@@ -4107,7 +4111,7 @@ public class AccountsService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, GetUserTags_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, GetUserTags_args struct) throws TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
@@ -4363,11 +4367,11 @@ public class AccountsService {
       return _Fields.findByThriftId(fieldId);
     }
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws TException {
       schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws TException {
       schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
       }
 
@@ -4387,7 +4391,7 @@ public class AccountsService {
       return sb.toString();
     }
 
-    public void validate() throws org.apache.thrift.TException {
+    public void validate() throws TException {
       // check for required fields
       // check for sub-struct validity
     }
@@ -4395,7 +4399,7 @@ public class AccountsService {
     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
       try {
         write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -4403,7 +4407,7 @@ public class AccountsService {
     private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
       try {
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -4416,7 +4420,7 @@ public class AccountsService {
 
     private static class GetUserTags_resultStandardScheme extends StandardScheme<GetUserTags_result> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, GetUserTags_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, GetUserTags_result struct) throws TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -4457,7 +4461,7 @@ public class AccountsService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, GetUserTags_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, GetUserTags_result struct) throws TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -4489,7 +4493,7 @@ public class AccountsService {
     private static class GetUserTags_resultTupleScheme extends TupleScheme<GetUserTags_result> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, GetUserTags_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, GetUserTags_result struct) throws TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetSuccess()) {
@@ -4509,7 +4513,7 @@ public class AccountsService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, GetUserTags_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, GetUserTags_result struct) throws TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
@@ -4852,11 +4856,11 @@ public class AccountsService {
       return _Fields.findByThriftId(fieldId);
     }
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws TException {
       schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws TException {
       schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
     }
 
@@ -4880,7 +4884,7 @@ public class AccountsService {
       return sb.toString();
     }
 
-    public void validate() throws org.apache.thrift.TException {
+    public void validate() throws TException {
       // check for required fields
       // check for sub-struct validity
     }
@@ -4888,7 +4892,7 @@ public class AccountsService {
     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
       try {
         write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -4898,7 +4902,7 @@ public class AccountsService {
         // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
         __isset_bitfield = 0;
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -4911,7 +4915,7 @@ public class AccountsService {
 
     private static class SetUserTags_argsStandardScheme extends StandardScheme<SetUserTags_args> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, SetUserTags_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, SetUserTags_args struct) throws TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -4960,7 +4964,7 @@ public class AccountsService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, SetUserTags_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, SetUserTags_args struct) throws TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -4995,7 +4999,7 @@ public class AccountsService {
     private static class SetUserTags_argsTupleScheme extends TupleScheme<SetUserTags_args> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, SetUserTags_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, SetUserTags_args struct) throws TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetId()) {
@@ -5021,7 +5025,7 @@ public class AccountsService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, SetUserTags_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, SetUserTags_args struct) throws TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
@@ -5280,11 +5284,11 @@ public class AccountsService {
       return _Fields.findByThriftId(fieldId);
     }
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws TException {
       schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws TException {
       schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
       }
 
@@ -5300,7 +5304,7 @@ public class AccountsService {
       return sb.toString();
     }
 
-    public void validate() throws org.apache.thrift.TException {
+    public void validate() throws TException {
       // check for required fields
       // check for sub-struct validity
     }
@@ -5308,7 +5312,7 @@ public class AccountsService {
     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
       try {
         write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -5318,7 +5322,7 @@ public class AccountsService {
         // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
         __isset_bitfield = 0;
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -5331,7 +5335,7 @@ public class AccountsService {
 
     private static class SetUserTags_resultStandardScheme extends StandardScheme<SetUserTags_result> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, SetUserTags_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, SetUserTags_result struct) throws TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -5360,7 +5364,7 @@ public class AccountsService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, SetUserTags_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, SetUserTags_result struct) throws TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -5384,7 +5388,7 @@ public class AccountsService {
     private static class SetUserTags_resultTupleScheme extends TupleScheme<SetUserTags_result> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, SetUserTags_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, SetUserTags_result struct) throws TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetSuccess()) {
@@ -5397,7 +5401,7 @@ public class AccountsService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, SetUserTags_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, SetUserTags_result struct) throws TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
@@ -5412,7 +5416,8 @@ public class AccountsService {
   public static class ChangeAccountPwd_args implements org.apache.thrift.TBase<ChangeAccountPwd_args, ChangeAccountPwd_args._Fields>, java.io.Serializable, Cloneable, Comparable<ChangeAccountPwd_args>   {
     private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("ChangeAccountPwd_args");
 
-    private static final org.apache.thrift.protocol.TField PASSWD_FIELD_DESC = new org.apache.thrift.protocol.TField("passwd", org.apache.thrift.protocol.TType.STRING, (short)1);
+    private static final org.apache.thrift.protocol.TField INFO_FIELD_DESC = new org.apache.thrift.protocol.TField("info", org.apache.thrift.protocol.TType.STRUCT, (short)1);
+    private static final org.apache.thrift.protocol.TField PASSWD_FIELD_DESC = new org.apache.thrift.protocol.TField("passwd", org.apache.thrift.protocol.TType.STRING, (short)2);
 
     private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
     static {
@@ -5420,11 +5425,13 @@ public class AccountsService {
       schemes.put(TupleScheme.class, new ChangeAccountPwd_argsTupleSchemeFactory());
     }
 
+    public AccountsInfo info; // required
     public String passwd; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
-      PASSWD((short)1, "passwd");
+      INFO((short)1, "info"),
+      PASSWD((short)2, "passwd");
 
       private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -5439,7 +5446,9 @@ public class AccountsService {
        */
       public static _Fields findByThriftId(int fieldId) {
         switch(fieldId) {
-          case 1: // PASSWD
+          case 1: // INFO
+            return INFO;
+          case 2: // PASSWD
             return PASSWD;
           default:
             return null;
@@ -5484,6 +5493,8 @@ public class AccountsService {
     public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
     static {
       Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.INFO, new org.apache.thrift.meta_data.FieldMetaData("info", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, AccountsInfo.class)));
       tmpMap.put(_Fields.PASSWD, new org.apache.thrift.meta_data.FieldMetaData("passwd", org.apache.thrift.TFieldRequirementType.DEFAULT, 
           new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
       metaDataMap = Collections.unmodifiableMap(tmpMap);
@@ -5494,9 +5505,11 @@ public class AccountsService {
     }
 
     public ChangeAccountPwd_args(
+      AccountsInfo info,
       String passwd)
     {
       this();
+      this.info = info;
       this.passwd = passwd;
     }
 
@@ -5504,6 +5517,9 @@ public class AccountsService {
      * Performs a deep copy on <i>other</i>.
      */
     public ChangeAccountPwd_args(ChangeAccountPwd_args other) {
+      if (other.isSetInfo()) {
+        this.info = new AccountsInfo(other.info);
+      }
       if (other.isSetPasswd()) {
         this.passwd = other.passwd;
       }
@@ -5515,7 +5531,32 @@ public class AccountsService {
 
     @Override
     public void clear() {
+      this.info = null;
       this.passwd = null;
+    }
+
+    public AccountsInfo getInfo() {
+      return this.info;
+    }
+
+    public ChangeAccountPwd_args setInfo(AccountsInfo info) {
+      this.info = info;
+      return this;
+    }
+
+    public void unsetInfo() {
+      this.info = null;
+    }
+
+    /** Returns true if field info is set (has been assigned a value) and false otherwise */
+    public boolean isSetInfo() {
+      return this.info != null;
+    }
+
+    public void setInfoIsSet(boolean value) {
+      if (!value) {
+        this.info = null;
+      }
     }
 
     public String getPasswd() {
@@ -5544,6 +5585,14 @@ public class AccountsService {
 
     public void setFieldValue(_Fields field, Object value) {
       switch (field) {
+      case INFO:
+        if (value == null) {
+          unsetInfo();
+        } else {
+          setInfo((AccountsInfo)value);
+        }
+        break;
+
       case PASSWD:
         if (value == null) {
           unsetPasswd();
@@ -5557,6 +5606,9 @@ public class AccountsService {
 
     public Object getFieldValue(_Fields field) {
       switch (field) {
+      case INFO:
+        return getInfo();
+
       case PASSWD:
         return getPasswd();
 
@@ -5571,6 +5623,8 @@ public class AccountsService {
       }
 
       switch (field) {
+      case INFO:
+        return isSetInfo();
       case PASSWD:
         return isSetPasswd();
       }
@@ -5590,6 +5644,15 @@ public class AccountsService {
       if (that == null)
         return false;
 
+      boolean this_present_info = true && this.isSetInfo();
+      boolean that_present_info = true && that.isSetInfo();
+      if (this_present_info || that_present_info) {
+        if (!(this_present_info && that_present_info))
+          return false;
+        if (!this.info.equals(that.info))
+          return false;
+      }
+
       boolean this_present_passwd = true && this.isSetPasswd();
       boolean that_present_passwd = true && that.isSetPasswd();
       if (this_present_passwd || that_present_passwd) {
@@ -5605,6 +5668,11 @@ public class AccountsService {
     @Override
     public int hashCode() {
       List<Object> list = new ArrayList<Object>();
+
+      boolean present_info = true && (isSetInfo());
+      list.add(present_info);
+      if (present_info)
+        list.add(info);
 
       boolean present_passwd = true && (isSetPasswd());
       list.add(present_passwd);
@@ -5622,6 +5690,16 @@ public class AccountsService {
 
       int lastComparison = 0;
 
+      lastComparison = Boolean.valueOf(isSetInfo()).compareTo(other.isSetInfo());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetInfo()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.info, other.info);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
       lastComparison = Boolean.valueOf(isSetPasswd()).compareTo(other.isSetPasswd());
       if (lastComparison != 0) {
         return lastComparison;
@@ -5639,11 +5717,11 @@ public class AccountsService {
       return _Fields.findByThriftId(fieldId);
     }
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws TException {
       schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws TException {
       schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
     }
 
@@ -5652,6 +5730,14 @@ public class AccountsService {
       StringBuilder sb = new StringBuilder("ChangeAccountPwd_args(");
       boolean first = true;
 
+      sb.append("info:");
+      if (this.info == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.info);
+      }
+      first = false;
+      if (!first) sb.append(", ");
       sb.append("passwd:");
       if (this.passwd == null) {
         sb.append("null");
@@ -5663,15 +5749,18 @@ public class AccountsService {
       return sb.toString();
     }
 
-    public void validate() throws org.apache.thrift.TException {
+    public void validate() throws TException {
       // check for required fields
       // check for sub-struct validity
+      if (info != null) {
+        info.validate();
+      }
     }
 
     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
       try {
         write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -5679,7 +5768,7 @@ public class AccountsService {
     private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
       try {
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -5692,7 +5781,7 @@ public class AccountsService {
 
     private static class ChangeAccountPwd_argsStandardScheme extends StandardScheme<ChangeAccountPwd_args> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, ChangeAccountPwd_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, ChangeAccountPwd_args struct) throws TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -5702,7 +5791,16 @@ public class AccountsService {
             break;
           }
           switch (schemeField.id) {
-            case 1: // PASSWD
+            case 1: // INFO
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.info = new AccountsInfo();
+                struct.info.read(iprot);
+                struct.setInfoIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 2: // PASSWD
               if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
                 struct.passwd = iprot.readString();
                 struct.setPasswdIsSet(true);
@@ -5721,10 +5819,15 @@ public class AccountsService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, ChangeAccountPwd_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, ChangeAccountPwd_args struct) throws TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.info != null) {
+          oprot.writeFieldBegin(INFO_FIELD_DESC);
+          struct.info.write(oprot);
+          oprot.writeFieldEnd();
+        }
         if (struct.passwd != null) {
           oprot.writeFieldBegin(PASSWD_FIELD_DESC);
           oprot.writeString(struct.passwd);
@@ -5745,23 +5848,34 @@ public class AccountsService {
     private static class ChangeAccountPwd_argsTupleScheme extends TupleScheme<ChangeAccountPwd_args> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, ChangeAccountPwd_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, ChangeAccountPwd_args struct) throws TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
-        if (struct.isSetPasswd()) {
+        if (struct.isSetInfo()) {
           optionals.set(0);
         }
-        oprot.writeBitSet(optionals, 1);
+        if (struct.isSetPasswd()) {
+          optionals.set(1);
+        }
+        oprot.writeBitSet(optionals, 2);
+        if (struct.isSetInfo()) {
+          struct.info.write(oprot);
+        }
         if (struct.isSetPasswd()) {
           oprot.writeString(struct.passwd);
         }
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, ChangeAccountPwd_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, ChangeAccountPwd_args struct) throws TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
-        BitSet incoming = iprot.readBitSet(1);
+        BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
+          struct.info = new AccountsInfo();
+          struct.info.read(iprot);
+          struct.setInfoIsSet(true);
+        }
+        if (incoming.get(1)) {
           struct.passwd = iprot.readString();
           struct.setPasswdIsSet(true);
         }
@@ -6002,11 +6116,11 @@ public class AccountsService {
       return _Fields.findByThriftId(fieldId);
     }
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws TException {
       schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws TException {
       schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
       }
 
@@ -6022,7 +6136,7 @@ public class AccountsService {
       return sb.toString();
     }
 
-    public void validate() throws org.apache.thrift.TException {
+    public void validate() throws TException {
       // check for required fields
       // check for sub-struct validity
     }
@@ -6030,7 +6144,7 @@ public class AccountsService {
     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
       try {
         write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -6040,7 +6154,7 @@ public class AccountsService {
         // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
         __isset_bitfield = 0;
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -6053,7 +6167,7 @@ public class AccountsService {
 
     private static class ChangeAccountPwd_resultStandardScheme extends StandardScheme<ChangeAccountPwd_result> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, ChangeAccountPwd_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, ChangeAccountPwd_result struct) throws TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -6082,7 +6196,7 @@ public class AccountsService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, ChangeAccountPwd_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, ChangeAccountPwd_result struct) throws TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -6106,7 +6220,7 @@ public class AccountsService {
     private static class ChangeAccountPwd_resultTupleScheme extends TupleScheme<ChangeAccountPwd_result> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, ChangeAccountPwd_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, ChangeAccountPwd_result struct) throws TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetSuccess()) {
@@ -6119,7 +6233,7 @@ public class AccountsService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, ChangeAccountPwd_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, ChangeAccountPwd_result struct) throws TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
@@ -6361,11 +6475,11 @@ public class AccountsService {
       return _Fields.findByThriftId(fieldId);
     }
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws TException {
       schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws TException {
       schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
     }
 
@@ -6385,7 +6499,7 @@ public class AccountsService {
       return sb.toString();
     }
 
-    public void validate() throws org.apache.thrift.TException {
+    public void validate() throws TException {
       // check for required fields
       // check for sub-struct validity
       if (info != null) {
@@ -6396,7 +6510,7 @@ public class AccountsService {
     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
       try {
         write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -6404,7 +6518,7 @@ public class AccountsService {
     private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
       try {
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -6417,7 +6531,7 @@ public class AccountsService {
 
     private static class CreateAccount_argsStandardScheme extends StandardScheme<CreateAccount_args> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, CreateAccount_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, CreateAccount_args struct) throws TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -6447,7 +6561,7 @@ public class AccountsService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, CreateAccount_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, CreateAccount_args struct) throws TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -6471,7 +6585,7 @@ public class AccountsService {
     private static class CreateAccount_argsTupleScheme extends TupleScheme<CreateAccount_args> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, CreateAccount_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, CreateAccount_args struct) throws TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetInfo()) {
@@ -6484,7 +6598,7 @@ public class AccountsService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, CreateAccount_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, CreateAccount_args struct) throws TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
@@ -6729,11 +6843,11 @@ public class AccountsService {
       return _Fields.findByThriftId(fieldId);
     }
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws TException {
       schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws TException {
       schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
       }
 
@@ -6749,7 +6863,7 @@ public class AccountsService {
       return sb.toString();
     }
 
-    public void validate() throws org.apache.thrift.TException {
+    public void validate() throws TException {
       // check for required fields
       // check for sub-struct validity
     }
@@ -6757,7 +6871,7 @@ public class AccountsService {
     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
       try {
         write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -6767,7 +6881,7 @@ public class AccountsService {
         // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
         __isset_bitfield = 0;
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -6780,7 +6894,7 @@ public class AccountsService {
 
     private static class CreateAccount_resultStandardScheme extends StandardScheme<CreateAccount_result> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, CreateAccount_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, CreateAccount_result struct) throws TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -6809,7 +6923,7 @@ public class AccountsService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, CreateAccount_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, CreateAccount_result struct) throws TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -6833,7 +6947,7 @@ public class AccountsService {
     private static class CreateAccount_resultTupleScheme extends TupleScheme<CreateAccount_result> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, CreateAccount_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, CreateAccount_result struct) throws TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetSuccess()) {
@@ -6846,7 +6960,7 @@ public class AccountsService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, CreateAccount_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, CreateAccount_result struct) throws TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
@@ -7090,11 +7204,11 @@ public class AccountsService {
       return _Fields.findByThriftId(fieldId);
     }
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws TException {
       schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws TException {
       schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
     }
 
@@ -7110,7 +7224,7 @@ public class AccountsService {
       return sb.toString();
     }
 
-    public void validate() throws org.apache.thrift.TException {
+    public void validate() throws TException {
       // check for required fields
       // check for sub-struct validity
     }
@@ -7118,7 +7232,7 @@ public class AccountsService {
     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
       try {
         write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -7128,7 +7242,7 @@ public class AccountsService {
         // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
         __isset_bitfield = 0;
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -7141,7 +7255,7 @@ public class AccountsService {
 
     private static class GetAccountInfo_argsStandardScheme extends StandardScheme<GetAccountInfo_args> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, GetAccountInfo_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, GetAccountInfo_args struct) throws TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -7170,7 +7284,7 @@ public class AccountsService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, GetAccountInfo_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, GetAccountInfo_args struct) throws TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -7192,7 +7306,7 @@ public class AccountsService {
     private static class GetAccountInfo_argsTupleScheme extends TupleScheme<GetAccountInfo_args> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, GetAccountInfo_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, GetAccountInfo_args struct) throws TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetId()) {
@@ -7205,7 +7319,7 @@ public class AccountsService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, GetAccountInfo_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, GetAccountInfo_args struct) throws TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
@@ -7447,11 +7561,11 @@ public class AccountsService {
       return _Fields.findByThriftId(fieldId);
     }
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws TException {
       schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws TException {
       schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
       }
 
@@ -7471,7 +7585,7 @@ public class AccountsService {
       return sb.toString();
     }
 
-    public void validate() throws org.apache.thrift.TException {
+    public void validate() throws TException {
       // check for required fields
       // check for sub-struct validity
       if (success != null) {
@@ -7482,7 +7596,7 @@ public class AccountsService {
     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
       try {
         write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -7490,7 +7604,7 @@ public class AccountsService {
     private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
       try {
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -7503,7 +7617,7 @@ public class AccountsService {
 
     private static class GetAccountInfo_resultStandardScheme extends StandardScheme<GetAccountInfo_result> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, GetAccountInfo_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, GetAccountInfo_result struct) throws TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -7533,7 +7647,7 @@ public class AccountsService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, GetAccountInfo_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, GetAccountInfo_result struct) throws TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -7557,7 +7671,7 @@ public class AccountsService {
     private static class GetAccountInfo_resultTupleScheme extends TupleScheme<GetAccountInfo_result> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, GetAccountInfo_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, GetAccountInfo_result struct) throws TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetSuccess()) {
@@ -7570,7 +7684,7 @@ public class AccountsService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, GetAccountInfo_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, GetAccountInfo_result struct) throws TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
@@ -7889,11 +8003,11 @@ public class AccountsService {
       return _Fields.findByThriftId(fieldId);
     }
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws TException {
       schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws TException {
       schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
     }
 
@@ -7917,7 +8031,7 @@ public class AccountsService {
       return sb.toString();
     }
 
-    public void validate() throws org.apache.thrift.TException {
+    public void validate() throws TException {
       // check for required fields
       // check for sub-struct validity
     }
@@ -7925,7 +8039,7 @@ public class AccountsService {
     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
       try {
         write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -7935,7 +8049,7 @@ public class AccountsService {
         // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
         __isset_bitfield = 0;
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -7948,7 +8062,7 @@ public class AccountsService {
 
     private static class CompareResEfficiencyBM1_argsStandardScheme extends StandardScheme<CompareResEfficiencyBM1_args> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, CompareResEfficiencyBM1_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, CompareResEfficiencyBM1_args struct) throws TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -7985,7 +8099,7 @@ public class AccountsService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, CompareResEfficiencyBM1_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, CompareResEfficiencyBM1_args struct) throws TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -8012,7 +8126,7 @@ public class AccountsService {
     private static class CompareResEfficiencyBM1_argsTupleScheme extends TupleScheme<CompareResEfficiencyBM1_args> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, CompareResEfficiencyBM1_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, CompareResEfficiencyBM1_args struct) throws TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetRemoteFilePath()) {
@@ -8031,7 +8145,7 @@ public class AccountsService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, CompareResEfficiencyBM1_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, CompareResEfficiencyBM1_args struct) throws TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
@@ -8277,11 +8391,11 @@ public class AccountsService {
       return _Fields.findByThriftId(fieldId);
     }
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws TException {
       schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws TException {
       schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
       }
 
@@ -8301,7 +8415,7 @@ public class AccountsService {
       return sb.toString();
     }
 
-    public void validate() throws org.apache.thrift.TException {
+    public void validate() throws TException {
       // check for required fields
       // check for sub-struct validity
     }
@@ -8309,7 +8423,7 @@ public class AccountsService {
     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
       try {
         write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -8317,7 +8431,7 @@ public class AccountsService {
     private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
       try {
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -8330,7 +8444,7 @@ public class AccountsService {
 
     private static class CompareResEfficiencyBM1_resultStandardScheme extends StandardScheme<CompareResEfficiencyBM1_result> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, CompareResEfficiencyBM1_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, CompareResEfficiencyBM1_result struct) throws TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -8359,7 +8473,7 @@ public class AccountsService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, CompareResEfficiencyBM1_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, CompareResEfficiencyBM1_result struct) throws TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -8383,7 +8497,7 @@ public class AccountsService {
     private static class CompareResEfficiencyBM1_resultTupleScheme extends TupleScheme<CompareResEfficiencyBM1_result> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, CompareResEfficiencyBM1_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, CompareResEfficiencyBM1_result struct) throws TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetSuccess()) {
@@ -8396,7 +8510,7 @@ public class AccountsService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, CompareResEfficiencyBM1_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, CompareResEfficiencyBM1_result struct) throws TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {

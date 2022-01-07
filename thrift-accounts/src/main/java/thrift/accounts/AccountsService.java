@@ -49,7 +49,7 @@ public class AccountsService {
 
     public boolean SetUserTags(long id, Map<Integer, Double> tags) throws TException;
 
-    public boolean ChangeAccountPwd(String passwd) throws TException;
+    public boolean ChangeAccountPwd(AccountsInfo info, String passwd) throws TException;
 
     public boolean CreateAccount(AccountsInfo info) throws TException;
 
@@ -71,7 +71,7 @@ public class AccountsService {
 
     public void SetUserTags(long id, Map<Integer, Double> tags, AsyncMethodCallback resultHandler) throws TException;
 
-    public void ChangeAccountPwd(String passwd, AsyncMethodCallback resultHandler) throws TException;
+    public void ChangeAccountPwd(AccountsInfo info, String passwd, AsyncMethodCallback resultHandler) throws TException;
 
     public void CreateAccount(AccountsInfo info, AsyncMethodCallback resultHandler) throws TException;
 
@@ -219,15 +219,16 @@ public class AccountsService {
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "SetUserTags failed: unknown result");
     }
 
-    public boolean ChangeAccountPwd(String passwd) throws TException
+    public boolean ChangeAccountPwd(AccountsInfo info, String passwd) throws TException
     {
-      send_ChangeAccountPwd(passwd);
+      send_ChangeAccountPwd(info, passwd);
       return recv_ChangeAccountPwd();
     }
 
-    public void send_ChangeAccountPwd(String passwd) throws TException
+    public void send_ChangeAccountPwd(AccountsInfo info, String passwd) throws TException
     {
       ChangeAccountPwd_args args = new ChangeAccountPwd_args();
+      args.setInfo(info);
       args.setPasswd(passwd);
       sendBase("ChangeAccountPwd", args);
     }
@@ -499,23 +500,26 @@ public class AccountsService {
       }
     }
 
-    public void ChangeAccountPwd(String passwd, AsyncMethodCallback resultHandler) throws TException {
+    public void ChangeAccountPwd(AccountsInfo info, String passwd, AsyncMethodCallback resultHandler) throws TException {
       checkReady();
-      ChangeAccountPwd_call method_call = new ChangeAccountPwd_call(passwd, resultHandler, this, ___protocolFactory, ___transport);
+      ChangeAccountPwd_call method_call = new ChangeAccountPwd_call(info, passwd, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
       ___manager.call(method_call);
     }
 
     public static class ChangeAccountPwd_call extends org.apache.thrift.async.TAsyncMethodCall {
+      private AccountsInfo info;
       private String passwd;
-      public ChangeAccountPwd_call(String passwd, AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws TException {
+      public ChangeAccountPwd_call(AccountsInfo info, String passwd, AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws TException {
         super(client, protocolFactory, transport, resultHandler, false);
+        this.info = info;
         this.passwd = passwd;
       }
 
       public void write_args(org.apache.thrift.protocol.TProtocol prot) throws TException {
         prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("ChangeAccountPwd", org.apache.thrift.protocol.TMessageType.CALL, 0));
         ChangeAccountPwd_args args = new ChangeAccountPwd_args();
+        args.setInfo(info);
         args.setPasswd(passwd);
         args.write(prot);
         prot.writeMessageEnd();
@@ -773,7 +777,7 @@ public class AccountsService {
 
       public ChangeAccountPwd_result getResult(I iface, ChangeAccountPwd_args args) throws TException {
         ChangeAccountPwd_result result = new ChangeAccountPwd_result();
-        result.success = iface.ChangeAccountPwd(args.passwd);
+        result.success = iface.ChangeAccountPwd(args.info, args.passwd);
         result.setSuccessIsSet(true);
         return result;
       }
@@ -1171,7 +1175,7 @@ public class AccountsService {
       }
 
       public void start(I iface, ChangeAccountPwd_args args, AsyncMethodCallback<Boolean> resultHandler) throws TException {
-        iface.ChangeAccountPwd(args.passwd,resultHandler);
+        iface.ChangeAccountPwd(args.info, args.passwd,resultHandler);
       }
     }
 
@@ -5412,7 +5416,8 @@ public class AccountsService {
   public static class ChangeAccountPwd_args implements org.apache.thrift.TBase<ChangeAccountPwd_args, ChangeAccountPwd_args._Fields>, java.io.Serializable, Cloneable, Comparable<ChangeAccountPwd_args>   {
     private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("ChangeAccountPwd_args");
 
-    private static final org.apache.thrift.protocol.TField PASSWD_FIELD_DESC = new org.apache.thrift.protocol.TField("passwd", org.apache.thrift.protocol.TType.STRING, (short)1);
+    private static final org.apache.thrift.protocol.TField INFO_FIELD_DESC = new org.apache.thrift.protocol.TField("info", org.apache.thrift.protocol.TType.STRUCT, (short)1);
+    private static final org.apache.thrift.protocol.TField PASSWD_FIELD_DESC = new org.apache.thrift.protocol.TField("passwd", org.apache.thrift.protocol.TType.STRING, (short)2);
 
     private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
     static {
@@ -5420,11 +5425,13 @@ public class AccountsService {
       schemes.put(TupleScheme.class, new ChangeAccountPwd_argsTupleSchemeFactory());
     }
 
+    public AccountsInfo info; // required
     public String passwd; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
-      PASSWD((short)1, "passwd");
+      INFO((short)1, "info"),
+      PASSWD((short)2, "passwd");
 
       private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -5439,7 +5446,9 @@ public class AccountsService {
        */
       public static _Fields findByThriftId(int fieldId) {
         switch(fieldId) {
-          case 1: // PASSWD
+          case 1: // INFO
+            return INFO;
+          case 2: // PASSWD
             return PASSWD;
           default:
             return null;
@@ -5484,6 +5493,8 @@ public class AccountsService {
     public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
     static {
       Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.INFO, new org.apache.thrift.meta_data.FieldMetaData("info", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, AccountsInfo.class)));
       tmpMap.put(_Fields.PASSWD, new org.apache.thrift.meta_data.FieldMetaData("passwd", org.apache.thrift.TFieldRequirementType.DEFAULT, 
           new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
       metaDataMap = Collections.unmodifiableMap(tmpMap);
@@ -5494,9 +5505,11 @@ public class AccountsService {
     }
 
     public ChangeAccountPwd_args(
+      AccountsInfo info,
       String passwd)
     {
       this();
+      this.info = info;
       this.passwd = passwd;
     }
 
@@ -5504,6 +5517,9 @@ public class AccountsService {
      * Performs a deep copy on <i>other</i>.
      */
     public ChangeAccountPwd_args(ChangeAccountPwd_args other) {
+      if (other.isSetInfo()) {
+        this.info = new AccountsInfo(other.info);
+      }
       if (other.isSetPasswd()) {
         this.passwd = other.passwd;
       }
@@ -5515,7 +5531,32 @@ public class AccountsService {
 
     @Override
     public void clear() {
+      this.info = null;
       this.passwd = null;
+    }
+
+    public AccountsInfo getInfo() {
+      return this.info;
+    }
+
+    public ChangeAccountPwd_args setInfo(AccountsInfo info) {
+      this.info = info;
+      return this;
+    }
+
+    public void unsetInfo() {
+      this.info = null;
+    }
+
+    /** Returns true if field info is set (has been assigned a value) and false otherwise */
+    public boolean isSetInfo() {
+      return this.info != null;
+    }
+
+    public void setInfoIsSet(boolean value) {
+      if (!value) {
+        this.info = null;
+      }
     }
 
     public String getPasswd() {
@@ -5544,6 +5585,14 @@ public class AccountsService {
 
     public void setFieldValue(_Fields field, Object value) {
       switch (field) {
+      case INFO:
+        if (value == null) {
+          unsetInfo();
+        } else {
+          setInfo((AccountsInfo)value);
+        }
+        break;
+
       case PASSWD:
         if (value == null) {
           unsetPasswd();
@@ -5557,6 +5606,9 @@ public class AccountsService {
 
     public Object getFieldValue(_Fields field) {
       switch (field) {
+      case INFO:
+        return getInfo();
+
       case PASSWD:
         return getPasswd();
 
@@ -5571,6 +5623,8 @@ public class AccountsService {
       }
 
       switch (field) {
+      case INFO:
+        return isSetInfo();
       case PASSWD:
         return isSetPasswd();
       }
@@ -5590,6 +5644,15 @@ public class AccountsService {
       if (that == null)
         return false;
 
+      boolean this_present_info = true && this.isSetInfo();
+      boolean that_present_info = true && that.isSetInfo();
+      if (this_present_info || that_present_info) {
+        if (!(this_present_info && that_present_info))
+          return false;
+        if (!this.info.equals(that.info))
+          return false;
+      }
+
       boolean this_present_passwd = true && this.isSetPasswd();
       boolean that_present_passwd = true && that.isSetPasswd();
       if (this_present_passwd || that_present_passwd) {
@@ -5605,6 +5668,11 @@ public class AccountsService {
     @Override
     public int hashCode() {
       List<Object> list = new ArrayList<Object>();
+
+      boolean present_info = true && (isSetInfo());
+      list.add(present_info);
+      if (present_info)
+        list.add(info);
 
       boolean present_passwd = true && (isSetPasswd());
       list.add(present_passwd);
@@ -5622,6 +5690,16 @@ public class AccountsService {
 
       int lastComparison = 0;
 
+      lastComparison = Boolean.valueOf(isSetInfo()).compareTo(other.isSetInfo());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetInfo()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.info, other.info);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
       lastComparison = Boolean.valueOf(isSetPasswd()).compareTo(other.isSetPasswd());
       if (lastComparison != 0) {
         return lastComparison;
@@ -5652,6 +5730,14 @@ public class AccountsService {
       StringBuilder sb = new StringBuilder("ChangeAccountPwd_args(");
       boolean first = true;
 
+      sb.append("info:");
+      if (this.info == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.info);
+      }
+      first = false;
+      if (!first) sb.append(", ");
       sb.append("passwd:");
       if (this.passwd == null) {
         sb.append("null");
@@ -5666,6 +5752,9 @@ public class AccountsService {
     public void validate() throws TException {
       // check for required fields
       // check for sub-struct validity
+      if (info != null) {
+        info.validate();
+      }
     }
 
     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
@@ -5702,7 +5791,16 @@ public class AccountsService {
             break;
           }
           switch (schemeField.id) {
-            case 1: // PASSWD
+            case 1: // INFO
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.info = new AccountsInfo();
+                struct.info.read(iprot);
+                struct.setInfoIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 2: // PASSWD
               if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
                 struct.passwd = iprot.readString();
                 struct.setPasswdIsSet(true);
@@ -5725,6 +5823,11 @@ public class AccountsService {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.info != null) {
+          oprot.writeFieldBegin(INFO_FIELD_DESC);
+          struct.info.write(oprot);
+          oprot.writeFieldEnd();
+        }
         if (struct.passwd != null) {
           oprot.writeFieldBegin(PASSWD_FIELD_DESC);
           oprot.writeString(struct.passwd);
@@ -5748,10 +5851,16 @@ public class AccountsService {
       public void write(org.apache.thrift.protocol.TProtocol prot, ChangeAccountPwd_args struct) throws TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
-        if (struct.isSetPasswd()) {
+        if (struct.isSetInfo()) {
           optionals.set(0);
         }
-        oprot.writeBitSet(optionals, 1);
+        if (struct.isSetPasswd()) {
+          optionals.set(1);
+        }
+        oprot.writeBitSet(optionals, 2);
+        if (struct.isSetInfo()) {
+          struct.info.write(oprot);
+        }
         if (struct.isSetPasswd()) {
           oprot.writeString(struct.passwd);
         }
@@ -5760,8 +5869,13 @@ public class AccountsService {
       @Override
       public void read(org.apache.thrift.protocol.TProtocol prot, ChangeAccountPwd_args struct) throws TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
-        BitSet incoming = iprot.readBitSet(1);
+        BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
+          struct.info = new AccountsInfo();
+          struct.info.read(iprot);
+          struct.setInfoIsSet(true);
+        }
+        if (incoming.get(1)) {
           struct.passwd = iprot.readString();
           struct.setPasswdIsSet(true);
         }

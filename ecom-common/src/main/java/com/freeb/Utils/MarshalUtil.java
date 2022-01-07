@@ -16,7 +16,7 @@ public class MarshalUtil {
             while(rs.next()){
                 info.setUserId(rs.getLong(1));
                 info.setUserName(rs.getString(2));
-                info.setUserPwd(rs.getString(3));
+                info.setUserPasswd(rs.getString(3));
                 info.setUserDescription(rs.getString(4));
                 break;
             }

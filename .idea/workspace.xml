@@ -2,17 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e7402edc-f985-409d-9734-d8a746f29253" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/thrift-accounts/src/main/java/thrift/AccountsTypeConvert.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/thrift-accounts/src/main/java/thrift/accounts/AccountsServiceServerImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/thrift-frontend/src/main/java/com/freeb/ForeignClients.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/thrift-frontend/src/main/java/com/freeb/thrift/FrontendClients.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/thrift-frontend/src/main/java/com/freeb/thrift/ThriftAccountClientImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecom-accounts/src/main/java/com/freeb/Service/AccountsServiceServerImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecom-accounts/src/main/java/com/freeb/Service/AccountsServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecom-common/src/main/java/com/freeb/Entity/AccountsInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecom-common/src/main/java/com/freeb/Entity/AccountsInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecom-common/src/main/java/com/freeb/Utils/MarshalUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecom-common/src/main/java/com/freeb/Utils/MarshalUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thrift-accounts/src/main/java/com/freeb/HalfBMOne.java" beforeDir="false" afterPath="$PROJECT_DIR$/thrift-accounts/src/main/java/com/freeb/HalfBMOne.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thrift-accounts/src/main/java/thrift/accounts/AccountsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/thrift-accounts/src/main/java/thrift/accounts/AccountsService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thrift-frontend/src/main/java/com/freeb/thrift/AccountsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/thrift-frontend/src/main/java/com/freeb/thrift/AccountsService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thrift-frontend/src/main/thrift/AccountsService.thrift" beforeDir="false" afterPath="$PROJECT_DIR$/thrift-frontend/src/main/thrift/AccountsService.thrift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thrift-frontend/src/main/thrift/gen-java/benchmark/rpc/thrift/AccountsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/thrift-frontend/src/main/thrift/gen-java/benchmark/rpc/thrift/AccountsService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/thrift-client/src/main/java/benchmark/rpc/thrift/TypeConvertor.java" beforeDir="false" afterPath="$PROJECT_DIR$/thrift-client/src/main/java/benchmark/rpc/thrift/TypeConvertor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/thrift-frontend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/thrift-frontend/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/thrift-frontend/src/main/java/com/freeb/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/thrift-frontend/src/main/java/com/freeb/Client.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -407,11 +403,11 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="184" y="124" key="#Project_Structure" timestamp="1641300429910">
+    <state x="184" y="124" key="#Project_Structure" timestamp="1641575207311">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="233" y="-923" key="#Project_Structure/0.0.1536.824/3.-1080.1920.1040@3.-1080.1920.1040" timestamp="1640164894266" />
-    <state x="184" y="124" key="#Project_Structure/0.0.1536.824@0.0.1536.824" timestamp="1641300429910" />
+    <state x="184" y="124" key="#Project_Structure/0.0.1536.824@0.0.1536.824" timestamp="1641575207311" />
     <state x="659" y="97" key="#SQL_Dialects" timestamp="1636802026490">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -433,11 +429,11 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="399" y="105" key="#com.intellij.ide.fileTemplates.ui.ConfigureTemplatesDialog/0.0.1536.824@0.0.1536.824" timestamp="1636788265426" />
-    <state x="958" y="124" key="#com.intellij.ide.util.MemberChooser" timestamp="1641553796703">
+    <state x="958" y="124" key="#com.intellij.ide.util.MemberChooser" timestamp="1641574859726">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="-722" y="157" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1636859364147" />
-    <state x="958" y="124" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1641553796703" />
+    <state x="958" y="124" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1641574859726" />
     <state x="575" y="340" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1641385485717">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

@@ -1,6 +1,9 @@
 package benchmark.rpc.thrift;
 import Bean.*;
-public class TypeConvertor {
+
+import java.io.Closeable;
+
+public class TypeConvertor  {
 
     public static benchmark.rpc.thrift.User convertUserBean2Thrift(Bean.User user){
         return new benchmark.rpc.thrift.User(user.getUuid(),user.getApartId(),user.getAge(),user.getName(),user.getProfile());

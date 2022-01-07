@@ -7,16 +7,17 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="ecom-search" />
-        <module name="thrift-server" />
         <module name="ecom-common" />
-        <module name="ecom-carts" />
+        <module name="thrift-server" />
         <module name="ecom-accounts" />
         <module name="thrift-client" />
         <module name="ecom-orders" />
         <module name="thrift-search" />
         <module name="ecom-payment" />
+        <module name="thrift-frontend" />
         <module name="ecom-category" />
         <module name="thrift-accounts" />
+        <module name="ecom-carts" />
         <module name="base-benchmark" />
       </profile>
     </annotationProcessing>

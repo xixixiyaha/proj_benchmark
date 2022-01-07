@@ -25,6 +25,7 @@
         <module>ecom-category</module>
         <module>thrift-accounts</module>
         <module>thrift-search</module>
+        <module>thrift-frontend</module>
     </modules>
 
     <properties>

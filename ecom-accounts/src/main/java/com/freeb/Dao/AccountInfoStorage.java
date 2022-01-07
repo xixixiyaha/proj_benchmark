@@ -38,13 +38,13 @@ public class AccountInfoStorage {
         }
     }
 
-    static final String GET_ACCOUNT_BY_ID ="SELECT account_id, user_name, user_pwd, user_description FROM ACCOUNT_INFOS WHERE account_id = ?";
-    static final String GET_ACCOUNT_BY_NAME ="SELECT account_id, user_name, user_pwd, user_description FROM ACCOUNT_INFOS WHERE user_name = ?";
+    static final String GET_ACCOUNT_BY_ID ="SELECT user_id, user_name, user_pwd, user_description FROM ACCOUNT_INFOS WHERE user_id = ?";
+    static final String GET_ACCOUNT_BY_NAME ="SELECT user_id, user_name, user_pwd, user_description FROM ACCOUNT_INFOS WHERE user_name = ?";
 
-    static final String UPDATE_ACCOUNT_BY_ID ="UPDATE ACCOUNT_INFOS SET user_name =?, user_pwd = ?, user_description = ? WHERE account_id = ?";
-    static final String DELETE_ACCOUNT_BY_ID ="DELETE FROM ACCOUNT_INFOS WHERE account_id = ?";
-    static final String CREATE_ACCOUNT="INSERT INTO ACCOUNT_INFOS (account_id, user_name, user_pwd, user_description) VALUES(?,?,?,?)";
-    static final String EXISTS_ACCOUNT_BY_ID ="SELECT account_id FROM ACCOUNT_INFOS WHERE account_id = ?";
+    static final String UPDATE_ACCOUNT_BY_ID ="UPDATE ACCOUNT_INFOS SET user_name =?, user_pwd = ?, user_description = ? WHERE user_id = ?";
+    static final String DELETE_ACCOUNT_BY_ID ="DELETE FROM ACCOUNT_INFOS WHERE user_id = ?";
+    static final String CREATE_ACCOUNT="INSERT INTO ACCOUNT_INFOS (user_id, user_name, user_pwd, user_description) VALUES(?,?,?,?)";
+    static final String EXISTS_ACCOUNT_BY_ID ="SELECT user_id FROM ACCOUNT_INFOS WHERE user_id = ?";
 
 
     public AccountsInfo GetAccountInfoByName(String name){
@@ -62,12 +62,12 @@ public class AccountInfoStorage {
             return null;
         }
     }
-    public AccountsInfo GetAccountInfoById(Integer id){
+    public AccountsInfo GetAccountInfoById(Long id){
 
         ResultSet rs=null;
         try(Connection conn = DriverManager.getConnection(ACCOUNT_DB_URL, ACCOUNT_USER, ACCOUNT_PWD)){
             PreparedStatement stmt = conn.prepareStatement(GET_ACCOUNT_BY_ID);
-            stmt.setInt(1,id);
+            stmt.setLong(1,id);
             rs = stmt.executeQuery();
             return MarshalUtil.convertRs2Account(rs);
         }catch (SQLException e){

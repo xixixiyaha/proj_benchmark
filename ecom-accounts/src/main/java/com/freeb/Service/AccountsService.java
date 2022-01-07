@@ -12,9 +12,9 @@ public interface AccountsService {
     /*
      * Normal RPC call
      * */
-    public Boolean AccountExists(Integer id);
-    public Boolean AccountExists(String name);
-    public Boolean VerifyAccessByAccount(Integer accountId,Integer targetId, IdType idType);
+    public Boolean AccountExists(Long id);
+//    public Boolean AccountExists(String name);
+    public Boolean VerifyAccessByAccount(Long accountId, Long targetId, IdType idType);
     public List<Integer> GetAccountTag(Long id);
     public HashMap<Integer,Double> GetUserTags(Long id);
     public Boolean SetUserTags(Long id,HashMap<Integer,Double> tags);
@@ -32,9 +32,9 @@ public interface AccountsService {
     /*
     * Mem bandwidth READ
     * */
-    public AccountsInfo GetAccountInfo(Integer id);
+    public AccountsInfo GetAccountInfo(Long id);
 
-    public void CompareResEfficiencyBM1(String remoteFilePath,Integer testType);
+    public String CompareResEfficiencyBM1(String remoteFilePath,Integer testType);
 
 
 

@@ -4,7 +4,7 @@
  * DO NOT EDIT UNLESS YOU ARE SURE THAT YOU KNOW WHAT YOU ARE DOING
  *  @generated
  */
-package benchmark.rpc.thrift;
+package thrift.accounts;
 
 import org.apache.thrift.scheme.IScheme;
 import org.apache.thrift.scheme.SchemeFactory;
@@ -571,11 +571,11 @@ public class AccountsInfo implements org.apache.thrift.TBase<AccountsInfo, Accou
     return _Fields.findByThriftId(fieldId);
   }
 
-  public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+  public void read(org.apache.thrift.protocol.TProtocol iprot) throws TException {
     schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
   }
 
-  public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+  public void write(org.apache.thrift.protocol.TProtocol oprot) throws TException {
     schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
   }
 
@@ -629,13 +629,13 @@ public class AccountsInfo implements org.apache.thrift.TBase<AccountsInfo, Accou
     return sb.toString();
   }
 
-  public void validate() throws org.apache.thrift.TException {
+  public void validate() throws TException {
     // check for required fields
     if (userName == null) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'userName' was not present! Struct: " + toString());
+      throw new TProtocolException("Required field 'userName' was not present! Struct: " + toString());
     }
     if (userPasswd == null) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'userPasswd' was not present! Struct: " + toString());
+      throw new TProtocolException("Required field 'userPasswd' was not present! Struct: " + toString());
     }
     // check for sub-struct validity
   }
@@ -643,7 +643,7 @@ public class AccountsInfo implements org.apache.thrift.TBase<AccountsInfo, Accou
   private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
     try {
       write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-    } catch (org.apache.thrift.TException te) {
+    } catch (TException te) {
       throw new java.io.IOException(te);
     }
   }
@@ -653,7 +653,7 @@ public class AccountsInfo implements org.apache.thrift.TBase<AccountsInfo, Accou
       // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
       __isset_bitfield = 0;
       read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-    } catch (org.apache.thrift.TException te) {
+    } catch (TException te) {
       throw new java.io.IOException(te);
     }
   }
@@ -666,7 +666,7 @@ public class AccountsInfo implements org.apache.thrift.TBase<AccountsInfo, Accou
 
   private static class AccountsInfoStandardScheme extends StandardScheme<AccountsInfo> {
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot, AccountsInfo struct) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot, AccountsInfo struct) throws TException {
       org.apache.thrift.protocol.TField schemeField;
       iprot.readStructBegin();
       while (true)
@@ -739,7 +739,7 @@ public class AccountsInfo implements org.apache.thrift.TBase<AccountsInfo, Accou
       struct.validate();
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot, AccountsInfo struct) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot, AccountsInfo struct) throws TException {
       struct.validate();
 
       oprot.writeStructBegin(STRUCT_DESC);
@@ -795,7 +795,7 @@ public class AccountsInfo implements org.apache.thrift.TBase<AccountsInfo, Accou
   private static class AccountsInfoTupleScheme extends TupleScheme<AccountsInfo> {
 
     @Override
-    public void write(org.apache.thrift.protocol.TProtocol prot, AccountsInfo struct) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol prot, AccountsInfo struct) throws TException {
       TTupleProtocol oprot = (TTupleProtocol) prot;
       oprot.writeString(struct.userName);
       oprot.writeString(struct.userPasswd);
@@ -829,7 +829,7 @@ public class AccountsInfo implements org.apache.thrift.TBase<AccountsInfo, Accou
     }
 
     @Override
-    public void read(org.apache.thrift.protocol.TProtocol prot, AccountsInfo struct) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol prot, AccountsInfo struct) throws TException {
       TTupleProtocol iprot = (TTupleProtocol) prot;
       struct.userName = iprot.readString();
       struct.setUserNameIsSet(true);

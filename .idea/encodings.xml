@@ -22,6 +22,8 @@
     <file url="file://$PROJECT_DIR$/thrift-client/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/thrift-client/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/thrift-client/src/main/thrift" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/thrift-frontend/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/thrift-frontend/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/thrift-search/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/thrift-search/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/thrift-server/src/main/java" charset="UTF-8" />

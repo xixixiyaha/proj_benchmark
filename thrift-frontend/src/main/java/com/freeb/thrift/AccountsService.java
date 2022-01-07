@@ -4,7 +4,7 @@
  * DO NOT EDIT UNLESS YOU ARE SURE THAT YOU KNOW WHAT YOU ARE DOING
  *  @generated
  */
-package benchmark.rpc.thrift;
+package com.freeb.thrift;
 
 import org.apache.thrift.scheme.IScheme;
 import org.apache.thrift.scheme.SchemeFactory;
@@ -47,7 +47,7 @@ public class AccountsService {
 
     public Map<Integer,Double> GetUserTags(long id) throws org.apache.thrift.TException;
 
-    public boolean SetUserTags(long id, Map<Integer,Double> tags) throws org.apache.thrift.TException;
+    public boolean SetUserTags(long id, Map<Integer, Double> tags) throws org.apache.thrift.TException;
 
     public boolean ChangeAccountPwd(String passwd) throws org.apache.thrift.TException;
 
@@ -69,7 +69,7 @@ public class AccountsService {
 
     public void GetUserTags(long id, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
-    public void SetUserTags(long id, Map<Integer,Double> tags, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void SetUserTags(long id, Map<Integer, Double> tags, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
     public void ChangeAccountPwd(String passwd, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 

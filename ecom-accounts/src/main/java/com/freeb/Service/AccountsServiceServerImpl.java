@@ -5,14 +5,13 @@ import com.freeb.Dao.AccountInfoStorage;
 import com.freeb.Entity.AccountsInfo;
 import com.freeb.Enum.IdType;
 import com.mysql.cj.util.StringUtils;
-import org.apache.logging.log4j.core.util.FileUtils;
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.*;
 import java.io.*;
-import java.net.*;
+
 import ch.ethz.ssh2.*;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -33,11 +32,11 @@ public class AccountsServiceServerImpl implements AccountsService {
 
     //Notice Tag1
     @Override
-    public Boolean AccountExists(Integer id) {
+    public Boolean AccountExists(Long id) {
         return storage.GetAccountInfoById(id) != null;
     }
 
-    @Override
+
     public Boolean AccountExists(String name) {
         return storage.GetAccountInfoByName(name) != null;
     }
@@ -54,7 +53,7 @@ public class AccountsServiceServerImpl implements AccountsService {
     }
 
     @Override
-    public Boolean VerifyAccessByAccount(Integer accountId, Integer targetId, IdType idType) {
+    public Boolean VerifyAccessByAccount(Long accountId, Long targetId, IdType idType) {
         //TODO
         return null;
     }
@@ -87,7 +86,7 @@ public class AccountsServiceServerImpl implements AccountsService {
     }
 
     @Override
-    public AccountsInfo GetAccountInfo(Integer id) {
+    public AccountsInfo GetAccountInfo(Long id) {
 
         return storage.GetAccountInfoById(id);
     }
@@ -245,7 +244,7 @@ public class AccountsServiceServerImpl implements AccountsService {
 
 
     @Override
-    public void CompareResEfficiencyBM1(String remoteFilePath,Integer testType) {
+    public String CompareResEfficiencyBM1(String remoteFilePath,Integer testType) {
         List<Long> results;
         long bengintime = System.nanoTime();
         Integer totalWorkLoad=0,threadNum = 1;
@@ -253,12 +252,12 @@ public class AccountsServiceServerImpl implements AccountsService {
         boolean conn = preConnection(IP,PORT,USER_Name,PASSWORD);
         if(!conn){
             logger.error("unable to connect");
-            return;
+            return "";
         }
         boolean fecth = copyFile("/home/anna/bm/bm1test1.json","D:/anna/bm/","bm1test1.json");
         if(!fecth){
             logger.error("unable to download file");
-            return;
+            return "";
         }
         JSONParser parser = new JSONParser();
 
@@ -290,5 +289,6 @@ public class AccountsServiceServerImpl implements AccountsService {
         long endtime = System.currentTimeMillis();
         long costtime = (endtime-bengintime)/1000;
         logger.info("costTime = "+costtime);
+        return "TODO@ BM1 return filepath";
     }
 }

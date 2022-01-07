@@ -1,3 +1,0 @@
-JMH S 19 com.freeb.HalfBMOne S 54 com.freeb.jmh_generated.HalfBMOne_testSearchRe_jmhTest S 12 testSearchRe S 10 Throughput E A 1 1 1 E E E E E E E E E E E E E E U 12 MILLISECONDS E E 
-JMH S 19 com.freeb.HalfBMOne S 54 com.freeb.jmh_generated.HalfBMOne_testSearchRe_jmhTest S 12 testSearchRe S 11 AverageTime E A 1 1 1 E E E E E E E E E E E E E E U 12 MILLISECONDS E E 
-JMH S 19 com.freeb.HalfBMOne S 54 com.freeb.jmh_generated.HalfBMOne_testSearchRe_jmhTest S 12 testSearchRe S 10 SampleTime E A 1 1 1 E E E E E E E E E E E E E E U 12 MILLISECONDS E E 

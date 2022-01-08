@@ -18,7 +18,7 @@ import java.sql.Timestamp;
 import java.util.concurrent.TimeUnit;
 
 @State(Scope.Benchmark)
-public class Client{
+public class Client {
     public static final int CONCURRENCY = 32;
     public static int callNum = 0;
     private final ForeignClients client = new ForeignClients();
@@ -29,23 +29,23 @@ public class Client{
         client.close();
     }
 
-    @Benchmark
-    @BenchmarkMode({ Mode.Throughput, Mode.AverageTime, Mode.SampleTime })
-    @OutputTimeUnit(TimeUnit.MILLISECONDS)
-
-    public boolean createUser() throws Exception {
-        System.out.println("<Client.createUser>"+callNum++);
-        return super.createUser();
-    }
-
-    @Benchmark
-    @BenchmarkMode({ Mode.Throughput, Mode.AverageTime, Mode.SampleTime })
-    @OutputTimeUnit(TimeUnit.MILLISECONDS)
-
-    public User getUser() throws Exception {
-        System.out.println("<Client.getUser>"+callNum++);
-        return super.getUser();
-    }
+//    @Benchmark
+//    @BenchmarkMode({ Mode.Throughput, Mode.AverageTime, Mode.SampleTime })
+//    @OutputTimeUnit(TimeUnit.MILLISECONDS)
+//
+//    public boolean createUser() throws Exception {
+//        System.out.println("<Client.createUser>"+callNum++);
+//        return super.createUser();
+//    }
+//
+//    @Benchmark
+//    @BenchmarkMode({ Mode.Throughput, Mode.AverageTime, Mode.SampleTime })
+//    @OutputTimeUnit(TimeUnit.MILLISECONDS)
+//
+//    public User getUser() throws Exception {
+//        System.out.println("<Client.getUser>"+callNum++);
+//        return super.getUser();
+//    }
 
 
     public static void main(String[] args) throws Exception {
@@ -68,3 +68,4 @@ public class Client{
 
 
     }
+}

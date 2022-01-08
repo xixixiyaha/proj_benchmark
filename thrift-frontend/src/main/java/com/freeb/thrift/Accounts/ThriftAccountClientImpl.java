@@ -1,6 +1,5 @@
-package com.freeb.thrift;
+package com.freeb.thrift.Accounts;
 
-import com.freeb.Utils.LockObjectPool;
 import org.apache.thrift.protocol.TBinaryProtocol;
 import org.apache.thrift.protocol.TProtocol;
 import org.apache.thrift.transport.TFramedTransport;

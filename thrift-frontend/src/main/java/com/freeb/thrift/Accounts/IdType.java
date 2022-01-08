@@ -4,12 +4,8 @@
  * DO NOT EDIT UNLESS YOU ARE SURE THAT YOU KNOW WHAT YOU ARE DOING
  *  @generated
  */
-package com.freeb.thrift;
+package com.freeb.thrift.Accounts;
 
-
-import java.util.Map;
-import java.util.HashMap;
-import org.apache.thrift.TEnum;
 
 public enum IdType implements org.apache.thrift.TEnum {
   ACCOUNT_ID(0),

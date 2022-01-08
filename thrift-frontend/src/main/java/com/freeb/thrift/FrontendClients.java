@@ -1,6 +1,7 @@
 package com.freeb.thrift;
 
 import com.freeb.Utils.LockObjectPool;
+import com.freeb.thrift.Accounts.ThriftAccountClientImpl;
 
 public class FrontendClients {
 

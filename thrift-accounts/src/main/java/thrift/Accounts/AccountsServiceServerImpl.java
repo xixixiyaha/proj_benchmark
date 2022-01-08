@@ -1,4 +1,4 @@
-package thrift.accounts;
+package thrift.Accounts;
 
 import com.freeb.Service.AccountsServiceImpl;
 import org.apache.thrift.TException;

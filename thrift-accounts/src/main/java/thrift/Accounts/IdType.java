@@ -4,14 +4,14 @@
  * DO NOT EDIT UNLESS YOU ARE SURE THAT YOU KNOW WHAT YOU ARE DOING
  *  @generated
  */
-package benchmark.rpc.thrift;
+package thrift.Accounts;
 
 
 import java.util.Map;
 import java.util.HashMap;
 import org.apache.thrift.TEnum;
 
-public enum IdType implements org.apache.thrift.TEnum {
+public enum IdType implements TEnum {
   ACCOUNT_ID(0),
   ORDER_ID(1),
   PAYMENT_ID(2),

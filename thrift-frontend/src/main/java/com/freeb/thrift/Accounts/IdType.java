@@ -7,7 +7,11 @@
 package com.freeb.thrift.Accounts;
 
 
-public enum IdType implements org.apache.thrift.TEnum {
+import java.util.Map;
+import java.util.HashMap;
+import org.apache.thrift.TEnum;
+
+public enum IdType implements TEnum {
   ACCOUNT_ID(0),
   ORDER_ID(1),
   PAYMENT_ID(2),

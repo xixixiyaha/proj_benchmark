@@ -1,4 +1,4 @@
-namespace java benchmark.rpc.thrift
+namespace java com.freeb.thrift.Accounts
 
 enum IdType{
     ACCOUNT_ID = 0,

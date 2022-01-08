@@ -1,6 +1,5 @@
 package com.freeb;
 
-import com.freeb.Service.AccountsServiceImpl;
 import org.apache.thrift.protocol.TBinaryProtocol;
 import org.apache.thrift.server.TServer;
 import org.apache.thrift.server.TThreadedSelectorServer;
@@ -13,8 +12,8 @@ import org.openjdk.jmh.runner.RunnerException;
 import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
 import org.openjdk.jmh.runner.options.TimeValue;
-import thrift.accounts.AccountsService;
-import thrift.accounts.AccountsServiceServerImpl;
+import thrift.Accounts.AccountsService;
+import thrift.Accounts.AccountsServiceServerImpl;
 import thrift.search.AccountsForeignClients;
 
 import java.io.IOException;

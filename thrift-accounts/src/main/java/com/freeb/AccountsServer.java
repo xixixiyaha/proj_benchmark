@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 @State(Scope.Benchmark)
-public class HalfBMOne{
+public class AccountsServer {
     public static final int CONCURRENCY = 32;
     public static int callNum = 0;
     private final AccountsForeignClients accClients = new AccountsForeignClients();
@@ -67,7 +67,7 @@ public class HalfBMOne{
     }
 
     public static void HalfTest() throws InterruptedException, RunnerException, IOException {
-        HalfBMOne client = new HalfBMOne();
+        AccountsServer client = new AccountsServer();
         for (int i = 0; i < 1; i++) {
             try {
                 System.out.println(client.testSearchRe());
@@ -82,7 +82,7 @@ public class HalfBMOne{
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
         Options opt = new OptionsBuilder()//
-                .include(HalfBMOne.class.getSimpleName())//
+                .include(AccountsServer.class.getSimpleName())//
                 .warmupIterations(3)//
                 .warmupTime(TimeValue.seconds(10))//
                 .measurementIterations(3)//
@@ -91,14 +91,34 @@ public class HalfBMOne{
                 .forks(1)//
                 .build();
 
-        System.out.println("in thrift com.freeb.HalfBMOne main() === 4 === ");
+        System.out.println("in thrift com.freeb.AccountsServer main() === 4 === ");
         new Runner(opt).run();
-        System.out.println("in thrift com.freeb.HalfBMOne main() === 5 === ");
+        System.out.println("in thrift com.freeb.AccountsServer main() === 5 === ");
     }
 
     public static void main(String[] args) throws Exception {
 
 //        HalfTest();
+
+        try {
+
+
+            InetSocketAddress serverAddress = new InetSocketAddress("10.0.16.14", 8080);
+
+            TNonblockingServerTransport serverSocket = new TNonblockingServerSocket(serverAddress);
+
+            TThreadedSelectorServer.Args serverParams = new TThreadedSelectorServer.Args(serverSocket);
+            serverParams.protocolFactory(new TBinaryProtocol.Factory());
+            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+            serverParams.processor(new AccountsService.Processor<AccountsService.Iface>(new AccountsServiceServerImpl()));
+            TServer server = new TThreadedSelectorServer(serverParams);
+            timestamp = new Timestamp(System.currentTimeMillis());
+            System.out.println("in thrift Server main() ==  =="+timestamp.toString());
+            server.serve();
+        }catch (TTransportException e){
+            System.out.println("Server Exception is "+e.getMessage());
+            System.out.println(Arrays.toString(e.getStackTrace()));
+        }
 
     }
 

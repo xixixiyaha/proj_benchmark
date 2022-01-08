@@ -112,7 +112,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>com.freeb.HalfBMOne</mainClass>
+                            <mainClass>com.freeb.AccountsServer</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

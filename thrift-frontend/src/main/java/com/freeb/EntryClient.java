@@ -1,5 +1,6 @@
 package com.freeb;
 
+import com.freeb.thrift.FrontendClients;
 import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
@@ -18,10 +19,10 @@ import java.sql.Timestamp;
 import java.util.concurrent.TimeUnit;
 
 @State(Scope.Benchmark)
-public class Client {
+public class EntryClient {
     public static final int CONCURRENCY = 32;
     public static int callNum = 0;
-    private final ForeignClients client = new ForeignClients();
+    private final FrontendClients client = new FrontendClients();
 
 
     @TearDown
@@ -29,31 +30,33 @@ public class Client {
         client.close();
     }
 
-//    @Benchmark
-//    @BenchmarkMode({ Mode.Throughput, Mode.AverageTime, Mode.SampleTime })
-//    @OutputTimeUnit(TimeUnit.MILLISECONDS)
-//
-//    public boolean createUser() throws Exception {
-//        System.out.println("<Client.createUser>"+callNum++);
-//        return super.createUser();
-//    }
-//
-//    @Benchmark
-//    @BenchmarkMode({ Mode.Throughput, Mode.AverageTime, Mode.SampleTime })
-//    @OutputTimeUnit(TimeUnit.MILLISECONDS)
-//
-//    public User getUser() throws Exception {
-//        System.out.println("<Client.getUser>"+callNum++);
-//        return super.getUser();
-//    }
+    @Benchmark
+    @BenchmarkMode({ Mode.Throughput, Mode.AverageTime, Mode.SampleTime })
+    @OutputTimeUnit(TimeUnit.MILLISECONDS)
+    public String LaunchBM1() throws Exception {
+        System.out.println("<EntryClient.LaunchBM1>"+callNum++);
+        return client.CompareResEfficiencyBM1("remotePath",0);
+    }
 
 
     public static void main(String[] args) throws Exception {
 
+        EntryClient client = new EntryClient();
+        for (int i = 0; i < 60; i++) {
+            try {
+                System.out.println(client.LaunchBM1());
+                break;
+            } catch (Exception e) {
+                Thread.sleep(1000);
+            }
+        }
+
+        client.close();
+
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
         Options opt = new OptionsBuilder()//
-                .include(Client.class.getSimpleName())//
+                .include(EntryClient.class.getSimpleName())//
                 .warmupIterations(3)//
                 .warmupTime(TimeValue.seconds(10))//
                 .measurementIterations(3)//
@@ -62,9 +65,9 @@ public class Client {
                 .forks(1)//
                 .build();
 
-        System.out.println("in thrift com.freeb.HalfBMOne main() === 4 === ");
+        System.out.println("in thrift com.freeb.BM! main() === 4 === ");
         new Runner(opt).run();
-        System.out.println("in thrift com.freeb.HalfBMOne main() === 5 === ");
+        System.out.println("in thrift com.freeb.BM! main() === 5 === ");
 
 
     }

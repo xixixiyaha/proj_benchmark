@@ -42,7 +42,7 @@ public class EntryClient {
     public static void main(String[] args) throws Exception {
 
         EntryClient client = new EntryClient();
-        for (int i = 0; i < 60; i++) {
+        for (int i = 0; i < 1; i++) {
             try {
                 System.out.println(client.LaunchBM1());
                 break;

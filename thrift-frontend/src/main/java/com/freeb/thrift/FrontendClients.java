@@ -14,8 +14,8 @@ import java.util.Map;
 public class FrontendClients implements Closeable {
 
     //Notice Tag2
-    private static String host = "bm-accounts-server";
-    private static int port = 8080;
+    private static String host ="bm-accounts-server";
+    private static int port = 8081;
     static {
         System.out.println("in FrontendClients");
     }

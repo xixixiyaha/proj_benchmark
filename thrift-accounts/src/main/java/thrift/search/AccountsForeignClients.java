@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.List;
 
 public class AccountsForeignClients extends AccountsClients implements Closeable {
-    private static String host = "benchmark-server";
+    private static String host = "bm-search-server";
     private static int port = 8080;
     static {
         System.out.println("in AccountsForeignClients");

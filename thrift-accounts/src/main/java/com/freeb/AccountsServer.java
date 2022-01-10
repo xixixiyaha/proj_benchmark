@@ -46,9 +46,9 @@ public class AccountsServer {
 
     private static void initAccountService(){
         try {
+            //TODO auto-acquire private addr
 
-
-            InetSocketAddress serverAddress = new InetSocketAddress("TODO@ Accounts Private Address", 8080);
+            InetSocketAddress serverAddress = new InetSocketAddress("10.0.16.14", 8081);
 
             TNonblockingServerTransport serverSocket = new TNonblockingServerSocket(serverAddress);
 
@@ -100,25 +100,7 @@ public class AccountsServer {
 
 //        HalfTest();
 
-        try {
-
-
-            InetSocketAddress serverAddress = new InetSocketAddress("10.0.16.14", 8080);
-
-            TNonblockingServerTransport serverSocket = new TNonblockingServerSocket(serverAddress);
-
-            TThreadedSelectorServer.Args serverParams = new TThreadedSelectorServer.Args(serverSocket);
-            serverParams.protocolFactory(new TBinaryProtocol.Factory());
-            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-            serverParams.processor(new AccountsService.Processor<AccountsService.Iface>(new AccountsServiceServerImpl()));
-            TServer server = new TThreadedSelectorServer(serverParams);
-            timestamp = new Timestamp(System.currentTimeMillis());
-            System.out.println("in thrift Server main() ==  =="+timestamp.toString());
-            server.serve();
-        }catch (TTransportException e){
-            System.out.println("Server Exception is "+e.getMessage());
-            System.out.println(Arrays.toString(e.getStackTrace()));
-        }
+        initAccountService();
 
     }
 

@@ -52,8 +52,8 @@ public class launchBM1{
         var folder = new File(".");
 
         return Stream.of(folder.list())
-                .filter(name -> (name.endsWith("-accounts") && !name.contains("ecom")))
-                .map(name -> name.substring("ecom".length()))
+                .filter(name -> (name.endsWith("-frontend")))
+                .map(name -> name.substring("thrift-".length()))
                 .sorted();
     }
 
@@ -64,7 +64,11 @@ public class launchBM1{
             var accountsServerPackage = packageAndGet(new File("thrift-accounts"));
             var frontendPackage = packageAndGet(new File("thrift-frontend"));
             startServer(searchServerPackage,"bm-search-server");
+            System.out.println("<benchmark server> [bm-search-server]");
+
             startServer(accountsServerPackage,"bm-accounts-server");
+            System.out.println("<benchmark server> [bm-accounts-server]");
+
 //            startLocalServer(accountsServerPackage);
             //等服务器启动起来在启动客户端
             TimeUnit.SECONDS.sleep(10);

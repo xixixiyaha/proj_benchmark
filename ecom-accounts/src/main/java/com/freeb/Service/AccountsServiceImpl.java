@@ -237,10 +237,11 @@ public class AccountsServiceImpl implements AccountsService {
         return bool;
     }
 
-    private static String IP = "";
-    private static Integer PORT = 0;
-    private static String USER_Name = "";
-    private static String PASSWORD = "";
+    //TODO Notice
+    private static String IP = "124.223.34.172"; // account 到 search host 下载 json
+    private static Integer PORT = 22;
+    private static String USER_Name = "benchmark";
+    private static String PASSWORD = "benchmark";
 
 
     @Override
@@ -254,7 +255,7 @@ public class AccountsServiceImpl implements AccountsService {
             logger.error("unable to connect");
             return "";
         }
-        boolean fecth = copyFile("/home/anna/bm/bm1test1.json","D:/anna/bm/","bm1test1.json");
+        boolean fecth = copyFile("/home/benchmark/bm/bm1test1.json","/home/benchmark/","bm1test1.json");
         if(!fecth){
             logger.error("unable to download file");
             return "";
@@ -262,7 +263,7 @@ public class AccountsServiceImpl implements AccountsService {
         JSONParser parser = new JSONParser();
 
         try {
-            Object obj = parser.parse(new FileReader("D:/anna/bm/bm1test1.json"));
+            Object obj = parser.parse(new FileReader("/home/benchmark/bm1test1.json"));
 
             JSONObject jsonObject =  (JSONObject) obj;
 

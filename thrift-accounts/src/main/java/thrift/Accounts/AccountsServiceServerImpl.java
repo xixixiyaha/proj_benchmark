@@ -11,6 +11,8 @@ import java.util.Map;
 
 public class AccountsServiceServerImpl implements AccountsService.Iface{
 
+    private static boolean IS_DBG=true; 
+
     private final com.freeb.Service.AccountsService accountsService = new AccountsServiceImpl(new AccountsForeignClients());
     @Override
     public boolean AccountExists(long id) throws TException {
@@ -54,6 +56,11 @@ public class AccountsServiceServerImpl implements AccountsService.Iface{
 
     @Override
     public String CompareResEfficiencyBM1(String remoteFilePath, int testType) throws TException {
-        return accountsService.CompareResEfficiencyBM1(remoteFilePath,testType);
+        if(IS_DBG){
+            System.out.println("IN AccountsServiceImpl/thrift CompareResEfficiencyBM1");
+        }
+        String str = accountsService.CompareResEfficiencyBM1(remoteFilePath,testType)
+        System.out.println("POST AccountsServiceImpl/thrift CompareResEfficiencyBM1");
+        return str;
     }
 }

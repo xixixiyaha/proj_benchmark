@@ -1,0 +1,8 @@
+/home/benchmark/diao/proj_benchmark/ecom-orders/src/main/java/com/freeb/Entity/OrderSearchKey.java
+/home/benchmark/diao/proj_benchmark/ecom-orders/src/main/java/com/freeb/Service/OrderServiceServerImpl.java
+/home/benchmark/diao/proj_benchmark/ecom-orders/src/main/java/com/freeb/Service/OrdersService.java
+/home/benchmark/diao/proj_benchmark/ecom-orders/src/main/java/com/freeb/Clients/AccountsClient.java
+/home/benchmark/diao/proj_benchmark/ecom-orders/src/main/java/com/freeb/Orders/Orders.java
+/home/benchmark/diao/proj_benchmark/ecom-orders/src/main/java/com/freeb/Dao/OrderInfoCache.java
+/home/benchmark/diao/proj_benchmark/ecom-orders/src/main/java/com/freeb/Dao/OrderInfoStorage.java
+/home/benchmark/diao/proj_benchmark/ecom-orders/src/main/java/com/freeb/Clients/PaymentClient.java

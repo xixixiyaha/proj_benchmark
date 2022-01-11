@@ -28,7 +28,7 @@ public class ThriftSearchClientImpl implements Closeable {
 			System.out.println(e.getMessage());
 			throw new Error(e);
 		}
-		System.out.println("in ThriftSearchClientImpl "+ clientNum++);
+		// System.out.println("in ThriftSearchClientImpl/Accounts "+ clientNum++);
 	}
 
 	@Override

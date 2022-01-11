@@ -19,7 +19,7 @@ import org.json.simple.parser.ParseException;
 
 public class AccountsServiceImpl implements AccountsService {
 
-    private static final Logger logger = LoggerFactory.getLogger(AccountsServiceImpl.class);
+    private static final java.util.logging.Logger logger = LoggerFactory.getLogger(AccountsServiceImpl.class);
 
 
     private AccountInfoStorage storage = new AccountInfoStorage();
@@ -246,6 +246,8 @@ public class AccountsServiceImpl implements AccountsService {
 
     @Override
     public String CompareResEfficiencyBM1(String remoteFilePath,Integer testType) {
+        System.out.println("CompareResEfficiencyBM1/Accounts");
+        logger.info("DBG@ AccountsServiceImpl/ecom");
         List<Long> results;
         long bengintime = System.nanoTime();
         Integer totalWorkLoad=0,threadNum = 1;

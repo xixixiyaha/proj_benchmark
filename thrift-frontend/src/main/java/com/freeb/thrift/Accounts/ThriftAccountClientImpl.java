@@ -17,7 +17,7 @@ public class ThriftAccountClientImpl implements Closeable {
     public final AccountsService.Client client;
     private static int clientNum = 0;
     public ThriftAccountClientImpl(String host,int port) {
-        System.out.println("pre ThriftAccountClientImpl "+ clientNum);
+        // System.out.println("pre ThriftAccountClientImpl "+ clientNum);
         transport = new TFramedTransport(new TSocket(host, port));
         protocol = new TBinaryProtocol(transport);
         client = new AccountsService.Client(protocol);
@@ -27,7 +27,7 @@ public class ThriftAccountClientImpl implements Closeable {
             System.out.println(e.getMessage());
             throw new Error(e);
         }
-        System.out.println("post ThriftAccountClientImpl "+ clientNum++);
+        // System.out.println("post ThriftAccountClientImpl "+ clientNum++);
     }
 
     @Override

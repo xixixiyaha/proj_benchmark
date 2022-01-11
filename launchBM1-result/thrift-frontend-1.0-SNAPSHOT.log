@@ -1,5 +1,8 @@
 in FrontendClients
 in LockObjectPool == 1 ==
 in LockObjectPool == 2 ==
-pre ThriftAccountClientImpl 0
-java.net.SocketException: Resource temporarily unavailable (connect failed)
+in LockObjectPool == 3 ==
+<EntryClient.LaunchBM1>0
+IN FrontendClients CompareResEfficiencyBM1
+
+in thrift com.freeb.BM! main() === 4 === 

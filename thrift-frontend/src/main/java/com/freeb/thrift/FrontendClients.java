@@ -16,6 +16,7 @@ public class FrontendClients implements Closeable {
     //Notice Tag2
     private static String host ="bm-accounts-server";
     private static int port = 8081;
+    private static Boolean IS_DBG=true;
     static {
         System.out.println("in FrontendClients");
     }
@@ -122,6 +123,9 @@ public class FrontendClients implements Closeable {
     public String CompareResEfficiencyBM1(String remoteFilePath, int testType) throws TException {
         ThriftAccountClientImpl client = clientPool.borrow();
         try{
+            if(IS_DBG){
+                System.out.println("IN FrontendClients CompareResEfficiencyBM1");
+            }
             return client.client.CompareResEfficiencyBM1(remoteFilePath, testType);
         } catch (TException e) {
             e.printStackTrace();

@@ -1,9 +1,0 @@
-/home/benchmark/diao/proj_benchmark/thrift-accounts/src/main/java/thrift/Accounts/IdType.java
-/home/benchmark/diao/proj_benchmark/thrift-accounts/src/main/java/thrift/Accounts/AccountsService.java
-/home/benchmark/diao/proj_benchmark/thrift-accounts/src/main/java/thrift/search/AccountsForeignClients.java
-/home/benchmark/diao/proj_benchmark/thrift-accounts/src/main/java/thrift/Accounts/AccountsInfo.java
-/home/benchmark/diao/proj_benchmark/thrift-accounts/src/main/java/com/freeb/AccountsServer.java
-/home/benchmark/diao/proj_benchmark/thrift-accounts/src/main/java/thrift/Accounts/AccountsServiceServerImpl.java
-/home/benchmark/diao/proj_benchmark/thrift-accounts/src/main/java/thrift/search/SearchService.java
-/home/benchmark/diao/proj_benchmark/thrift-accounts/src/main/java/thrift/AccountsTypeConvert.java
-/home/benchmark/diao/proj_benchmark/thrift-accounts/src/main/java/thrift/search/ThriftSearchClientImpl.java

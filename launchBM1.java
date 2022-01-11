@@ -19,13 +19,13 @@ public class launchBM1{
     private final static File resultFolder = new File("launchBM1-result");
 
 
-    private final static List<String> funOrder = Arrays.asList("LaunchBM1");
+    private final static List<String> funOrder = Arrays.asList("CompareResEfficiencyBM1");
 
     Item emptyItem = new Item(null, Typ.Thrpt, null, 0D);
 
 
     public static void main(String[] args) throws Exception {
-        // installSearchService();
+        installSearchService();
 
         var allTasks = getAllTasks()
                 .filter(t -> !t.startsWith("jupiter"))

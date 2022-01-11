@@ -121,18 +121,21 @@ public class AccountsServiceImpl implements AccountsService {
         }
 
         public Long getComputationRe(){
-            return this.computationRe;
+            return this.computationRe; //
         }
     }
 
     private List<Long> LocalIdealResEfficiencyTest(Integer totalComputationLoad, Integer threadNum) {
-        List<Long> results = new ArrayList<>(threadNum);
+        long begintime = System.currentTimeMillis();
+        List<Long> results = new ArrayList<>();
         Integer loopPerThread = totalComputationLoad/threadNum;
-        List<IdealComputationThread> threads = new ArrayList<>(threadNum);
+        List<IdealComputationThread> threads = new ArrayList<>();
         for(int i=0;i<threadNum;i++){
             IdealComputationThread thread = new IdealComputationThread(loopPerThread);
             thread.start();
-            threads.set(i,thread);
+            System.out.println("DBG@ threads len = "+threads.size());
+            threads.add(thread);
+            System.out.println("DBG@ put "+i+" thread");
         }
         for(IdealComputationThread thread:threads){
             try {
@@ -141,10 +144,14 @@ public class AccountsServiceImpl implements AccountsService {
                 e.printStackTrace();
             }
         }
-        for(int i = 0; i<threadNum; i++){
-            results.set(i,threads.get(i).getComputationRe());
+        for(Integer i=0;i<threadNum;i++){
+            results.add(threads.get(i).getComputationRe());
         }
-
+        long endtime = System.currentTimeMillis();
+        long costtime = (endtime-begintime);
+        logger.info("beginTime = "+begintime);
+        logger.info("endTime = "+endtime);
+        logger.info("costTime = "+costtime);
         return results;
     }
 
@@ -152,8 +159,6 @@ public class AccountsServiceImpl implements AccountsService {
     private Session session = null;
 
     private boolean preConnection(String ip,int port,String userName,String password){
-        Connection conn = null;
-        Session session = null;
         try {
             if (StringUtils.isNullOrEmpty(ip) || StringUtils.isNullOrEmpty(userName) || StringUtils.isNullOrEmpty(password)) {
                 return false;
@@ -192,23 +197,29 @@ public class AccountsServiceImpl implements AccountsService {
                 return bool;
             }
             //执行命令并打印执行结果
-            session.execCommand("df -h");
-            InputStream staout = new StreamGobbler(session.getStdout());
-            BufferedReader br = new BufferedReader(new InputStreamReader(staout));
-            String line = null;
-            while ((line = br.readLine()) != null){
-                System.out.println(line);
-            }
-            br.close();
+            // session.execCommand("df -h");
+            // InputStream staout = new StreamGobbler(session.getStdout());
+            // BufferedReader br = new BufferedReader(new InputStreamReader(staout));
+            // String line = null;
+            // while ((line = br.readLine()) != null){
+            //     System.out.println(line);
+            // }
+            // br.close();
 
             //下载文件到本地
-            SCPClient scpClient = conn.createSCPClient();
+            System.out.println("pre SCPClient");
+            //下载文件到本地
+            SCPClient scpClient = new SCPClient(conn);
+            System.out.println("pre SCPInputStream");
             SCPInputStream scpis = scpClient.get(sourceFile);
 
             //判断指定目录是否存在，不存在则先创建目录
             File file = new File(targetFile);
-            if (!file.exists())
+            if (!file.exists()){
+                System.out.println("pre mkdirs");
                 file.mkdirs();
+            }
+            System.out.println("pre FileOutputStream");
 
             FileOutputStream fos = new FileOutputStream(targetFile + targetFileName);
             byte[] buffer = new byte[1024];
@@ -266,23 +277,23 @@ public class AccountsServiceImpl implements AccountsService {
         JSONParser parser = new JSONParser();
 
         try {
-            Object obj = parser.parse(new FileReader("/home/benchmark/bm1test1.json"));
+            Object obj = parser.parse(new FileReader("./bm1test1.json"));
 
             JSONObject jsonObject =  (JSONObject) obj;
 
-            totalWorkLoad = (int) jsonObject.get("totalWorkLoad");
+            totalWorkLoad = (Long.valueOf((long) jsonObject.get("totalWorkLoad"))).intValue();
             System.out.println(totalWorkLoad);
 
-            threadNum = (int) jsonObject.get("threadNum");
+            threadNum = (Long.valueOf((long) jsonObject.get("threadNum"))).intValue();
             System.out.println(threadNum);
         } catch (IOException | ParseException e) {
             e.printStackTrace();
         }
 
-        long midtime = System.currentTimeMillis();
+        long midtime = System.nanoTime();
         long fetchtime = (midtime-bengintime)/1000;
         logger.info("fetchtime = "+fetchtime);
-
+        testType=1;
         if(testType==0){
             results = LocalIdealResEfficiencyTest(totalWorkLoad,threadNum);
 
@@ -290,7 +301,7 @@ public class AccountsServiceImpl implements AccountsService {
             results = client.IdealResEfficiencyTest(totalWorkLoad,threadNum);
         }
 
-        long endtime = System.currentTimeMillis();
+        long endtime = System.nanoTime();
         long costtime = (endtime-bengintime)/1000;
         logger.info("costTime = "+costtime);
         return "TODO@ BM1 return filepath";

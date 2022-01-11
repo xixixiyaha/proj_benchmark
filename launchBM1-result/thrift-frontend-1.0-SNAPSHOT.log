@@ -4,5 +4,5 @@ in LockObjectPool == 2 ==
 in LockObjectPool == 3 ==
 <EntryClient.LaunchBM1>0
 IN FrontendClients CompareResEfficiencyBM1
-
+TODO@ BM1 return filepath
 in thrift com.freeb.BM! main() === 4 === 

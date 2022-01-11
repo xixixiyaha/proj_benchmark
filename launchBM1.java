@@ -25,7 +25,7 @@ public class launchBM1{
 
 
     public static void main(String[] args) throws Exception {
-        // installSearchService();
+        installSearchService();
 
         var allTasks = getAllTasks()
                 .filter(t -> !t.startsWith("jupiter"))

@@ -60,6 +60,7 @@ public class AccountsServiceServerImpl implements AccountsService.Iface{
             System.out.println("IN AccountsServiceImpl/thrift CompareResEfficiencyBM1");
         }
         String str = accountsService.CompareResEfficiencyBM1(remoteFilePath,testType);
+        System.out.println("POST AccountsServiceImpl/thrift CompareResEfficiencyBM1");
         return str;
     }
 }

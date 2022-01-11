@@ -16,20 +16,6 @@ public class AccountsForeignClients extends AccountsClients implements Closeable
     }
     private final LockObjectPool<ThriftSearchClientImpl> clientPool = new LockObjectPool<>(32,()->new ThriftSearchClientImpl(host,port));
 
-
-    public List<Long> IdealResEfficiencyTest(int totalComputationLoad, int threadName){
-        ThriftSearchClientImpl client = clientPool.borrow();
-        System.out.println("IdealResEfficiencyTest/AccountsForeignClients");
-        try{
-            return client.client.IdealResEfficiencyTest(totalComputationLoad,threadName);
-        } catch (TException e) {
-            e.printStackTrace();
-        }finally {
-            clientPool.release(client);
-        }
-        return null;
-    }
-
     @Override
     public void close() throws IOException {
         clientPool.close();
@@ -38,7 +24,20 @@ public class AccountsForeignClients extends AccountsClients implements Closeable
     //Todo Notice if valid
     @Override
     protected AccountsClients getClient() {
-        System.out.println("AccountsClient/getClient");
         return this;
+    }
+
+    @Override
+    public List<Long> IdealResEfficiencyTest(Integer totalComputationLoad, Integer threadNum) {
+        ThriftSearchClientImpl client = clientPool.borrow();
+        System.out.println("IdealResEfficiencyTest/AccountsForeignClients");
+        try{
+            return client.client.IdealResEfficiencyTest(totalComputationLoad,threadNum);
+        } catch (TException e) {
+            e.printStackTrace();
+        }finally {
+            clientPool.release(client);
+        }
+        return null;
     }
 }

@@ -11,11 +11,10 @@ public abstract class AccountsClients {
     // TODO 看继承函数的覆盖条件
     protected abstract AccountsClients getClient();
 
-
-    public List<Long> IdealResEfficiencyTest(Integer totalComputationLoad, Integer threadNum){
-        int id = counter.getAndIncrement();
-        System.out.println("IdealResEfficiencyTest/AbstractAccountsClient");
-        return getClient().IdealResEfficiencyTest(totalComputationLoad,threadNum);
-    }
+    public abstract List<Long> IdealResEfficiencyTest(Integer totalComputationLoad, Integer threadNum);
+//    public List<Long> IdealResEfficiencyTest(Integer totalComputationLoad, Integer threadNum){
+//        int id = counter.getAndIncrement();
+//        return getClient().IdealResEfficiencyTest(totalComputationLoad,threadNum);
+//    }
 
 }

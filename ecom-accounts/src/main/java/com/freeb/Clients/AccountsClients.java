@@ -14,6 +14,7 @@ public abstract class AccountsClients {
 
     public List<Long> IdealResEfficiencyTest(Integer totalComputationLoad, Integer threadNum){
         int id = counter.getAndIncrement();
+        System.out.println("IdealResEfficiencyTest/AbstractAccountsClient");
         return getClient().IdealResEfficiencyTest(totalComputationLoad,threadNum);
     }
 

@@ -38,6 +38,7 @@ public class AccountsForeignClients extends AccountsClients implements Closeable
     //Todo Notice if valid
     @Override
     protected AccountsClients getClient() {
+        System.out.println("AccountsClient/getClient");
         return this;
     }
 }

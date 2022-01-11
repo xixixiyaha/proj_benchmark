@@ -1,0 +1,3 @@
+JMH S 24 com.freeb.AccountsServer S 59 com.freeb.jmh_generated.AccountsServer_testSearchRe_jmhTest S 12 testSearchRe S 10 Throughput E A 1 1 1 E E E E E E E E E E E E E E U 12 MILLISECONDS E E 
+JMH S 24 com.freeb.AccountsServer S 59 com.freeb.jmh_generated.AccountsServer_testSearchRe_jmhTest S 12 testSearchRe S 11 AverageTime E A 1 1 1 E E E E E E E E E E E E E E U 12 MILLISECONDS E E 
+JMH S 24 com.freeb.AccountsServer S 59 com.freeb.jmh_generated.AccountsServer_testSearchRe_jmhTest S 12 testSearchRe S 10 SampleTime E A 1 1 1 E E E E E E E E E E E E E E U 12 MILLISECONDS E E 

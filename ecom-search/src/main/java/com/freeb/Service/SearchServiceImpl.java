@@ -98,6 +98,8 @@ public class SearchServiceImpl implements SearchService {
 
     @Override
     public List<Long> IdealResEfficiencyTest(Integer totalComputationLoad, Integer threadNum) {
+        System.out.println("DBG@ IdealResEfficiencyTest/search totalComputationLoad"+totalComputationLoad+" threadNum "+threadNum);
+
         long begintime = System.currentTimeMillis();
         List<Long> results = new ArrayList<>();
         Integer loopPerThread = totalComputationLoad/threadNum;

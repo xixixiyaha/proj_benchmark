@@ -1,0 +1,8 @@
+/home/benchmark/diao/proj_benchmark/ecom-search/src/main/java/com/freeb/Dao/ProductInfoStorage.java
+/home/benchmark/diao/proj_benchmark/ecom-search/src/main/java/com/freeb/Entity/ObjSearchKey.java
+/home/benchmark/diao/proj_benchmark/ecom-search/src/main/java/com/freeb/Entity/UserSimilarity.java
+/home/benchmark/diao/proj_benchmark/ecom-search/src/main/java/com/freeb/Service/SearchService.java
+/home/benchmark/diao/proj_benchmark/ecom-search/src/main/java/com/freeb/Clients/SearchClients.java
+/home/benchmark/diao/proj_benchmark/ecom-search/src/main/java/com/freeb/Service/Recommend.java
+/home/benchmark/diao/proj_benchmark/ecom-search/src/main/java/com/freeb/Entity/UserActive.java
+/home/benchmark/diao/proj_benchmark/ecom-search/src/main/java/com/freeb/Service/SearchServiceImpl.java

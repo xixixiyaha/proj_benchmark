@@ -16,8 +16,12 @@ public interface AccountsService {
 //    public Boolean AccountExists(String name);
     public Boolean VerifyAccessByAccount(Long accountId, Long targetId, IdType idType);
     public List<Integer> GetAccountTag(Long id);
-    public HashMap<Integer,Double> GetUserTags(Long id);
-    public Boolean SetUserTags(Long id,HashMap<Integer,Double> tags);
+    public Boolean SetAccountTag(Long id, String jsonStr);
+
+
+//    //TODO current deprecated
+//    public HashMap<Integer,Double> GetUserTags(Long id);
+//    public Boolean SetUserTags(Long id,HashMap<Integer,Double> tags);
 
     /*
      * todo CPU contention

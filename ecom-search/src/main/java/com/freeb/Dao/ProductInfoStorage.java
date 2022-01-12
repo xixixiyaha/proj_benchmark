@@ -58,7 +58,7 @@ public class ProductInfoStorage {
     private static final String GET_PRODUCT_BY_SIMILARITY = "SELECT * FROM PRODUCT_INFOS WHERE category_id = ? AND prod_name LIKE %?% ORDER BY prod_sales DESC";
 
     //todo 挪入accountDao
-    private static final String CREATE_USER = "INSERT INTO ACCOUNT_INFOS (user_name,user_pwd,user_description) VALUES (?,?,?)";
+    private static final String CREATE_USER = "INSERT INTO ACCOUNT_INFO (user_name,user_pwd,user_description) VALUES (?,?,?)";
     public Boolean CreateAccountInfo(String userName,String pwd,String description){
         try(Connection conn = druidUtil.GetConnection()){
             PreparedStatement stmt = conn.prepareStatement(CREATE_USER);

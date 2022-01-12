@@ -12,9 +12,7 @@ public abstract class AccountsClients {
     protected abstract AccountsClients getClient();
 
     public abstract List<Long> IdealResEfficiencyTest(Integer totalComputationLoad, Integer threadNum);
-//    public List<Long> IdealResEfficiencyTest(Integer totalComputationLoad, Integer threadNum){
-//        int id = counter.getAndIncrement();
-//        return getClient().IdealResEfficiencyTest(totalComputationLoad,threadNum);
-//    }
+
+
 
 }

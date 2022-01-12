@@ -61,18 +61,28 @@ public class AccountsServiceImpl implements AccountsService {
 
     @Override
     public List<Integer> GetAccountTag(Long id) {
-        // todo
+        if(!AccountExists(id)){
+            logger.warn("Non-exists user_id="+id);
+            return null;
+        }
+        List<Integer> re = storage.GetAccountTagById(id);
+        if(null==re){
+            logger.warn("getTag Failed user_id="+id);
+        }
         return null;
     }
 
     @Override
-    public HashMap<Integer, Double> GetUserTags(Long id) {
-        return null;
-    }
-
-    @Override
-    public Boolean SetUserTags(Long id, HashMap<Integer, Double> tags) {
-        return null;
+    public Boolean SetAccountTag(Long id, String jsonStr) {
+        if(!AccountExists(id)){
+            logger.warn("Non-exists user_id="+id);
+            return false;
+        }
+        Boolean re = storage.SetAccountTagById(id,jsonStr);
+        if(!re){
+            logger.warn("setTag Failed user_id="+id);
+        }
+        return re;
     }
 
     @Override
@@ -196,30 +206,16 @@ public class AccountsServiceImpl implements AccountsService {
             if (StringUtils.isNullOrEmpty(sourceFile) || StringUtils.isNullOrEmpty(targetFile)){
                 return bool;
             }
-            //执行命令并打印执行结果
-            // session.execCommand("df -h");
-            // InputStream staout = new StreamGobbler(session.getStdout());
-            // BufferedReader br = new BufferedReader(new InputStreamReader(staout));
-            // String line = null;
-            // while ((line = br.readLine()) != null){
-            //     System.out.println(line);
-            // }
-            // br.close();
 
             //下载文件到本地
-            System.out.println("pre SCPClient");
-            //下载文件到本地
             SCPClient scpClient = new SCPClient(conn);
-            System.out.println("pre SCPInputStream");
             SCPInputStream scpis = scpClient.get(sourceFile);
 
             //判断指定目录是否存在，不存在则先创建目录
             File file = new File(targetFile);
             if (!file.exists()){
-                System.out.println("pre mkdirs");
                 file.mkdirs();
             }
-            System.out.println("pre FileOutputStream");
 
             FileOutputStream fos = new FileOutputStream(targetFile + targetFileName);
             byte[] buffer = new byte[1024];
@@ -254,12 +250,12 @@ public class AccountsServiceImpl implements AccountsService {
     private static Integer PORT = 22;
     private static String USER_Name = "benchmark";
     private static String PASSWORD = "benchmark";
-
+    private static String LOCAL_PATH = "/home/benchmark/";
+    private static String LOCAL_FILENAME = "bm1test1.json";
 
     @Override
     public String CompareResEfficiencyBM1(String remoteFilePath,Integer testType) {
-        System.out.println("CompareResEfficiencyBM1/Accounts");
-        logger.info("DBG@ AccountsServiceImpl/ecom");
+        logger.info("DBG@ AccountsServiceImpl/ecom-Accounts");
         List<Long> results;
         long bengintime = System.nanoTime();
         Integer totalWorkLoad=0,threadNum = 1;
@@ -269,7 +265,7 @@ public class AccountsServiceImpl implements AccountsService {
             logger.error("unable to connect");
             return "";
         }
-        boolean fecth = copyFile("/home/benchmark/bm/bm1test1.json","/home/benchmark/","bm1test1.json");
+        boolean fecth = copyFile("/home/benchmark/bm/bm1test1.json",LOCAL_PATH,LOCAL_FILENAME);
         if(!fecth){
             logger.error("unable to download file");
             return "";
@@ -304,6 +300,6 @@ public class AccountsServiceImpl implements AccountsService {
         long endtime = System.nanoTime();
         long costtime = (endtime-bengintime)/1000;
         logger.info("costTime = "+costtime);
-        return "TODO@ BM1 return filepath";
+        return LOCAL_PATH+LOCAL_FILENAME;
     }
 }

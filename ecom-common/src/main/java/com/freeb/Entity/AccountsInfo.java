@@ -69,4 +69,17 @@ public class AccountsInfo {
     public void setUserTag(Map<Integer,Double> userTag) {
         this.userTag = userTag;
     }
+
+    @Override
+    public String toString() {
+        return "AccountsInfo{" +
+                "userId=" + userId +
+                ", userName='" + userName + '\'' +
+                ", userPasswd='" + userPasswd + '\'' +
+                ", userDescription='" + userDescription + '\'' +
+                ", userTag=" + userTag +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                '}';
+    }
 }

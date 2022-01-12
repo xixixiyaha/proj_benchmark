@@ -2,12 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e7402edc-f985-409d-9734-d8a746f29253" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/ecom-accounts/src/test/java/TestAccountsDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecom-accounts/src/main/java/com/freeb/Clients/AccountsClients.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecom-accounts/src/main/java/com/freeb/Clients/AccountsClients.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ecom-accounts/src/main/java/com/freeb/Dao/AccountInfoStorage.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecom-accounts/src/main/java/com/freeb/Dao/AccountInfoStorage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecom-accounts/src/main/java/com/freeb/Service/AccountsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecom-accounts/src/main/java/com/freeb/Service/AccountsService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecom-accounts/src/main/java/com/freeb/Service/AccountsServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecom-accounts/src/main/java/com/freeb/Service/AccountsServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecom-common/src/main/java/com/freeb/Entity/AccountsInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecom-common/src/main/java/com/freeb/Entity/AccountsInfo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ecom-search/src/main/java/com/freeb/Dao/ProductInfoStorage.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecom-search/src/main/java/com/freeb/Dao/ProductInfoStorage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecom-search/src/test/java/com/test/TestProductDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecom-search/src/test/java/com/test/TestProductDao.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,6 +40,13 @@
         <item name="Tecent" type="feb32156:DbDataSourceImpl" />
         <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
         <item name="FREEB: schema" type="76f4a085:MysqlImplModel$Schema" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="Tecent" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="FREEB: schema" type="76f4a085:MysqlImplModel$Schema" />
+        <item name="ACCOUNT_INFO: table" type="285a2a93:MysqlImplModel$Table" />
       </path>
       <path>
         <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
@@ -137,66 +144,42 @@
       <recent name="D:\0_4th\proj_benchmark\src" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.TestSCPClient.TestSCPGet">
-    <configuration name="TestProductDao.CreateComments" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ecom-search" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.test.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.test" />
-      <option name="MAIN_CLASS_NAME" value="com.test.TestProductDao" />
-      <option name="METHOD_NAME" value="CreateComments" />
+  <component name="RunManager" selected="JUnit.TestAccountsDao.TestDeleteAccountInfoById">
+    <configuration name="TestAccountsDao.TestDeleteAccountInfoById" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ecom-accounts" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="TestAccountsDao" />
+      <option name="METHOD_NAME" value="TestDeleteAccountInfoById" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestProductDao.CreateDiscounts" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ecom-search" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.test.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.test" />
-      <option name="MAIN_CLASS_NAME" value="com.test.TestProductDao" />
-      <option name="METHOD_NAME" value="CreateDiscounts" />
+    <configuration name="TestAccountsDao.TestGetAccountInfoById" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ecom-accounts" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="TestAccountsDao" />
+      <option name="METHOD_NAME" value="TestGetAccountInfoById" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestProductDao.CreatePayment" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ecom-search" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.test.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.test" />
-      <option name="MAIN_CLASS_NAME" value="com.test.TestProductDao" />
-      <option name="METHOD_NAME" value="CreatePayment" />
+    <configuration name="TestAccountsDao.TestSetAndGetAccountTagById" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ecom-accounts" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="TestAccountsDao" />
+      <option name="METHOD_NAME" value="TestSetAndGetAccountTagById" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestProductDao.TestCreateData" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ecom-search" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.test.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.test" />
-      <option name="MAIN_CLASS_NAME" value="com.test.TestProductDao" />
-      <option name="METHOD_NAME" value="TestCreateData" />
+    <configuration name="TestAccountsDao.TestUpdateAccountInfoById" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ecom-accounts" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="TestAccountsDao" />
+      <option name="METHOD_NAME" value="TestUpdateAccountInfoById" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -261,11 +244,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.TestAccountsDao.TestDeleteAccountInfoById" />
+        <item itemvalue="JUnit.TestAccountsDao.TestUpdateAccountInfoById" />
+        <item itemvalue="JUnit.TestAccountsDao.TestSetAndGetAccountTagById" />
+        <item itemvalue="JUnit.TestAccountsDao.TestGetAccountInfoById" />
         <item itemvalue="JUnit.TestSCPClient.TestSCPGet" />
-        <item itemvalue="JUnit.TestProductDao.CreateComments" />
-        <item itemvalue="JUnit.TestProductDao.CreateDiscounts" />
-        <item itemvalue="JUnit.TestProductDao.CreatePayment" />
-        <item itemvalue="JUnit.TestProductDao.TestCreateData" />
       </list>
     </recent_temporary>
   </component>
@@ -419,11 +402,11 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="399" y="105" key="#com.intellij.ide.fileTemplates.ui.ConfigureTemplatesDialog/0.0.1536.824@0.0.1536.824" timestamp="1636788265426" />
-    <state x="958" y="124" key="#com.intellij.ide.util.MemberChooser" timestamp="1641956701284">
+    <state x="958" y="124" key="#com.intellij.ide.util.MemberChooser" timestamp="1641959112464">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="-722" y="157" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1636859364147" />
-    <state x="958" y="124" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1641956701284" />
+    <state x="958" y="124" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1641959112464" />
     <state x="575" y="340" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1641385485717">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -457,54 +440,54 @@
     </state>
     <state x="1169" y="-932" key="FileChooserDialogImpl/0.0.1536.824/3.-1080.1920.1040@3.-1080.1920.1040" timestamp="1640764652182" />
     <state x="933" y="117" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1641539991119" />
-    <state width="1493" height="251" key="GridCell.Tab.0.bottom" timestamp="1641881871689">
+    <state width="1493" height="239" key="GridCell.Tab.0.bottom" timestamp="1641974376851">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1495" height="205" key="GridCell.Tab.0.bottom/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1636859865510" />
     <state width="1877" height="212" key="GridCell.Tab.0.bottom/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1636882128867" />
     <state width="1024" height="5" key="GridCell.Tab.0.bottom/0.0.1536.824/3.-1080.1920.1040@0.0.1536.824" timestamp="1640177992521" />
     <state width="1877" height="379" key="GridCell.Tab.0.bottom/0.0.1536.824/3.-1080.1920.1040@3.-1080.1920.1040" timestamp="1640439796646" />
-    <state width="1493" height="251" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1641881871689" />
-    <state width="1493" height="251" key="GridCell.Tab.0.center" timestamp="1641881871689">
+    <state width="1493" height="239" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1641974376851" />
+    <state width="1493" height="239" key="GridCell.Tab.0.center" timestamp="1641974376851">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1495" height="205" key="GridCell.Tab.0.center/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1636859865510" />
     <state width="1877" height="212" key="GridCell.Tab.0.center/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1636882128867" />
     <state width="1024" height="5" key="GridCell.Tab.0.center/0.0.1536.824/3.-1080.1920.1040@0.0.1536.824" timestamp="1640177992521" />
     <state width="1877" height="379" key="GridCell.Tab.0.center/0.0.1536.824/3.-1080.1920.1040@3.-1080.1920.1040" timestamp="1640439796646" />
-    <state width="1493" height="251" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1641881871689" />
-    <state width="1493" height="251" key="GridCell.Tab.0.left" timestamp="1641881871689">
+    <state width="1493" height="239" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1641974376851" />
+    <state width="1493" height="239" key="GridCell.Tab.0.left" timestamp="1641974376851">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1495" height="205" key="GridCell.Tab.0.left/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1636859865510" />
     <state width="1877" height="212" key="GridCell.Tab.0.left/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1636882128866" />
     <state width="1024" height="5" key="GridCell.Tab.0.left/0.0.1536.824/3.-1080.1920.1040@0.0.1536.824" timestamp="1640177992520" />
     <state width="1877" height="379" key="GridCell.Tab.0.left/0.0.1536.824/3.-1080.1920.1040@3.-1080.1920.1040" timestamp="1640439796646" />
-    <state width="1493" height="251" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1641881871689" />
-    <state width="1493" height="251" key="GridCell.Tab.0.right" timestamp="1641881871689">
+    <state width="1493" height="239" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1641974376851" />
+    <state width="1493" height="239" key="GridCell.Tab.0.right" timestamp="1641974376851">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1495" height="205" key="GridCell.Tab.0.right/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1636859865510" />
     <state width="1877" height="212" key="GridCell.Tab.0.right/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1636882128867" />
     <state width="1024" height="5" key="GridCell.Tab.0.right/0.0.1536.824/3.-1080.1920.1040@0.0.1536.824" timestamp="1640177992521" />
     <state width="1877" height="379" key="GridCell.Tab.0.right/0.0.1536.824/3.-1080.1920.1040@3.-1080.1920.1040" timestamp="1640439796646" />
-    <state width="1493" height="251" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1641881871689" />
-    <state width="1493" height="261" key="GridCell.Tab.1.bottom" timestamp="1641881871680">
+    <state width="1493" height="239" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1641974376851" />
+    <state width="1493" height="239" key="GridCell.Tab.1.bottom" timestamp="1641974376852">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1641881871680" />
-    <state width="1493" height="261" key="GridCell.Tab.1.center" timestamp="1641881871680">
+    <state width="1493" height="239" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1641974376852" />
+    <state width="1493" height="239" key="GridCell.Tab.1.center" timestamp="1641974376852">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1641881871680" />
-    <state width="1493" height="261" key="GridCell.Tab.1.left" timestamp="1641881871680">
+    <state width="1493" height="239" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1641974376852" />
+    <state width="1493" height="239" key="GridCell.Tab.1.left" timestamp="1641974376852">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1641881871680" />
-    <state width="1493" height="261" key="GridCell.Tab.1.right" timestamp="1641881871680">
+    <state width="1493" height="239" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1641974376852" />
+    <state width="1493" height="239" key="GridCell.Tab.1.right" timestamp="1641974376852">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="261" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1641881871680" />
+    <state width="1493" height="239" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1641974376852" />
     <state width="212" height="477" key="HiddenNamespacesPopup" timestamp="1638857459964">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -554,12 +537,12 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="732" y="397" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1641297584695" />
-    <state x="343" y="135" width="973" height="548" key="find.popup" timestamp="1641954952963">
+    <state x="343" y="135" width="973" height="548" key="find.popup" timestamp="1641964323622">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="775" y="141" width="755" height="548" key="find.popup/0.0.1536.824/3.-1080.1920.1040@0.0.1536.824" timestamp="1640178117663" />
     <state x="972" y="-902" width="944" height="692" key="find.popup/0.0.1536.824/3.-1080.1920.1040@3.-1080.1920.1040" timestamp="1640439648584" />
-    <state x="343" y="135" width="973" height="548" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1641954952963" />
+    <state x="343" y="135" width="973" height="548" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1641964323622" />
     <state x="181" y="187" key="new project wizard" timestamp="1641540043376">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -574,11 +557,11 @@
     </state>
     <state x="2536" y="240" key="run.anything.popup/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1636882153689" />
     <state x="493" y="190" width="672" height="677" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1641293909882" />
-    <state x="814" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1641957296827">
+    <state x="814" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1641962388645">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="-902" y="183" width="840" height="856" key="search.everywhere.popup/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1636858314530" />
-    <state x="814" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1641957296827" />
+    <state x="814" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1641962388645" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

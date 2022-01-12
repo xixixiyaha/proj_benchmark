@@ -184,25 +184,7 @@ public class TestProductDao {
 
     }
 
-    //TODO 移入另一个TestDao
-    @Test
-    public void CreateUser() throws NoSuchAlgorithmException {
-        String description = "description#description#description#description#description#description#description#description#description#description#" +
-                "description#description#description#description#description#description#description#description#description#description#description#" +
-                "description#description#description#description#description#description#description#description#description#description#description#";
-        String userName = "username";
-        MessageDigest messageDigest = MessageDigest.getInstance("MD5");
-        for(int merchantId=0;merchantId<1000;merchantId++){
-            for(int i=0;i<100000;i++){
-                String content = "password"+i;
-                String a = messageDigest.digest(content.getBytes()).toString();
-                Boolean re = storage.CreateAccountInfo(userName+i,a,description);
-                if(!re){
-                    logger.error("insert failed round"+merchantId+" "+i);
-                }
-            }
-        }
-    }
+
 
     private String genCardNum(){
         Random r= new Random(5L);

@@ -57,24 +57,6 @@ public class ProductInfoStorage {
     // TODO & NOTICE: 小数据量使用 like 避免大炮打蚊子
     private static final String GET_PRODUCT_BY_SIMILARITY = "SELECT * FROM PRODUCT_INFOS WHERE category_id = ? AND prod_name LIKE %?% ORDER BY prod_sales DESC";
 
-    //todo 挪入accountDao
-    private static final String CREATE_USER = "INSERT INTO ACCOUNT_INFO (user_name,user_pwd,user_description) VALUES (?,?,?)";
-    public Boolean CreateAccountInfo(String userName,String pwd,String description){
-        try(Connection conn = druidUtil.GetConnection()){
-            PreparedStatement stmt = conn.prepareStatement(CREATE_USER);
-            stmt.setString(1,userName);
-            stmt.setString(2,pwd);
-            stmt.setString(3,description);
-            int rs = stmt.executeUpdate();
-            if(rs>0)return true;
-
-        }catch (SQLException e){
-            logger.error(String.format("DB connect failure %s",e.toString()));
-            // Notice here
-            e.printStackTrace();
-        }
-        return false;
-    }
 
     //todo 挪入productDao
     private static final String GET_CATEGORY_BY_PRODUCT = "SELECT category_id FROM PRODUCT_INFOS WHERE prod_id = ?";

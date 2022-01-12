@@ -8,7 +8,7 @@ public interface PaymentService {
     /*
     * Normal Function. @Long Call Chain
     * */
-    public PaymentStatus CheckPaymentStatusById(Long paymentId);
+    public PaymentStatus CheckPaymentStatusById(Long uid,Long paymentId);
 
     /*
     * Normal Callback. High Concurrency.
@@ -18,11 +18,11 @@ public interface PaymentService {
     /*
     * Nested. Long waiting time.
     * */
-    public Boolean CancelPayment(Long paymentId);
+    public Boolean CancelPayment(Long uid,Long paymentId);
 
     /*
     * Big data structure.
     * */
-    public PaymentInfo GetPaymentInfoById(Long id);
+    public PaymentInfo GetPaymentInfoById(Long uid,Long paymentId);
 
 }

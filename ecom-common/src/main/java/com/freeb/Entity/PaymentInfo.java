@@ -8,7 +8,7 @@ public class PaymentInfo {
     private Double paymentVal;
     private Double discountsVal;
     private String paymentCard;
-    private Integer accountId;
+    private Long userId;
     private Date createTime;
     private Date updateTime;
 
@@ -52,12 +52,12 @@ public class PaymentInfo {
         this.paymentCard = paymentCard;
     }
 
-    public Integer getAccountId() {
-        return accountId;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setAccountId(Integer accountId) {
-        this.accountId = accountId;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public Date getCreateTime() {

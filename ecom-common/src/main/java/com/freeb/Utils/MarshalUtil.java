@@ -64,7 +64,7 @@ public class MarshalUtil {
                 info.setPaymentVal(rs.getDouble(3));
                 info.setDiscountsVal(rs.getDouble(4));
                 info.setPaymentCard(rs.getString(5));
-                info.setAccountId(rs.getInt(6));
+                info.setUserId(rs.getInt(6));
                 break;
             }
         }catch(Exception e){

@@ -19,17 +19,17 @@ public class ProductInfoStorage {
     static String PROD_DB_URL;
     static String PROD_USER;
     static String PROD_PWD;
-    DruidUtil druidUtil;
+    private DruidUtil druidUtil;
     public ProductInfoStorage(){
-        logger.error("unsupported initialization method");
+        logger.error("TODO@ unsupported initialization method");
     }
 
-    public ProductInfoStorage(String url,String user,String pwd) throws ClassNotFoundException {
+    public ProductInfoStorage(String url,String user,String psw) throws ClassNotFoundException {
         PROD_DB_URL = url;
         PROD_USER=user;
-        PROD_PWD = pwd;
+        PROD_PWD = psw;
         Class.forName("com.mysql.cj.jdbc.Driver");
-        druidUtil=new DruidUtil(url,user,pwd);
+        druidUtil=new DruidUtil(url,user,psw);
     }
 
     public Boolean TestConn() {
@@ -96,7 +96,7 @@ public class ProductInfoStorage {
     }
 
     //todo 挪入payment
-    private static final String CREATE_PAYMENT = "INSERT INTO PAYMENT_INFOS(payment_status,payment_val,discounts_val,payment_card,user_id) VALUES(?,?,?,?,?)";
+    private static final String CREATE_PAYMENT = "INSERT INTO PAYMENT_INFO(payment_status,payment_val,discounts_val,payment_card,user_id) VALUES(?,?,?,?,?)";
     public Boolean CreatePaymentInfo(Integer status,Double pval,Double dval,String cardNum,Long userId){
         try(Connection conn = druidUtil.GetConnection()){
             PreparedStatement stmt = conn.prepareStatement(CREATE_PAYMENT);

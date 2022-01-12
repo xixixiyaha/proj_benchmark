@@ -19,7 +19,7 @@ public class Orders {
     OrderInfoCache cache = new OrderInfoCache();
     OrderInfoStorage storage = new OrderInfoStorage();
 
-    public List<OrderInfo> getOrderListByAccountId(Integer accountId,Integer paymentStatus){
+    public List<OrderInfo> getOrderListByAccountId(long accountId, Integer paymentStatus){
         OrderSearchKey key = new OrderSearchKey();
         key.setAccountId(accountId);
         key.setStatus(paymentStatus);
@@ -27,7 +27,7 @@ public class Orders {
 
         return getOrderList(skey,accountId,SearchType.ACCOUNT_ID);
     }
-    public List<OrderInfo> getOrderByOrderId(int accountId, int orderId, int status) {
+    public List<OrderInfo> getOrderByOrderId(long accountId, long orderId, int status) {
         OrderSearchKey key = new OrderSearchKey();
         key.setAccountId(accountId);
         key.setObjId(orderId);
@@ -39,7 +39,7 @@ public class Orders {
         }
         return info;
     }
-    public List<OrderInfo> getOrderByPaymentId(int accountId, int paymentId, int status) {
+    public List<OrderInfo> getOrderByPaymentId(long accountId, long paymentId, int status) {
         OrderSearchKey key = new OrderSearchKey();
         key.setAccountId(accountId);
         key.setObjId(paymentId);
@@ -89,7 +89,7 @@ public class Orders {
         return getOrderList(skey,merchantName,SearchType.MERCHANT_NAME);
     }
 
-    public List<OrderInfo> getOrderList(String key, Integer searchId, SearchType type){
+    public List<OrderInfo> getOrderList(String key, long searchId, SearchType type){
         String str = OrderInfoCache.getOrderListString(key);
         if(str!=null){
             return MarshalUtil.convertString2OrderList(key);

@@ -6,11 +6,11 @@ public class AccountsClient {
 
 
 
-    public Boolean verifyAccount(Integer accountId){
+    public Boolean verifyAccount(long accountId){
         return true;
     }
 
-    public Boolean verifyAccessByAccount(Integer accountId,Integer targetId, IdType idType){
+    public Boolean verifyAccessByAccount(long accountId, long targetId, IdType idType){
         switch (idType){
             case PAYMENT_ID:
                 return true;

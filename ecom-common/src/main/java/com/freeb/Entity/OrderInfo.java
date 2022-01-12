@@ -12,29 +12,29 @@ public class OrderInfo {
      * paymentId : 12345
      */
 
-    private int orderId;
-    private int accountId;
+    private long orderId;
+    private long userId;
     private int paymentStatus;
-    private int merchantId;
+    private long merchantId;
     private String merchantName;
-    private int objId;
-    private String objName;
-    private int paymentId;
+    private long prodId;
+    private String prodName;
+    private long paymentId;
 
-    public int getOrderId() {
+    public long getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(int orderId) {
+    public void setOrderId(long orderId) {
         this.orderId = orderId;
     }
 
-    public int getAccountId() {
-        return accountId;
+    public long getUserId() {
+        return userId;
     }
 
-    public void setAccountId(int accountId) {
-        this.accountId = accountId;
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 
     public int getPaymentStatus() {
@@ -45,11 +45,11 @@ public class OrderInfo {
         this.paymentStatus = paymentStatus;
     }
 
-    public int getMerchantId() {
+    public long getMerchantId() {
         return merchantId;
     }
 
-    public void setMerchantId(int merchantId) {
+    public void setMerchantId(long merchantId) {
         this.merchantId = merchantId;
     }
 
@@ -61,27 +61,41 @@ public class OrderInfo {
         this.merchantName = merchantName;
     }
 
-    public int getObjId() {
-        return objId;
+    public long getProdId() {
+        return prodId;
     }
 
-    public void setObjId(int objId) {
-        this.objId = objId;
+    public void setProdId(long prodId) {
+        this.prodId = prodId;
     }
 
-    public String getObjName() {
-        return objName;
+    public String getProdName() {
+        return prodName;
     }
 
-    public void setObjName(String objName) {
-        this.objName = objName;
+    public void setProdName(String prodName) {
+        this.prodName = prodName;
     }
 
-    public int getPaymentId() {
+    public long getPaymentId() {
         return paymentId;
     }
 
-    public void setPaymentId(int paymentId) {
+    public void setPaymentId(long paymentId) {
         this.paymentId = paymentId;
+    }
+
+    @Override
+    public String toString() {
+        return "OrderInfo{" +
+                "orderId=" + orderId +
+                ", accountId=" + userId +
+                ", paymentStatus=" + paymentStatus +
+                ", merchantId=" + merchantId +
+                ", merchantName='" + merchantName + '\'' +
+                ", objId=" + prodId +
+                ", objName='" + prodName + '\'' +
+                ", paymentId=" + paymentId +
+                '}';
     }
 }

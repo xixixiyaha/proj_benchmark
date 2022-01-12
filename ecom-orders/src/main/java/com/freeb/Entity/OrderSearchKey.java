@@ -2,11 +2,11 @@ package com.freeb.Entity;
 
 public class OrderSearchKey {
 
-    private int accountId;
+    private long accountId;
     private int status;
     private int merchantId;
     private String merchantName;
-    private int objId;
+    private long objId;
     private String objName;
 
     public int getStatus() {
@@ -33,11 +33,11 @@ public class OrderSearchKey {
         this.merchantName = merchantName;
     }
 
-    public int getObjId() {
+    public long getObjId() {
         return objId;
     }
 
-    public void setObjId(int objId) {
+    public void setObjId(long objId) {
         this.objId = objId;
     }
 
@@ -49,11 +49,11 @@ public class OrderSearchKey {
         this.objName = objName;
     }
 
-    public int getAccountId() {
+    public long getAccountId() {
         return accountId;
     }
 
-    public void setAccountId(int accountId) {
+    public void setAccountId(long accountId) {
         this.accountId = accountId;
     }
 }

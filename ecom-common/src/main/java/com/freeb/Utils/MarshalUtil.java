@@ -3,6 +3,7 @@ package com.freeb.Utils;
 import com.freeb.Entity.*;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,12 +40,12 @@ public class MarshalUtil {
             while(rs.next()){
                 OrderInfo info = new OrderInfo();
                 info.setOrderId(rs.getInt(1));
-                info.setAccountId(rs.getInt(2));
+                info.setUserId(rs.getInt(2));
                 info.setPaymentStatus(rs.getInt(3));
                 info.setMerchantId(rs.getInt(4));
                 info.setMerchantName(rs.getString(5));
-                info.setObjId(rs.getInt(6));
-                info.setObjName(rs.getString(7));
+                info.setProdId(rs.getInt(6));
+                info.setProdName(rs.getString(7));
                 info.setPaymentId(rs.getInt(8));
                 lst.add(info);
             }
@@ -120,4 +121,34 @@ public class MarshalUtil {
         return lst;
     }
 
+    public static OrderInfo convertRs2OrderInfo(ResultSet rs){
+        OrderInfo info = new OrderInfo();
+        while (true){
+            try {
+                if (!rs.next()){
+                    long oid=rs.getLong(1);
+                    long uid = rs.getLong(2);
+                    //TODO 没有status会怎样 报错吗
+                    int status = rs.getInt(3);
+                    long mid = rs.getLong(4);
+                    String mName = rs.getString(5);
+                    long prodId = rs.getLong(6);
+                    String prodName=rs.getString(7);
+                    long paymentId=rs.getLong(8);
+                    info.setOrderId(oid);
+                    info.setUserId(uid);
+                    info.setMerchantId(mid);
+                    info.setMerchantName(mName);
+                    info.setProdId(prodId);
+                    info.setProdName(prodName);
+                    info.setPaymentId(paymentId);
+                    return info;
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return null;
+            }
+
+        }
+    }
 }

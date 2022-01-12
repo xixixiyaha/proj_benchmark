@@ -5,7 +5,7 @@ import com.freeb.Entity.OrderResp;
 
 public interface OrdersService {
 
-    OrderResp GetOrderListByAccountId(OrderReq orderReq);
+    OrderResp GetOrderListByUserId(OrderReq orderReq);
 
     OrderResp GetOrderByPaymentId(OrderReq orderReq);
 

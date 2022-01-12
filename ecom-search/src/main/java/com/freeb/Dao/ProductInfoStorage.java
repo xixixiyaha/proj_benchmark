@@ -95,26 +95,6 @@ public class ProductInfoStorage {
         return false;
     }
 
-    //todo 挪入payment
-    private static final String CREATE_PAYMENT = "INSERT INTO PAYMENT_INFO(payment_status,payment_val,discounts_val,payment_card,user_id) VALUES(?,?,?,?,?)";
-    public Boolean CreatePaymentInfo(Integer status,Double pval,Double dval,String cardNum,Long userId){
-        try(Connection conn = druidUtil.GetConnection()){
-            PreparedStatement stmt = conn.prepareStatement(CREATE_PAYMENT);
-            stmt.setInt(1,status);
-            stmt.setDouble(2,pval);
-            stmt.setDouble(3,dval);
-            stmt.setString(4,cardNum);
-            stmt.setLong(5,userId);
-            int rs = stmt.executeUpdate();
-            if(rs>0)return true;
-
-        }catch (SQLException e){
-            logger.error(String.format("DB connect failure %s",e.toString()));
-            // Notice here
-            e.printStackTrace();
-        }
-        return false;
-    }
 
     //todo 挪入disocounts
     private static final String CREATE_DISCOUNT = "INSERT INTO DISCOUNT_INFOS(discount_type,prod_id,discount_price) VALUES(?,?,?)";

@@ -186,25 +186,8 @@ public class TestProductDao {
 
 
 
-    private String genCardNum(){
-        Random r= new Random(5L);
-        Integer fir = r.nextInt(3000)+1000;
-        Integer sec = r.nextInt(3000)+1000;
-        return (fir +String.valueOf(sec));
-    }
 
-    @Test
-    public void CreatePayment(){
-        int record = 10000; // 1w
-        Random r = new Random(13L);
-        for(int i=0;i<record;i++){
-            Double price = 1.0*r.nextInt(1000)+5;
-            Double dicounts = price/((i&4)+1);
-            Long uid = (long)r.nextInt(1000);
 
-            storage.CreatePaymentInfo((i&4),price,dicounts,genCardNum(),uid);
-        }
-    }
 
     @Test
     public void CreateDiscounts(){

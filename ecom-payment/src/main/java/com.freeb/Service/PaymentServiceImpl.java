@@ -13,12 +13,16 @@ public class PaymentServiceImpl implements PaymentService {
 
     static String PAYMENT_DB_URL;
     static String PAYMENT_USER;
-    static String PAYMENT_PWD;
-
-    private PaymentInfoStorage storage;
+    static String PAYMENT_PSW;
+    //TODO 记得把public属性改回private
+    public PaymentInfoStorage storage;
 
     public PaymentServiceImpl() throws ClassNotFoundException {
-        storage = new PaymentInfoStorage(PAYMENT_DB_URL,PAYMENT_USER,PAYMENT_PWD);
+        storage = new PaymentInfoStorage(PAYMENT_DB_URL,PAYMENT_USER, PAYMENT_PSW);
+    }
+
+    public PaymentServiceImpl(String url,String user,String psw) throws ClassNotFoundException {
+        storage = new PaymentInfoStorage(url,user,psw);
     }
 
     private Boolean VerifyAccess2Payment(Long uid,Long pid){

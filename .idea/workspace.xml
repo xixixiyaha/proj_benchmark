@@ -2,13 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e7402edc-f985-409d-9734-d8a746f29253" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/ecom-payment/src/test/java/TestPaymentService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecom-common/src/main/java/com/freeb/Entity/PaymentInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecom-common/src/main/java/com/freeb/Entity/PaymentInfo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ecom-common/src/main/java/com/freeb/Utils/MarshalUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecom-common/src/main/java/com/freeb/Utils/MarshalUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecom-payment/src/main/java/com.freeb/Dao/PaymentInfoStorage.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecom-payment/src/main/java/com.freeb/Dao/PaymentInfoStorage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecom-payment/src/main/java/com.freeb/Service/PaymentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecom-payment/src/main/java/com.freeb/Service/PaymentService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ecom-payment/src/main/java/com.freeb/Service/PaymentServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecom-payment/src/main/java/com.freeb/Service/PaymentServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ecom-search/src/main/java/com/freeb/Dao/ProductInfoStorage.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecom-search/src/main/java/com/freeb/Dao/ProductInfoStorage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecom-search/src/test/java/com/test/TestProductDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecom-search/src/test/java/com/test/TestProductDao.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -138,22 +137,12 @@
       <recent name="D:\0_4th\proj_benchmark\src" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.TestAccountsDao.TestDeleteAccountInfoById">
+  <component name="RunManager" selected="JUnit.TestPaymentService.TestCancelPayment">
     <configuration name="TestAccountsDao.TestDeleteAccountInfoById" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ecom-accounts" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="TestAccountsDao" />
       <option name="METHOD_NAME" value="TestDeleteAccountInfoById" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="TestAccountsDao.TestGetAccountInfoById" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ecom-accounts" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="TestAccountsDao" />
-      <option name="METHOD_NAME" value="TestGetAccountInfoById" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -179,11 +168,21 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestSCPClient.TestSCPGet" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="thrift-frontend" />
+    <configuration name="TestPaymentService.TestCancelPayment" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ecom-payment" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="TestSCPClient" />
-      <option name="METHOD_NAME" value="TestSCPGet" />
+      <option name="MAIN_CLASS_NAME" value="TestPaymentService" />
+      <option name="METHOD_NAME" value="TestCancelPayment" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestPaymentService.TestGetPaymentInfoById" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ecom-payment" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="TestPaymentService" />
+      <option name="METHOD_NAME" value="TestGetPaymentInfoById" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -238,11 +237,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.TestPaymentService.TestCancelPayment" />
+        <item itemvalue="JUnit.TestPaymentService.TestGetPaymentInfoById" />
         <item itemvalue="JUnit.TestAccountsDao.TestDeleteAccountInfoById" />
         <item itemvalue="JUnit.TestAccountsDao.TestUpdateAccountInfoById" />
         <item itemvalue="JUnit.TestAccountsDao.TestSetAndGetAccountTagById" />
-        <item itemvalue="JUnit.TestAccountsDao.TestGetAccountInfoById" />
-        <item itemvalue="JUnit.TestSCPClient.TestSCPGet" />
       </list>
     </recent_temporary>
   </component>
@@ -434,54 +433,54 @@
     </state>
     <state x="1169" y="-932" key="FileChooserDialogImpl/0.0.1536.824/3.-1080.1920.1040@3.-1080.1920.1040" timestamp="1640764652182" />
     <state x="933" y="117" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1641539991119" />
-    <state width="1493" height="257" key="GridCell.Tab.0.bottom" timestamp="1641974482938">
+    <state width="1493" height="257" key="GridCell.Tab.0.bottom" timestamp="1641990163552">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1495" height="205" key="GridCell.Tab.0.bottom/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1636859865510" />
     <state width="1877" height="212" key="GridCell.Tab.0.bottom/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1636882128867" />
     <state width="1024" height="5" key="GridCell.Tab.0.bottom/0.0.1536.824/3.-1080.1920.1040@0.0.1536.824" timestamp="1640177992521" />
     <state width="1877" height="379" key="GridCell.Tab.0.bottom/0.0.1536.824/3.-1080.1920.1040@3.-1080.1920.1040" timestamp="1640439796646" />
-    <state width="1493" height="257" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1641974482938" />
-    <state width="1493" height="257" key="GridCell.Tab.0.center" timestamp="1641974482938">
+    <state width="1493" height="257" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1641990163552" />
+    <state width="1493" height="257" key="GridCell.Tab.0.center" timestamp="1641990163551">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1495" height="205" key="GridCell.Tab.0.center/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1636859865510" />
     <state width="1877" height="212" key="GridCell.Tab.0.center/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1636882128867" />
     <state width="1024" height="5" key="GridCell.Tab.0.center/0.0.1536.824/3.-1080.1920.1040@0.0.1536.824" timestamp="1640177992521" />
     <state width="1877" height="379" key="GridCell.Tab.0.center/0.0.1536.824/3.-1080.1920.1040@3.-1080.1920.1040" timestamp="1640439796646" />
-    <state width="1493" height="257" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1641974482938" />
-    <state width="1493" height="257" key="GridCell.Tab.0.left" timestamp="1641974482938">
+    <state width="1493" height="257" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1641990163551" />
+    <state width="1493" height="257" key="GridCell.Tab.0.left" timestamp="1641990163551">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1495" height="205" key="GridCell.Tab.0.left/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1636859865510" />
     <state width="1877" height="212" key="GridCell.Tab.0.left/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1636882128866" />
     <state width="1024" height="5" key="GridCell.Tab.0.left/0.0.1536.824/3.-1080.1920.1040@0.0.1536.824" timestamp="1640177992520" />
     <state width="1877" height="379" key="GridCell.Tab.0.left/0.0.1536.824/3.-1080.1920.1040@3.-1080.1920.1040" timestamp="1640439796646" />
-    <state width="1493" height="257" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1641974482938" />
-    <state width="1493" height="257" key="GridCell.Tab.0.right" timestamp="1641974482938">
+    <state width="1493" height="257" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1641990163551" />
+    <state width="1493" height="257" key="GridCell.Tab.0.right" timestamp="1641990163552">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1495" height="205" key="GridCell.Tab.0.right/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1636859865510" />
     <state width="1877" height="212" key="GridCell.Tab.0.right/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1636882128867" />
     <state width="1024" height="5" key="GridCell.Tab.0.right/0.0.1536.824/3.-1080.1920.1040@0.0.1536.824" timestamp="1640177992521" />
     <state width="1877" height="379" key="GridCell.Tab.0.right/0.0.1536.824/3.-1080.1920.1040@3.-1080.1920.1040" timestamp="1640439796646" />
-    <state width="1493" height="257" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1641974482938" />
-    <state width="1493" height="239" key="GridCell.Tab.1.bottom" timestamp="1641974376852">
+    <state width="1493" height="257" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1641990163552" />
+    <state width="1493" height="239" key="GridCell.Tab.1.bottom" timestamp="1641989925346">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="239" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1641974376852" />
-    <state width="1493" height="239" key="GridCell.Tab.1.center" timestamp="1641974376852">
+    <state width="1493" height="239" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1641989925346" />
+    <state width="1493" height="239" key="GridCell.Tab.1.center" timestamp="1641989925345">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="239" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1641974376852" />
-    <state width="1493" height="239" key="GridCell.Tab.1.left" timestamp="1641974376852">
+    <state width="1493" height="239" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1641989925345" />
+    <state width="1493" height="239" key="GridCell.Tab.1.left" timestamp="1641989925345">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="239" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1641974376852" />
-    <state width="1493" height="239" key="GridCell.Tab.1.right" timestamp="1641974376852">
+    <state width="1493" height="239" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1641989925345" />
+    <state width="1493" height="239" key="GridCell.Tab.1.right" timestamp="1641989925345">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="239" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1641974376852" />
+    <state width="1493" height="239" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1641989925345" />
     <state width="212" height="477" key="HiddenNamespacesPopup" timestamp="1638857459964">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -531,12 +530,12 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="732" y="397" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1641297584695" />
-    <state x="343" y="135" width="973" height="548" key="find.popup" timestamp="1641964323622">
+    <state x="343" y="135" width="973" height="548" key="find.popup" timestamp="1641989029063">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="775" y="141" width="755" height="548" key="find.popup/0.0.1536.824/3.-1080.1920.1040@0.0.1536.824" timestamp="1640178117663" />
     <state x="972" y="-902" width="944" height="692" key="find.popup/0.0.1536.824/3.-1080.1920.1040@3.-1080.1920.1040" timestamp="1640439648584" />
-    <state x="343" y="135" width="973" height="548" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1641964323622" />
+    <state x="343" y="135" width="973" height="548" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1641989029063" />
     <state x="181" y="187" key="new project wizard" timestamp="1641540043376">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

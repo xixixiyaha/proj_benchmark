@@ -38,4 +38,6 @@ public abstract class CategoryClients {
     public abstract List<CommentInfo> GetComments(Long prodId, Integer comtNum);
 
     public abstract DiscountInfo GetDiscounts(Long prodId,Integer type);
+
+    public abstract List<String> GetMerchantNames(List<Long> pids);
 }

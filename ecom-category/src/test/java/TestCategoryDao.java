@@ -1,4 +1,5 @@
 import com.freeb.Dao.CategoryStorage;
+import com.freeb.Dao.CommentStorage;
 import com.freeb.Dao.MerchantStorage;
 import org.junit.After;
 import org.junit.Before;
@@ -10,6 +11,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Random;
 
 public class TestCategoryDao {
 
@@ -21,6 +23,7 @@ public class TestCategoryDao {
 
     private CategoryStorage cStorage;
     private MerchantStorage mStorage;
+    private CommentStorage cmtStorage;
     @Before
     public void Init() throws ClassNotFoundException {
 //        cStorage = new CategoryStorage(CATE_DB_URL, CATE_USER, CATE_PWD);
@@ -60,7 +63,7 @@ public class TestCategoryDao {
 
     private void TruncateDB(){
         try(Connection conn = DriverManager.getConnection(CATE_DB_URL, CATE_USER, CATE_PWD)){
-            PreparedStatement stmt = conn.prepareStatement("truncate table CATEGORY_INFOS");
+            PreparedStatement stmt = conn.prepareStatement("truncate table CATEGORY_INFO");
             int re = stmt.executeUpdate();
             if(re<0){
                 logger.warn("truncate table CATEGORY_INFOS FAILED !");
@@ -76,6 +79,26 @@ public class TestCategoryDao {
     public void finale(){
 //        TruncateDB();
 
+    }
+
+
+    @Test
+    public void CreateComments(){
+        Random r=new Random(25);
+        // 50*500 = 2w5
+        String detail = "comment details ";
+        for(int i=0;i<50;i++){
+            Long pid = (long)r.nextInt(10000);
+            for(int j=0;j<500;j++){
+                Long uid = (long)r.nextInt(1000);
+                cmtStorage.CreateComments(uid,pid,detail+uid+detail+pid,"invalid");
+            }
+        }
+        for(int i=0;i<10000;i++){
+            Long pid = (long)r.nextInt(10000);
+            Long uid = (long)r.nextInt(100000);
+            cmtStorage.CreateComments(uid,pid,detail+uid+detail+pid,"invalid");
+        }
     }
 
 }

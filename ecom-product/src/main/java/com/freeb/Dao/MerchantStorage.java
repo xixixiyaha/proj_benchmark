@@ -7,7 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class MerchantStorage {
-    private static final Logger logger = LoggerFactory.getLogger(CategoryStorage.class);
+    private static final Logger logger = LoggerFactory.getLogger(MerchantStorage.class);
 
     static String MERCHANT_DB_URL;
     static String MERCHANT_USER;

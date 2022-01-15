@@ -58,7 +58,7 @@ public class ProductInfoStorage {
     private static final String GET_PRODUCT_BY_SIMILARITY = "SELECT * FROM PRODUCT_INFOS WHERE category_id = ? AND prod_name LIKE %?% ORDER BY prod_sales DESC";
 
 
-    //todo 挪入productDao
+
     private static final String GET_CATEGORY_BY_PRODUCT = "SELECT category_id FROM PRODUCT_INFOS WHERE prod_id = ?";
     public Integer GetCategoryByProduct(Long productId) {
         ResultSet rs = null;
@@ -97,7 +97,7 @@ public class ProductInfoStorage {
 
 
     //todo 挪入disocounts
-    private static final String CREATE_DISCOUNT = "INSERT INTO DISCOUNT_INFOS(discount_type,prod_id,discount_price) VALUES(?,?,?)";
+    private static final String CREATE_DISCOUNT = "INSERT INTO DISCOUNT_INFOS(discount_type,prod_id,discount_val) VALUES(?,?,?)";
     public Boolean CreateDiscountInfo(Integer type,Long prodId,Double price){
         try(Connection conn = druidUtil.GetConnection()){
             PreparedStatement stmt = conn.prepareStatement(CREATE_DISCOUNT);

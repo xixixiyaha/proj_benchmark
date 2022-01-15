@@ -1,7 +1,6 @@
 package com.freeb.Service;
 
 import com.freeb.Clients.SearchClients;
-import com.freeb.Dao.ProductInfoStorage;
 import com.freeb.Entity.ProductInfo;
 import com.freeb.Entity.UserActive;
 import com.freeb.Entity.UserSimilarity;
@@ -18,29 +17,20 @@ public class Recommend {
     private static final Logger logger = LoggerFactory.getLogger(Recommend.class);
 
     SearchClients clients;
-    ProductInfoStorage storage;
 
     public Recommend(SearchClients c){
         this.clients = c;
     }
-    public Recommend(ProductInfoStorage s){
-        storage = s;
-        this.clients = new SearchClients();
-    }
+
     public Recommend(String url,String user,String pwd) throws ClassNotFoundException {
-
-        storage = new ProductInfoStorage(url,user,pwd);
-        this.clients = new SearchClients();
+     //TODO RPC
+//        this.clients;
     }
 
-    public Recommend(SearchClients c,ProductInfoStorage s){
-        clients = c;
-        storage =s;
-    }
 
     public Map<Integer,Double> GetUserTags(Long id){
         // TODO & NOTICE : This is local version -- should in account
-        ConcurrentHashMap<Integer, Integer> categoryTags = storage.GetUserActiveByCategory(id);
+        ConcurrentHashMap<Integer, Integer> categoryTags = clients.GetUserActiveByCategory(id);
         Integer sumClicks = 0;
         Map<Integer,Double> tags = new HashMap<>();
         Iterator<Map.Entry<Integer, Integer>> it = categoryTags.entrySet().iterator();
@@ -66,7 +56,7 @@ public class Recommend {
 
     public boolean CreateUserClickBehavior(Long userId, Long prodId, Integer categoryId) {
         logger.info(String.format("userId={%d} prodId={%d} categoryId={%d}",userId,prodId,categoryId));
-        return storage.CreateActiveBehavior(userId,prodId,categoryId);
+        return clients.CreateActiveBehavior(userId,prodId,categoryId);
     }
 
     public ConcurrentHashMap<Long, ConcurrentHashMap<Long, Long>> AssembleUserBehavior(List<UserActive> userActiveList) {
@@ -107,9 +97,9 @@ public class Recommend {
         ConcurrentHashMap<Long, ConcurrentHashMap<Integer, Integer>> activeMap = new ConcurrentHashMap<>();
         // 遍历查询到的用户点击行为数据
         // 获取最近活跃的 1000 个用户
-        List<Long> activeUsers = storage.GetLastestAvtiveUsers(1000);
+        List<Long> activeUsers = clients.GetLastestAvtiveUsers(1000);
         for(Long uid:activeUsers){
-            activeMap.put(uid,storage.GetUserActiveByCategory(uid));
+            activeMap.put(uid,clients.GetUserActiveByCategory(uid));
         }
         logger.info("assemable user num="+activeMap.size());
         return activeMap;
@@ -123,9 +113,9 @@ public class Recommend {
     public ConcurrentHashMap<Long, HashSet<Long>> AssembleUserClicks(){
         ConcurrentHashMap<Long, HashSet<Long>> activeMap = new ConcurrentHashMap<>();
 
-        List<Long> activeUsers = storage.GetLastestAvtiveUsers(1000);
+        List<Long> activeUsers = clients.GetLastestAvtiveUsers(1000);
         for(Long uid:activeUsers){
-            activeMap.put(uid,storage.GetUserActiveByProduct(uid));
+            activeMap.put(uid,clients.GetUserActiveByProduct(uid));
         }
         logger.info("assemable user num="+activeMap.size());
         return activeMap;
@@ -142,7 +132,7 @@ public class Recommend {
 
         // 计算所有的用户之间的相似度对
         if(!activeMap.containsKey(userId)) {
-            activeMap.put(userId,storage.GetUserActiveByProduct(userId));
+            activeMap.put(userId,clients.GetUserActiveByProduct(userId));
         }
 
         // 获取所有的键的集合
@@ -346,8 +336,8 @@ public class Recommend {
      *                       目前写死 len = 3 (0.6,0.3,0.1)
      * @param prodNum 推荐总数 目前写死 num = 50
      */
-    public List<ProductInfo> GetRecommendProductsByProdName(Long userId, SearchOrder order, String words, List<Integer> categoryWeight, Integer prodNum){
-        List<ProductInfo> prodList = new ArrayList<>();
+    public List<Long> GetRecommendProductsByProdName(Long userId, SearchOrder order, String words, List<Integer> categoryWeight, Integer prodNum){
+        List<Long> prodList = new ArrayList<>();
         int categoryLen = categoryWeight.size();
 
         // 1. & 2. 获取最近活跃的1000名用户 & 计算当前用户与他们的相似度
@@ -361,7 +351,7 @@ public class Recommend {
         // 4. 获取用户可能最喜欢的类别
         List<Integer> rcmdCategory = GetRecommendCategory(userId,topSimilarities,categoryLen+REDUNDANCY_CATEGORY_NUM,categoryLen);
         for(int i=0;i<categoryLen;i++){
-            List<ProductInfo> prodSubList = GetProductByCategory(rcmdCategory.get(i),order,words,prodNum*categoryWeight.get(i));
+            List<Long> prodSubList = GetProductByCategory(rcmdCategory.get(i),order,words,prodNum*categoryWeight.get(i));
             if(prodSubList == null || prodSubList.size()==0){
                 logger.error(String.format("prodSubList is invalid! userId={%d} category={%d} order={%s} words={%s}",userId,rcmdCategory.get(i),order.toString(),words));
                 continue;
@@ -371,8 +361,8 @@ public class Recommend {
         return prodList;
     }
 
-    public List<ProductInfo> GetRecommendProductsByProdName(Long userId, SearchOrder order, String words){
-        List<ProductInfo> prodList = new ArrayList<>();
+    public List<Long> GetRecommendProductsByProdName(Long userId, SearchOrder order, String words){
+        List<Long> prodList = new ArrayList<>();
         int categoryLen = DEFAULT_CATEGORY_WEIGHT.size();
 
         // 1. & 2. 获取最近活跃的1000名用户 & 计算当前用户与他们的相似度
@@ -386,7 +376,7 @@ public class Recommend {
         // 4. 获取用户可能最喜欢的类别
         List<Integer> rcmdCategory = GetRecommendCategory(userId,topSimilarities,categoryLen+REDUNDANCY_CATEGORY_NUM,categoryLen);
         for(int i=0;i<categoryLen;i++){
-            List<ProductInfo> prodSubList = GetProductByCategory(rcmdCategory.get(i),order,words,50*DEFAULT_CATEGORY_WEIGHT.get(i));
+            List<Long> prodSubList = GetProductByCategory(rcmdCategory.get(i),order,words,50*DEFAULT_CATEGORY_WEIGHT.get(i));
             if(prodSubList == null || prodSubList.size()==0){
                 logger.error(String.format("prodSubList is invalid! userId={%d} category={%d} order={%s} words={%s}",userId,rcmdCategory.get(i),order.toString(),words));
                 continue;
@@ -397,12 +387,12 @@ public class Recommend {
     }
 
     // TODO & NOTICE 现阶段提供两种 order: by SALES 和 模糊搜索
-    public List<ProductInfo> GetProductByCategory(Integer categoryId, SearchOrder order,String words,Integer prodNum){
+    public List<Long> GetProductByCategory(Integer categoryId, SearchOrder order,String words,Integer prodNum){
         switch (order){
             case SALES:
-                return storage.GetProductByCategory(categoryId,order,prodNum);
+                return clients.GetProductByCategory(categoryId,order,prodNum);
             case SIMILARITY:
-                return storage.GetProductBySimilarity(categoryId,order,words,prodNum);
+                return clients.GetProductBySimilarity(categoryId,order,words,prodNum);
             default:
                 logger.warn("Unsupported recommend type !");
         }

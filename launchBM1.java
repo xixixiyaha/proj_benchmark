@@ -41,7 +41,7 @@ public class launchBM1{
     }
 
     private static void installSearchService() throws Exception {
-        //TODO 看一下 proj_bm 要不要 install
+
         exec("mvn clean install");
         // exec("ecom-common","mvn clean install");
         // exec("ecom-search", "mvn clean install");

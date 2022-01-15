@@ -14,8 +14,8 @@ public class PaymentServiceImpl implements PaymentService {
     static String PAYMENT_DB_URL;
     static String PAYMENT_USER;
     static String PAYMENT_PSW;
-    //TODO 记得把public属性改回private
-    public PaymentInfoStorage storage;
+
+    private PaymentInfoStorage storage;
 
     public PaymentServiceImpl() throws ClassNotFoundException {
         storage = new PaymentInfoStorage(PAYMENT_DB_URL,PAYMENT_USER, PAYMENT_PSW);

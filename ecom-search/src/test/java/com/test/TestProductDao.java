@@ -202,23 +202,6 @@ public class TestProductDao {
         }
     }
 
-    @Test
-    public void CreateComments(){
-        Random r=new Random(25);
-        // 50*500 = 2w5
-        String detail = "comment details ";
-        for(int i=0;i<50;i++){
-            Long pid = (long)r.nextInt(10000);
-            for(int j=0;j<500;j++){
-                Long uid = (long)r.nextInt(1000);
-                storage.CreateComments(uid,pid,detail+uid+detail+pid,"invalid");
-            }
-        }
-        for(int i=0;i<10000;i++){
-            Long pid = (long)r.nextInt(10000);
-            Long uid = (long)r.nextInt(100000);
-            storage.CreateComments(uid,pid,detail+uid+detail+pid,"invalid");
-        }
-    }
+
 
 }

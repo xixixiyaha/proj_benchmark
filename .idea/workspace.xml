@@ -2,13 +2,33 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e7402edc-f985-409d-9734-d8a746f29253" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/ecom-category/src/main/java/com/freeb/Service/CategoryService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ecom-common/src/main/java/com/freeb/Entity/CategoryPage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ecom-common/src/main/java/com/freeb/Entity/CommentInfo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ecom-common/src/main/java/com/freeb/Entity/ProductPage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ecom-category/src/main/java/com/freeb/Clients/CategoryClients.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ecom-category/src/main/java/com/freeb/Dao/CommentStorage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ecom-category/src/main/java/com/freeb/Dao/ProdStorage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ecom-category/src/main/java/com/freeb/Service/CategoryServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ecom-common/src/main/java/com/freeb/Entity/DiscountInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ecom-product/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ecom-product/src/main/java/com/freeb/Service/ProductService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ecom-product/src/main/java/com/freeb/Service/ProductServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecom-category/src/main/java/com.freeb/Dao/CategoryStorage.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecom-category/src/main/java/com.freeb/Dao/CategoryStorage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecom-search/src/main/java/com/freeb/Dao/ProductInfoStorage.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecom-search/src/main/java/com/freeb/Dao/ProductInfoStorage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecom-category/src/main/java/com.freeb/Dao/CategoryStorage.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecom-category/src/main/java/com/freeb/Dao/CategoryStorage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecom-category/src/main/java/com.freeb/Dao/MerchantStorage.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecom-product/src/main/java/com/freeb/Dao/MerchantStorage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecom-category/src/test/java/TestCategoryDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecom-category/src/test/java/TestCategoryDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecom-common/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ecom-common/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecom-common/src/main/java/com/freeb/Entity/CommentInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecom-common/src/main/java/com/freeb/Entity/CommentInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecom-common/src/main/java/com/freeb/Entity/ProductPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecom-common/src/main/java/com/freeb/Entity/ProductPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecom-common/src/main/java/com/freeb/Utils/MarshalUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecom-common/src/main/java/com/freeb/Utils/MarshalUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecom-payment/src/main/java/com.freeb/Service/PaymentServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecom-payment/src/main/java/com.freeb/Service/PaymentServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecom-search/src/main/java/com/freeb/Clients/SearchClients.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecom-search/src/main/java/com/freeb/Clients/SearchClients.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecom-search/src/main/java/com/freeb/Dao/ProductInfoStorage.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecom-product/src/main/java/com/freeb/Dao/ProductInfoStorage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecom-search/src/main/java/com/freeb/Service/Recommend.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecom-search/src/main/java/com/freeb/Service/Recommend.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecom-search/src/main/java/com/freeb/Service/SearchService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecom-search/src/main/java/com/freeb/Service/SearchService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecom-search/src/main/java/com/freeb/Service/SearchServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecom-search/src/main/java/com/freeb/Service/SearchServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecom-search/src/test/java/com/test/TestProductDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecom-search/src/test/java/com/test/TestProductDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/launchBM1.java" beforeDir="false" afterPath="$PROJECT_DIR$/launchBM1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,14 +67,14 @@
         <item name="Tecent" type="feb32156:DbDataSourceImpl" />
         <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
         <item name="FREEB: schema" type="76f4a085:MysqlImplModel$Schema" />
-        <item name="CATEGORY_INFOS: table" type="285a2a93:MysqlImplModel$Table" />
+        <item name="COMMENT_INFO: table" type="285a2a93:MysqlImplModel$Table" />
       </path>
       <path>
         <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
         <item name="Tecent" type="feb32156:DbDataSourceImpl" />
         <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
         <item name="FREEB: schema" type="76f4a085:MysqlImplModel$Schema" />
-        <item name="COMMENT_INFO: table" type="285a2a93:MysqlImplModel$Table" />
+        <item name="DISCOUNT_INFOS: table" type="285a2a93:MysqlImplModel$Table" />
       </path>
       <path>
         <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
@@ -137,12 +157,15 @@
     <property name="settings.editor.selected.configurable" value="Errors" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\0_4th\proj_benchmark\thrift-accounts\src\main\java\thrift\Accounts" />
-      <recent name="D:\0_4th\proj_benchmark\thrift-frontend\src\main\java\com\freeb\thrift\Accounts" />
-      <recent name="D:\0_4th\proj_benchmark\thrift-accounts\src\main\java\thrift\accounts" />
-      <recent name="D:\0_4th\proj_benchmark\thrift-frontend\src\main\java\com\freeb\thrift" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\0_4th\proj_benchmark\ecom-accounts\src\main\resources" />
       <recent name="D:\0_4th\proj_benchmark\thrift-accounts\src\main\java\thrift" />
+      <recent name="D:\0_4th\proj_benchmark\resource" />
+      <recent name="D:\0_4th\proj_benchmark\thrift-client\src\main\thrift" />
+      <recent name="D:\0_4th\proj_benchmark\src" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.freeb.Dao" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.freeb.thrift" />
@@ -151,12 +174,12 @@
       <recent name="com.freeb.Utils" />
       <recent name="benchmark.rpc.pipe" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\0_4th\proj_benchmark\ecom-accounts\src\main\resources" />
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\0_4th\proj_benchmark\thrift-accounts\src\main\java\thrift\Accounts" />
+      <recent name="D:\0_4th\proj_benchmark\thrift-frontend\src\main\java\com\freeb\thrift\Accounts" />
+      <recent name="D:\0_4th\proj_benchmark\thrift-accounts\src\main\java\thrift\accounts" />
+      <recent name="D:\0_4th\proj_benchmark\thrift-frontend\src\main\java\com\freeb\thrift" />
       <recent name="D:\0_4th\proj_benchmark\thrift-accounts\src\main\java\thrift" />
-      <recent name="D:\0_4th\proj_benchmark\resource" />
-      <recent name="D:\0_4th\proj_benchmark\thrift-client\src\main\thrift" />
-      <recent name="D:\0_4th\proj_benchmark\src" />
     </key>
   </component>
   <component name="RunManager" selected="JUnit.TestPaymentService.TestCancelPayment">
@@ -333,7 +356,8 @@
       <workItem from="1641866225279" duration="4709000" />
       <workItem from="1641883167409" duration="1156000" />
       <workItem from="1642001526301" duration="3298000" />
-      <workItem from="1642033860642" duration="1464000" />
+      <workItem from="1642033860642" duration="2288000" />
+      <workItem from="1642231889066" duration="12169000" />
     </task>
     <servers />
   </component>
@@ -419,19 +443,19 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="399" y="105" key="#com.intellij.ide.fileTemplates.ui.ConfigureTemplatesDialog/0.0.1536.824@0.0.1536.824" timestamp="1636788265426" />
-    <state x="958" y="124" key="#com.intellij.ide.util.MemberChooser" timestamp="1642003052667">
+    <state x="958" y="124" key="#com.intellij.ide.util.MemberChooser" timestamp="1642250845154">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="-722" y="157" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1636859364147" />
-    <state x="958" y="124" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1642003052667" />
+    <state x="958" y="124" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1642250845154" />
     <state x="575" y="340" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1641385485717">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="575" y="340" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/0.0.1536.824@0.0.1536.824" timestamp="1641385485717" />
-    <state x="553" y="279" width="429" height="271" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1641628246287">
+    <state x="553" y="279" width="429" height="271" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1642233598029">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="553" y="279" width="429" height="271" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1536.824@0.0.1536.824" timestamp="1641628246287" />
+    <state x="553" y="279" width="429" height="271" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1536.824@0.0.1536.824" timestamp="1642233598029" />
     <state x="411" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1638773416485">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -514,12 +538,12 @@
     </state>
     <state x="-1224" y="178" key="Maven.ArtifactSearchDialog/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1636855879210" />
     <state x="557" y="141" key="Maven.ArtifactSearchDialog/0.0.1536.824@0.0.1536.824" timestamp="1641628385820" />
-    <state x="412" y="0" key="SettingsEditor" timestamp="1641654109304">
+    <state x="412" y="0" key="SettingsEditor" timestamp="1642238492288">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="-1040" y="81" key="SettingsEditor/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1636855190523" />
     <state x="536" y="-1080" key="SettingsEditor/0.0.1536.824/3.-1080.1920.1040@3.-1080.1920.1040" timestamp="1640434765051" />
-    <state x="412" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1641654109304" />
+    <state x="412" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1642238492288" />
     <state x="440" y="149" key="VcsDiffUtil.ChangesDialog" timestamp="1635811459960">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -534,22 +558,22 @@
     <state x="653" y="305" width="333" height="226" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1/0.0.1536.824/3.-1080.1920.1040@0.0.1536.824" timestamp="1640177989747" />
     <state x="819" y="-695" width="336" height="227" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1/0.0.1536.824/3.-1080.1920.1040@3.-1080.1920.1040" timestamp="1640439041224" />
     <state x="653" y="305" width="333" height="294" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1/0.0.1536.824@0.0.1536.824" timestamp="1642035125035" />
-    <state x="553" y="242" width="429" height="339" key="com.intellij.database.psi.DbRenamePsiElementProcessor.DbRenameDialog" timestamp="1642035059393">
+    <state x="553" y="242" width="429" height="327" key="com.intellij.database.psi.DbRenamePsiElementProcessor.DbRenameDialog" timestamp="1642250830252">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="553" y="242" width="429" height="339" key="com.intellij.database.psi.DbRenamePsiElementProcessor.DbRenameDialog/0.0.1536.824@0.0.1536.824" timestamp="1642035059393" />
+    <state x="553" y="242" width="429" height="327" key="com.intellij.database.psi.DbRenamePsiElementProcessor.DbRenameDialog/0.0.1536.824@0.0.1536.824" timestamp="1642250830252" />
     <state x="478" y="60" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog" timestamp="1642035255397">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="478" y="60" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog/0.0.1536.824@0.0.1536.824" timestamp="1642035255397" />
-    <state x="461" y="240" key="com.intellij.ide.util.TipDialog" timestamp="1642033885057">
+    <state x="461" y="240" key="com.intellij.ide.util.TipDialog" timestamp="1642232179219">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="461" y="240" key="com.intellij.ide.util.TipDialog/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1639962966401" />
     <state x="2496" y="303" key="com.intellij.ide.util.TipDialog/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1637196385518" />
     <state x="461" y="240" key="com.intellij.ide.util.TipDialog/0.0.1536.824/3.-1080.1920.1040@0.0.1536.824" timestamp="1640430145466" />
     <state x="579" y="-777" key="com.intellij.ide.util.TipDialog/0.0.1536.824/3.-1080.1920.1040@3.-1080.1920.1040" timestamp="1640764587563" />
-    <state x="461" y="240" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1642033885057" />
+    <state x="461" y="240" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1642232179219" />
     <state x="485" y="313" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1638854296100">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -558,17 +582,17 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="732" y="397" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1641297584695" />
-    <state x="343" y="135" width="973" height="548" key="find.popup" timestamp="1642034787782">
+    <state x="343" y="135" width="973" height="548" key="find.popup" timestamp="1642249862560">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="775" y="141" width="755" height="548" key="find.popup/0.0.1536.824/3.-1080.1920.1040@0.0.1536.824" timestamp="1640178117663" />
     <state x="972" y="-902" width="944" height="692" key="find.popup/0.0.1536.824/3.-1080.1920.1040@3.-1080.1920.1040" timestamp="1640439648584" />
-    <state x="343" y="135" width="973" height="548" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1642034787782" />
-    <state x="181" y="187" key="new project wizard" timestamp="1641540043376">
+    <state x="343" y="135" width="973" height="548" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1642249862560" />
+    <state x="181" y="187" key="new project wizard" timestamp="1642238423333">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="229" y="-844" key="new project wizard/0.0.1536.824/3.-1080.1920.1040@3.-1080.1920.1040" timestamp="1640434658494" />
-    <state x="181" y="187" key="new project wizard/0.0.1536.824@0.0.1536.824" timestamp="1641540043376" />
+    <state x="181" y="187" key="new project wizard/0.0.1536.824@0.0.1536.824" timestamp="1642238423333" />
     <state x="862" y="48" key="refactoring.ChangeSignatureDialog" timestamp="1635216676480">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -578,11 +602,11 @@
     </state>
     <state x="2536" y="240" key="run.anything.popup/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1636882153689" />
     <state x="493" y="190" width="672" height="677" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1641293909882" />
-    <state x="814" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1642034743106">
+    <state x="814" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1642249250643">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="-902" y="183" width="840" height="856" key="search.everywhere.popup/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1636858314530" />
-    <state x="814" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1642034743106" />
+    <state x="814" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1642249250643" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -12,7 +12,7 @@ public interface SearchService {
     /*
     * CPU contention 预计使用计算密集 cache可选
     * */
-    List<ProductInfo> GetRecommendByProdName(Long userId, String words, SearchType type, SearchOrder order);
+    List<Long> GetRecommendByProdName(Long userId, String words, SearchType type, SearchOrder order);
 
     /*
     * 插入数据

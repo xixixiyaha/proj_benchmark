@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
@@ -15,7 +14,7 @@ public class CategoryStorage {
     static String CATE_USER;
     static String CATE_PWD;
 
-    DruidUtil druidUtil;
+    private DruidUtil druidUtil;
 
     public CategoryStorage(String url, String name, String pwd) throws ClassNotFoundException {
         CATE_DB_URL =url;
@@ -38,7 +37,7 @@ public class CategoryStorage {
     }
 
     static final String GET_CATE_BY_ID ="SELECT category_id, category_description FROM CATEGORY_INFOS WHERE category_id = ?";
-    static final String CREATE_CATE="INSERT INTO CATEGORY_INFOS (category_description) VALUES(?)";
+    static final String CREATE_CATE="INSERT INTO CATEGORY_INFO (category_description) VALUES(?)";
 
     public Boolean CreateCategoryInfo(String description){
         try(Connection conn = druidUtil.GetConnection()){
@@ -55,23 +54,5 @@ public class CategoryStorage {
         return false;
     }
 
-    //todo 挪入products
-    public static final String CREATE_COMMENTS = "INSERT INTO COMMENT_INFO(user_id,prod_id,comment_detail,comment_media) VALUES(?,?,?,?)";
-    public Boolean CreateComments(Long userId,Long prodId,String commentDetail,String commentMedia){
-        try(Connection conn = druidUtil.GetConnection()){
-            PreparedStatement stmt = conn.prepareStatement(CREATE_COMMENTS);
-            stmt.setLong(1,userId);
-            stmt.setLong(2,prodId);
-            stmt.setString(3,commentDetail);
-            stmt.setString(4,commentMedia);
-            int rs = stmt.executeUpdate();
-            if(rs>0)return true;
 
-        }catch (SQLException e){
-            logger.error(String.format("DB connect failure %s",e.toString()));
-            // Notice here
-            e.printStackTrace();
-        }
-        return false;
-    }
 }

@@ -15,8 +15,8 @@ import java.util.Random;
 public class SearchServiceImpl implements SearchService {
 
     private static final Logger logger = LoggerFactory.getLogger(SearchServiceImpl.class);
-
-    private SearchClients clients = new SearchClients();
+//TODO
+    private SearchClients clients ;
     private Recommend rcmd = new Recommend(clients);
     private Boolean forceSearch = true;
 
@@ -26,9 +26,9 @@ public class SearchServiceImpl implements SearchService {
 
 
     @Override
-    public List<ProductInfo> GetRecommendByProdName(Long userId, String words, SearchType type, SearchOrder order) {
+    public List<Long> GetRecommendByProdName(Long userId, String words, SearchType type, SearchOrder order) {
 
-        List<ProductInfo> lst = new ArrayList<>();
+        List<Long> lst = new ArrayList<>();
         if(!clients.AccountExists(userId))return lst;
 //        List<Integer> tags = clients.GetAccountTag(userId);
 

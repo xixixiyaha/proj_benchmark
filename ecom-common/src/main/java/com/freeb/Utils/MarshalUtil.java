@@ -1,6 +1,8 @@
 package com.freeb.Utils;
 
 import com.freeb.Entity.*;
+import org.json.simple.JSONArray;
+import org.json.simple.parser.JSONParser;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -151,4 +153,32 @@ public class MarshalUtil {
 
         }
     }
+    public static List<CommentInfo> convertRs2CommentLists(ResultSet rs){
+        JSONParser parser = new JSONParser();
+        List<CommentInfo> lst=new ArrayList<>();
+        try{
+            while(rs.next()){
+                CommentInfo info = new CommentInfo();
+                info.setCommentId(rs.getLong(1));
+                info.setUserId(rs.getLong(2));
+                //TODO DB only stores the path. Tags should be read from .txt/.csv/.json/ ...
+//                info.setProdTag(rs.get(3));
+                info.setProdId(rs.getLong(3));
+                info.setCommentDetails(rs.getString(4));
+                List<String> imageUrls = new ArrayList<>();
+                JSONArray jarr = (JSONArray) parser.parse(rs.getString(5));
+                List<String> re = new ArrayList<>();
+                for (Object jsonValue : jarr) {
+                    re.add( (String)jsonValue);
+                }
+                info.setCommentImages(re);
+                lst.add(info);
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+            return null;
+        }
+        return lst;
+    }
+
 }

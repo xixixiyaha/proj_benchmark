@@ -78,7 +78,7 @@ public class OrderServiceServerImpl implements OrdersService{
             return orderResp;
         }
         Double prodVal= prodClient.GetProdPrice(orderReq.getProdId());
-        Double discountsVal= prodClient.GetDiscountsByProd(orderReq.getProdId());
+        Double discountsVal= prodClient.GetDiscounts(orderReq.getProdId(),0).getDiscountVal();
 
         Long paymentId = paymentClient.CreatePayment(orderReq.getUserId(),prodVal,discountsVal);
         if(paymentId ==-1L){
@@ -89,10 +89,8 @@ public class OrderServiceServerImpl implements OrdersService{
         }
         Boolean re =storage.UpdatePaymentIdByOrderId(orderReq.getOrderId());
         //update order's paymentID
-        OrderInfo info = storage.getOrderInfoByOrderId(orderReq.getOrderId());
+        List<OrderInfo> infos = storage.getOrderInfoByOrderId(orderReq.getOrderId());
         orderResp.setBaseResp(PackResponse.packSuccess());
-        // Pack OrderInfo
-        List<OrderInfo> infos = List.of(info);
         orderResp.setOrderInfos(infos);
         return orderResp;
     }

@@ -5,6 +5,8 @@ import com.freeb.Dao.CategoryStorage;
 import com.freeb.Entity.*;
 import com.freeb.Enum.SearchOrder;
 import com.freeb.Enum.SearchType;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +15,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 public class CategoryServiceImpl implements CategoryService {
+    private static final Logger logger = LoggerFactory.getLogger(CategoryServiceImpl.class);
 
     private ThreadPoolExecutor executor;
     private CategoryStorage cStorage;
@@ -77,7 +80,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     class GetMerchantNames implements Runnable{
-        private List<String> names;
+        private List<MerchantInfo> names;
         private List<Long> pids;
         GetMerchantNames(List<Long> ids){
             pids = ids;
@@ -87,7 +90,7 @@ public class CategoryServiceImpl implements CategoryService {
         public void run() {
             names = clients.GetMerchantNames(pids);
         }
-        public List<String> GetNames(){
+        public List<MerchantInfo> GetNames(){
             return names;
         }
     }
@@ -119,28 +122,44 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public List<CategoryPage> GetCategoryPage(Long userId, String searchKey) {
+        // 1. get product ids
         List<Long> prodIds = clients.GetRecommendProdId(userId,searchKey, SearchType.OBJ_NAME, SearchOrder.SIMILARITY);
 
         List<GetProductInfo> tasks = new ArrayList<>();
-        List<GetMerchantNames> task1s = new ArrayList<>();
 
-        // t2 => follow t1, merchantName
+        // 2. t1 => prod -> merchantName
         GetMerchantNames t2 = new GetMerchantNames(prodIds);
         executor.submit(t2);
-        // t1 => prodName, prodSales, prodNames, merchantId
-        // t1 => prodInfo
+        // 3. t2 => prodName, prodSales, prodNames, merchantId
         for(Long prodId:prodIds){
 
             GetProductInfo t1 = new GetProductInfo(prodId);
             executor.submit(t1);
             tasks.add(t1);
         }
+        //TODO CHECK if the function is that meaning
         try {
             executor.awaitTermination(3, TimeUnit.SECONDS);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
-        return null;
+        List<MerchantInfo> mInfoLst = t2.GetNames();
+        if(mInfoLst.size()!=prodIds.size()){
+            logger.warn("fetch merchantInfos Failed");
+            return null;
+        }
+        List<CategoryPage> re = new ArrayList<>();
+        int pos = 0;
+        for(Long pid:prodIds){
+            ProductInfo pInfo = tasks.get(pos).GetInfo();
+            if(mInfoLst.get(pos).getMerchantId().equals(pInfo.getMerchantId())){
+                re.add(new CategoryPage(pid,pInfo.getProdName(),pInfo.getProdSales(),pInfo.getProdImages().get(0),pInfo.getMerchantId(),mInfoLst.get(pos).getMerchantName()));
+            }else {
+                logger.warn("product Info doesnt match ");
+                re.add(new CategoryPage(pid,pInfo.getProdName(),pInfo.getProdSales(),pInfo.getProdImages().get(0),null,null));
+            }
+            // Notice ImagesList == null ?
+        }
+        return re;
     }
 }

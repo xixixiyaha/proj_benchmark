@@ -2,6 +2,7 @@ package com.freeb.Clients;
 
 import com.freeb.Entity.CommentInfo;
 import com.freeb.Entity.DiscountInfo;
+import com.freeb.Entity.MerchantInfo;
 import com.freeb.Entity.ProductInfo;
 import com.freeb.Enum.SearchOrder;
 import com.freeb.Enum.SearchType;
@@ -39,5 +40,5 @@ public abstract class CategoryClients {
 
     public abstract DiscountInfo GetDiscounts(Long prodId,Integer type);
 
-    public abstract List<String> GetMerchantNames(List<Long> pids);
+    public abstract List<MerchantInfo> GetMerchantNames(List<Long> pids);
 }

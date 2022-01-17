@@ -10,6 +10,7 @@ import com.freeb.Utils.MarshalUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Orders {
@@ -95,17 +96,18 @@ public class Orders {
             return MarshalUtil.convertString2OrderList(key);
 
         }
+
         switch (type){
             case ORDER_ID:
-                return MarshalUtil.convertRs2OrderList(storage.getOrderInfoByOrderId(searchId));
+                return storage.getOrderInfoByOrderId(searchId);
             case OBJ_ID:
-                return MarshalUtil.convertRs2OrderList(storage.getOrderInfoByObjId(searchId));
+                return storage.getOrderInfoByObjId(searchId);
             case ACCOUNT_ID:
-                return MarshalUtil.convertRs2OrderList(storage.getOrderInfoByAccountId(searchId));
+                return storage.getOrderInfoByAccountId(searchId);
             case MERCHANT_ID:
-                return MarshalUtil.convertRs2OrderList(storage.getOrderInfoByMerchantId(searchId));
+                return storage.getOrderInfoByMerchantId(searchId);
             case PAYMENT_ID:
-                return MarshalUtil.convertRs2OrderList(storage.getOrderInfoByPaymentId(searchId));
+                return storage.getOrderInfoByPaymentId(searchId);
             default:
                 logger.warn("unsupported type");
                 return null;

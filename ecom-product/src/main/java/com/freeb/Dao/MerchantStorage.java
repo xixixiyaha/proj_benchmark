@@ -11,14 +11,14 @@ public class MerchantStorage {
 
     static String MERCHANT_DB_URL;
     static String MERCHANT_USER;
-    static String ERCHANT_PWD;
+    static String MERCHANT_PWD;
 
     DruidUtil druidUtil;
 
     public MerchantStorage(String url, String name, String pwd) throws ClassNotFoundException {
         MERCHANT_DB_URL =url;
         MERCHANT_USER =name;
-        ERCHANT_PWD =pwd;
+        MERCHANT_PWD =pwd;
 
         Class.forName("com.mysql.cj.jdbc.Driver");
         druidUtil=new DruidUtil(url,name,pwd);
@@ -36,7 +36,7 @@ public class MerchantStorage {
     }
 
     static final String GET_MERCHANT_BY_ID ="SELECT merchant_id, merchant_name FROM MERCHANT_INFOS WHERE merchant_id = ?";
-    static final String CREATE_MERTCHANT="INSERT INTO MERCHANT_INFOS (merchant_name) VALUES(?)";
+    static final String CREATE_MERTCHANT="INSERT INTO MERCHANT_INFO (merchant_name) VALUES(?)";
 
     public Boolean CreateMerchantInfo(String mName){
         try(Connection conn = druidUtil.GetConnection()){

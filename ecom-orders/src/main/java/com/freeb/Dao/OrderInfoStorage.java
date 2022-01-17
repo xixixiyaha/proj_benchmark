@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.sql.*;
+import java.util.List;
 
 public class OrderInfoStorage {
 
@@ -49,7 +50,7 @@ public class OrderInfoStorage {
     static final String ORDER_FULL_QUERY_BY_OBJID ="SELECT order_id, user_id, payment_status, merchant_id,merchant_name,prod_id,prod_name,payment_id FROM ORDER_INFO WHERE prod_id = ?";
     static final String ORDER_FULL_QUERY_BY_PAYMENTID="SELECT order_id, user_id, payment_status, merchant_id,merchant_name,prod_id,prod_name,payment_id FROM ORDER_INFO WHERE payment_id = ?";
     static final String UPDATE_PAYMENTID_BY_ORDERID = "UPDATE ORDER_INFO SET payment_id = ? WHERE order_id=?";
-    public OrderInfo getOrderInfoByOrderId(long orderId) {
+    public List<OrderInfo> getOrderInfoByOrderId(long orderId) {
         ResultSet rs=null;
         try(Connection conn = druidUtil.GetConnection()){
             PreparedStatement stmt = conn.prepareStatement(ORDER_FULL_QUERY_BY_ORDERID);
@@ -61,9 +62,9 @@ public class OrderInfoStorage {
             e.printStackTrace();
             return null;
         }
-        return MarshalUtil.convertRs2OrderInfo(rs);
+        return MarshalUtil.convertRs2OrderList(rs);
     }
-    public OrderInfo getOrderInfoByAccountId(long orderId) {
+    public List<OrderInfo> getOrderInfoByAccountId(long orderId) {
         ResultSet rs=null;
         try(Connection conn = druidUtil.GetConnection()){
             PreparedStatement stmt = conn.prepareStatement(ORDER_FULL_QUERY_BY_ACCOUNTID);
@@ -75,9 +76,9 @@ public class OrderInfoStorage {
             e.printStackTrace();
             return null;
         }
-        return MarshalUtil.convertRs2OrderInfo(rs);
+        return MarshalUtil.convertRs2OrderList(rs);
     }
-    public OrderInfo getOrderInfoByMerchantId(long orderId) {
+    public List<OrderInfo> getOrderInfoByMerchantId(long orderId) {
         ResultSet rs=null;
         try(Connection conn = druidUtil.GetConnection()){
             PreparedStatement stmt = conn.prepareStatement(ORDER_FULL_QUERY_BY_MERCHANTID);
@@ -89,9 +90,9 @@ public class OrderInfoStorage {
             e.printStackTrace();
             return null;
         }
-        return MarshalUtil.convertRs2OrderInfo(rs);
+        return MarshalUtil.convertRs2OrderList(rs);
     }
-    public OrderInfo getOrderInfoByObjId(long orderId) {
+    public List<OrderInfo> getOrderInfoByObjId(long orderId) {
         ResultSet rs=null;
         try(Connection conn = druidUtil.GetConnection()){
             PreparedStatement stmt = conn.prepareStatement(ORDER_FULL_QUERY_BY_OBJID);
@@ -103,10 +104,10 @@ public class OrderInfoStorage {
             e.printStackTrace();
             return null;
         }
-        return MarshalUtil.convertRs2OrderInfo(rs);
+        return MarshalUtil.convertRs2OrderList(rs);
     }
 
-    public OrderInfo getOrderInfoByPaymentId(long paymentId) {
+    public List<OrderInfo> getOrderInfoByPaymentId(long paymentId) {
         ResultSet rs=null;
         try(Connection conn = druidUtil.GetConnection()){
             PreparedStatement stmt = conn.prepareStatement(ORDER_FULL_QUERY_BY_PAYMENTID);
@@ -118,7 +119,7 @@ public class OrderInfoStorage {
             e.printStackTrace();
             return null;
         }
-        return MarshalUtil.convertRs2OrderInfo(rs);
+        return MarshalUtil.convertRs2OrderList(rs);
     }
 
     public Boolean UpdatePaymentIdByOrderId(Long orderId) {

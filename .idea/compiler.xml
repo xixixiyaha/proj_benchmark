@@ -19,8 +19,14 @@
         <module name="thrift-server" />
         <module name="ecom-search" />
         <module name="thrift-frontend" />
+        <module name="ecom-discount" />
         <module name="ecom-orders" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="base-benchmark" target="1.8" />
+      <module name="thrift-client" target="1.8" />
+      <module name="thrift-server" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>

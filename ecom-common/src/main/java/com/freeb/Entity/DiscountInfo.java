@@ -6,6 +6,13 @@ public class DiscountInfo {
     Long prodId;
     Double discountVal;
 
+    public DiscountInfo(Long discountId, Integer discountType, Long prodId, Double discountVal) {
+        this.discountId = discountId;
+        this.discountType = discountType;
+        this.prodId = prodId;
+        this.discountVal = discountVal;
+    }
+
     public Long getDiscountId() {
         return discountId;
     }

@@ -13,9 +13,9 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>base-benchmark</module>
-        <module>thrift-client</module>
-        <module>thrift-server</module>
+<!--        <module>base-benchmark</module>-->
+<!--        <module>thrift-client</module>-->
+<!--        <module>thrift-server</module>-->
         <module>ecom-orders</module>
         <module>ecom-accounts</module>
         <module>ecom-common</module>
@@ -27,6 +27,7 @@
         <module>thrift-search</module>
         <module>thrift-frontend</module>
         <module>ecom-product</module>
+        <module>ecom-discount</module>
     </modules>
 
     <properties>
@@ -66,12 +67,6 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.13.2</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>7.4.0</version>
             <scope>test</scope>
         </dependency>
         <!-- https://mvnrepository.com/artifact/redis.clients/jedis -->

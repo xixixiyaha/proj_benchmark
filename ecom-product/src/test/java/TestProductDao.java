@@ -1,5 +1,3 @@
-package com.test;
-
 import com.freeb.Dao.ProductInfoStorage;
 import org.junit.After;
 import org.junit.Before;
@@ -8,14 +6,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.*;
-import java.util.function.DoubleUnaryOperator;
 
 public class TestProductDao {
 
@@ -164,7 +159,7 @@ public class TestProductDao {
                 categoryId = rand.nextInt(50);
                  Boolean re = storage.CreateProductInfo(prodName+cnter,categoryId,prodPrice,prodSales,(long)0,(long)merchantId);
                  if(!re){
-                     logger.error("insert failed round"+merchantId+" "+i);                                                                                     
+                     logger.error("insert failed round"+merchantId+" "+i);
                  }
                  this.prod2Category.put(cnter,categoryId);
                  cnter++;
@@ -189,18 +184,18 @@ public class TestProductDao {
 
 
 
-    @Test
-    public void CreateDiscounts(){
-        for(int i=0;i<5000;i++){
-            double price = (i*2+1)*1.0/((i&3)+1);
-            System.out.println("1="+(i&2)+"2="+i+"3="+price);
-            storage.CreateDiscountInfo(i&2, (long) i,price);
-            if((i&7)>3){
-                Double aprice = price/2;
-                storage.CreateDiscountInfo(i&3, (long) i,aprice);
-            }
-        }
-    }
+//    @Test
+//    public void CreateDiscounts(){
+//        for(int i=0;i<5000;i++){
+//            double price = (i*2+1)*1.0/((i&3)+1);
+//            System.out.println("1="+(i&2)+"2="+i+"3="+price);
+//            storage.CreateDiscountInfo(i&2, (long) i,price);
+//            if((i&7)>3){
+//                Double aprice = price/2;
+//                storage.CreateDiscountInfo(i&3, (long) i,aprice);
+//            }
+//        }
+//    }
 
 
 

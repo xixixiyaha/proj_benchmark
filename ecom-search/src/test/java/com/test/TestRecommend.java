@@ -1,6 +1,5 @@
 package com.test;
 import com.freeb.Clients.SearchClients;
-import com.freeb.Dao.ProductInfoStorage;
 import com.freeb.Entity.ProductInfo;
 import com.freeb.Service.Recommend;
 import org.junit.Before;
@@ -24,7 +23,6 @@ public class TestRecommend {
     static String PROD_PWD = "1204Adzq";
 
     private SearchClients clients;
-    private ProductInfoStorage storage;
     private Recommend rcmdService;
 
     public void CreateData(Long userNum,Long prodNum,Integer categoryNum,Long startUserNum){
@@ -42,7 +40,7 @@ public class TestRecommend {
                     cid=rand.nextInt(categoryNum);
                     obj2Category.put(pid,cid);
                 }
-                Boolean re = storage.CreateActiveBehavior(uid,pid,cid);
+                Boolean re = clients.CreateActiveBehavior(uid,pid,cid);
                 if(!re){
                     logger.error("insert failed round"+uid+" "+i);
                 }
@@ -66,8 +64,7 @@ public class TestRecommend {
 
     @Before
     public void initi() throws ClassNotFoundException {
-        storage = new ProductInfoStorage(PROD_DB_URL,PROD_USER,PROD_PWD);
-        rcmdService = new Recommend(storage);
+        rcmdService = new Recommend(clients);
     }
 
     @Test
@@ -124,7 +121,7 @@ public class TestRecommend {
                 cid=rand.nextInt(categoryNum);
                 obj2Category.put(pid,cid);
             }
-            Boolean re = storage.CreateActiveBehavior((long) startUserNum,pid,cid);
+            Boolean re = clients.CreateActiveBehavior((long) startUserNum,pid,cid);
             if(!re){
                 logger.error("insert failed round"+startUserNum+" "+i);
             }
@@ -146,7 +143,7 @@ public class TestRecommend {
                             obj2Category.put(pid,cid);
                         }
                     }
-                    Boolean re = storage.CreateActiveBehavior((uid+1L+startUserNum),pid,cid);
+                    Boolean re = clients.CreateActiveBehavior((uid+1L+startUserNum),pid,cid);
                     if(!re){
                         logger.error("insert failed round"+uid+" "+i);
                     }

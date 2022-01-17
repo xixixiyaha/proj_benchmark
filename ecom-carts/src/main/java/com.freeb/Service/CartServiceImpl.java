@@ -7,8 +7,8 @@ import com.freeb.Entity.CartInfo;
 import java.util.List;
 
 public class CartServiceImpl implements CartService {
-
-    private CartClients clients = new CartClients();
+    // TODO 虚类
+    private CartClients clients;
     private CartInfoStorage storage = new CartInfoStorage();
 
     @Override

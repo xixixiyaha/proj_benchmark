@@ -1,6 +1,5 @@
 package com.freeb.Dao;
 
-import com.alibaba.druid.pool.DruidDataSource;
 import com.freeb.Entity.ProductInfo;
 import com.freeb.Enum.SearchOrder;
 import com.freeb.Utils.MarshalUtil;
@@ -52,14 +51,14 @@ public class ProductInfoStorage {
 
     private static final String GET_PRODUCT_BY_CATEGORY_ORDER_BY_SALES_DESC = "SELECT * FROM PRODUCT_INFOS WHERE category_id = ? ORDER BY prod_sales DESC";
 
-    private static final String CREATE_PRODUCT = "INSERT INTO PRODUCT_INFOS (prod_name,category_id,prod_price,prod_sales,discounts_id,merchant_id) VALUES (?,?,?,?,?,?)";
+    private static final String CREATE_PRODUCT = "INSERT INTO PRODUCT_INFO (prod_name,category_id,prod_price,prod_sales,discounts_id,merchant_id) VALUES (?,?,?,?,?,?)";
 
     // TODO & NOTICE: 小数据量使用 like 避免大炮打蚊子
     private static final String GET_PRODUCT_BY_SIMILARITY = "SELECT * FROM PRODUCT_INFOS WHERE category_id = ? AND prod_name LIKE %?% ORDER BY prod_sales DESC";
 
 
 
-    private static final String GET_CATEGORY_BY_PRODUCT = "SELECT category_id FROM PRODUCT_INFOS WHERE prod_id = ?";
+    private static final String GET_CATEGORY_BY_PRODUCT = "SELECT category_id FROM PRODUCT_INFO WHERE prod_id = ?";
     public Integer GetCategoryByProduct(Long productId) {
         ResultSet rs = null;
         try (Connection conn = druidUtil.GetConnection()) {
@@ -96,24 +95,7 @@ public class ProductInfoStorage {
     }
 
 
-    //todo 挪入disocounts
-    private static final String CREATE_DISCOUNT = "INSERT INTO DISCOUNT_INFOS(discount_type,prod_id,discount_val) VALUES(?,?,?)";
-    public Boolean CreateDiscountInfo(Integer type,Long prodId,Double price){
-        try(Connection conn = druidUtil.GetConnection()){
-            PreparedStatement stmt = conn.prepareStatement(CREATE_DISCOUNT);
-            stmt.setInt(1,type);
-            stmt.setLong(2,prodId);
-            stmt.setDouble(3,price);
-            int rs = stmt.executeUpdate();
-            if(rs>0)return true;
 
-        }catch (SQLException e){
-            logger.error(String.format("DB connect failure %s",e.toString()));
-            // Notice here
-            e.printStackTrace();
-        }
-        return false;
-    }
 
 
 

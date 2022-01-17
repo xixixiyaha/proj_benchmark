@@ -6,9 +6,10 @@ import java.util.List;
 public class ProductInfo {
     Long prodId;
     String prodName;
-    Long prodCategory;
+    Integer categoryId;
     Double prodPrice;
     Integer prodSales;
+    List<String> prodImages;
     Long discountsId;
     Long merchantId;
     Date createTime;
@@ -30,12 +31,12 @@ public class ProductInfo {
         this.prodName = prodName;
     }
 
-    public Long getProdCategory() {
-        return prodCategory;
+    public Integer getCategoryId() {
+        return categoryId;
     }
 
-    public void setProdCategory(Long prodCategory) {
-        this.prodCategory = prodCategory;
+    public void setCategoryId(Integer categoryId) {
+        this.categoryId = categoryId;
     }
 
     public Double getProdPrice() {
@@ -84,5 +85,13 @@ public class ProductInfo {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public List<String> getProdImages() {
+        return prodImages;
+    }
+
+    public void setProdImages(List<String> prodImages) {
+        this.prodImages = prodImages;
     }
 }

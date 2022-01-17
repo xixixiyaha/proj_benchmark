@@ -1,9 +1,5 @@
 package com.freeb.Clients;
 
-public class CartClients {
-
-    //TODO
-    public Boolean AccountExists(Long id){
-        return true;
-    }
+public abstract class CartClients {
+    public abstract Boolean AccountExists(Long id);
 }

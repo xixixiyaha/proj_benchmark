@@ -10,7 +10,7 @@ enum IdType{
 }
 
 struct AccountInfo{
-    1: optional i64 userId,
+    1: required i64 userId,
     2: required string userName,
     3: required string userPasswd,
     4: optional string userDescription,

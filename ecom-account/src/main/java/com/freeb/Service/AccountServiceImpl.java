@@ -255,7 +255,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public String CompareResEfficiencyBM1(String remoteFilePath,Integer testType) {
-        logger.info("DBG@ AccountServiceImpl/ecom-Accounts");
+        logger.info("DBG@ AccountServiceImpl/ecom-Account");
         List<Long> results;
         long bengintime = System.nanoTime();
         Integer totalWorkLoad=0,threadNum = 1;

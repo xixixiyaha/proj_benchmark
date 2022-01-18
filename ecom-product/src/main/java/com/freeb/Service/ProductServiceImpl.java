@@ -5,6 +5,7 @@ import com.freeb.Entity.ProductInfo;
 import com.freeb.Enum.SearchOrder;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
@@ -16,7 +17,7 @@ public class ProductServiceImpl implements ProductService {
 
 
     @Override
-    public ConcurrentHashMap<Integer, Integer> GetUserActiveByCategory(Long id) {
+    public HashMap<Integer, Integer> GetUserActiveByCategory(Long id) {
         return storage.GetUserActiveByCategory(id);
     }
 

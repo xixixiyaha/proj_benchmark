@@ -16,8 +16,8 @@
 <!--        <module>base-benchmark</module>-->
 <!--        <module>thrift-client</module>-->
 <!--        <module>thrift-server</module>-->
-        <module>ecom-orders</module>
-        <module>ecom-accounts</module>
+        <module>ecom-order</module>
+        <module>ecom-account</module>
         <module>ecom-common</module>
         <module>ecom-payment</module>
         <module>ecom-carts</module>

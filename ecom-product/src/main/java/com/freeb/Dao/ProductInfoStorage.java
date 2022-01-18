@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
@@ -209,8 +210,8 @@ public class ProductInfoStorage {
      * @return userId最活跃的前10个category
      * TODO : 从最近 x 条该用户的点击记录里找 ↖
      */
-    public ConcurrentHashMap<Integer, Integer> GetUserActiveByCategory(Long userId){
-        ConcurrentHashMap<Integer, Integer> userActives = new ConcurrentHashMap<>();
+    public HashMap<Integer, Integer> GetUserActiveByCategory(Long userId){
+        HashMap<Integer, Integer> userActives = new HashMap<>();
         ResultSet rs=null;
         try(Connection conn = druidUtil.GetConnection()){
             PreparedStatement stmt = conn.prepareStatement(GET_USER_ACTIVE_BY_USER_GROUPBY_CATEGORY);

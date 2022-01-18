@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>ecom-accounts</artifactId>
+    <artifactId>ecom-account</artifactId>
     <dependencies>
         <dependency>
             <groupId>ch.ethz.ganymed</groupId>

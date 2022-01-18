@@ -2,12 +2,13 @@ package com.freeb.Service;
 
 import com.freeb.Enum.SearchOrder;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
 public interface ProductService {
-    public ConcurrentHashMap<Integer, Integer> GetUserActiveByCategory(Long id);
+    public HashMap<Integer, Integer> GetUserActiveByCategory(Long id);
 
     public Boolean CreateActiveBehavior(Long uid, Long pid, Integer cid);
 

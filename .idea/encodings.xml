@@ -3,8 +3,8 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/base-benchmark/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/base-benchmark/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/ecom-accounts/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/ecom-accounts/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ecom-account/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ecom-account/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ecom-carts/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ecom-carts/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ecom-category/src/main/java" charset="UTF-8" />
@@ -13,8 +13,8 @@
     <file url="file://$PROJECT_DIR$/ecom-common/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ecom-discount/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ecom-discount/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/ecom-orders/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/ecom-orders/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ecom-order/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ecom-order/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ecom-payment/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ecom-payment/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ecom-product/src/main/java" charset="UTF-8" />

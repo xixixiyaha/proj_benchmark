@@ -9,8 +9,6 @@ public class CartInfo {
     Long merchantId;
     Integer incartQuantity;
     Integer incartSelect;
-    Date createTime;
-    Date updateTime;
 
     public Long getCartId() {
         return cartId;
@@ -60,21 +58,6 @@ public class CartInfo {
         this.incartSelect = incartSelect;
     }
 
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public Date getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
 
     @Override
     public String toString() {
@@ -85,8 +68,6 @@ public class CartInfo {
                 ", merchantId=" + merchantId +
                 ", incartQuantity=" + incartQuantity +
                 ", incartSelect=" + incartSelect +
-                ", createTime=" + createTime +
-                ", updateTime=" + updateTime +
                 '}';
     }
 }

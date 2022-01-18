@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>com.freeb.Clients.AccountClients</OriginalElement>
+  <nodes>
+    <node x="0.0" y="1136.0">com.freeb.Clients.CartClients</node>
+    <node x="515.0" y="635.0">com.freeb.Service.PaymentService</node>
+    <node x="793.0" y="1014.0">com.freeb.Service.DiscountService</node>
+    <node x="0.0" y="849.0">com.freeb.Clients.AccountClients</node>
+    <node x="528.0" y="0.0">com.freeb.Clients.SearchClients</node>
+    <node x="398.0" y="375.0">com.freeb.Service.AccountService</node>
+    <node x="387.0" y="849.0">com.freeb.Service.SearchService</node>
+    <node x="0.0" y="635.0">com.freeb.Service.ProductService</node>
+    <node x="0.0" y="1014.0">com.freeb.Service.CartService</node>
+    <node x="0.0" y="0.0">com.freeb.Clients.CategoryClients</node>
+    <node x="0.0" y="375.0">com.freeb.Clients.OrderClients</node>
+    <node x="913.0" y="635.0">com.freeb.Service.OrderService</node>
+    <node x="398.0" y="1014.0">com.freeb.Service.CategoryService</node>
+  </nodes>
+  <notes />
+  <edges />
+  <settings layout="Hierarchic Group" zoom="0.7003977724741447" x="992.9957973648343" y="458.2996365288506" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

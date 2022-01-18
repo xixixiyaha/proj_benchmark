@@ -9,19 +9,10 @@ import java.util.concurrent.ConcurrentHashMap;
 public abstract class SearchClients {
 
 
-    public Boolean AccountExists(Long id){
-        return true;
-    }
-    public List<Integer> GetAccountTag(Long id) {
-        // todo
-        return null;
-    }
+    public abstract List<Integer> GetAccountTag(Long id);
+    public abstract Boolean SetAccountTag(Long id, String jsonStr);
 
-
-    public Boolean SetUserTags(Long userId,HashMap<Integer,Double> tags){
-        //todo
-        return null;
-    }
+    public abstract Boolean AccountExists(Long id);
 
     public abstract ConcurrentHashMap<Integer, Integer> GetUserActiveByCategory(Long id);
 

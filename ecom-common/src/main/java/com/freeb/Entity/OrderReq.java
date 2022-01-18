@@ -18,7 +18,6 @@ public class OrderReq {
     private String merchantName;
     private long prodId;
     private String prodName;
-    private int requireInfo;
     private long orderId;
     private long paymentId;
 
@@ -86,11 +85,4 @@ public class OrderReq {
         this.prodName = prodName;
     }
 
-    public int getRequireInfo() {
-        return requireInfo;
-    }
-
-    public void setRequireInfo(int requireInfo) {
-        this.requireInfo = requireInfo;
-    }
 }

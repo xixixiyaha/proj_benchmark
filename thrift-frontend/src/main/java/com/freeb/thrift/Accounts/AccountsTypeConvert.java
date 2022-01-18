@@ -1,5 +1,6 @@
 package com.freeb.thrift.Accounts;
 
+import com.freeb.Entity.AccountInfo;
 import com.freeb.Enum.IdType;
 
 public class AccountsTypeConvert {
@@ -40,8 +41,8 @@ public class AccountsTypeConvert {
         }
     }
 
-    public static com.freeb.Entity.AccountsInfo AccountsInfoThr2Ori(com.freeb.thrift.Accounts.AccountsInfo info) {
-        com.freeb.Entity.AccountsInfo re = new com.freeb.Entity.AccountsInfo();
+    public static AccountInfo AccountsInfoThr2Ori(com.freeb.thrift.Accounts.AccountsInfo info) {
+        AccountInfo re = new AccountInfo();
         re.setUserId(info.getUserId());
         re.setUserName(info.getUserName());
         re.setUserPasswd(info.getUserPasswd());
@@ -50,7 +51,7 @@ public class AccountsTypeConvert {
         return re;
     }
 
-    public static com.freeb.thrift.Accounts.AccountsInfo AccountsInfoOri2Thr(com.freeb.Entity.AccountsInfo info) {
+    public static com.freeb.thrift.Accounts.AccountsInfo AccountsInfoOri2Thr(AccountInfo info) {
         AccountsInfo re = new AccountsInfo();
         re.setUserId(info.getUserId());
         re.setUserName(info.getUserName());

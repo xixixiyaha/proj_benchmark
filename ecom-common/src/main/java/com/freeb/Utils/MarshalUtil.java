@@ -12,9 +12,9 @@ import java.util.List;
 public class MarshalUtil {
 
 
-    public static AccountsInfo convertRs2Account(ResultSet rs){
+    public static AccountInfo convertRs2Account(ResultSet rs){
 
-        AccountsInfo info=new AccountsInfo();
+        AccountInfo info=new AccountInfo();
         try{
             while(rs.next()){
                 info.setUserId(rs.getLong(1));

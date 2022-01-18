@@ -14,7 +14,7 @@ import org.openjdk.jmh.runner.options.OptionsBuilder;
 import org.openjdk.jmh.runner.options.TimeValue;
 import thrift.Accounts.AccountsService;
 import thrift.Accounts.AccountsServiceServerImpl;
-import thrift.search.AccountsForeignClients;
+import thrift.search.AccountForeignClients;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -27,7 +27,7 @@ import java.util.concurrent.TimeUnit;
 public class AccountsServer {
     public static final int CONCURRENCY = 32;
     public static int callNum = 0;
-    private final AccountsForeignClients accClients = new AccountsForeignClients();
+    private final AccountForeignClients accClients = new AccountForeignClients();
 
     @TearDown
     public void close() throws IOException {

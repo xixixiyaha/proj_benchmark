@@ -15,25 +15,6 @@ public abstract class CategoryClients {
 
     public abstract List<Long> GetRecommendProdId(Long userId, String words, SearchType type, SearchOrder order);
 
-    /*
-     * 插入数据
-     * */
-    public abstract Boolean CreateUserClick(Long userId,Long prodId,Integer categoryId);
-
-    public abstract List<Long> IdealResEfficiencyTest(Integer totalComputationLoad, Integer threadNum);
-
-    public abstract ConcurrentHashMap<Integer, Integer> GetUserActiveByCategory(Long id);
-
-    public abstract Boolean CreateActiveBehavior(Long uid, Long pid, Integer cid);
-
-    public abstract List<Long> GetLastestAvtiveUsers(Integer userNum);
-
-    public abstract HashSet<Long> GetUserActiveByProduct(Long uid);
-
-    public abstract List<Long> GetProductByCategory(Integer cid, SearchOrder order,Integer prodNum);
-
-    public abstract List<Long> GetProductBySimilarity(Integer cid, SearchOrder order,String words,Integer prodNum);
-
     public abstract ProductInfo GetProductInfo(Long id);
 
     public abstract List<CommentInfo> GetComments(Long prodId, Integer comtNum);

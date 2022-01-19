@@ -21,11 +21,11 @@ public class AccountInfoStorage {
 
     static String ACCOUNT_DB_URL;
     static String ACCOUNT_USER;
-    static String ACCOUNT_PWD;
+    static String ACCOUNT_PSW;
 
     public AccountInfoStorage(){
         logger.error("TODO@ unsupported initialization method / AccountInfoStorage");
-        try(Connection conn = DriverManager.getConnection(ACCOUNT_DB_URL, ACCOUNT_USER, ACCOUNT_PWD)){
+        try(Connection conn = DriverManager.getConnection(ACCOUNT_DB_URL, ACCOUNT_USER, ACCOUNT_PSW)){
             logger.info("DB connected!");
         }catch (SQLException e){
             logger.error(String.format("DB connect failure %s",e.toString()));
@@ -37,7 +37,7 @@ public class AccountInfoStorage {
     public AccountInfoStorage(String url, String name, String psw) throws ClassNotFoundException {
         ACCOUNT_DB_URL =url;
         ACCOUNT_USER =name;
-        ACCOUNT_PWD =psw;
+        ACCOUNT_PSW =psw;
 
         try(Connection conn = druidUtil.GetConnection()){
             logger.info("DB connected!");
@@ -198,7 +198,7 @@ public class AccountInfoStorage {
 
     public Boolean ExistsAccountInfo(Integer id){
         ResultSet rs=null;
-        try(Connection conn = DriverManager.getConnection(ACCOUNT_DB_URL, ACCOUNT_USER, ACCOUNT_PWD)){
+        try(Connection conn = DriverManager.getConnection(ACCOUNT_DB_URL, ACCOUNT_USER, ACCOUNT_PSW)){
             PreparedStatement stmt = conn.prepareStatement(EXISTS_ACCOUNT_BY_ID);
             stmt.setInt(1,id);
             rs = stmt.executeQuery();

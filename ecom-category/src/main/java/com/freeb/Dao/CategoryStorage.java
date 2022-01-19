@@ -12,14 +12,14 @@ public class CategoryStorage {
 
     static String CATE_DB_URL;
     static String CATE_USER;
-    static String CATE_PWD;
+    static String CATE_PSW;
 
     private DruidUtil druidUtil;
 
     public CategoryStorage(String url, String name, String pwd) throws ClassNotFoundException {
         CATE_DB_URL =url;
         CATE_USER =name;
-        CATE_PWD =pwd;
+        CATE_PSW =pwd;
 
         Class.forName("com.mysql.cj.jdbc.Driver");
         druidUtil=new DruidUtil(url,name,pwd);

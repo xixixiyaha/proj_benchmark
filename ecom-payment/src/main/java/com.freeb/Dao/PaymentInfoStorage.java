@@ -12,6 +12,12 @@ public class PaymentInfoStorage {
     private static final Logger logger = LoggerFactory.getLogger(PaymentInfoStorage.class);
     private     DruidUtil druidUtil;
 
+    /**
+     * PMT_DB_URL=
+     * PMT_USER=
+     * PMT_PSW=
+     */
+
 
     public PaymentInfoStorage(String url, String name, String psw) throws ClassNotFoundException {
 

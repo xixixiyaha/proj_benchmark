@@ -5,7 +5,6 @@ import com.freeb.Utils.MarshalUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.awt.image.ShortLookupTable;
 import java.sql.*;
 import java.util.List;
 
@@ -14,10 +13,10 @@ public class CartInfoStorage {
 
     static String CART_DB_URL;
     static String CART_USER;
-    static String CART_PWD;
+    static String CART_PSW;
 
     public CartInfoStorage(){
-        try(Connection conn = DriverManager.getConnection(CART_DB_URL, CART_USER, CART_PWD)){
+        try(Connection conn = DriverManager.getConnection(CART_DB_URL, CART_USER, CART_PSW)){
             logger.info("DB connected!");
         }catch (SQLException e){
             logger.error(String.format("DB connect failure %s",e.toString()));
@@ -29,9 +28,9 @@ public class CartInfoStorage {
     public CartInfoStorage(String url, String name, String psw){
         CART_DB_URL =url;
         CART_USER =name;
-        CART_PWD =psw;
+        CART_PSW =psw;
 
-        try(Connection conn = DriverManager.getConnection(CART_DB_URL, CART_USER, CART_PWD)){
+        try(Connection conn = DriverManager.getConnection(CART_DB_URL, CART_USER, CART_PSW)){
             logger.info("DB connected!");
         }catch (SQLException e){
             logger.error(String.format("DB connect failure %s",e.toString()));
@@ -57,7 +56,7 @@ public class CartInfoStorage {
     public List<CartInfo> GetCartInfosByAccount(Long aId){
 
         ResultSet rs=null;
-        try(Connection conn = DriverManager.getConnection(CART_DB_URL, CART_USER, CART_PWD)){
+        try(Connection conn = DriverManager.getConnection(CART_DB_URL, CART_USER, CART_PSW)){
             PreparedStatement stmt = conn.prepareStatement(GET_CART_BY_ACCOUNT);
             stmt.setLong(1,aId);
             rs = stmt.executeQuery();
@@ -73,7 +72,7 @@ public class CartInfoStorage {
     public List<CartInfo> GetCartInfosByAccount(Long aId,Integer limit){
 
         ResultSet rs=null;
-        try(Connection conn = DriverManager.getConnection(CART_DB_URL, CART_USER, CART_PWD)){
+        try(Connection conn = DriverManager.getConnection(CART_DB_URL, CART_USER, CART_PSW)){
             PreparedStatement stmt = conn.prepareStatement(GET_LIMIT_CART_BY_ACCOUNT);
             stmt.setLong(1,aId);
             stmt.setInt(2,limit);

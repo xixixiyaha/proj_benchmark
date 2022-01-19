@@ -11,17 +11,17 @@ public class MerchantStorage {
 
     static String MERCHANT_DB_URL;
     static String MERCHANT_USER;
-    static String MERCHANT_PWD;
+    static String MERCHANT_PSW;
 
     DruidUtil druidUtil;
 
-    public MerchantStorage(String url, String name, String pwd) throws ClassNotFoundException {
+    public MerchantStorage(String url, String name, String psw) throws ClassNotFoundException {
         MERCHANT_DB_URL =url;
         MERCHANT_USER =name;
-        MERCHANT_PWD =pwd;
+        MERCHANT_PSW =psw;
 
         Class.forName("com.mysql.cj.jdbc.Driver");
-        druidUtil=new DruidUtil(url,name,pwd);
+        druidUtil=new DruidUtil(url,name,psw);
     }
 
     public Boolean TestConn(){

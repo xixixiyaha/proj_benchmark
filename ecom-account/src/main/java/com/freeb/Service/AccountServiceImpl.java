@@ -246,12 +246,12 @@ public class AccountServiceImpl implements AccountService {
     }
 
     //TODO Notice
-    private static String IP = "124.223.34.172"; // account 到 search host 下载 json
-    private static Integer PORT = 22;
-    private static String USER_Name = "benchmark";
-    private static String PASSWORD = "benchmark";
-    private static String LOCAL_PATH = "/home/benchmark/";
-    private static String LOCAL_FILENAME = "bm1test1.json";
+    private static String BM1_IP = "124.223.34.172"; // account 到 search host 下载 json
+    private static Integer BM1_PORT = 22;
+    private static String BM1_USER_NAME = "benchmark";
+    private static String BM1_PSW = "benchmark";
+    private static String BM1_LOCAL_PATH = "/home/benchmark/";
+    private static String BM1_LOCAL_FILENAME = "bm1test1.json";
 
     @Override
     public String CompareResEfficiencyBM1(String remoteFilePath,Integer testType) {
@@ -260,12 +260,12 @@ public class AccountServiceImpl implements AccountService {
         long bengintime = System.nanoTime();
         Integer totalWorkLoad=0,threadNum = 1;
         // 1.
-        boolean conn = preConnection(IP,PORT,USER_Name,PASSWORD);
+        boolean conn = preConnection(BM1_IP,BM1_PORT,BM1_USER_NAME,BM1_PSW);
         if(!conn){
             logger.error("unable to connect");
             return "";
         }
-        boolean fecth = copyFile("/home/benchmark/bm/bm1test1.json",LOCAL_PATH,LOCAL_FILENAME);
+        boolean fecth = copyFile("/home/benchmark/bm/bm1test1.json",BM1_LOCAL_PATH,BM1_LOCAL_FILENAME);
         if(!fecth){
             logger.error("unable to download file");
             return "";
@@ -300,6 +300,6 @@ public class AccountServiceImpl implements AccountService {
         long endtime = System.nanoTime();
         long costtime = (endtime-bengintime)/1000;
         logger.info("costTime = "+costtime);
-        return LOCAL_PATH+LOCAL_FILENAME;
+        return BM1_LOCAL_PATH+BM1_LOCAL_FILENAME;
     }
 }

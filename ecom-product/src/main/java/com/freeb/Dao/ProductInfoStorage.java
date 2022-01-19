@@ -11,14 +11,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.concurrent.ConcurrentHashMap;
 
 public class ProductInfoStorage {
 
     private static final Logger logger = LoggerFactory.getLogger(ProductInfoStorage.class);
     static String PROD_DB_URL;
     static String PROD_USER;
-    static String PROD_PWD;
+    static String PROD_PSW;
     private DruidUtil druidUtil;
     public ProductInfoStorage(){
         logger.error("TODO@ unsupported initialization method");
@@ -27,7 +26,7 @@ public class ProductInfoStorage {
     public ProductInfoStorage(String url,String user,String psw) throws ClassNotFoundException {
         PROD_DB_URL = url;
         PROD_USER=user;
-        PROD_PWD = psw;
+        PROD_PSW = psw;
         Class.forName("com.mysql.cj.jdbc.Driver");
         druidUtil=new DruidUtil(url,user,psw);
     }

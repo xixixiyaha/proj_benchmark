@@ -9,9 +9,14 @@ import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 public class AccountInfoStorage {
     private static final Logger logger = LoggerFactory.getLogger(AccountInfoStorage.class);
@@ -19,18 +24,44 @@ public class AccountInfoStorage {
     private DruidUtil druidUtil;
 
 
-    static String ACCOUNT_DB_URL;
-    static String ACCOUNT_USER;
-    static String ACCOUNT_PSW;
+    static volatile String ACCOUNT_DB_URL;
+    static volatile String ACCOUNT_USER;
+    static volatile String ACCOUNT_PSW;
 
     public AccountInfoStorage(){
-        logger.error("TODO@ unsupported initialization method / AccountInfoStorage");
-        try(Connection conn = DriverManager.getConnection(ACCOUNT_DB_URL, ACCOUNT_USER, ACCOUNT_PSW)){
+        if(ACCOUNT_DB_URL==null){
+            synchronized (AccountInfoStorage.class){
+                if(ACCOUNT_DB_URL==null){
+                    Properties properties = new Properties();
+                    // 使用ClassLoader加载properties配置文件生成对应的输入流
+                    BufferedReader in = null;
+                    try {
+                        in = new BufferedReader(new FileReader("./proj_benchmark.properties"));
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    // 使用properties对象加载输入流
+                    try {
+                        assert in != null;
+                        properties.load(in);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    ACCOUNT_DB_URL = properties.getProperty("ACCOUNT_DB_URL");
+                    ACCOUNT_USER = properties.getProperty("ACCOUNT_USER");
+                    ACCOUNT_PSW = properties.getProperty("ACCOUNT_PSW");
+                }
+            }
+        }
+        druidUtil = new DruidUtil(ACCOUNT_DB_URL, ACCOUNT_USER,ACCOUNT_PSW );
+
+
+        try(Connection conn =druidUtil.GetConnection()){
             logger.info("DB connected!");
-        }catch (SQLException e){
+        } catch (SQLException e) {
             logger.error(String.format("DB connect failure %s",e.toString()));
-            // Notice here
             e.printStackTrace();
+            System.exit(-1);
         }
     }
 
@@ -38,7 +69,8 @@ public class AccountInfoStorage {
         ACCOUNT_DB_URL =url;
         ACCOUNT_USER =name;
         ACCOUNT_PSW =psw;
-
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        druidUtil=new DruidUtil(url,name,psw);
         try(Connection conn = druidUtil.GetConnection()){
             logger.info("DB connected!");
         }catch (SQLException e){
@@ -46,8 +78,7 @@ public class AccountInfoStorage {
             // Notice here
             e.printStackTrace();
         }
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        druidUtil=new DruidUtil(url,name,psw);
+
     }
 
     static final String GET_ACCOUNT_BY_ID ="SELECT user_id, user_name, user_pwd, user_description FROM ACCOUNT_INFO WHERE user_id = ?";
@@ -97,9 +128,8 @@ public class AccountInfoStorage {
             stmt.setLong(1,id);
             rs = stmt.executeQuery();
             String jstr="";
-            while (rs.next()){
+            if (rs.next()){
                 jstr = (String) rs.getObject(1);
-                break;
             }
             if(jstr==null){
                 logger.warn("unfilled user_tag uid = "+id);

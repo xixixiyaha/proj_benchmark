@@ -21,9 +21,9 @@ public class CategoryServiceImpl implements CategoryService {
     private CategoryStorage cStorage;
     private CategoryClients clients;
     //Notice 对比线程数量
-    public CategoryServiceImpl(String url,String name,String psw,Integer num) throws ClassNotFoundException {
+    public CategoryServiceImpl(Integer num) throws ClassNotFoundException {
 
-        cStorage = new CategoryStorage(url,name,psw);
+        cStorage = new CategoryStorage();
         executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(num);
     }
 

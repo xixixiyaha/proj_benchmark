@@ -8,11 +8,11 @@ import java.sql.SQLException;
 public class DruidUtil {
     DruidDataSource dataSource;
 
-    DruidUtil(String url,String userName,String passwprd){
+    DruidUtil(String url,String userName,String password){
         dataSource = new DruidDataSource();
         dataSource.setUrl(url);
         dataSource.setUsername(userName);
-        dataSource.setPassword(passwprd);
+        dataSource.setPassword(password);
 
         //Default Setting
         dataSource.setInitialSize(5);  //初始连接数，默认0

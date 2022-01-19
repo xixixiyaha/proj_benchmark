@@ -1,6 +1,11 @@
 package com.freeb.Dao;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.*;
+import java.util.Properties;
 
 import com.freeb.Entity.PaymentInfo;
 import com.freeb.Utils.MarshalUtil;
@@ -11,13 +16,45 @@ public class PaymentInfoStorage {
 
     private static final Logger logger = LoggerFactory.getLogger(PaymentInfoStorage.class);
     private     DruidUtil druidUtil;
+    private volatile static String PMT_DB_URL,PMT_USER,PMT_PSW;
 
-    /**
-     * PMT_DB_URL=
-     * PMT_USER=
-     * PMT_PSW=
-     */
 
+    public PaymentInfoStorage(){
+        if(PMT_DB_URL==null){
+            synchronized (PaymentInfoStorage.class){
+                if(PMT_DB_URL==null){
+                    Properties properties = new Properties();
+                    // 使用ClassLoader加载properties配置文件生成对应的输入流
+                    BufferedReader in = null;
+                    try {
+                        in = new BufferedReader(new FileReader("./proj_benchmark.properties"));
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    // 使用properties对象加载输入流
+                    try {
+                        assert in != null;
+                        properties.load(in);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    PMT_DB_URL = properties.getProperty("PMT_DB_URL");
+                    PMT_USER = properties.getProperty("PMT_USER");
+                    PMT_PSW = properties.getProperty("PMT_PSW");
+                }
+            }
+        }
+        druidUtil = new DruidUtil(PMT_DB_URL,PMT_USER,PMT_PSW);
+        try(Connection conn = druidUtil.GetConnection()){
+            logger.info("DB connected!");
+
+        }catch (SQLException e){
+            logger.error(String.format("DB connect failure %s",e.toString()));
+            // Notice here
+            e.printStackTrace();
+        }
+
+    }
 
     public PaymentInfoStorage(String url, String name, String psw) throws ClassNotFoundException {
 
@@ -44,7 +81,7 @@ public class PaymentInfoStorage {
             PreparedStatement stmt = conn.prepareStatement(GET_USERID_BY_PAYMENTID);
             stmt.setLong(1,pid);
             rs = stmt.executeQuery();
-            while(rs.next()){
+            if(rs.next()){
                 return rs.getLong(1);
             }
         }catch (SQLException e){

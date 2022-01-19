@@ -28,34 +28,34 @@ public class TestPaymentService {
 
     }
 
-    @Test
-    public void TestCheckPaymentStatusById(){
-        Random r= new Random();
-        for(int i=0;i<1000;i++){
-            Long pid = (long)r.nextInt(10000);
-            PaymentInfo info = service.storage.GetPaymentInfoById(pid);
-            assert info!=null;
-            Long uid = info.getUserId();
-            assert uid!=null;
-            PaymentStatus status1 = service.CheckPaymentStatusById(uid,pid);
-            assert status1!=PaymentStatus.PAYMENT_NO_RECORD;
-            PaymentStatus status2 = service.CheckPaymentStatusById(uid+1,pid);
-            assert status2 ==PaymentStatus.PAYMENT_NO_RECORD;
-        }
-    }
-
-    @Test
-    public void TestCancelPayment(){
-        Random r= new Random();
-        for(long pid=1;pid<=1000;pid++){
-            PaymentInfo info = service.storage.GetPaymentInfoById(pid);
-            assert info!=null;
-            Long uid = info.getUserId();
-            assert uid!=null;
-            Boolean re1 = service.CancelPayment(uid,pid);
-            assert re1;
-        }
-    }
+//    @Test
+//    public void TestCheckPaymentStatusById(){
+//        Random r= new Random();
+//        for(int i=0;i<1000;i++){
+//            Long pid = (long)r.nextInt(10000);
+//            PaymentInfo info = service.storage.GetPaymentInfoById(pid);
+//            assert info!=null;
+//            Long uid = info.getUserId();
+//            assert uid!=null;
+//            PaymentStatus status1 = service.CheckPaymentStatusById(uid,pid);
+//            assert status1!=PaymentStatus.PAYMENT_NO_RECORD;
+//            PaymentStatus status2 = service.CheckPaymentStatusById(uid+1,pid);
+//            assert status2 ==PaymentStatus.PAYMENT_NO_RECORD;
+//        }
+//    }
+//
+//    @Test
+//    public void TestCancelPayment(){
+//        Random r= new Random();
+//        for(long pid=1;pid<=1000;pid++){
+//            PaymentInfo info = service.storage.GetPaymentInfoById(pid);
+//            assert info!=null;
+//            Long uid = info.getUserId();
+//            assert uid!=null;
+//            Boolean re1 = service.CancelPayment(uid,pid);
+//            assert re1;
+//        }
+//    }
 
 
     private String genCardNum(){
@@ -83,22 +83,22 @@ public class TestPaymentService {
             assert re!=null;
         }
     }
-
-    @Test
-    public void TestGetPaymentInfoById(){
-        Random r= new Random();
-        for(int i=0;i<1000;i++){
-            Long pid = (long)r.nextInt(10000);
-            PaymentInfo info = service.storage.GetPaymentInfoById(pid);
-            assert info!=null;
-            Long uid = info.getUserId();
-            assert uid!=null;
-            PaymentInfo info1 = service.GetPaymentInfoById(uid,pid);
-            assert info1!=null;
-            PaymentInfo info2 = service.GetPaymentInfoById(uid+1,pid);
-            assert info2 ==null;
-        }
-    }
+//
+//    @Test
+//    public void TestGetPaymentInfoById(){
+//        Random r= new Random();
+//        for(int i=0;i<1000;i++){
+//            Long pid = (long)r.nextInt(10000);
+//            PaymentInfo info = service.storage.GetPaymentInfoById(pid);
+//            assert info!=null;
+//            Long uid = info.getUserId();
+//            assert uid!=null;
+//            PaymentInfo info1 = service.GetPaymentInfoById(uid,pid);
+//            assert info1!=null;
+//            PaymentInfo info2 = service.GetPaymentInfoById(uid+1,pid);
+//            assert info2 ==null;
+//        }
+//    }
 
 
 }

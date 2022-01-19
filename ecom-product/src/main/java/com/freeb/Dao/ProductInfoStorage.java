@@ -6,11 +6,12 @@ import com.freeb.Utils.MarshalUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 public class ProductInfoStorage {
 
@@ -20,7 +21,38 @@ public class ProductInfoStorage {
     static String PROD_PSW;
     private DruidUtil druidUtil;
     public ProductInfoStorage(){
-        logger.error("TODO@ unsupported initialization method");
+        if(PROD_DB_URL==null){
+            synchronized (ProductInfoStorage.class){
+                if(PROD_DB_URL==null){
+                    Properties properties = new Properties();
+                    // 使用ClassLoader加载properties配置文件生成对应的输入流
+                    BufferedReader in = null;
+                    try {
+                        in = new BufferedReader(new FileReader("./proj_benchmark.properties"));
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    // 使用properties对象加载输入流
+                    try {
+                        assert in != null;
+                        properties.load(in);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    PROD_DB_URL = properties.getProperty("PROD_DB_URL");
+                    PROD_USER = properties.getProperty("PROD_USER");
+                    PROD_PSW = properties.getProperty("PROD_PSW");
+                }
+            }
+        }
+        druidUtil = new DruidUtil(PROD_DB_URL, PROD_USER,PROD_PSW );
+
+
+        try(Connection conn =druidUtil.GetConnection()){
+            logger.info("DB connected!");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public ProductInfoStorage(String url,String user,String psw) throws ClassNotFoundException {

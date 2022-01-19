@@ -5,11 +5,16 @@ import com.freeb.Utils.MarshalUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Properties;
 
 public class CommentStorage {
     private static final Logger logger = LoggerFactory.getLogger(CommentStorage.class);
@@ -19,6 +24,40 @@ public class CommentStorage {
     static String CMT_PSW;
 
     private DruidUtil druidUtil;
+    public CommentStorage(){
+        if(CMT_DB_URL==null){
+            synchronized (CommentStorage.class){
+                if(CMT_DB_URL==null){
+                    Properties properties = new Properties();
+                    // 使用ClassLoader加载properties配置文件生成对应的输入流
+                    BufferedReader in = null;
+                    try {
+                        in = new BufferedReader(new FileReader("./proj_benchmark.properties"));
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    // 使用properties对象加载输入流
+                    try {
+                        assert in != null;
+                        properties.load(in);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    CMT_DB_URL = properties.getProperty("CMT_DB_URL");
+                    CMT_USER = properties.getProperty("CMT_USER");
+                    CMT_PSW = properties.getProperty("CMT_PSW");
+                }
+            }
+        }
+        druidUtil = new DruidUtil(CMT_DB_URL, CMT_USER,CMT_PSW );
+
+
+        try(Connection conn =druidUtil.GetConnection()){
+            logger.info("DB connected!");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     public CommentStorage(String url, String name, String pwd) throws ClassNotFoundException {
         CMT_DB_URL =url;

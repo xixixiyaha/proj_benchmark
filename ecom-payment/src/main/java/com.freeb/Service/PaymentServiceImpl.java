@@ -11,14 +11,10 @@ import org.slf4j.LoggerFactory;
 public class PaymentServiceImpl implements PaymentService {
     private static final Logger logger = LoggerFactory.getLogger(PaymentServiceImpl.class);
 
-    static String PAYMENT_DB_URL;
-    static String PAYMENT_USER;
-    static String PAYMENT_PSW;
-
     private PaymentInfoStorage storage;
 
     public PaymentServiceImpl() throws ClassNotFoundException {
-        storage = new PaymentInfoStorage(PAYMENT_DB_URL,PAYMENT_USER, PAYMENT_PSW);
+        storage = new PaymentInfoStorage();
     }
 
     public PaymentServiceImpl(String url,String user,String psw) throws ClassNotFoundException {

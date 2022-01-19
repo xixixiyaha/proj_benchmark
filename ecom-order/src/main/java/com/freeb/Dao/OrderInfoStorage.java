@@ -1,23 +1,53 @@
 package com.freeb.Dao;
 
 import com.freeb.Entity.OrderInfo;
+import com.freeb.Service.OrderService;
 import com.freeb.Utils.MarshalUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.*;
 import java.util.List;
+import java.util.Properties;
 
 public class OrderInfoStorage {
 
     private static final Logger logger = LoggerFactory.getLogger(OrderInfoStorage.class);
     private DruidUtil druidUtil;
-    static String ORDER_DB_URL ="jdbc:mysql://sh-cynosdbmysql-grp-fdsb56no.sql.tencentcdb.com:24262/FREEB";
-    static String ORDER_USER="root";
-    static String ORDER_PSW= "1204Adzq";
+    static String ORDER_DB_URL;
+    static String ORDER_USER;
+    static String ORDER_PSW;
 
 
     public OrderInfoStorage(){
+        if(ORDER_DB_URL==null){
+            synchronized (OrderInfoStorage.class){
+                if(ORDER_DB_URL==null){
+                    Properties properties = new Properties();
+                    // 使用ClassLoader加载properties配置文件生成对应的输入流
+                    BufferedReader in = null;
+                    try {
+                        in = new BufferedReader(new FileReader("./proj_benchmark.properties"));
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    // 使用properties对象加载输入流
+                    try {
+                        assert in != null;
+                        properties.load(in);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    ORDER_DB_URL = properties.getProperty("ORDER_DB_URL");
+                    ORDER_USER = properties.getProperty("ORDER_USER");
+                    ORDER_PSW = properties.getProperty("ORDER_PSW");
+                }
+            }
+        }
         druidUtil = new DruidUtil(ORDER_DB_URL,ORDER_USER,ORDER_PSW);
         try(Connection conn = druidUtil.GetConnection()){
             logger.info("DB connected!");

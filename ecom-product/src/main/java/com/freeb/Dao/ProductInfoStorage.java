@@ -1,5 +1,6 @@
 package com.freeb.Dao;
 
+import com.freeb.Entity.MerchantInfo;
 import com.freeb.Entity.ProductInfo;
 import com.freeb.Enum.SearchOrder;
 import com.freeb.Utils.MarshalUtil;
@@ -74,19 +75,23 @@ public class ProductInfoStorage {
         }
     }
 
-    private static final String GET_PRODUCT_BY_CATEGORY = "SELECT * FROM PRODUCT_INFOS WHERE category_id = ?";
+    private static final String GET_PRODUCT_BY_CATEGORY = "SELECT prod_id,prod_name,category_id,prod_price,prod_sales,prod_remain,prod_images,discounts_id,merchant_id FROM PRODUCT_INFO WHERE category_id = ?";
+    private static final String GET_PRODUCT_BY_ID = "SELECT prod_id,prod_name,category_id,prod_price,prod_sales,prod_remain,prod_images,discounts_id,merchant_id FROM PRODUCT_INFO WHERE prod_id = ?";
+    private static final String GET_PRODUCT_SALES_BY_ID = "SELECT prod_sales FROM PRODUCT_INFO WHERE prod_id = ?";
+    private static final String GET_PRODUCT_REMAIN_BY_ID = "SELECT prod_remain FROM PRODUCT_INFO WHERE prod_id = ?";
+    private static final String INC_PRODUCT_SALES_BY_ID = "UPDATE PRODUCT_INFO SET prod_sales=prod_sales+?, prod_remain=prod_remain-? WHERE prod_id = ?";
 
-    private static final String GET_PRODUCT_BY_CATEGORY_ORDER_BY_UPDATE_TIME_DESC = "SELECT * FROM PRODUCT_INFOS WHERE category_id = ? ORDER BY update_time DESC";
+    private static final String GET_PRODUCT_BY_CATEGORY_ORDER_BY_UPDATE_TIME_DESC = "SELECT prod_id,prod_name,category_id,prod_price,prod_sales,prod_remain,prod_images,discounts_id,merchant_id FROM PRODUCT_INFO WHERE category_id = ? ORDER BY update_time DESC";
 
-    private static final String GET_PRODUCT_BY_CATEGORY_ORDER_BY_PRICE_ASC = "SELECT * FROM PRODUCT_INFOS WHERE category_id = ? ORDER BY prod_price ASC";
-    private static final String GET_PRODUCT_BY_CATEGORY_ORDER_BY_PRICE_DESC = "SELECT * FROM PRODUCT_INFOS WHERE category_id = ? ORDER BY prod_price DESC";
+    private static final String GET_PRODUCT_BY_CATEGORY_ORDER_BY_PRICE_ASC = "SELECT prod_id,prod_name,category_id,prod_price,prod_sales,prod_remain,prod_images,discounts_id,merchant_id FROM PRODUCT_INFO WHERE category_id = ? ORDER BY prod_price ASC";
+    private static final String GET_PRODUCT_BY_CATEGORY_ORDER_BY_PRICE_DESC = "SELECT prod_id,prod_name,category_id,prod_price,prod_sales,prod_remain,prod_images,discounts_id,merchant_id FROM PRODUCT_INFO WHERE category_id = ? ORDER BY prod_price DESC";
 
-    private static final String GET_PRODUCT_BY_CATEGORY_ORDER_BY_SALES_DESC = "SELECT * FROM PRODUCT_INFOS WHERE category_id = ? ORDER BY prod_sales DESC";
+    private static final String GET_PRODUCT_BY_CATEGORY_ORDER_BY_SALES_DESC = "SELECT prod_id,prod_name,category_id,prod_price,prod_sales,prod_remain,prod_images,discounts_id,merchant_id FROM PRODUCT_INFO WHERE category_id = ? ORDER BY prod_sales DESC";
 
     private static final String CREATE_PRODUCT = "INSERT INTO PRODUCT_INFO (prod_name,category_id,prod_price,prod_sales,discounts_id,merchant_id) VALUES (?,?,?,?,?,?)";
 
     // TODO & NOTICE: 小数据量使用 like 避免大炮打蚊子
-    private static final String GET_PRODUCT_BY_SIMILARITY = "SELECT * FROM PRODUCT_INFOS WHERE category_id = ? AND prod_name LIKE %?% ORDER BY prod_sales DESC";
+    private static final String GET_PRODUCT_BY_SIMILARITY = "SELECT prod_id,prod_name,category_id,prod_price,prod_sales,prod_remain,prod_images,discounts_id,merchant_id FROM PRODUCT_INFO WHERE category_id = ? AND prod_name LIKE %?% ORDER BY prod_sales DESC";
 
 
 
@@ -97,7 +102,7 @@ public class ProductInfoStorage {
             PreparedStatement stmt = conn.prepareStatement(GET_CATEGORY_BY_PRODUCT);
             stmt.setLong(1, productId);
             rs = stmt.executeQuery();
-            while (rs.next()){
+            if (rs.next()){
                 return rs.getInt(1);
             }
         } catch (SQLException e) {
@@ -214,11 +219,11 @@ public class ProductInfoStorage {
         }
     }
 
-    private static String CREATE_USER_ACTIVE = "INSERT INTO USER_ACTIVE_INFOS (user_id,prod_id,category_id) VALUES (?,?,?)";
-    private static String GET_USER_ACTIVE_BY_USER_GROUPBY_CATEGORY = "SELECT category_id,COUNT(*) FROM USER_ACTIVE_INFOS WHERE user_id = ? GROUP BY category_id ORDER BY COUNT(*) DESC LIMIT 10";
-    private static String GET_LASTEST_ACTIVE_USERS = "SELECT user_id FROM USER_ACTIVE_INFOS GROUP BY user_id ORDER BY MAX(update_time) DESC";
+    private static final String CREATE_USER_ACTIVE = "INSERT INTO USER_ACTIVE_INFOS (user_id,prod_id,category_id) VALUES (?,?,?)";
+    private static final String GET_USER_ACTIVE_BY_USER_GROUPBY_CATEGORY = "SELECT category_id,COUNT(*) FROM USER_ACTIVE_INFOS WHERE user_id = ? GROUP BY category_id ORDER BY COUNT(*) DESC LIMIT 10";
+    private static final String GET_LASTEST_ACTIVE_USERS = "SELECT user_id FROM USER_ACTIVE_INFOS GROUP BY user_id ORDER BY MAX(update_time) DESC";
 
-    private static String GET_USER_ACTIVE_BY_USER_GROUPBY_PRODUCT = "SELECT prod_id FROM USER_ACTIVE_INFOS WHERE user_id = ? ORDER BY UPDATE_TIME DESC LIMIT 50";
+    private static final String GET_USER_ACTIVE_BY_USER_GROUPBY_PRODUCT = "SELECT prod_id FROM USER_ACTIVE_INFOS WHERE user_id = ? ORDER BY UPDATE_TIME DESC LIMIT 50";
 
     public Boolean CreateActiveBehavior(Long userId,Long prodId,Integer categoryId){
         try(Connection conn = druidUtil.GetConnection()){
@@ -311,5 +316,58 @@ public class ProductInfoStorage {
             return null;
         }
         return users;
+    }
+
+
+    public Integer GetProductNum(Long pid) {
+        ResultSet rs;
+        try (Connection conn = druidUtil.GetConnection()) {
+            PreparedStatement stmt = conn.prepareStatement(GET_PRODUCT_REMAIN_BY_ID);
+            stmt.setLong(1, pid);
+            rs = stmt.executeQuery();
+            if (rs.next()){
+
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
+    public Boolean IncProductSales(Long pid, Integer purchaseNum) {
+
+        int rs;
+        try (Connection conn = druidUtil.GetConnection()) {
+            PreparedStatement stmt = conn.prepareStatement(INC_PRODUCT_SALES_BY_ID);
+            stmt.setInt(1, purchaseNum);
+            stmt.setInt(2,purchaseNum);
+            stmt.setLong(3,pid);
+            rs = stmt.executeUpdate();
+            return rs==1;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public ProductInfo GetProductById(Long pid) {
+        ResultSet rs = null;
+        try (Connection conn = druidUtil.GetConnection()) {
+            PreparedStatement stmt = conn.prepareStatement(GET_PRODUCT_BY_ID);
+            stmt.setLong(1, pid);
+            rs = stmt.executeQuery();
+            if (rs.next()){
+                List<ProductInfo> lst = MarshalUtil.convertRs2ProdList(rs);
+                if(lst==null){
+                    logger.error("marshal failed");
+                    return null;
+                }
+                return lst.get(0);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

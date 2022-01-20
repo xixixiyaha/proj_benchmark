@@ -9,6 +9,7 @@ import com.freeb.Utils.MapUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.sql.Time;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -18,13 +19,13 @@ public class Recommend {
 
     SearchClients clients;
 
+    //TODO
+    private ConcurrentHashMap<Long,HashSet<Long>> activeMap;
+    private long updateTime;
+
     public Recommend(SearchClients c){
         this.clients = c;
-    }
-
-    public Recommend(String url,String user,String pwd) throws ClassNotFoundException {
-     //TODO RPC
-//        this.clients;
+        this.updateTime= 0;
     }
 
 
@@ -33,9 +34,8 @@ public class Recommend {
         ConcurrentHashMap<Integer, Integer> categoryTags = clients.GetUserActiveByCategory(id);
         Integer sumClicks = 0;
         Map<Integer,Double> tags = new HashMap<>();
-        Iterator<Map.Entry<Integer, Integer>> it = categoryTags.entrySet().iterator();
-        while (it.hasNext()){
-            sumClicks+=it.next().getValue();
+        for (Map.Entry<Integer, Integer> integerIntegerEntry : categoryTags.entrySet()) {
+            sumClicks += integerIntegerEntry.getValue();
         }
         for(Map.Entry<Integer,Integer> entry:categoryTags.entrySet()){
             tags.put(entry.getKey(),(entry.getValue()*1.0)/sumClicks);
@@ -54,10 +54,9 @@ public class Recommend {
         return flag;
     }
 
-    public boolean CreateUserClickBehavior(Long userId, Long prodId, Integer categoryId) {
-        logger.info(String.format("userId={%d} prodId={%d} categoryId={%d}",userId,prodId,categoryId));
-        return clients.CreateActiveBehavior(userId,prodId,categoryId);
-    }
+    /*
+    * Deprecated. Only in Test.
+    * */
 
     public ConcurrentHashMap<Long, ConcurrentHashMap<Long, Long>> AssembleUserBehavior(List<UserActive> userActiveList) {
         ConcurrentHashMap<Long, ConcurrentHashMap<Long, Long>> activeMap = new ConcurrentHashMap<>();
@@ -90,6 +89,7 @@ public class Recommend {
     }
 
     /**
+     * Deprecated. Only in Test.
      * 计算一个 userId 的浏览行为
      * @return 用户的 各个 categoryId 的点击频率
      */
@@ -108,16 +108,22 @@ public class Recommend {
 
     /**
      *
-     * @return 获取最近活跃的1000名用户和他们最近点击的50个商品
+     * @return 获取最近活跃的1000名用户和他们最近点击的50个商品,每120s更新一次
      */
     public ConcurrentHashMap<Long, HashSet<Long>> AssembleUserClicks(){
-        ConcurrentHashMap<Long, HashSet<Long>> activeMap = new ConcurrentHashMap<>();
+//        ConcurrentHashMap<Long, HashSet<Long>> activeMap = new ConcurrentHashMap<>();
+        long now = new Date().getTime();
+        if(activeMap!=null&&(now-updateTime)/1000<120){
+            return activeMap;
+        }
 
         List<Long> activeUsers = clients.GetLastestAvtiveUsers(1000);
         for(Long uid:activeUsers){
             activeMap.put(uid,clients.GetUserActiveByProduct(uid));
         }
-        logger.info("assemable user num="+activeMap.size());
+        now =  new Date().getTime();
+        updateTime = now;
+        logger.info("update at "+updateTime+"assemable user num="+activeMap.size());
         return activeMap;
     }
 
@@ -148,7 +154,7 @@ public class Recommend {
         }
 
         HashSet<Long> key1Set = activeMap.get(userId);
-        Double key1size = Math.sqrt((double) key1Set.size());
+        double key1size = Math.sqrt(key1Set.size());
 //        Iterator<Long> it1;
 
         for (Long refUserId : userIdList) { //O(num(refUser)*num(prodId))

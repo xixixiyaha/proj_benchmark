@@ -17,11 +17,14 @@ public class SearchServiceImpl implements SearchService {
     private static final Logger logger = LoggerFactory.getLogger(SearchServiceImpl.class);
 //TODO
     private SearchClients clients ;
-    private Recommend rcmd = new Recommend(clients);
+    private Recommend rcmd;
     private Boolean forceSearch = true;
 
-    public SearchServiceImpl(){
-        System.out.println("DBG@ init SearchServiceImpl");
+    public SearchServiceImpl(SearchClients c){
+
+        this.clients = c;
+        this.rcmd = new Recommend(this.clients);
+//        System.out.println("DBG@ init SearchServiceImpl");
     }
 
 
@@ -51,15 +54,6 @@ public class SearchServiceImpl implements SearchService {
     }
 
 
-    @Override
-    public Boolean CreateUserClick(Long userId, Long prodId, Integer categoryId) {
-        logger.info("CreateUserClick userId=%d"+userId);
-        if(!clients.AccountExists(userId)){
-            return false;
-        }
-        return rcmd.CreateUserClickBehavior(userId,prodId,categoryId);
-    }
-
     class IdealComputationThread extends Thread{
         private Integer loopTime;
         private Long computationRe;
@@ -71,10 +65,10 @@ public class SearchServiceImpl implements SearchService {
         @Override
         public void run() {
             Random seed = new Random(7L);
-            Integer a = seed.nextInt(100)+50;
-            Integer b= seed.nextInt(100)+50;
+            Integer a;
+            Integer b;
             long temp = 0L;
-            System.out.println("DBG@ loopTime "+loopTime);
+//            System.out.println("DBG@ loopTime "+loopTime);
             for(int time = 0; time<this.loopTime; time++){
                 a = seed.nextInt(100)+50;
                 b= seed.nextInt(100)+50;
@@ -105,9 +99,9 @@ public class SearchServiceImpl implements SearchService {
         for(int i=0;i<threadNum;i++){
             IdealComputationThread thread = new IdealComputationThread(loopPerThread);
             thread.start();
-            System.out.println("DBG@ threads len = "+threads.size());
+//            System.out.println("DBG@ threads len = "+threads.size());
             threads.add(thread);
-            System.out.println("DBG@ put "+i+" thread");
+//            System.out.println("DBG@ put "+i+" thread");
         }
         for(IdealComputationThread thread:threads){
             try {
@@ -116,7 +110,7 @@ public class SearchServiceImpl implements SearchService {
                 e.printStackTrace();
             }
         }
-        for(Integer i=0;i<threadNum;i++){
+        for(int i = 0; i<threadNum; i++){
             results.add(threads.get(i).getComputationRe());
         }
         long endtime = System.currentTimeMillis();
@@ -125,5 +119,81 @@ public class SearchServiceImpl implements SearchService {
         logger.info("endTime = "+endtime);
         logger.info("costTime = "+costtime);
         return results;
+    }
+
+    @Override
+    public Boolean BM2CompareParallelEfficiency(Integer totalComputationLoad, Integer threadNum, Integer type) {
+        switch (type){
+            case 1:
+                /*先RPC fetch数据 再计算相似度 */
+                return BM2CompRpcEfficiency(totalComputationLoad,threadNum);
+            default:
+                /* computation heavy 复用*/
+                IdealResEfficiencyTest(totalComputationLoad,threadNum);
+                return true;
+        }
+    }
+
+    @Override
+    public Boolean OfflineUserTagComputation(List<Long> uidLst) {
+        //TODO@ high priority 直接从数据库拿数据计算 不走client
+
+        return null;
+    }
+
+    class CompRpcThread extends Thread{
+        private Integer startUid,endUid;
+        private SearchClients c;
+        private List<List<Long>> computationRe;
+        CompRpcThread(Integer sUid,Integer eUid,SearchClients cc){
+            this.startUid = sUid;
+            this.endUid = eUid;
+            this.c = cc;
+        }
+
+        @Override
+        public void run() {
+            //TODO notice RCMD 并发
+            Recommend rcmd = new Recommend(c);
+            computationRe = new ArrayList<>();
+            for(long uid=startUid;uid<=endUid;uid++){
+                computationRe.add(rcmd.GetRecommendProductsByProdName(uid, SearchOrder.SIMILARITY,""));
+            }
+        }
+
+        public List<List<Long>> GetComputationRe(){
+            return this.computationRe;
+        }
+
+    }
+
+    private Boolean BM2CompRpcEfficiency(Integer totalUserNum,Integer threadNum){
+        long begintime = System.currentTimeMillis();
+
+        int loopPerThread = totalUserNum/threadNum;
+        List<CompRpcThread> threads = new ArrayList<>();
+        for(int i=0;i<threadNum;i++){
+            CompRpcThread thread = new CompRpcThread(i*loopPerThread+1,(i+1)*loopPerThread,this.clients); //Notice: Uid start from 1
+            thread.start();
+//            System.out.println("DBG@ threads len = "+threads.size());
+            threads.add(thread);
+//            System.out.println("DBG@ put "+i+" thread");
+        }
+        for(CompRpcThread thread:threads){
+            try {
+                thread.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+//        for(int i = 0; i<threadNum; i++){
+//            //TODO & Notice: not in hurry. current Result is useless
+//        }
+        long endtime = System.currentTimeMillis();
+        long costtime = (endtime-begintime);
+        logger.info("beginTime = "+begintime);
+        logger.info("endTime = "+endtime);
+        logger.info("costTime = "+costtime);
+        return true;
     }
 }

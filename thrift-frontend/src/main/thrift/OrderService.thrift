@@ -1,4 +1,7 @@
 namespace java com.freeb.thrift
+include "CartService.thrift"
+
+
 enum RespCode {
     SUCCESS=0,
     DENY_NO_AUTHORITY=1,
@@ -6,7 +9,6 @@ enum RespCode {
 }
 
 struct BaseResp {
-
     1: required RespCode Status;
     2: optional string Msg;
 }
@@ -19,6 +21,7 @@ struct OrderInfo{
     6:required i64 prodId,
     7:required string prodName,
     8:optional i64 paymentId,
+    9:optional CartService.CartInfo cartId,
 }
 struct OrderResp{
     1: optional list<OrderInfo> orderInfos;
@@ -35,6 +38,7 @@ struct OrderReq{
   6:optional i64 prodName,
   7:optional i64 orderId,
   8:optional i64 paymentId,
+  9:optional CartService.CartInfo cartId,
 }
 
 service OrderSearvice{
@@ -45,6 +49,9 @@ service OrderSearvice{
     OrderResp CreatePaymentByOrderId(OrderReq orderReq);
 
     OrderResp GetOrderByOrderId(OrderReq orderReq);
+
+    OrderResp CreateOrderByCartInfo(OrderReq orderReq);
+
 }
 
 

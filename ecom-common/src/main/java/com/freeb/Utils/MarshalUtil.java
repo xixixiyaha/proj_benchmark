@@ -16,12 +16,12 @@ public class MarshalUtil {
 
         AccountInfo info=new AccountInfo();
         try{
-            while(rs.next()){
+            if(rs.next()){
                 info.setUserId(rs.getLong(1));
                 info.setUserName(rs.getString(2));
                 info.setUserPasswd(rs.getString(3));
                 info.setUserDescription(rs.getString(4));
-                break;
+
             }
         }catch(Exception e){
             e.printStackTrace();
@@ -61,14 +61,14 @@ public class MarshalUtil {
     public static PaymentInfo convertRs2Payment(ResultSet rs){
         PaymentInfo info=new PaymentInfo();
         try{
-            while(rs.next()){
+            if(rs.next()){
                 info.setPaymentId(rs.getLong(1));
                 info.setPaymentStatus(rs.getInt(2));
                 info.setPaymentVal(rs.getDouble(3));
                 info.setDiscountsVal(rs.getDouble(4));
                 info.setPaymentCard(rs.getString(5));
                 info.setUserId(rs.getLong(6));
-                break;
+
             }
         }catch(Exception e){
             e.printStackTrace();
@@ -85,8 +85,8 @@ public class MarshalUtil {
             while(rs.next()){
                 CartInfo info = new CartInfo();
                 info.setCartId(rs.getLong(1));
-                info.setAccountId(rs.getLong(2));
-                info.setObjId(rs.getLong(3));
+                info.setUserId(rs.getLong(2));
+                info.setProdId(rs.getLong(3));
                 info.setMerchantId(rs.getLong(4));
                 info.setIncartQuantity(rs.getInt(5));
                 info.setIncartSelect(rs.getInt(6));
@@ -100,20 +100,27 @@ public class MarshalUtil {
         return lst;
     }
 
-    public static List<ProductInfo> convertRs2ProdList(ResultSet rs){
-
+    public static List<ProductInfo> convertRs2ProdList(ResultSet rs){ //done
+        JSONParser parser = new JSONParser();
         List<ProductInfo> lst=new ArrayList<>();
         try{
             while(rs.next()){
                 ProductInfo info = new ProductInfo();
                 info.setProdId(rs.getLong(1));
                 info.setProdName(rs.getString(2));
-                //TODO DB only stores the path. Tags should be read from .txt/.csv/.json/ ...
-//                info.setProdTag(rs.get(3));
+                info.setCategoryId(rs.getInt(3));
                 info.setProdPrice(rs.getDouble(4));
                 info.setProdSales(rs.getInt(5));
-                info.setDiscountsId(rs.getLong(6));
-                info.setMerchantId(rs.getLong(7));
+                info.setProdRemain(rs.getInt(6));
+                //Notice DB only stores the URLs.
+                List<String> imgs = new ArrayList<>();
+                JSONArray jarr = (JSONArray) parser.parse(rs.getString(7));
+                for (Object jsonValue : jarr) {
+                    imgs.add( (String)jsonValue);
+                }
+                info.setProdImages(imgs);
+                info.setDiscountsId(rs.getLong(8));
+                info.setMerchantId(rs.getLong(9));
                 lst.add(info);
             }
         }catch(Exception e){

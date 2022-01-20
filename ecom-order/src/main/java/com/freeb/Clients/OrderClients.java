@@ -1,63 +1,44 @@
 package com.freeb.Clients;
 
-import com.freeb.Entity.DiscountInfo;
-import com.freeb.Entity.PaymentInfo;
+import com.freeb.Entity.*;
 import com.freeb.Enum.IdType;
 import com.freeb.Enum.PaymentStatus;
 
-public class OrderClients {
+public abstract class OrderClients {
 
     /*==== Accounts ====*/
 
-    public Boolean verifyAccount(long accountId){
-        return true;
-    }
+    public abstract Boolean verifyAccount(long accountId);
 
-    public Boolean verifyAccessByAccount(long accountId, long targetId, IdType idType){
-        switch (idType){
-            case PAYMENT_ID:
-                return true;
-            case SHIPPING_ID:
-                return true;
-            default:
-                return false;
-        }
-    }
+    public abstract Boolean verifyAccessByAccount(long accountId, long targetId, IdType idType);
 
+    public abstract AccountInfo GetAccountInfo(Long id);
     /*==== Products ====*/
 
-    public PaymentStatus CheckPaymentStatusById(Long uid, Long paymentId){
-        return PaymentStatus.PAYMENT_NO_RECORD;
-    }
+    public abstract PaymentStatus CheckPaymentStatusById(Long uid, Long paymentId);
 
     /*
      * Normal Callback. High Concurrency.
      * */
-    public Long CreatePayment(long uid,double prodVal,double discountsVal){
-        return -1L;
-    }
+    public abstract Long CreatePayment(PaymentInfo info);
 
     /*
      * Nested. Long waiting time.
      * */
-    public Boolean CancelPayment(Long uid,Long paymentId){
-        return false;
-    }
+    public abstract Boolean CancelPayment(Long uid,Long paymentId);
 
     /*
      * Big data structure.
      * */
-    public PaymentInfo GetPaymentInfoById(Long uid, Long paymentId){
-        return null;
-    }
+    public abstract PaymentInfo GetPaymentInfoById(Long uid, Long paymentId);
+
+    public abstract ProductInfo IncProductSales(Long pid, Integer purchaseNum);
+
+    public abstract MerchantInfo GetMerchantInfoById(Long mid);
 
 
     /*==== Discounts ====*/
-    public Double GetProdPrice(long prodId) {
-        return null;
-    }
+    public abstract Double GetProdPrice(long prodId);
 
-    public DiscountInfo GetDiscounts(Long prodId, Integer type){
-        return null;
-    }
+    public abstract DiscountInfo GetDiscounts(Long prodId, Integer type);
 }

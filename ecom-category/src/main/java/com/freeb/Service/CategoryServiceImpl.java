@@ -16,13 +16,13 @@ import java.util.concurrent.TimeUnit;
 
 public class CategoryServiceImpl implements CategoryService {
     private static final Logger logger = LoggerFactory.getLogger(CategoryServiceImpl.class);
-
+    //TODO excutor
     private ThreadPoolExecutor executor;
     private CategoryStorage cStorage;
     private CategoryClients clients;
     //Notice 对比线程数量
-    public CategoryServiceImpl(Integer num) throws ClassNotFoundException {
-
+    public CategoryServiceImpl(CategoryClients c,Integer num) throws ClassNotFoundException {
+        clients = c;
         cStorage = new CategoryStorage();
         executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(num);
     }
@@ -38,6 +38,23 @@ public class CategoryServiceImpl implements CategoryService {
             info = clients.GetProductInfo(pid);
         }
         public ProductInfo GetInfo(){
+            return info;
+        }
+    }
+    class GetProductInfoLst implements Runnable{
+        private List<ProductInfo> info;
+        private Long startPid,endPid;
+        GetProductInfoLst(Long sid,Long eid){
+            startPid=sid;
+            endPid=eid;
+        }
+        @Override
+        public void run() {
+            for (long pid = startPid; pid <= endPid; pid++) {
+                info.add(clients.GetProductInfo(pid));
+            }
+        }
+        public List<ProductInfo> GetInfoLst(){
             return info;
         }
     }
@@ -127,10 +144,10 @@ public class CategoryServiceImpl implements CategoryService {
 
         List<GetProductInfo> tasks = new ArrayList<>();
 
-        // 2. t1 => prod -> merchantName
+        // 2. t2 => prod -> merchantName
         GetMerchantNames t2 = new GetMerchantNames(prodIds);
         executor.submit(t2);
-        // 3. t2 => prodName, prodSales, prodNames, merchantId
+        // 3. t1 => prodName, prodSales, prodNames, merchantId
         for(Long prodId:prodIds){
 
             GetProductInfo t1 = new GetProductInfo(prodId);
@@ -159,6 +176,41 @@ public class CategoryServiceImpl implements CategoryService {
                 re.add(new CategoryPage(pid,pInfo.getProdName(),pInfo.getProdSales(),pInfo.getProdImages().get(0),null,null));
             }
             // Notice ImagesList == null ?
+        }
+        return re;
+    }
+
+    //TODO@ high-priority
+    @Override
+    public List<ProductInfo> BM2CompareParallelRpcEfficiency(Integer totalComputationLoad, Integer threadNum) {
+        int loopPerThread = totalComputationLoad/threadNum;
+            List<GetProductInfoLst> tasks = new ArrayList<>();
+
+        for(int tid = 0; tid<threadNum; tid++){
+
+            GetProductInfoLst t1 = new GetProductInfoLst((long) (tid * loopPerThread + 1),(long) (tid+1)*loopPerThread);
+            executor.submit(t1);
+            tasks.add(t1);
+        }
+        //TODO CHECK if the function is that meaning
+        try {
+            executor.awaitTermination(3, TimeUnit.SECONDS);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        List<ProductInfo> re = new ArrayList<>();
+        for(GetProductInfoLst task:tasks){
+            re.addAll(task.GetInfoLst());
+        }
+        return re;
+    }
+
+    @Override
+    public List<ProductPage> BM4ComparePatternFanout(List<Long> pidLst){
+        List<ProductPage> re = new ArrayList<>();
+        for(long pid:pidLst) {
+            re.add(GetProductPage(pid));
         }
         return re;
     }

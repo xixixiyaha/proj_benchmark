@@ -86,6 +86,18 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    public HashMap<Integer, Double> GetUserTags(Long id) {
+        logger.error("Method Not Implemented");
+        return null;
+    }
+
+    @Override
+    public Boolean SetUserTags(Long id, HashMap<Integer, Double> tags) {
+        logger.error("Method Not Implemented");
+        return null;
+    }
+
+    @Override
     public Boolean CreateAccount(AccountInfo info) {
         if(storage.GetAccountInfoByName(info.getUserName())!=null)return false;
         UUID uuid = UUID.randomUUID();

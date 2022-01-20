@@ -1,11 +1,9 @@
 package com.freeb.Entity;
 
-import java.util.Date;
-
 public class CartInfo {
     Long cartId;
-    Long accountId;
-    Long objId;
+    Long userId;
+    Long prodId;
     Long merchantId;
     Integer incartQuantity;
     Integer incartSelect;
@@ -18,20 +16,20 @@ public class CartInfo {
         this.cartId = cartId;
     }
 
-    public Long getAccountId() {
-        return accountId;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setAccountId(Long accountId) {
-        this.accountId = accountId;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
-    public Long getObjId() {
-        return objId;
+    public Long getProdId() {
+        return prodId;
     }
 
-    public void setObjId(Long objId) {
-        this.objId = objId;
+    public void setProdId(Long prodId) {
+        this.prodId = prodId;
     }
 
     public Long getMerchantId() {
@@ -63,8 +61,8 @@ public class CartInfo {
     public String toString() {
         return "CartInfo{" +
                 "cartId=" + cartId +
-                ", accountId=" + accountId +
-                ", objId=" + objId +
+                ", accountId=" + userId +
+                ", objId=" + prodId +
                 ", merchantId=" + merchantId +
                 ", incartQuantity=" + incartQuantity +
                 ", incartSelect=" + incartSelect +

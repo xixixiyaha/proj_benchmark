@@ -12,6 +12,16 @@ public class PaymentInfo {
     private Date createTime;
     private Date updateTime;
 
+    public PaymentInfo() {
+    }
+
+    public PaymentInfo(Double paymentVal, Double discountsVal, String paymentCard, Long userId) {
+        this.paymentVal = paymentVal;
+        this.discountsVal = discountsVal;
+        this.paymentCard = paymentCard;
+        this.userId = userId;
+    }
+
     public Long getPaymentId() {
         return paymentId;
     }

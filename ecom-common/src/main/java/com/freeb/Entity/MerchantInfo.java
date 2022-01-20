@@ -4,6 +4,14 @@ public class MerchantInfo {
     Long merchantId;
     String merchantName;
 
+    public MerchantInfo() {
+    }
+
+    public MerchantInfo(Long merchantId, String merchantName) {
+        this.merchantId = merchantId;
+        this.merchantName = merchantName;
+    }
+
     public Long getMerchantId() {
         return merchantId;
     }

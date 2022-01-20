@@ -2,9 +2,7 @@ package com.freeb.Service;
 
 import com.freeb.Clients.OrderClients;
 import com.freeb.Dao.OrderInfoStorage;
-import com.freeb.Entity.OrderInfo;
-import com.freeb.Entity.OrderReq;
-import com.freeb.Entity.OrderResp;
+import com.freeb.Entity.*;
 import com.freeb.Enum.IdType;
 import com.freeb.Orders.Orders;
 import com.freeb.Utils.PackResponse;
@@ -22,8 +20,9 @@ public class OrderServiceServerImpl implements OrderService {
     private Orders orders = new Orders();
     private OrderInfoStorage storage;
 
-    public OrderServiceServerImpl(){
+    public OrderServiceServerImpl(OrderClients c){
         storage = new OrderInfoStorage();
+        this.client = c;
     }
 
     @Override
@@ -74,17 +73,24 @@ public class OrderServiceServerImpl implements OrderService {
             orderResp.setBaseResp(PackResponse.packNoAuthority());
             return orderResp;
         }
+        AccountInfo aInfo = client.GetAccountInfo(orderReq.getUserId());
+        if(aInfo ==null){
+            logger.warn("create order failed OrderReq="+orderReq.toString());
+            orderResp.setBaseResp(PackResponse.packUnknownFailure());
+            return orderResp;
+        }
         Double prodVal= client.GetProdPrice(orderReq.getProdId());
         Double discountsVal= client.GetDiscounts(orderReq.getProdId(),0).getDiscountVal();
 
-        Long paymentId = client.CreatePayment(orderReq.getUserId(),prodVal,discountsVal);
+        PaymentInfo payInfo = new PaymentInfo(prodVal,discountsVal,aInfo.getUserCard(),orderReq.getUserId());
+        Long paymentId = client.CreatePayment(payInfo);
         if(paymentId ==-1L){
             logger.warn("create payment failed OrderReq="+orderReq.toString());
             //TODO 升级resp类型
             orderResp.setBaseResp(PackResponse.packUnknownFailure());
             return orderResp;
         }
-        Boolean re =storage.UpdatePaymentIdByOrderId(orderReq.getOrderId());
+        Boolean re =storage.UpdatePaymentIdByOrderId(orderReq.getOrderId(),paymentId);
         //update order's paymentID
         List<OrderInfo> infos = storage.getOrderInfoByOrderId(orderReq.getOrderId());
         orderResp.setBaseResp(PackResponse.packSuccess());
@@ -108,6 +114,68 @@ public class OrderServiceServerImpl implements OrderService {
 
         orderResp.setBaseResp(PackResponse.packSuccess());
         orderResp.setOrderInfos(infos);
+        return orderResp;
+    }
+
+    @Override
+    public OrderResp CreateOrderByCartInfo(OrderReq orderReq) {
+        OrderResp orderResp = new OrderResp();
+        AccountInfo aInfo = client.GetAccountInfo(orderReq.getUserId());
+        if(aInfo ==null){
+            logger.warn("create order failed OrderReq="+orderReq.toString());
+            orderResp.setBaseResp(PackResponse.packUnknownFailure());
+            return orderResp;
+        }
+        // 1， user合法
+        if (!client.verifyAccount(orderReq.getUserId())){
+            orderResp.setBaseResp(PackResponse.packNoAuthority());
+            orderResp.setHasMore(false);
+            return orderResp;
+        }
+        // 2. product 有余量 + Fetch Name + Fetch 商家名字
+        CartInfo cInfo = orderReq.getCartInfo();
+        if(cInfo==null){
+            logger.warn("create order failed cInfo = NULL OrderReq="+orderReq.toString());
+            orderResp.setBaseResp(PackResponse.packUnknownFailure());
+            return orderResp;
+        }
+        ProductInfo pInfo = client.IncProductSales(cInfo.getProdId(),cInfo.getIncartQuantity());
+        if(pInfo==null){
+            logger.warn("create order failed pInfo = NULL OrderReq="+orderReq.toString());
+            orderResp.setBaseResp(PackResponse.packUnknownFailure());
+            return orderResp;
+        }
+        MerchantInfo mInfo = client.GetMerchantInfoById(pInfo.getMerchantId());
+        if(mInfo==null){
+            logger.warn("create order failed mInfo = NULL OrderReq="+orderReq.toString());
+            orderResp.setBaseResp(PackResponse.packUnknownFailure());
+            return orderResp;
+        }
+        DiscountInfo dInfo = client.GetDiscounts(pInfo.getDiscountsId(),0);
+        if(dInfo==null){
+            logger.warn("create order failed dInfo = NULL OrderReq="+orderReq.toString());
+            orderResp.setBaseResp(PackResponse.packUnknownFailure());
+            return orderResp;
+        }
+        // 3. Create Order
+        List<OrderInfo> order = storage.CreateOrderInfoByCartInfo(cInfo.getUserId(),mInfo.getMerchantId(),mInfo.getMerchantName(),pInfo.getProdId(),pInfo.getProdName(),cInfo.getCartId());
+        if(order.size()!=1){
+            logger.warn("create order failed");
+            orderResp.setBaseResp(PackResponse.packUnknownFailure());
+            return orderResp;
+        }
+        // 4. Create Payment By order
+        PaymentInfo payInfo = new PaymentInfo(cInfo.getIncartQuantity()*pInfo.getProdPrice(),cInfo.getIncartQuantity()*dInfo.getDiscountVal(),aInfo.getUserCard(),orderReq.getUserId());
+        Long paymentId = client.CreatePayment(payInfo);
+        // 5. 返回orderInfo
+        if(!storage.UpdatePaymentIdByOrderId(order.get(0).getOrderId(),paymentId)){
+            logger.warn("create order failed Update Payment"+payInfo.getPaymentId());
+            orderResp.setBaseResp(PackResponse.packUnknownFailure());
+            return orderResp;
+        }
+        order = storage.getOrderInfoByOrderId(order.get(0).getOrderId());
+        orderResp.setOrderInfos(order);
+        orderResp.setBaseResp(PackResponse.packSuccess());
         return orderResp;
     }
 

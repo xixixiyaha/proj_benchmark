@@ -9,6 +9,7 @@ public class ProductInfo {
     Integer categoryId;
     Double prodPrice;
     Integer prodSales;
+    Integer prodRemain;
     List<String> prodImages;
     Long discountsId;
     Long merchantId;
@@ -93,5 +94,13 @@ public class ProductInfo {
 
     public void setProdImages(List<String> prodImages) {
         this.prodImages = prodImages;
+    }
+
+    public Integer getProdRemain() {
+        return prodRemain;
+    }
+
+    public void setProdRemain(Integer prodRemain) {
+        this.prodRemain = prodRemain;
     }
 }

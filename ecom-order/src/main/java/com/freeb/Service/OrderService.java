@@ -13,7 +13,7 @@ public interface OrderService {
 
     OrderResp GetOrderByOrderId(OrderReq orderReq);
 
-
+    OrderResp CreateOrderByCartInfo(OrderReq orderReq);
 
 
 }

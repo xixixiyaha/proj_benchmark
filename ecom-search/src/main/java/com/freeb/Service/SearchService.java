@@ -14,11 +14,9 @@ public interface SearchService {
     * */
     List<Long> GetRecommendByProdName(Long userId, String words, SearchType type, SearchOrder order);
 
-    /*
-    * 插入数据
-    * */
-    Boolean CreateUserClick(Long userId,Long prodId,Integer categoryId);
-
     List<Long> IdealResEfficiencyTest(Integer totalComputationLoad, Integer threadNum);
 
+    Boolean BM2CompareParallelEfficiency(Integer totalComputationLoad,Integer threadNum,Integer type);
+
+    Boolean OfflineUserTagComputation(List<Long> uidLst);
 }

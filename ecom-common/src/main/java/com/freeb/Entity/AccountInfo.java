@@ -8,6 +8,7 @@ public class AccountInfo {
     private Long userId;
     private String userName;
     private String userPasswd;
+    private String userCard;
     private String userDescription;
     // 懒更新 alg: 最近的浏览中 top10 category的占比
     private Map<Integer,Double> userTag;
@@ -81,5 +82,13 @@ public class AccountInfo {
                 ", createTime=" + createTime +
                 ", updateTime=" + updateTime +
                 '}';
+    }
+
+    public String getUserCard() {
+        return userCard;
+    }
+
+    public void setUserCard(String userCard) {
+        this.userCard = userCard;
     }
 }

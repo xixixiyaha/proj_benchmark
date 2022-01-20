@@ -22,8 +22,10 @@ service SearchService {
 
     list<i64> GetRecommendByProdName(1:i64 userId, String words, SearchType type, SearchOrder order)
 
-//    Boolean CreateUserClick(Long userId,Long prodId,Integer categoryId);
-
 	list<i64> IdealResEfficiencyTest(1: i32 totalComputationLoad,2:i32 threadName),
+
+	bool BM2CompareParallelEfficiency(1:i32 totalComputationLoad,2:i32 threadNum,3:i32 type);
+
+    bool OfflineUserTagComputation(1:list<i64> uidLst);
 
 }

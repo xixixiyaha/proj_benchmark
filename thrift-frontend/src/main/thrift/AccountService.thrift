@@ -15,21 +15,21 @@ struct AccountInfo{
     3: required string userPasswd,
     4: optional string userDescription,
     5: optional map<i32,double> userTag,
+    6: optional string userCard,
 }
 service AccountsService{
-
-
     bool AccountExists(1: i64 id),
 
     bool VerifyAccessByAccount(1: i64 accountId, 2: i64 targetId,3:IdType idType),
 
-    bool SetUserTags(1:i64 id,2:map<i32,double> tags),
 
     map<i32,double> GetUserTags(1:i64 id),
 
-    bool SetAccountTag(1:i64 id,2:string jsonStr),
+    bool SetUserTags(1:i64 id,2:map<i32,double> tags),
 
     list<i32> GetAccountTag(1:i64 id),
+
+    bool SetAccountTag(1:i64 id,2:string jsonStr),
 
     bool ChangeAccountPwd(1:AccountInfo info,2:string passwd),
 

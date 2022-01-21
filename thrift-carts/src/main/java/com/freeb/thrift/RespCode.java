@@ -4,14 +4,12 @@
  * DO NOT EDIT UNLESS YOU ARE SURE THAT YOU KNOW WHAT YOU ARE DOING
  *  @generated
  */
-package com.freeb.thrift;
+package com.freeb.CartClients;
 
 
-import java.util.Map;
-import java.util.HashMap;
 import org.apache.thrift.TEnum;
 
-public enum RespCode implements org.apache.thrift.TEnum {
+public enum RespCode implements TEnum {
   SUCCESS(0),
   DENY_NO_AUTHORITY(1),
   FAILURE_UNKNOWN(2);

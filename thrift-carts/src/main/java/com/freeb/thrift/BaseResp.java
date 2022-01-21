@@ -4,7 +4,7 @@
  * DO NOT EDIT UNLESS YOU ARE SURE THAT YOU KNOW WHAT YOU ARE DOING
  *  @generated
  */
-package com.freeb.thrift.CartClients;
+package com.freeb.CartClients;
 
 import org.apache.thrift.scheme.IScheme;
 import org.apache.thrift.scheme.SchemeFactory;
@@ -424,7 +424,7 @@ public class BaseResp implements org.apache.thrift.TBase<BaseResp, BaseResp._Fie
         switch (schemeField.id) {
           case 1: // STATUS
             if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
-              struct.Status = com.freeb.thrift.CartClients.RespCode.findByValue(iprot.readI32());
+              struct.Status = RespCode.findByValue(iprot.readI32());
               struct.setStatusIsSet(true);
             } else { 
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
@@ -496,7 +496,7 @@ public class BaseResp implements org.apache.thrift.TBase<BaseResp, BaseResp._Fie
     @Override
     public void read(org.apache.thrift.protocol.TProtocol prot, BaseResp struct) throws TException {
       TTupleProtocol iprot = (TTupleProtocol) prot;
-      struct.Status = com.freeb.thrift.CartClients.RespCode.findByValue(iprot.readI32());
+      struct.Status = RespCode.findByValue(iprot.readI32());
       struct.setStatusIsSet(true);
       BitSet incoming = iprot.readBitSet(1);
       if (incoming.get(0)) {

@@ -4,19 +4,23 @@
  * DO NOT EDIT UNLESS YOU ARE SURE THAT YOU KNOW WHAT YOU ARE DOING
  *  @generated
  */
-package com.freeb.thrift.CartClients;
+package com.freeb.thrift;
 
 
+import java.util.Map;
+import java.util.HashMap;
 import org.apache.thrift.TEnum;
 
-public enum RespCode implements TEnum {
-  SUCCESS(0),
-  DENY_NO_AUTHORITY(1),
-  FAILURE_UNKNOWN(2);
+public enum SearchOrder implements org.apache.thrift.TEnum {
+  PRICE_DESC(0),
+  PRICE_ASC(1),
+  SIMILARITY(2),
+  SALES(3),
+  UPDATE_TIME(4);
 
   private final int value;
 
-  private RespCode(int value) {
+  private SearchOrder(int value) {
     this.value = value;
   }
 
@@ -31,14 +35,18 @@ public enum RespCode implements TEnum {
    * Find a the enum type by its integer value, as defined in the Thrift IDL.
    * @return null if the value is not found.
    */
-  public static RespCode findByValue(int value) { 
+  public static SearchOrder findByValue(int value) { 
     switch (value) {
       case 0:
-        return SUCCESS;
+        return PRICE_DESC;
       case 1:
-        return DENY_NO_AUTHORITY;
+        return PRICE_ASC;
       case 2:
-        return FAILURE_UNKNOWN;
+        return SIMILARITY;
+      case 3:
+        return SALES;
+      case 4:
+        return UPDATE_TIME;
       default:
         return null;
     }

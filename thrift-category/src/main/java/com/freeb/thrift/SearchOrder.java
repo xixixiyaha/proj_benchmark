@@ -4,22 +4,23 @@
  * DO NOT EDIT UNLESS YOU ARE SURE THAT YOU KNOW WHAT YOU ARE DOING
  *  @generated
  */
-package com.freeb.thrift.CartClients;
+package com.freeb.thrift;
 
 
+import java.util.Map;
+import java.util.HashMap;
 import org.apache.thrift.TEnum;
 
-public enum IdType implements TEnum {
-  ACCOUNT_ID(0),
-  ORDER_ID(1),
-  PAYMENT_ID(2),
-  SHIPPING_ID(3),
-  MERCHANT_ID(4),
-  OBJ_ID(5);
+public enum SearchOrder implements org.apache.thrift.TEnum {
+  PRICE_DESC(0),
+  PRICE_ASC(1),
+  SIMILARITY(2),
+  SALES(3),
+  UPDATE_TIME(4);
 
   private final int value;
 
-  private IdType(int value) {
+  private SearchOrder(int value) {
     this.value = value;
   }
 
@@ -34,20 +35,18 @@ public enum IdType implements TEnum {
    * Find a the enum type by its integer value, as defined in the Thrift IDL.
    * @return null if the value is not found.
    */
-  public static IdType findByValue(int value) { 
+  public static SearchOrder findByValue(int value) { 
     switch (value) {
       case 0:
-        return ACCOUNT_ID;
+        return PRICE_DESC;
       case 1:
-        return ORDER_ID;
+        return PRICE_ASC;
       case 2:
-        return PAYMENT_ID;
+        return SIMILARITY;
       case 3:
-        return SHIPPING_ID;
+        return SALES;
       case 4:
-        return MERCHANT_ID;
-      case 5:
-        return OBJ_ID;
+        return UPDATE_TIME;
       default:
         return null;
     }

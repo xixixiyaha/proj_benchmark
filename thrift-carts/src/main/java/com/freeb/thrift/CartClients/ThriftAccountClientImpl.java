@@ -1,4 +1,4 @@
-package com.freeb.thrift.CartClients;
+package com.freeb.CartClients;
 
 import org.apache.thrift.protocol.TBinaryProtocol;
 import org.apache.thrift.protocol.TProtocol;

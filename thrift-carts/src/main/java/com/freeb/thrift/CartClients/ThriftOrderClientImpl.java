@@ -1,5 +1,6 @@
-package com.freeb.CartClients;
+package com.freeb.thrift.CartClients;
 
+import com.freeb.thrift.OrderService;
 import org.apache.thrift.protocol.TBinaryProtocol;
 import org.apache.thrift.protocol.TProtocol;
 import org.apache.thrift.transport.TFramedTransport;

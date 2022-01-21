@@ -487,11 +487,11 @@ public class DiscountInfo implements org.apache.thrift.TBase<DiscountInfo, Disco
     return _Fields.findByThriftId(fieldId);
   }
 
-  public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+  public void read(org.apache.thrift.protocol.TProtocol iprot) throws TException {
     schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
   }
 
-  public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+  public void write(org.apache.thrift.protocol.TProtocol oprot) throws TException {
     schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
   }
 
@@ -521,7 +521,7 @@ public class DiscountInfo implements org.apache.thrift.TBase<DiscountInfo, Disco
     return sb.toString();
   }
 
-  public void validate() throws org.apache.thrift.TException {
+  public void validate() throws TException {
     // check for required fields
     // alas, we cannot check 'discountId' because it's a primitive and you chose the non-beans generator.
     // alas, we cannot check 'prodId' because it's a primitive and you chose the non-beans generator.
@@ -532,7 +532,7 @@ public class DiscountInfo implements org.apache.thrift.TBase<DiscountInfo, Disco
   private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
     try {
       write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-    } catch (org.apache.thrift.TException te) {
+    } catch (TException te) {
       throw new java.io.IOException(te);
     }
   }
@@ -542,7 +542,7 @@ public class DiscountInfo implements org.apache.thrift.TBase<DiscountInfo, Disco
       // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
       __isset_bitfield = 0;
       read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-    } catch (org.apache.thrift.TException te) {
+    } catch (TException te) {
       throw new java.io.IOException(te);
     }
   }
@@ -555,7 +555,7 @@ public class DiscountInfo implements org.apache.thrift.TBase<DiscountInfo, Disco
 
   private static class DiscountInfoStandardScheme extends StandardScheme<DiscountInfo> {
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot, DiscountInfo struct) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot, DiscountInfo struct) throws TException {
       org.apache.thrift.protocol.TField schemeField;
       iprot.readStructBegin();
       while (true)
@@ -606,18 +606,18 @@ public class DiscountInfo implements org.apache.thrift.TBase<DiscountInfo, Disco
 
       // check for required fields of primitive type, which can't be checked in the validate method
       if (!struct.isSetDiscountId()) {
-        throw new org.apache.thrift.protocol.TProtocolException("Required field 'discountId' was not found in serialized data! Struct: " + toString());
+        throw new TProtocolException("Required field 'discountId' was not found in serialized data! Struct: " + toString());
       }
       if (!struct.isSetProdId()) {
-        throw new org.apache.thrift.protocol.TProtocolException("Required field 'prodId' was not found in serialized data! Struct: " + toString());
+        throw new TProtocolException("Required field 'prodId' was not found in serialized data! Struct: " + toString());
       }
       if (!struct.isSetDiscountVal()) {
-        throw new org.apache.thrift.protocol.TProtocolException("Required field 'discountVal' was not found in serialized data! Struct: " + toString());
+        throw new TProtocolException("Required field 'discountVal' was not found in serialized data! Struct: " + toString());
       }
       struct.validate();
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot, DiscountInfo struct) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot, DiscountInfo struct) throws TException {
       struct.validate();
 
       oprot.writeStructBegin(STRUCT_DESC);
@@ -650,7 +650,7 @@ public class DiscountInfo implements org.apache.thrift.TBase<DiscountInfo, Disco
   private static class DiscountInfoTupleScheme extends TupleScheme<DiscountInfo> {
 
     @Override
-    public void write(org.apache.thrift.protocol.TProtocol prot, DiscountInfo struct) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol prot, DiscountInfo struct) throws TException {
       TTupleProtocol oprot = (TTupleProtocol) prot;
       oprot.writeI64(struct.discountId);
       oprot.writeI64(struct.prodId);
@@ -666,7 +666,7 @@ public class DiscountInfo implements org.apache.thrift.TBase<DiscountInfo, Disco
     }
 
     @Override
-    public void read(org.apache.thrift.protocol.TProtocol prot, DiscountInfo struct) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol prot, DiscountInfo struct) throws TException {
       TTupleProtocol iprot = (TTupleProtocol) prot;
       struct.discountId = iprot.readI64();
       struct.setDiscountIdIsSet(true);

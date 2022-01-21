@@ -56,7 +56,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>benchmark.rpc.com.freeb.CartServer</mainClass>
+                            <mainClass>benchmark.rpc.com.freeb.thrift.CartServer</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

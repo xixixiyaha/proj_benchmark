@@ -1,8 +1,10 @@
-package com.freeb.CartServer;
+package com.freeb.thrift.CartServer;
 
-import com.freeb.CartClients.CartForeignClients;
-import com.freeb.CartTypeConvert;
+import com.freeb.thrift.CartClients.CartForeignClients;
+import com.freeb.thrift.CartService;
+import com.freeb.thrift.CartTypeConvert;
 import com.freeb.Service.CartServiceImpl;
+import com.freeb.thrift.CartInfo;
 import org.apache.thrift.TException;
 
 import java.util.ArrayList;

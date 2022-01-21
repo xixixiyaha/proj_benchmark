@@ -6,7 +6,7 @@ public class ProductPage {
     ProductInfo info;
     Long merchantId;
     Long merchantName;
-    DiscountInfo discountVal;
+    Double discountVal;
     List<CommentInfo> prodComments;
 
 
@@ -43,11 +43,11 @@ public class ProductPage {
         this.info = info;
     }
 
-    public DiscountInfo getDiscountVal() {
+    public Double getDiscountVal() {
         return discountVal;
     }
 
-    public void setDiscountVal(DiscountInfo discountVal) {
+    public void setDiscountVal(Double discountVal) {
         this.discountVal = discountVal;
     }
 }

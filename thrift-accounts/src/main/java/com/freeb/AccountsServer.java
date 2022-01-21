@@ -12,9 +12,9 @@ import org.openjdk.jmh.runner.RunnerException;
 import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
 import org.openjdk.jmh.runner.options.TimeValue;
-import com.freeb.thrift.AccountServer.AccountService;
-import com.freeb.thrift.AccountServer.AccountsServiceServerImpl;
-import com.freeb.thrift.AccountClients.AccountForeignClients;
+import com.freeb.AccountServer.AccountService;
+import com.freeb.AccountServer.AccountsServiceServerImpl;
+import com.freeb.AccountClients.AccountForeignClients;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;

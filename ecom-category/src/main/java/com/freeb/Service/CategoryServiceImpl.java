@@ -96,19 +96,19 @@ public class CategoryServiceImpl implements CategoryService {
         }
     }
 
-    class GetMerchantNames implements Runnable{
-        private List<MerchantInfo> names;
-        private List<Long> pids;
-        GetMerchantNames(List<Long> ids){
-            pids = ids;
+    class GetMerchantInfo implements Runnable{
+        private MerchantInfo info;
+        private Long pid;
+        GetMerchantInfo(Long id){
+            pid = id;
         }
 
         @Override
         public void run() {
-            names = clients.GetMerchantNames(pids);
+            info = clients.GetMerchantInfoByProd(pid);
         }
-        public List<MerchantInfo> GetNames(){
-            return names;
+        public MerchantInfo GetInfo(){
+            return info;
         }
     }
 
@@ -133,26 +133,27 @@ public class CategoryServiceImpl implements CategoryService {
         ProductInfo info = t1.GetInfo();
         page.setInfo(info);
         page.setProdComments(t2.GetComments());
-        page.setDiscountVal(t3.GetDiscount());
+        page.setDiscountVal(t3.GetDiscount().getDiscountVal());
         return page;
     }
 
     @Override
     public List<CategoryPage> GetCategoryPage(Long userId, String searchKey) {
         // 1. get product ids
-        List<Long> prodIds = clients.GetRecommendProdId(userId,searchKey, SearchType.OBJ_NAME, SearchOrder.SIMILARITY);
+        List<Long> prodIds = clients.GetRecommendByProdName(userId,searchKey, SearchType.OBJ_NAME, SearchOrder.SIMILARITY);
 
         List<GetProductInfo> tasks = new ArrayList<>();
-
+        List<GetMerchantInfo> tasks2 = new ArrayList<>();
         // 2. t2 => prod -> merchantName
-        GetMerchantNames t2 = new GetMerchantNames(prodIds);
-        executor.submit(t2);
-        // 3. t1 => prodName, prodSales, prodNames, merchantId
+        //    t1 => prodName, prodSales, prodNames, merchantId
         for(Long prodId:prodIds){
 
             GetProductInfo t1 = new GetProductInfo(prodId);
             executor.submit(t1);
+            GetMerchantInfo t2 = new GetMerchantInfo(prodId);
+            executor.submit(t1);
             tasks.add(t1);
+            tasks2.add(t2);
         }
         //TODO CHECK if the function is that meaning
         try {
@@ -160,17 +161,14 @@ public class CategoryServiceImpl implements CategoryService {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        List<MerchantInfo> mInfoLst = t2.GetNames();
-        if(mInfoLst.size()!=prodIds.size()){
-            logger.warn("fetch merchantInfos Failed");
-            return null;
-        }
+
         List<CategoryPage> re = new ArrayList<>();
         int pos = 0;
         for(Long pid:prodIds){
             ProductInfo pInfo = tasks.get(pos).GetInfo();
-            if(mInfoLst.get(pos).getMerchantId().equals(pInfo.getMerchantId())){
-                re.add(new CategoryPage(pid,pInfo.getProdName(),pInfo.getProdSales(),pInfo.getProdImages().get(0),pInfo.getMerchantId(),mInfoLst.get(pos).getMerchantName()));
+            MerchantInfo mInfo = tasks2.get(pos).GetInfo();
+            if(mInfo.getMerchantId().equals(pInfo.getMerchantId())){
+                re.add(new CategoryPage(pid,pInfo.getProdName(),pInfo.getProdSales(),pInfo.getProdImages().get(0),pInfo.getMerchantId(),mInfo.getMerchantName()));
             }else {
                 logger.warn("product Info doesnt match ");
                 re.add(new CategoryPage(pid,pInfo.getProdName(),pInfo.getProdSales(),pInfo.getProdImages().get(0),null,null));

@@ -1,4 +1,4 @@
-package com.freeb.thrift.SearchClients;
+package com.freeb.SearchClients;
 
 import org.apache.thrift.protocol.TBinaryProtocol;
 import org.apache.thrift.protocol.TProtocol;

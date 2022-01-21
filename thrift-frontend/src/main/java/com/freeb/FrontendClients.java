@@ -1,15 +1,14 @@
-package com.freeb.thrift;
+package com.freeb;
 
 import com.freeb.Utils.LockObjectPool;
-import com.freeb.thrift.Accounts.AccountInfo;
-import com.freeb.thrift.Accounts.IdType;
-import com.freeb.thrift.Accounts.ThriftAccountClientImpl;
+import com.freeb.Accounts.AccountInfo;
+import com.freeb.Accounts.IdType;
+import com.freeb.Accounts.ThriftAccountClientImpl;
 import org.apache.thrift.TException;
 
 import java.io.Closeable;
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 
 public class FrontendClients implements Closeable {
 

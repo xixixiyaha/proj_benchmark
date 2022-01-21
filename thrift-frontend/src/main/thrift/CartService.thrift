@@ -1,4 +1,4 @@
-namespace java com.freeb.com.freeb.thrift
+namespace java com.freeb.thrift
 
 struct CartInfo{
     1:required i64 cartId,

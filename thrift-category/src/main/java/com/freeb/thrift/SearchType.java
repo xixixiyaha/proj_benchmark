@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.HashMap;
 import org.apache.thrift.TEnum;
 
-public enum SearchType implements org.apache.thrift.TEnum {
+public enum SearchType implements TEnum {
   ACCOUNT_ID(0),
   ORDER_ID(1),
   PAYMENT_ID(2),

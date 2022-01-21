@@ -39,25 +39,25 @@ public class SearchService {
 
   public interface Iface {
 
-    public List<Long> GetRecommendByProdName(long userId, String words, SearchType type, SearchOrder order) throws org.apache.thrift.TException;
+    public List<Long> GetRecommendByProdName(long userId, String words, SearchType type, SearchOrder order) throws TException;
 
-    public List<Long> IdealResEfficiencyTest(int totalComputationLoad, int threadName) throws org.apache.thrift.TException;
+    public List<Long> IdealResEfficiencyTest(int totalComputationLoad, int threadName) throws TException;
 
-    public boolean BM2CompareParallelEfficiency(int totalComputationLoad, int threadNum, int type) throws org.apache.thrift.TException;
+    public boolean BM2CompareParallelEfficiency(int totalComputationLoad, int threadNum, int type) throws TException;
 
-    public boolean OfflineUserTagComputation(List<Long> uidLst) throws org.apache.thrift.TException;
+    public boolean OfflineUserTagComputation(List<Long> uidLst) throws TException;
 
   }
 
   public interface AsyncIface {
 
-    public void GetRecommendByProdName(long userId, String words, SearchType type, SearchOrder order, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void GetRecommendByProdName(long userId, String words, SearchType type, SearchOrder order, AsyncMethodCallback resultHandler) throws TException;
 
-    public void IdealResEfficiencyTest(int totalComputationLoad, int threadName, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void IdealResEfficiencyTest(int totalComputationLoad, int threadName, AsyncMethodCallback resultHandler) throws TException;
 
-    public void BM2CompareParallelEfficiency(int totalComputationLoad, int threadNum, int type, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void BM2CompareParallelEfficiency(int totalComputationLoad, int threadNum, int type, AsyncMethodCallback resultHandler) throws TException;
 
-    public void OfflineUserTagComputation(List<Long> uidLst, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void OfflineUserTagComputation(List<Long> uidLst, AsyncMethodCallback resultHandler) throws TException;
 
   }
 
@@ -81,13 +81,13 @@ public class SearchService {
       super(iprot, oprot);
     }
 
-    public List<Long> GetRecommendByProdName(long userId, String words, SearchType type, SearchOrder order) throws org.apache.thrift.TException
+    public List<Long> GetRecommendByProdName(long userId, String words, SearchType type, SearchOrder order) throws TException
     {
       send_GetRecommendByProdName(userId, words, type, order);
       return recv_GetRecommendByProdName();
     }
 
-    public void send_GetRecommendByProdName(long userId, String words, SearchType type, SearchOrder order) throws org.apache.thrift.TException
+    public void send_GetRecommendByProdName(long userId, String words, SearchType type, SearchOrder order) throws TException
     {
       GetRecommendByProdName_args args = new GetRecommendByProdName_args();
       args.setUserId(userId);
@@ -97,7 +97,7 @@ public class SearchService {
       sendBase("GetRecommendByProdName", args);
     }
 
-    public List<Long> recv_GetRecommendByProdName() throws org.apache.thrift.TException
+    public List<Long> recv_GetRecommendByProdName() throws TException
     {
       GetRecommendByProdName_result result = new GetRecommendByProdName_result();
       receiveBase(result, "GetRecommendByProdName");
@@ -107,13 +107,13 @@ public class SearchService {
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "GetRecommendByProdName failed: unknown result");
     }
 
-    public List<Long> IdealResEfficiencyTest(int totalComputationLoad, int threadName) throws org.apache.thrift.TException
+    public List<Long> IdealResEfficiencyTest(int totalComputationLoad, int threadName) throws TException
     {
       send_IdealResEfficiencyTest(totalComputationLoad, threadName);
       return recv_IdealResEfficiencyTest();
     }
 
-    public void send_IdealResEfficiencyTest(int totalComputationLoad, int threadName) throws org.apache.thrift.TException
+    public void send_IdealResEfficiencyTest(int totalComputationLoad, int threadName) throws TException
     {
       IdealResEfficiencyTest_args args = new IdealResEfficiencyTest_args();
       args.setTotalComputationLoad(totalComputationLoad);
@@ -121,7 +121,7 @@ public class SearchService {
       sendBase("IdealResEfficiencyTest", args);
     }
 
-    public List<Long> recv_IdealResEfficiencyTest() throws org.apache.thrift.TException
+    public List<Long> recv_IdealResEfficiencyTest() throws TException
     {
       IdealResEfficiencyTest_result result = new IdealResEfficiencyTest_result();
       receiveBase(result, "IdealResEfficiencyTest");
@@ -131,13 +131,13 @@ public class SearchService {
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "IdealResEfficiencyTest failed: unknown result");
     }
 
-    public boolean BM2CompareParallelEfficiency(int totalComputationLoad, int threadNum, int type) throws org.apache.thrift.TException
+    public boolean BM2CompareParallelEfficiency(int totalComputationLoad, int threadNum, int type) throws TException
     {
       send_BM2CompareParallelEfficiency(totalComputationLoad, threadNum, type);
       return recv_BM2CompareParallelEfficiency();
     }
 
-    public void send_BM2CompareParallelEfficiency(int totalComputationLoad, int threadNum, int type) throws org.apache.thrift.TException
+    public void send_BM2CompareParallelEfficiency(int totalComputationLoad, int threadNum, int type) throws TException
     {
       BM2CompareParallelEfficiency_args args = new BM2CompareParallelEfficiency_args();
       args.setTotalComputationLoad(totalComputationLoad);
@@ -146,7 +146,7 @@ public class SearchService {
       sendBase("BM2CompareParallelEfficiency", args);
     }
 
-    public boolean recv_BM2CompareParallelEfficiency() throws org.apache.thrift.TException
+    public boolean recv_BM2CompareParallelEfficiency() throws TException
     {
       BM2CompareParallelEfficiency_result result = new BM2CompareParallelEfficiency_result();
       receiveBase(result, "BM2CompareParallelEfficiency");
@@ -156,20 +156,20 @@ public class SearchService {
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "BM2CompareParallelEfficiency failed: unknown result");
     }
 
-    public boolean OfflineUserTagComputation(List<Long> uidLst) throws org.apache.thrift.TException
+    public boolean OfflineUserTagComputation(List<Long> uidLst) throws TException
     {
       send_OfflineUserTagComputation(uidLst);
       return recv_OfflineUserTagComputation();
     }
 
-    public void send_OfflineUserTagComputation(List<Long> uidLst) throws org.apache.thrift.TException
+    public void send_OfflineUserTagComputation(List<Long> uidLst) throws TException
     {
       OfflineUserTagComputation_args args = new OfflineUserTagComputation_args();
       args.setUidLst(uidLst);
       sendBase("OfflineUserTagComputation", args);
     }
 
-    public boolean recv_OfflineUserTagComputation() throws org.apache.thrift.TException
+    public boolean recv_OfflineUserTagComputation() throws TException
     {
       OfflineUserTagComputation_result result = new OfflineUserTagComputation_result();
       receiveBase(result, "OfflineUserTagComputation");
@@ -197,7 +197,7 @@ public class SearchService {
       super(protocolFactory, clientManager, transport);
     }
 
-    public void GetRecommendByProdName(long userId, String words, SearchType type, SearchOrder order, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+    public void GetRecommendByProdName(long userId, String words, SearchType type, SearchOrder order, AsyncMethodCallback resultHandler) throws TException {
       checkReady();
       GetRecommendByProdName_call method_call = new GetRecommendByProdName_call(userId, words, type, order, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
@@ -209,7 +209,7 @@ public class SearchService {
       private String words;
       private SearchType type;
       private SearchOrder order;
-      public GetRecommendByProdName_call(long userId, String words, SearchType type, SearchOrder order, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      public GetRecommendByProdName_call(long userId, String words, SearchType type, SearchOrder order, AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws TException {
         super(client, protocolFactory, transport, resultHandler, false);
         this.userId = userId;
         this.words = words;
@@ -217,7 +217,7 @@ public class SearchService {
         this.order = order;
       }
 
-      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws TException {
         prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("GetRecommendByProdName", org.apache.thrift.protocol.TMessageType.CALL, 0));
         GetRecommendByProdName_args args = new GetRecommendByProdName_args();
         args.setUserId(userId);
@@ -228,8 +228,8 @@ public class SearchService {
         prot.writeMessageEnd();
       }
 
-      public List<Long> getResult() throws org.apache.thrift.TException {
-        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+      public List<Long> getResult() throws TException {
+        if (getState() != State.RESPONSE_READ) {
           throw new IllegalStateException("Method call not finished!");
         }
         org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
@@ -238,7 +238,7 @@ public class SearchService {
       }
     }
 
-    public void IdealResEfficiencyTest(int totalComputationLoad, int threadName, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+    public void IdealResEfficiencyTest(int totalComputationLoad, int threadName, AsyncMethodCallback resultHandler) throws TException {
       checkReady();
       IdealResEfficiencyTest_call method_call = new IdealResEfficiencyTest_call(totalComputationLoad, threadName, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
@@ -248,13 +248,13 @@ public class SearchService {
     public static class IdealResEfficiencyTest_call extends org.apache.thrift.async.TAsyncMethodCall {
       private int totalComputationLoad;
       private int threadName;
-      public IdealResEfficiencyTest_call(int totalComputationLoad, int threadName, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      public IdealResEfficiencyTest_call(int totalComputationLoad, int threadName, AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws TException {
         super(client, protocolFactory, transport, resultHandler, false);
         this.totalComputationLoad = totalComputationLoad;
         this.threadName = threadName;
       }
 
-      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws TException {
         prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("IdealResEfficiencyTest", org.apache.thrift.protocol.TMessageType.CALL, 0));
         IdealResEfficiencyTest_args args = new IdealResEfficiencyTest_args();
         args.setTotalComputationLoad(totalComputationLoad);
@@ -263,8 +263,8 @@ public class SearchService {
         prot.writeMessageEnd();
       }
 
-      public List<Long> getResult() throws org.apache.thrift.TException {
-        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+      public List<Long> getResult() throws TException {
+        if (getState() != State.RESPONSE_READ) {
           throw new IllegalStateException("Method call not finished!");
         }
         org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
@@ -273,7 +273,7 @@ public class SearchService {
       }
     }
 
-    public void BM2CompareParallelEfficiency(int totalComputationLoad, int threadNum, int type, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+    public void BM2CompareParallelEfficiency(int totalComputationLoad, int threadNum, int type, AsyncMethodCallback resultHandler) throws TException {
       checkReady();
       BM2CompareParallelEfficiency_call method_call = new BM2CompareParallelEfficiency_call(totalComputationLoad, threadNum, type, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
@@ -284,14 +284,14 @@ public class SearchService {
       private int totalComputationLoad;
       private int threadNum;
       private int type;
-      public BM2CompareParallelEfficiency_call(int totalComputationLoad, int threadNum, int type, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      public BM2CompareParallelEfficiency_call(int totalComputationLoad, int threadNum, int type, AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws TException {
         super(client, protocolFactory, transport, resultHandler, false);
         this.totalComputationLoad = totalComputationLoad;
         this.threadNum = threadNum;
         this.type = type;
       }
 
-      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws TException {
         prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("BM2CompareParallelEfficiency", org.apache.thrift.protocol.TMessageType.CALL, 0));
         BM2CompareParallelEfficiency_args args = new BM2CompareParallelEfficiency_args();
         args.setTotalComputationLoad(totalComputationLoad);
@@ -301,8 +301,8 @@ public class SearchService {
         prot.writeMessageEnd();
       }
 
-      public boolean getResult() throws org.apache.thrift.TException {
-        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+      public boolean getResult() throws TException {
+        if (getState() != State.RESPONSE_READ) {
           throw new IllegalStateException("Method call not finished!");
         }
         org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
@@ -311,7 +311,7 @@ public class SearchService {
       }
     }
 
-    public void OfflineUserTagComputation(List<Long> uidLst, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+    public void OfflineUserTagComputation(List<Long> uidLst, AsyncMethodCallback resultHandler) throws TException {
       checkReady();
       OfflineUserTagComputation_call method_call = new OfflineUserTagComputation_call(uidLst, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
@@ -320,12 +320,12 @@ public class SearchService {
 
     public static class OfflineUserTagComputation_call extends org.apache.thrift.async.TAsyncMethodCall {
       private List<Long> uidLst;
-      public OfflineUserTagComputation_call(List<Long> uidLst, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      public OfflineUserTagComputation_call(List<Long> uidLst, AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws TException {
         super(client, protocolFactory, transport, resultHandler, false);
         this.uidLst = uidLst;
       }
 
-      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws TException {
         prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("OfflineUserTagComputation", org.apache.thrift.protocol.TMessageType.CALL, 0));
         OfflineUserTagComputation_args args = new OfflineUserTagComputation_args();
         args.setUidLst(uidLst);
@@ -333,8 +333,8 @@ public class SearchService {
         prot.writeMessageEnd();
       }
 
-      public boolean getResult() throws org.apache.thrift.TException {
-        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+      public boolean getResult() throws TException {
+        if (getState() != State.RESPONSE_READ) {
           throw new IllegalStateException("Method call not finished!");
         }
         org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
@@ -376,7 +376,7 @@ public class SearchService {
         return false;
       }
 
-      public GetRecommendByProdName_result getResult(I iface, GetRecommendByProdName_args args) throws org.apache.thrift.TException {
+      public GetRecommendByProdName_result getResult(I iface, GetRecommendByProdName_args args) throws TException {
         GetRecommendByProdName_result result = new GetRecommendByProdName_result();
         result.success = iface.GetRecommendByProdName(args.userId, args.words, args.type, args.order);
         return result;
@@ -396,7 +396,7 @@ public class SearchService {
         return false;
       }
 
-      public IdealResEfficiencyTest_result getResult(I iface, IdealResEfficiencyTest_args args) throws org.apache.thrift.TException {
+      public IdealResEfficiencyTest_result getResult(I iface, IdealResEfficiencyTest_args args) throws TException {
         IdealResEfficiencyTest_result result = new IdealResEfficiencyTest_result();
         result.success = iface.IdealResEfficiencyTest(args.totalComputationLoad, args.threadName);
         return result;
@@ -416,7 +416,7 @@ public class SearchService {
         return false;
       }
 
-      public BM2CompareParallelEfficiency_result getResult(I iface, BM2CompareParallelEfficiency_args args) throws org.apache.thrift.TException {
+      public BM2CompareParallelEfficiency_result getResult(I iface, BM2CompareParallelEfficiency_args args) throws TException {
         BM2CompareParallelEfficiency_result result = new BM2CompareParallelEfficiency_result();
         result.success = iface.BM2CompareParallelEfficiency(args.totalComputationLoad, args.threadNum, args.type);
         result.setSuccessIsSet(true);
@@ -437,7 +437,7 @@ public class SearchService {
         return false;
       }
 
-      public OfflineUserTagComputation_result getResult(I iface, OfflineUserTagComputation_args args) throws org.apache.thrift.TException {
+      public OfflineUserTagComputation_result getResult(I iface, OfflineUserTagComputation_args args) throws TException {
         OfflineUserTagComputation_result result = new OfflineUserTagComputation_result();
         result.success = iface.OfflineUserTagComputation(args.uidLst);
         result.setSuccessIsSet(true);
@@ -511,7 +511,7 @@ public class SearchService {
         return false;
       }
 
-      public void start(I iface, GetRecommendByProdName_args args, org.apache.thrift.async.AsyncMethodCallback<List<Long>> resultHandler) throws TException {
+      public void start(I iface, GetRecommendByProdName_args args, AsyncMethodCallback<List<Long>> resultHandler) throws TException {
         iface.GetRecommendByProdName(args.userId, args.words, args.type, args.order,resultHandler);
       }
     }
@@ -562,7 +562,7 @@ public class SearchService {
         return false;
       }
 
-      public void start(I iface, IdealResEfficiencyTest_args args, org.apache.thrift.async.AsyncMethodCallback<List<Long>> resultHandler) throws TException {
+      public void start(I iface, IdealResEfficiencyTest_args args, AsyncMethodCallback<List<Long>> resultHandler) throws TException {
         iface.IdealResEfficiencyTest(args.totalComputationLoad, args.threadName,resultHandler);
       }
     }
@@ -614,7 +614,7 @@ public class SearchService {
         return false;
       }
 
-      public void start(I iface, BM2CompareParallelEfficiency_args args, org.apache.thrift.async.AsyncMethodCallback<Boolean> resultHandler) throws TException {
+      public void start(I iface, BM2CompareParallelEfficiency_args args, AsyncMethodCallback<Boolean> resultHandler) throws TException {
         iface.BM2CompareParallelEfficiency(args.totalComputationLoad, args.threadNum, args.type,resultHandler);
       }
     }
@@ -666,7 +666,7 @@ public class SearchService {
         return false;
       }
 
-      public void start(I iface, OfflineUserTagComputation_args args, org.apache.thrift.async.AsyncMethodCallback<Boolean> resultHandler) throws TException {
+      public void start(I iface, OfflineUserTagComputation_args args, AsyncMethodCallback<Boolean> resultHandler) throws TException {
         iface.OfflineUserTagComputation(args.uidLst,resultHandler);
       }
     }
@@ -1159,11 +1159,11 @@ public class SearchService {
       return _Fields.findByThriftId(fieldId);
     }
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws TException {
       schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws TException {
       schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
     }
 
@@ -1203,7 +1203,7 @@ public class SearchService {
       return sb.toString();
     }
 
-    public void validate() throws org.apache.thrift.TException {
+    public void validate() throws TException {
       // check for required fields
       // check for sub-struct validity
     }
@@ -1211,7 +1211,7 @@ public class SearchService {
     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
       try {
         write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -1221,7 +1221,7 @@ public class SearchService {
         // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
         __isset_bitfield = 0;
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -1234,7 +1234,7 @@ public class SearchService {
 
     private static class GetRecommendByProdName_argsStandardScheme extends StandardScheme<GetRecommendByProdName_args> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, GetRecommendByProdName_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, GetRecommendByProdName_args struct) throws TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -1270,7 +1270,7 @@ public class SearchService {
               break;
             case 4: // ORDER
               if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
-                struct.order = com.freeb.thrift.SearchOrder.findByValue(iprot.readI32());
+                struct.order = SearchOrder.findByValue(iprot.readI32());
                 struct.setOrderIsSet(true);
               } else { 
                 org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
@@ -1287,7 +1287,7 @@ public class SearchService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, GetRecommendByProdName_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, GetRecommendByProdName_args struct) throws TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -1324,7 +1324,7 @@ public class SearchService {
     private static class GetRecommendByProdName_argsTupleScheme extends TupleScheme<GetRecommendByProdName_args> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, GetRecommendByProdName_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, GetRecommendByProdName_args struct) throws TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetUserId()) {
@@ -1355,7 +1355,7 @@ public class SearchService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, GetRecommendByProdName_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, GetRecommendByProdName_args struct) throws TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(4);
         if (incoming.get(0)) {
@@ -1371,7 +1371,7 @@ public class SearchService {
           struct.setTypeIsSet(true);
         }
         if (incoming.get(3)) {
-          struct.order = com.freeb.thrift.SearchOrder.findByValue(iprot.readI32());
+          struct.order = SearchOrder.findByValue(iprot.readI32());
           struct.setOrderIsSet(true);
         }
       }
@@ -1626,11 +1626,11 @@ public class SearchService {
       return _Fields.findByThriftId(fieldId);
     }
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws TException {
       schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws TException {
       schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
       }
 
@@ -1650,7 +1650,7 @@ public class SearchService {
       return sb.toString();
     }
 
-    public void validate() throws org.apache.thrift.TException {
+    public void validate() throws TException {
       // check for required fields
       // check for sub-struct validity
     }
@@ -1658,7 +1658,7 @@ public class SearchService {
     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
       try {
         write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -1666,7 +1666,7 @@ public class SearchService {
     private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
       try {
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -1679,7 +1679,7 @@ public class SearchService {
 
     private static class GetRecommendByProdName_resultStandardScheme extends StandardScheme<GetRecommendByProdName_result> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, GetRecommendByProdName_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, GetRecommendByProdName_result struct) throws TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -1718,7 +1718,7 @@ public class SearchService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, GetRecommendByProdName_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, GetRecommendByProdName_result struct) throws TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -1749,7 +1749,7 @@ public class SearchService {
     private static class GetRecommendByProdName_resultTupleScheme extends TupleScheme<GetRecommendByProdName_result> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, GetRecommendByProdName_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, GetRecommendByProdName_result struct) throws TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetSuccess()) {
@@ -1768,7 +1768,7 @@ public class SearchService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, GetRecommendByProdName_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, GetRecommendByProdName_result struct) throws TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
@@ -2095,11 +2095,11 @@ public class SearchService {
       return _Fields.findByThriftId(fieldId);
     }
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws TException {
       schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws TException {
       schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
     }
 
@@ -2119,7 +2119,7 @@ public class SearchService {
       return sb.toString();
     }
 
-    public void validate() throws org.apache.thrift.TException {
+    public void validate() throws TException {
       // check for required fields
       // check for sub-struct validity
     }
@@ -2127,7 +2127,7 @@ public class SearchService {
     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
       try {
         write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -2137,7 +2137,7 @@ public class SearchService {
         // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
         __isset_bitfield = 0;
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -2150,7 +2150,7 @@ public class SearchService {
 
     private static class IdealResEfficiencyTest_argsStandardScheme extends StandardScheme<IdealResEfficiencyTest_args> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, IdealResEfficiencyTest_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, IdealResEfficiencyTest_args struct) throws TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -2187,7 +2187,7 @@ public class SearchService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, IdealResEfficiencyTest_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, IdealResEfficiencyTest_args struct) throws TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -2212,7 +2212,7 @@ public class SearchService {
     private static class IdealResEfficiencyTest_argsTupleScheme extends TupleScheme<IdealResEfficiencyTest_args> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, IdealResEfficiencyTest_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, IdealResEfficiencyTest_args struct) throws TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetTotalComputationLoad()) {
@@ -2231,7 +2231,7 @@ public class SearchService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, IdealResEfficiencyTest_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, IdealResEfficiencyTest_args struct) throws TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
@@ -2494,11 +2494,11 @@ public class SearchService {
       return _Fields.findByThriftId(fieldId);
     }
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws TException {
       schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws TException {
       schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
       }
 
@@ -2518,7 +2518,7 @@ public class SearchService {
       return sb.toString();
     }
 
-    public void validate() throws org.apache.thrift.TException {
+    public void validate() throws TException {
       // check for required fields
       // check for sub-struct validity
     }
@@ -2526,7 +2526,7 @@ public class SearchService {
     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
       try {
         write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -2534,7 +2534,7 @@ public class SearchService {
     private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
       try {
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -2547,7 +2547,7 @@ public class SearchService {
 
     private static class IdealResEfficiencyTest_resultStandardScheme extends StandardScheme<IdealResEfficiencyTest_result> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, IdealResEfficiencyTest_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, IdealResEfficiencyTest_result struct) throws TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -2586,7 +2586,7 @@ public class SearchService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, IdealResEfficiencyTest_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, IdealResEfficiencyTest_result struct) throws TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -2617,7 +2617,7 @@ public class SearchService {
     private static class IdealResEfficiencyTest_resultTupleScheme extends TupleScheme<IdealResEfficiencyTest_result> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, IdealResEfficiencyTest_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, IdealResEfficiencyTest_result struct) throws TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetSuccess()) {
@@ -2636,7 +2636,7 @@ public class SearchService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, IdealResEfficiencyTest_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, IdealResEfficiencyTest_result struct) throws TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
@@ -3037,11 +3037,11 @@ public class SearchService {
       return _Fields.findByThriftId(fieldId);
     }
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws TException {
       schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws TException {
       schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
     }
 
@@ -3065,7 +3065,7 @@ public class SearchService {
       return sb.toString();
     }
 
-    public void validate() throws org.apache.thrift.TException {
+    public void validate() throws TException {
       // check for required fields
       // check for sub-struct validity
     }
@@ -3073,7 +3073,7 @@ public class SearchService {
     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
       try {
         write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -3083,7 +3083,7 @@ public class SearchService {
         // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
         __isset_bitfield = 0;
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -3096,7 +3096,7 @@ public class SearchService {
 
     private static class BM2CompareParallelEfficiency_argsStandardScheme extends StandardScheme<BM2CompareParallelEfficiency_args> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, BM2CompareParallelEfficiency_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, BM2CompareParallelEfficiency_args struct) throws TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -3141,7 +3141,7 @@ public class SearchService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, BM2CompareParallelEfficiency_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, BM2CompareParallelEfficiency_args struct) throws TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -3169,7 +3169,7 @@ public class SearchService {
     private static class BM2CompareParallelEfficiency_argsTupleScheme extends TupleScheme<BM2CompareParallelEfficiency_args> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, BM2CompareParallelEfficiency_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, BM2CompareParallelEfficiency_args struct) throws TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetTotalComputationLoad()) {
@@ -3194,7 +3194,7 @@ public class SearchService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, BM2CompareParallelEfficiency_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, BM2CompareParallelEfficiency_args struct) throws TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(3);
         if (incoming.get(0)) {
@@ -3446,11 +3446,11 @@ public class SearchService {
       return _Fields.findByThriftId(fieldId);
     }
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws TException {
       schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws TException {
       schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
       }
 
@@ -3466,7 +3466,7 @@ public class SearchService {
       return sb.toString();
     }
 
-    public void validate() throws org.apache.thrift.TException {
+    public void validate() throws TException {
       // check for required fields
       // check for sub-struct validity
     }
@@ -3474,7 +3474,7 @@ public class SearchService {
     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
       try {
         write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -3484,7 +3484,7 @@ public class SearchService {
         // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
         __isset_bitfield = 0;
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -3497,7 +3497,7 @@ public class SearchService {
 
     private static class BM2CompareParallelEfficiency_resultStandardScheme extends StandardScheme<BM2CompareParallelEfficiency_result> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, BM2CompareParallelEfficiency_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, BM2CompareParallelEfficiency_result struct) throws TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -3526,7 +3526,7 @@ public class SearchService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, BM2CompareParallelEfficiency_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, BM2CompareParallelEfficiency_result struct) throws TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -3550,7 +3550,7 @@ public class SearchService {
     private static class BM2CompareParallelEfficiency_resultTupleScheme extends TupleScheme<BM2CompareParallelEfficiency_result> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, BM2CompareParallelEfficiency_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, BM2CompareParallelEfficiency_result struct) throws TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetSuccess()) {
@@ -3563,7 +3563,7 @@ public class SearchService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, BM2CompareParallelEfficiency_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, BM2CompareParallelEfficiency_result struct) throws TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
@@ -3822,11 +3822,11 @@ public class SearchService {
       return _Fields.findByThriftId(fieldId);
     }
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws TException {
       schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws TException {
       schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
     }
 
@@ -3846,7 +3846,7 @@ public class SearchService {
       return sb.toString();
     }
 
-    public void validate() throws org.apache.thrift.TException {
+    public void validate() throws TException {
       // check for required fields
       // check for sub-struct validity
     }
@@ -3854,7 +3854,7 @@ public class SearchService {
     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
       try {
         write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -3862,7 +3862,7 @@ public class SearchService {
     private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
       try {
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -3875,7 +3875,7 @@ public class SearchService {
 
     private static class OfflineUserTagComputation_argsStandardScheme extends StandardScheme<OfflineUserTagComputation_args> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, OfflineUserTagComputation_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, OfflineUserTagComputation_args struct) throws TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -3914,7 +3914,7 @@ public class SearchService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, OfflineUserTagComputation_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, OfflineUserTagComputation_args struct) throws TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -3945,7 +3945,7 @@ public class SearchService {
     private static class OfflineUserTagComputation_argsTupleScheme extends TupleScheme<OfflineUserTagComputation_args> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, OfflineUserTagComputation_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, OfflineUserTagComputation_args struct) throws TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetUidLst()) {
@@ -3964,7 +3964,7 @@ public class SearchService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, OfflineUserTagComputation_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, OfflineUserTagComputation_args struct) throws TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
@@ -4217,11 +4217,11 @@ public class SearchService {
       return _Fields.findByThriftId(fieldId);
     }
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws TException {
       schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws TException {
       schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
       }
 
@@ -4237,7 +4237,7 @@ public class SearchService {
       return sb.toString();
     }
 
-    public void validate() throws org.apache.thrift.TException {
+    public void validate() throws TException {
       // check for required fields
       // check for sub-struct validity
     }
@@ -4245,7 +4245,7 @@ public class SearchService {
     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
       try {
         write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -4255,7 +4255,7 @@ public class SearchService {
         // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
         __isset_bitfield = 0;
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -4268,7 +4268,7 @@ public class SearchService {
 
     private static class OfflineUserTagComputation_resultStandardScheme extends StandardScheme<OfflineUserTagComputation_result> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, OfflineUserTagComputation_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, OfflineUserTagComputation_result struct) throws TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -4297,7 +4297,7 @@ public class SearchService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, OfflineUserTagComputation_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, OfflineUserTagComputation_result struct) throws TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -4321,7 +4321,7 @@ public class SearchService {
     private static class OfflineUserTagComputation_resultTupleScheme extends TupleScheme<OfflineUserTagComputation_result> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, OfflineUserTagComputation_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, OfflineUserTagComputation_result struct) throws TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetSuccess()) {
@@ -4334,7 +4334,7 @@ public class SearchService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, OfflineUserTagComputation_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, OfflineUserTagComputation_result struct) throws TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {

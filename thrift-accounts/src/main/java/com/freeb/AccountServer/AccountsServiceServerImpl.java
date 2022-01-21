@@ -1,9 +1,9 @@
-package com.freeb.thrift.AccountServer;
+package com.freeb.AccountServer;
 
+import com.freeb.AccountClients.AccountForeignClients;
 import com.freeb.Service.AccountServiceImpl;
 import org.apache.thrift.TException;
-import com.freeb.thrift.AccountsTypeConvert;
-import com.freeb.thrift.AccountClients.AccountForeignClients;
+import com.freeb.AccountsTypeConvert;
 
 import java.util.List;
 

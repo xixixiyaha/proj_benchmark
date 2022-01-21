@@ -4,7 +4,7 @@
  * DO NOT EDIT UNLESS YOU ARE SURE THAT YOU KNOW WHAT YOU ARE DOING
  *  @generated
  */
-package com.freeb.thrift.SearchServer;
+package com.freeb.SearchServer;
 
 import org.apache.thrift.EncodingUtils;
 import org.apache.thrift.TException;

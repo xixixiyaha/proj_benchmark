@@ -19,6 +19,7 @@
         <module name="thrift-accounts" />
         <module name="thrift-discount" />
         <module name="ecom-order" />
+        <module name="thrift-category" />
         <module name="thrift-carts" />
       </profile>
     </annotationProcessing>

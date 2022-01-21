@@ -1,9 +1,9 @@
-package com.freeb.thrift;
+package com.freeb;
 
-import com.freeb.thrift.SearchClients.SearchOrder;
+import com.freeb.SearchClients.SearchOrder;
 
 public class SearchTypeConvert {
-    public static com.freeb.thrift.SearchClients.SearchOrder SearchOrderOri2Thr(com.freeb.Enum.SearchOrder order){
+    public static SearchOrder SearchOrderOri2Thr(com.freeb.Enum.SearchOrder order){
         switch (order){
             case SIMILARITY:
                 return SearchOrder.SIMILARITY;

@@ -1,12 +1,11 @@
-namespace java com.freeb.com.freeb.thrift
-include "DiscountService.com.freeb.thrift"
-include "ProductService.com.freeb.thrift"
+namespace java com.freeb.thrift
+include "ProductService.thrift"
 
 struct ProductPage {
     1:required ProductService.ProductInfo info,
     2:optional i64 merchantId,
     3:optional i64 merchantName,
-    4:optional DiscountService.DiscountInfo discountVal,
+    4:optional double discountVal,
     5:optional list<ProductService.CommentInfo> prodComments,
 }
 

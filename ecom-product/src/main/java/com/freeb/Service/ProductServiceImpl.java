@@ -121,4 +121,16 @@ public class ProductServiceImpl implements ProductService {
         //TODO@ high priority
         return null;
     }
+
+    @Override
+    public MerchantInfo GetMerchantInfoByProd(Long pid) {
+        //TODO@ high priority
+        return null;
+    }
+
+    @Override
+    public ProductInfo GetProdInfo(Long pid) {
+        //  //TODO@ high priority
+        return null;
+    }
 }

@@ -1,4 +1,4 @@
-package com.freeb.thrift;
+package com.freeb;
 
 import com.freeb.Service.DiscountServiceImpl;
 import org.apache.thrift.TException;

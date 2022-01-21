@@ -13,6 +13,9 @@ public class DiscountInfo {
         this.discountVal = discountVal;
     }
 
+    public DiscountInfo() {
+    }
+
     public Long getDiscountId() {
         return discountId;
     }

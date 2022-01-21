@@ -42,7 +42,7 @@ public class ProductInfo implements org.apache.thrift.TBase<ProductInfo, Product
   private static final org.apache.thrift.protocol.TField PROD_NAME_FIELD_DESC = new org.apache.thrift.protocol.TField("prodName", org.apache.thrift.protocol.TType.STRING, (short)2);
   private static final org.apache.thrift.protocol.TField CATEGORY_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("categoryId", org.apache.thrift.protocol.TType.I32, (short)3);
   private static final org.apache.thrift.protocol.TField PROD_PRICE_FIELD_DESC = new org.apache.thrift.protocol.TField("prodPrice", org.apache.thrift.protocol.TType.DOUBLE, (short)4);
-  private static final org.apache.thrift.protocol.TField PROD_SALES_FIELD_DESC = new org.apache.thrift.protocol.TField("prodSales", org.apache.thrift.protocol.TType.DOUBLE, (short)5);
+  private static final org.apache.thrift.protocol.TField PROD_SALES_FIELD_DESC = new org.apache.thrift.protocol.TField("prodSales", org.apache.thrift.protocol.TType.I32, (short)5);
   private static final org.apache.thrift.protocol.TField PROD_REMAIN_FIELD_DESC = new org.apache.thrift.protocol.TField("prodRemain", org.apache.thrift.protocol.TType.I32, (short)6);
   private static final org.apache.thrift.protocol.TField PROD_IMAGES_FIELD_DESC = new org.apache.thrift.protocol.TField("prodImages", org.apache.thrift.protocol.TType.LIST, (short)7);
   private static final org.apache.thrift.protocol.TField DISCOUNTS_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("discountsId", org.apache.thrift.protocol.TType.I64, (short)8);
@@ -60,7 +60,7 @@ public class ProductInfo implements org.apache.thrift.TBase<ProductInfo, Product
   public String prodName; // required
   public int categoryId; // optional
   public double prodPrice; // required
-  public double prodSales; // optional
+  public int prodSales; // optional
   public int prodRemain; // optional
   public List<String> prodImages; // optional
   public long discountsId; // optional
@@ -178,7 +178,7 @@ public class ProductInfo implements org.apache.thrift.TBase<ProductInfo, Product
     tmpMap.put(_Fields.PROD_PRICE, new org.apache.thrift.meta_data.FieldMetaData("prodPrice", org.apache.thrift.TFieldRequirementType.REQUIRED, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.DOUBLE)));
     tmpMap.put(_Fields.PROD_SALES, new org.apache.thrift.meta_data.FieldMetaData("prodSales", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
-        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.DOUBLE)));
+        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I32)));
     tmpMap.put(_Fields.PROD_REMAIN, new org.apache.thrift.meta_data.FieldMetaData("prodRemain", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I32)));
     tmpMap.put(_Fields.PROD_IMAGES, new org.apache.thrift.meta_data.FieldMetaData("prodImages", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
@@ -256,7 +256,7 @@ public class ProductInfo implements org.apache.thrift.TBase<ProductInfo, Product
     setProdPriceIsSet(false);
     this.prodPrice = 0.0;
     setProdSalesIsSet(false);
-    this.prodSales = 0.0;
+    this.prodSales = 0;
     setProdRemainIsSet(false);
     this.prodRemain = 0;
     this.prodImages = null;
@@ -361,11 +361,11 @@ public class ProductInfo implements org.apache.thrift.TBase<ProductInfo, Product
     __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __PRODPRICE_ISSET_ID, value);
   }
 
-  public double getProdSales() {
+  public int getProdSales() {
     return this.prodSales;
   }
 
-  public ProductInfo setProdSales(double prodSales) {
+  public ProductInfo setProdSales(int prodSales) {
     this.prodSales = prodSales;
     setProdSalesIsSet(true);
     return this;
@@ -578,7 +578,7 @@ public class ProductInfo implements org.apache.thrift.TBase<ProductInfo, Product
       if (value == null) {
         unsetProdSales();
       } else {
-        setProdSales((Double)value);
+        setProdSales((Integer)value);
       }
       break;
 
@@ -1007,11 +1007,11 @@ public class ProductInfo implements org.apache.thrift.TBase<ProductInfo, Product
     return _Fields.findByThriftId(fieldId);
   }
 
-  public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+  public void read(org.apache.thrift.protocol.TProtocol iprot) throws TException {
     schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
   }
 
-  public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+  public void write(org.apache.thrift.protocol.TProtocol oprot) throws TException {
     schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
   }
 
@@ -1097,11 +1097,11 @@ public class ProductInfo implements org.apache.thrift.TBase<ProductInfo, Product
     return sb.toString();
   }
 
-  public void validate() throws org.apache.thrift.TException {
+  public void validate() throws TException {
     // check for required fields
     // alas, we cannot check 'prodId' because it's a primitive and you chose the non-beans generator.
     if (prodName == null) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'prodName' was not present! Struct: " + toString());
+      throw new TProtocolException("Required field 'prodName' was not present! Struct: " + toString());
     }
     // alas, we cannot check 'prodPrice' because it's a primitive and you chose the non-beans generator.
     // alas, we cannot check 'merchantId' because it's a primitive and you chose the non-beans generator.
@@ -1111,7 +1111,7 @@ public class ProductInfo implements org.apache.thrift.TBase<ProductInfo, Product
   private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
     try {
       write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-    } catch (org.apache.thrift.TException te) {
+    } catch (TException te) {
       throw new java.io.IOException(te);
     }
   }
@@ -1121,7 +1121,7 @@ public class ProductInfo implements org.apache.thrift.TBase<ProductInfo, Product
       // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
       __isset_bitfield = 0;
       read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-    } catch (org.apache.thrift.TException te) {
+    } catch (TException te) {
       throw new java.io.IOException(te);
     }
   }
@@ -1134,7 +1134,7 @@ public class ProductInfo implements org.apache.thrift.TBase<ProductInfo, Product
 
   private static class ProductInfoStandardScheme extends StandardScheme<ProductInfo> {
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot, ProductInfo struct) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot, ProductInfo struct) throws TException {
       org.apache.thrift.protocol.TField schemeField;
       iprot.readStructBegin();
       while (true)
@@ -1177,8 +1177,8 @@ public class ProductInfo implements org.apache.thrift.TBase<ProductInfo, Product
             }
             break;
           case 5: // PROD_SALES
-            if (schemeField.type == org.apache.thrift.protocol.TType.DOUBLE) {
-              struct.prodSales = iprot.readDouble();
+            if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
+              struct.prodSales = iprot.readI32();
               struct.setProdSalesIsSet(true);
             } else { 
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
@@ -1251,18 +1251,18 @@ public class ProductInfo implements org.apache.thrift.TBase<ProductInfo, Product
 
       // check for required fields of primitive type, which can't be checked in the validate method
       if (!struct.isSetProdId()) {
-        throw new org.apache.thrift.protocol.TProtocolException("Required field 'prodId' was not found in serialized data! Struct: " + toString());
+        throw new TProtocolException("Required field 'prodId' was not found in serialized data! Struct: " + toString());
       }
       if (!struct.isSetProdPrice()) {
-        throw new org.apache.thrift.protocol.TProtocolException("Required field 'prodPrice' was not found in serialized data! Struct: " + toString());
+        throw new TProtocolException("Required field 'prodPrice' was not found in serialized data! Struct: " + toString());
       }
       if (!struct.isSetMerchantId()) {
-        throw new org.apache.thrift.protocol.TProtocolException("Required field 'merchantId' was not found in serialized data! Struct: " + toString());
+        throw new TProtocolException("Required field 'merchantId' was not found in serialized data! Struct: " + toString());
       }
       struct.validate();
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot, ProductInfo struct) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot, ProductInfo struct) throws TException {
       struct.validate();
 
       oprot.writeStructBegin(STRUCT_DESC);
@@ -1284,7 +1284,7 @@ public class ProductInfo implements org.apache.thrift.TBase<ProductInfo, Product
       oprot.writeFieldEnd();
       if (struct.isSetProdSales()) {
         oprot.writeFieldBegin(PROD_SALES_FIELD_DESC);
-        oprot.writeDouble(struct.prodSales);
+        oprot.writeI32(struct.prodSales);
         oprot.writeFieldEnd();
       }
       if (struct.isSetProdRemain()) {
@@ -1343,7 +1343,7 @@ public class ProductInfo implements org.apache.thrift.TBase<ProductInfo, Product
   private static class ProductInfoTupleScheme extends TupleScheme<ProductInfo> {
 
     @Override
-    public void write(org.apache.thrift.protocol.TProtocol prot, ProductInfo struct) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol prot, ProductInfo struct) throws TException {
       TTupleProtocol oprot = (TTupleProtocol) prot;
       oprot.writeI64(struct.prodId);
       oprot.writeString(struct.prodName);
@@ -1376,7 +1376,7 @@ public class ProductInfo implements org.apache.thrift.TBase<ProductInfo, Product
         oprot.writeI32(struct.categoryId);
       }
       if (struct.isSetProdSales()) {
-        oprot.writeDouble(struct.prodSales);
+        oprot.writeI32(struct.prodSales);
       }
       if (struct.isSetProdRemain()) {
         oprot.writeI32(struct.prodRemain);
@@ -1402,7 +1402,7 @@ public class ProductInfo implements org.apache.thrift.TBase<ProductInfo, Product
     }
 
     @Override
-    public void read(org.apache.thrift.protocol.TProtocol prot, ProductInfo struct) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol prot, ProductInfo struct) throws TException {
       TTupleProtocol iprot = (TTupleProtocol) prot;
       struct.prodId = iprot.readI64();
       struct.setProdIdIsSet(true);
@@ -1418,7 +1418,7 @@ public class ProductInfo implements org.apache.thrift.TBase<ProductInfo, Product
         struct.setCategoryIdIsSet(true);
       }
       if (incoming.get(1)) {
-        struct.prodSales = iprot.readDouble();
+        struct.prodSales = iprot.readI32();
         struct.setProdSalesIsSet(true);
       }
       if (incoming.get(2)) {

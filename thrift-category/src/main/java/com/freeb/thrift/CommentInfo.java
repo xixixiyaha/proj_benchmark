@@ -651,11 +651,11 @@ public class CommentInfo implements org.apache.thrift.TBase<CommentInfo, Comment
     return _Fields.findByThriftId(fieldId);
   }
 
-  public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+  public void read(org.apache.thrift.protocol.TProtocol iprot) throws TException {
     schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
   }
 
-  public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+  public void write(org.apache.thrift.protocol.TProtocol oprot) throws TException {
     schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
   }
 
@@ -707,13 +707,13 @@ public class CommentInfo implements org.apache.thrift.TBase<CommentInfo, Comment
     return sb.toString();
   }
 
-  public void validate() throws org.apache.thrift.TException {
+  public void validate() throws TException {
     // check for required fields
     // alas, we cannot check 'commentId' because it's a primitive and you chose the non-beans generator.
     // alas, we cannot check 'userId' because it's a primitive and you chose the non-beans generator.
     // alas, we cannot check 'prodId' because it's a primitive and you chose the non-beans generator.
     if (commentDetails == null) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'commentDetails' was not present! Struct: " + toString());
+      throw new TProtocolException("Required field 'commentDetails' was not present! Struct: " + toString());
     }
     // check for sub-struct validity
   }
@@ -721,7 +721,7 @@ public class CommentInfo implements org.apache.thrift.TBase<CommentInfo, Comment
   private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
     try {
       write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-    } catch (org.apache.thrift.TException te) {
+    } catch (TException te) {
       throw new java.io.IOException(te);
     }
   }
@@ -731,7 +731,7 @@ public class CommentInfo implements org.apache.thrift.TBase<CommentInfo, Comment
       // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
       __isset_bitfield = 0;
       read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-    } catch (org.apache.thrift.TException te) {
+    } catch (TException te) {
       throw new java.io.IOException(te);
     }
   }
@@ -744,7 +744,7 @@ public class CommentInfo implements org.apache.thrift.TBase<CommentInfo, Comment
 
   private static class CommentInfoStandardScheme extends StandardScheme<CommentInfo> {
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot, CommentInfo struct) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot, CommentInfo struct) throws TException {
       org.apache.thrift.protocol.TField schemeField;
       iprot.readStructBegin();
       while (true)
@@ -821,18 +821,18 @@ public class CommentInfo implements org.apache.thrift.TBase<CommentInfo, Comment
 
       // check for required fields of primitive type, which can't be checked in the validate method
       if (!struct.isSetCommentId()) {
-        throw new org.apache.thrift.protocol.TProtocolException("Required field 'commentId' was not found in serialized data! Struct: " + toString());
+        throw new TProtocolException("Required field 'commentId' was not found in serialized data! Struct: " + toString());
       }
       if (!struct.isSetUserId()) {
-        throw new org.apache.thrift.protocol.TProtocolException("Required field 'userId' was not found in serialized data! Struct: " + toString());
+        throw new TProtocolException("Required field 'userId' was not found in serialized data! Struct: " + toString());
       }
       if (!struct.isSetProdId()) {
-        throw new org.apache.thrift.protocol.TProtocolException("Required field 'prodId' was not found in serialized data! Struct: " + toString());
+        throw new TProtocolException("Required field 'prodId' was not found in serialized data! Struct: " + toString());
       }
       struct.validate();
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot, CommentInfo struct) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot, CommentInfo struct) throws TException {
       struct.validate();
 
       oprot.writeStructBegin(STRUCT_DESC);
@@ -886,7 +886,7 @@ public class CommentInfo implements org.apache.thrift.TBase<CommentInfo, Comment
   private static class CommentInfoTupleScheme extends TupleScheme<CommentInfo> {
 
     @Override
-    public void write(org.apache.thrift.protocol.TProtocol prot, CommentInfo struct) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol prot, CommentInfo struct) throws TException {
       TTupleProtocol oprot = (TTupleProtocol) prot;
       oprot.writeI64(struct.commentId);
       oprot.writeI64(struct.userId);
@@ -915,7 +915,7 @@ public class CommentInfo implements org.apache.thrift.TBase<CommentInfo, Comment
     }
 
     @Override
-    public void read(org.apache.thrift.protocol.TProtocol prot, CommentInfo struct) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol prot, CommentInfo struct) throws TException {
       TTupleProtocol iprot = (TTupleProtocol) prot;
       struct.commentId = iprot.readI64();
       struct.setCommentIdIsSet(true);

@@ -6,8 +6,8 @@ import org.apache.thrift.server.TThreadedSelectorServer;
 import org.apache.thrift.transport.TNonblockingServerSocket;
 import org.apache.thrift.transport.TNonblockingServerTransport;
 import org.apache.thrift.transport.TTransportException;
-import com.freeb.thrift.CartServer.CartService;
-import com.freeb.thrift.CartServer.CartServiceServerImpl;
+import CartService;
+import CartServiceServerImpl;
 
 import java.net.InetSocketAddress;
 import java.sql.Timestamp;

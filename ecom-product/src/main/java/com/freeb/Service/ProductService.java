@@ -34,4 +34,9 @@ public interface ProductService {
     Boolean BM6CompareMemBindWidth(Integer dataSize);
 
     List<CommentInfo> GetComments(Long prodId, Integer comtNum);
+
+    MerchantInfo GetMerchantInfoByProd(Long pid);
+
+    ProductInfo GetProdInfo(Long pid);
+
 }

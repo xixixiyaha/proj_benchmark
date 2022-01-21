@@ -1,8 +1,7 @@
-package com.freeb.thrift.SearchServer;
+package com.freeb.SearchServer;
 
 
-import com.freeb.thrift.SearchClients.SearchForeignClients;
-import com.freeb.thrift.SearchServer.SearchService;
+import com.freeb.SearchClients.SearchForeignClients;
 import org.apache.thrift.TException;
 
 import java.util.List;

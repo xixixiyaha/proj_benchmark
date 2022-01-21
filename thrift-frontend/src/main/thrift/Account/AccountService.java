@@ -6,6 +6,8 @@
  */
 package com.freeb.thrift.Accounts;
 
+import com.freeb.Accounts.AccountInfo;
+import com.freeb.Accounts.IdType;
 import org.apache.thrift.EncodingUtils;
 import org.apache.thrift.TException;
 import org.apache.thrift.async.AsyncMethodCallback;

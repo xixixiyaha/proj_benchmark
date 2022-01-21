@@ -633,11 +633,11 @@ public class CategoryPage implements org.apache.thrift.TBase<CategoryPage, Categ
     return _Fields.findByThriftId(fieldId);
   }
 
-  public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+  public void read(org.apache.thrift.protocol.TProtocol iprot) throws TException {
     schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
   }
 
-  public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+  public void write(org.apache.thrift.protocol.TProtocol oprot) throws TException {
     schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
   }
 
@@ -689,15 +689,15 @@ public class CategoryPage implements org.apache.thrift.TBase<CategoryPage, Categ
     return sb.toString();
   }
 
-  public void validate() throws org.apache.thrift.TException {
+  public void validate() throws TException {
     // check for required fields
     // alas, we cannot check 'prodId' because it's a primitive and you chose the non-beans generator.
     if (prodName == null) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'prodName' was not present! Struct: " + toString());
+      throw new TProtocolException("Required field 'prodName' was not present! Struct: " + toString());
     }
     // alas, we cannot check 'merchantId' because it's a primitive and you chose the non-beans generator.
     if (merchantName == null) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'merchantName' was not present! Struct: " + toString());
+      throw new TProtocolException("Required field 'merchantName' was not present! Struct: " + toString());
     }
     // check for sub-struct validity
   }
@@ -705,7 +705,7 @@ public class CategoryPage implements org.apache.thrift.TBase<CategoryPage, Categ
   private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
     try {
       write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-    } catch (org.apache.thrift.TException te) {
+    } catch (TException te) {
       throw new java.io.IOException(te);
     }
   }
@@ -715,7 +715,7 @@ public class CategoryPage implements org.apache.thrift.TBase<CategoryPage, Categ
       // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
       __isset_bitfield = 0;
       read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-    } catch (org.apache.thrift.TException te) {
+    } catch (TException te) {
       throw new java.io.IOException(te);
     }
   }
@@ -728,7 +728,7 @@ public class CategoryPage implements org.apache.thrift.TBase<CategoryPage, Categ
 
   private static class CategoryPageStandardScheme extends StandardScheme<CategoryPage> {
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot, CategoryPage struct) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot, CategoryPage struct) throws TException {
       org.apache.thrift.protocol.TField schemeField;
       iprot.readStructBegin();
       while (true)
@@ -795,15 +795,15 @@ public class CategoryPage implements org.apache.thrift.TBase<CategoryPage, Categ
 
       // check for required fields of primitive type, which can't be checked in the validate method
       if (!struct.isSetProdId()) {
-        throw new org.apache.thrift.protocol.TProtocolException("Required field 'prodId' was not found in serialized data! Struct: " + toString());
+        throw new TProtocolException("Required field 'prodId' was not found in serialized data! Struct: " + toString());
       }
       if (!struct.isSetMerchantId()) {
-        throw new org.apache.thrift.protocol.TProtocolException("Required field 'merchantId' was not found in serialized data! Struct: " + toString());
+        throw new TProtocolException("Required field 'merchantId' was not found in serialized data! Struct: " + toString());
       }
       struct.validate();
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot, CategoryPage struct) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot, CategoryPage struct) throws TException {
       struct.validate();
 
       oprot.writeStructBegin(STRUCT_DESC);
@@ -850,7 +850,7 @@ public class CategoryPage implements org.apache.thrift.TBase<CategoryPage, Categ
   private static class CategoryPageTupleScheme extends TupleScheme<CategoryPage> {
 
     @Override
-    public void write(org.apache.thrift.protocol.TProtocol prot, CategoryPage struct) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol prot, CategoryPage struct) throws TException {
       TTupleProtocol oprot = (TTupleProtocol) prot;
       oprot.writeI64(struct.prodId);
       oprot.writeString(struct.prodName);
@@ -873,7 +873,7 @@ public class CategoryPage implements org.apache.thrift.TBase<CategoryPage, Categ
     }
 
     @Override
-    public void read(org.apache.thrift.protocol.TProtocol prot, CategoryPage struct) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol prot, CategoryPage struct) throws TException {
       TTupleProtocol iprot = (TTupleProtocol) prot;
       struct.prodId = iprot.readI64();
       struct.setProdIdIsSet(true);

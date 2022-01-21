@@ -1,7 +1,5 @@
 package com.freeb;
 
-import com.freeb.thrift.DiscountService;
-import com.freeb.thrift.DiscountServiceServerImpl;
 import org.apache.thrift.protocol.TBinaryProtocol;
 import org.apache.thrift.server.TServer;
 import org.apache.thrift.server.TThreadedSelectorServer;

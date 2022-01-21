@@ -1,9 +1,9 @@
-package com.freeb.thrift.SearchClients;
+package com.freeb.SearchClients;
 
 import com.freeb.Clients.SearchClients;
 import com.freeb.Enum.SearchOrder;
 import com.freeb.Utils.LockObjectPool;
-import com.freeb.thrift.SearchTypeConvert;
+import com.freeb.SearchTypeConvert;
 import org.apache.thrift.TException;
 
 import java.io.Closeable;

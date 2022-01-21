@@ -39,57 +39,65 @@ public class ProductService {
 
   public interface Iface {
 
-    public Map<Integer,Integer> GetUserActiveByCategory(long id) throws org.apache.thrift.TException;
+    public Map<Integer,Integer> GetUserActiveByCategory(long id) throws TException;
 
-    public boolean CreateActiveBehavior(long uid, long pid, int cid) throws org.apache.thrift.TException;
+    public boolean CreateActiveBehavior(long uid, long pid, int cid) throws TException;
 
-    public List<Long> GetLastestActiveUsers(int userNum) throws org.apache.thrift.TException;
+    public List<Long> GetLastestActiveUsers(int userNum) throws TException;
 
-    public Set<Long> GetUserActiveByProduct(long uid) throws org.apache.thrift.TException;
+    public Set<Long> GetUserActiveByProduct(long uid) throws TException;
 
-    public List<Long> GetProductByCategory(int cid, SearchOrder order, int prodNum) throws org.apache.thrift.TException;
+    public List<Long> GetProductByCategory(int cid, SearchOrder order, int prodNum) throws TException;
 
-    public List<Long> GetProductBySimilarity(int cid, SearchOrder order, String words, int prodNum) throws org.apache.thrift.TException;
+    public List<Long> GetProductBySimilarity(int cid, SearchOrder order, String words, int prodNum) throws TException;
 
-    public ProductInfo IncProductSales(long pid, int perchaseNum) throws org.apache.thrift.TException;
+    public ProductInfo IncProductSales(long pid, int perchaseNum) throws TException;
 
-    public MerchantInfo GetMerchantInfoById(long mid) throws org.apache.thrift.TException;
+    public ProductInfo GetProdInfo(long pid) throws TException;
 
-    public boolean BM4ComparePatternTrigger(List<Long> uidLst, List<Long> pidLst, List<Integer> cidLst, int compLoad) throws org.apache.thrift.TException;
+    public MerchantInfo GetMerchantInfoById(long mid) throws TException;
 
-    public CommentInfo BM5CompareTransferDataSize(int dataSize) throws org.apache.thrift.TException;
+    public boolean BM4ComparePatternTrigger(List<Long> uidLst, List<Long> pidLst, List<Integer> cidLst, int compLoad) throws TException;
 
-    public boolean BM6CompareMemBindWidth(int dataSize) throws org.apache.thrift.TException;
+    public CommentInfo BM5CompareTransferDataSize(int dataSize) throws TException;
 
-    public List<CommentInfo> GetComments(long prodId, int comtNum) throws org.apache.thrift.TException;
+    public boolean BM6CompareMemBindWidth(int dataSize) throws TException;
+
+    public List<CommentInfo> GetComments(long prodId, int comtNum) throws TException;
+
+    public MerchantInfo GetMerchantInfoByProd(long pid) throws TException;
 
   }
 
   public interface AsyncIface {
 
-    public void GetUserActiveByCategory(long id, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void GetUserActiveByCategory(long id, AsyncMethodCallback resultHandler) throws TException;
 
-    public void CreateActiveBehavior(long uid, long pid, int cid, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void CreateActiveBehavior(long uid, long pid, int cid, AsyncMethodCallback resultHandler) throws TException;
 
-    public void GetLastestActiveUsers(int userNum, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void GetLastestActiveUsers(int userNum, AsyncMethodCallback resultHandler) throws TException;
 
-    public void GetUserActiveByProduct(long uid, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void GetUserActiveByProduct(long uid, AsyncMethodCallback resultHandler) throws TException;
 
-    public void GetProductByCategory(int cid, SearchOrder order, int prodNum, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void GetProductByCategory(int cid, SearchOrder order, int prodNum, AsyncMethodCallback resultHandler) throws TException;
 
-    public void GetProductBySimilarity(int cid, SearchOrder order, String words, int prodNum, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void GetProductBySimilarity(int cid, SearchOrder order, String words, int prodNum, AsyncMethodCallback resultHandler) throws TException;
 
-    public void IncProductSales(long pid, int perchaseNum, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void IncProductSales(long pid, int perchaseNum, AsyncMethodCallback resultHandler) throws TException;
 
-    public void GetMerchantInfoById(long mid, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void GetProdInfo(long pid, AsyncMethodCallback resultHandler) throws TException;
 
-    public void BM4ComparePatternTrigger(List<Long> uidLst, List<Long> pidLst, List<Integer> cidLst, int compLoad, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void GetMerchantInfoById(long mid, AsyncMethodCallback resultHandler) throws TException;
 
-    public void BM5CompareTransferDataSize(int dataSize, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void BM4ComparePatternTrigger(List<Long> uidLst, List<Long> pidLst, List<Integer> cidLst, int compLoad, AsyncMethodCallback resultHandler) throws TException;
 
-    public void BM6CompareMemBindWidth(int dataSize, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void BM5CompareTransferDataSize(int dataSize, AsyncMethodCallback resultHandler) throws TException;
 
-    public void GetComments(long prodId, int comtNum, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void BM6CompareMemBindWidth(int dataSize, AsyncMethodCallback resultHandler) throws TException;
+
+    public void GetComments(long prodId, int comtNum, AsyncMethodCallback resultHandler) throws TException;
+
+    public void GetMerchantInfoByProd(long pid, AsyncMethodCallback resultHandler) throws TException;
 
   }
 
@@ -113,20 +121,20 @@ public class ProductService {
       super(iprot, oprot);
     }
 
-    public Map<Integer,Integer> GetUserActiveByCategory(long id) throws org.apache.thrift.TException
+    public Map<Integer,Integer> GetUserActiveByCategory(long id) throws TException
     {
       send_GetUserActiveByCategory(id);
       return recv_GetUserActiveByCategory();
     }
 
-    public void send_GetUserActiveByCategory(long id) throws org.apache.thrift.TException
+    public void send_GetUserActiveByCategory(long id) throws TException
     {
       GetUserActiveByCategory_args args = new GetUserActiveByCategory_args();
       args.setId(id);
       sendBase("GetUserActiveByCategory", args);
     }
 
-    public Map<Integer,Integer> recv_GetUserActiveByCategory() throws org.apache.thrift.TException
+    public Map<Integer,Integer> recv_GetUserActiveByCategory() throws TException
     {
       GetUserActiveByCategory_result result = new GetUserActiveByCategory_result();
       receiveBase(result, "GetUserActiveByCategory");
@@ -136,13 +144,13 @@ public class ProductService {
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "GetUserActiveByCategory failed: unknown result");
     }
 
-    public boolean CreateActiveBehavior(long uid, long pid, int cid) throws org.apache.thrift.TException
+    public boolean CreateActiveBehavior(long uid, long pid, int cid) throws TException
     {
       send_CreateActiveBehavior(uid, pid, cid);
       return recv_CreateActiveBehavior();
     }
 
-    public void send_CreateActiveBehavior(long uid, long pid, int cid) throws org.apache.thrift.TException
+    public void send_CreateActiveBehavior(long uid, long pid, int cid) throws TException
     {
       CreateActiveBehavior_args args = new CreateActiveBehavior_args();
       args.setUid(uid);
@@ -151,7 +159,7 @@ public class ProductService {
       sendBase("CreateActiveBehavior", args);
     }
 
-    public boolean recv_CreateActiveBehavior() throws org.apache.thrift.TException
+    public boolean recv_CreateActiveBehavior() throws TException
     {
       CreateActiveBehavior_result result = new CreateActiveBehavior_result();
       receiveBase(result, "CreateActiveBehavior");
@@ -161,20 +169,20 @@ public class ProductService {
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "CreateActiveBehavior failed: unknown result");
     }
 
-    public List<Long> GetLastestActiveUsers(int userNum) throws org.apache.thrift.TException
+    public List<Long> GetLastestActiveUsers(int userNum) throws TException
     {
       send_GetLastestActiveUsers(userNum);
       return recv_GetLastestActiveUsers();
     }
 
-    public void send_GetLastestActiveUsers(int userNum) throws org.apache.thrift.TException
+    public void send_GetLastestActiveUsers(int userNum) throws TException
     {
       GetLastestActiveUsers_args args = new GetLastestActiveUsers_args();
       args.setUserNum(userNum);
       sendBase("GetLastestActiveUsers", args);
     }
 
-    public List<Long> recv_GetLastestActiveUsers() throws org.apache.thrift.TException
+    public List<Long> recv_GetLastestActiveUsers() throws TException
     {
       GetLastestActiveUsers_result result = new GetLastestActiveUsers_result();
       receiveBase(result, "GetLastestActiveUsers");
@@ -184,20 +192,20 @@ public class ProductService {
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "GetLastestActiveUsers failed: unknown result");
     }
 
-    public Set<Long> GetUserActiveByProduct(long uid) throws org.apache.thrift.TException
+    public Set<Long> GetUserActiveByProduct(long uid) throws TException
     {
       send_GetUserActiveByProduct(uid);
       return recv_GetUserActiveByProduct();
     }
 
-    public void send_GetUserActiveByProduct(long uid) throws org.apache.thrift.TException
+    public void send_GetUserActiveByProduct(long uid) throws TException
     {
       GetUserActiveByProduct_args args = new GetUserActiveByProduct_args();
       args.setUid(uid);
       sendBase("GetUserActiveByProduct", args);
     }
 
-    public Set<Long> recv_GetUserActiveByProduct() throws org.apache.thrift.TException
+    public Set<Long> recv_GetUserActiveByProduct() throws TException
     {
       GetUserActiveByProduct_result result = new GetUserActiveByProduct_result();
       receiveBase(result, "GetUserActiveByProduct");
@@ -207,13 +215,13 @@ public class ProductService {
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "GetUserActiveByProduct failed: unknown result");
     }
 
-    public List<Long> GetProductByCategory(int cid, SearchOrder order, int prodNum) throws org.apache.thrift.TException
+    public List<Long> GetProductByCategory(int cid, SearchOrder order, int prodNum) throws TException
     {
       send_GetProductByCategory(cid, order, prodNum);
       return recv_GetProductByCategory();
     }
 
-    public void send_GetProductByCategory(int cid, SearchOrder order, int prodNum) throws org.apache.thrift.TException
+    public void send_GetProductByCategory(int cid, SearchOrder order, int prodNum) throws TException
     {
       GetProductByCategory_args args = new GetProductByCategory_args();
       args.setCid(cid);
@@ -222,7 +230,7 @@ public class ProductService {
       sendBase("GetProductByCategory", args);
     }
 
-    public List<Long> recv_GetProductByCategory() throws org.apache.thrift.TException
+    public List<Long> recv_GetProductByCategory() throws TException
     {
       GetProductByCategory_result result = new GetProductByCategory_result();
       receiveBase(result, "GetProductByCategory");
@@ -232,13 +240,13 @@ public class ProductService {
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "GetProductByCategory failed: unknown result");
     }
 
-    public List<Long> GetProductBySimilarity(int cid, SearchOrder order, String words, int prodNum) throws org.apache.thrift.TException
+    public List<Long> GetProductBySimilarity(int cid, SearchOrder order, String words, int prodNum) throws TException
     {
       send_GetProductBySimilarity(cid, order, words, prodNum);
       return recv_GetProductBySimilarity();
     }
 
-    public void send_GetProductBySimilarity(int cid, SearchOrder order, String words, int prodNum) throws org.apache.thrift.TException
+    public void send_GetProductBySimilarity(int cid, SearchOrder order, String words, int prodNum) throws TException
     {
       GetProductBySimilarity_args args = new GetProductBySimilarity_args();
       args.setCid(cid);
@@ -248,7 +256,7 @@ public class ProductService {
       sendBase("GetProductBySimilarity", args);
     }
 
-    public List<Long> recv_GetProductBySimilarity() throws org.apache.thrift.TException
+    public List<Long> recv_GetProductBySimilarity() throws TException
     {
       GetProductBySimilarity_result result = new GetProductBySimilarity_result();
       receiveBase(result, "GetProductBySimilarity");
@@ -258,13 +266,13 @@ public class ProductService {
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "GetProductBySimilarity failed: unknown result");
     }
 
-    public ProductInfo IncProductSales(long pid, int perchaseNum) throws org.apache.thrift.TException
+    public ProductInfo IncProductSales(long pid, int perchaseNum) throws TException
     {
       send_IncProductSales(pid, perchaseNum);
       return recv_IncProductSales();
     }
 
-    public void send_IncProductSales(long pid, int perchaseNum) throws org.apache.thrift.TException
+    public void send_IncProductSales(long pid, int perchaseNum) throws TException
     {
       IncProductSales_args args = new IncProductSales_args();
       args.setPid(pid);
@@ -272,7 +280,7 @@ public class ProductService {
       sendBase("IncProductSales", args);
     }
 
-    public ProductInfo recv_IncProductSales() throws org.apache.thrift.TException
+    public ProductInfo recv_IncProductSales() throws TException
     {
       IncProductSales_result result = new IncProductSales_result();
       receiveBase(result, "IncProductSales");
@@ -282,20 +290,43 @@ public class ProductService {
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "IncProductSales failed: unknown result");
     }
 
-    public MerchantInfo GetMerchantInfoById(long mid) throws org.apache.thrift.TException
+    public ProductInfo GetProdInfo(long pid) throws TException
+    {
+      send_GetProdInfo(pid);
+      return recv_GetProdInfo();
+    }
+
+    public void send_GetProdInfo(long pid) throws TException
+    {
+      GetProdInfo_args args = new GetProdInfo_args();
+      args.setPid(pid);
+      sendBase("GetProdInfo", args);
+    }
+
+    public ProductInfo recv_GetProdInfo() throws TException
+    {
+      GetProdInfo_result result = new GetProdInfo_result();
+      receiveBase(result, "GetProdInfo");
+      if (result.isSetSuccess()) {
+        return result.success;
+      }
+      throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "GetProdInfo failed: unknown result");
+    }
+
+    public MerchantInfo GetMerchantInfoById(long mid) throws TException
     {
       send_GetMerchantInfoById(mid);
       return recv_GetMerchantInfoById();
     }
 
-    public void send_GetMerchantInfoById(long mid) throws org.apache.thrift.TException
+    public void send_GetMerchantInfoById(long mid) throws TException
     {
       GetMerchantInfoById_args args = new GetMerchantInfoById_args();
       args.setMid(mid);
       sendBase("GetMerchantInfoById", args);
     }
 
-    public MerchantInfo recv_GetMerchantInfoById() throws org.apache.thrift.TException
+    public MerchantInfo recv_GetMerchantInfoById() throws TException
     {
       GetMerchantInfoById_result result = new GetMerchantInfoById_result();
       receiveBase(result, "GetMerchantInfoById");
@@ -305,13 +336,13 @@ public class ProductService {
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "GetMerchantInfoById failed: unknown result");
     }
 
-    public boolean BM4ComparePatternTrigger(List<Long> uidLst, List<Long> pidLst, List<Integer> cidLst, int compLoad) throws org.apache.thrift.TException
+    public boolean BM4ComparePatternTrigger(List<Long> uidLst, List<Long> pidLst, List<Integer> cidLst, int compLoad) throws TException
     {
       send_BM4ComparePatternTrigger(uidLst, pidLst, cidLst, compLoad);
       return recv_BM4ComparePatternTrigger();
     }
 
-    public void send_BM4ComparePatternTrigger(List<Long> uidLst, List<Long> pidLst, List<Integer> cidLst, int compLoad) throws org.apache.thrift.TException
+    public void send_BM4ComparePatternTrigger(List<Long> uidLst, List<Long> pidLst, List<Integer> cidLst, int compLoad) throws TException
     {
       BM4ComparePatternTrigger_args args = new BM4ComparePatternTrigger_args();
       args.setUidLst(uidLst);
@@ -321,7 +352,7 @@ public class ProductService {
       sendBase("BM4ComparePatternTrigger", args);
     }
 
-    public boolean recv_BM4ComparePatternTrigger() throws org.apache.thrift.TException
+    public boolean recv_BM4ComparePatternTrigger() throws TException
     {
       BM4ComparePatternTrigger_result result = new BM4ComparePatternTrigger_result();
       receiveBase(result, "BM4ComparePatternTrigger");
@@ -331,20 +362,20 @@ public class ProductService {
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "BM4ComparePatternTrigger failed: unknown result");
     }
 
-    public CommentInfo BM5CompareTransferDataSize(int dataSize) throws org.apache.thrift.TException
+    public CommentInfo BM5CompareTransferDataSize(int dataSize) throws TException
     {
       send_BM5CompareTransferDataSize(dataSize);
       return recv_BM5CompareTransferDataSize();
     }
 
-    public void send_BM5CompareTransferDataSize(int dataSize) throws org.apache.thrift.TException
+    public void send_BM5CompareTransferDataSize(int dataSize) throws TException
     {
       BM5CompareTransferDataSize_args args = new BM5CompareTransferDataSize_args();
       args.setDataSize(dataSize);
       sendBase("BM5CompareTransferDataSize", args);
     }
 
-    public CommentInfo recv_BM5CompareTransferDataSize() throws org.apache.thrift.TException
+    public CommentInfo recv_BM5CompareTransferDataSize() throws TException
     {
       BM5CompareTransferDataSize_result result = new BM5CompareTransferDataSize_result();
       receiveBase(result, "BM5CompareTransferDataSize");
@@ -354,20 +385,20 @@ public class ProductService {
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "BM5CompareTransferDataSize failed: unknown result");
     }
 
-    public boolean BM6CompareMemBindWidth(int dataSize) throws org.apache.thrift.TException
+    public boolean BM6CompareMemBindWidth(int dataSize) throws TException
     {
       send_BM6CompareMemBindWidth(dataSize);
       return recv_BM6CompareMemBindWidth();
     }
 
-    public void send_BM6CompareMemBindWidth(int dataSize) throws org.apache.thrift.TException
+    public void send_BM6CompareMemBindWidth(int dataSize) throws TException
     {
       BM6CompareMemBindWidth_args args = new BM6CompareMemBindWidth_args();
       args.setDataSize(dataSize);
       sendBase("BM6CompareMemBindWidth", args);
     }
 
-    public boolean recv_BM6CompareMemBindWidth() throws org.apache.thrift.TException
+    public boolean recv_BM6CompareMemBindWidth() throws TException
     {
       BM6CompareMemBindWidth_result result = new BM6CompareMemBindWidth_result();
       receiveBase(result, "BM6CompareMemBindWidth");
@@ -377,13 +408,13 @@ public class ProductService {
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "BM6CompareMemBindWidth failed: unknown result");
     }
 
-    public List<CommentInfo> GetComments(long prodId, int comtNum) throws org.apache.thrift.TException
+    public List<CommentInfo> GetComments(long prodId, int comtNum) throws TException
     {
       send_GetComments(prodId, comtNum);
       return recv_GetComments();
     }
 
-    public void send_GetComments(long prodId, int comtNum) throws org.apache.thrift.TException
+    public void send_GetComments(long prodId, int comtNum) throws TException
     {
       GetComments_args args = new GetComments_args();
       args.setProdId(prodId);
@@ -391,7 +422,7 @@ public class ProductService {
       sendBase("GetComments", args);
     }
 
-    public List<CommentInfo> recv_GetComments() throws org.apache.thrift.TException
+    public List<CommentInfo> recv_GetComments() throws TException
     {
       GetComments_result result = new GetComments_result();
       receiveBase(result, "GetComments");
@@ -399,6 +430,29 @@ public class ProductService {
         return result.success;
       }
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "GetComments failed: unknown result");
+    }
+
+    public MerchantInfo GetMerchantInfoByProd(long pid) throws TException
+    {
+      send_GetMerchantInfoByProd(pid);
+      return recv_GetMerchantInfoByProd();
+    }
+
+    public void send_GetMerchantInfoByProd(long pid) throws TException
+    {
+      GetMerchantInfoByProd_args args = new GetMerchantInfoByProd_args();
+      args.setPid(pid);
+      sendBase("GetMerchantInfoByProd", args);
+    }
+
+    public MerchantInfo recv_GetMerchantInfoByProd() throws TException
+    {
+      GetMerchantInfoByProd_result result = new GetMerchantInfoByProd_result();
+      receiveBase(result, "GetMerchantInfoByProd");
+      if (result.isSetSuccess()) {
+        return result.success;
+      }
+      throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "GetMerchantInfoByProd failed: unknown result");
     }
 
   }
@@ -419,7 +473,7 @@ public class ProductService {
       super(protocolFactory, clientManager, transport);
     }
 
-    public void GetUserActiveByCategory(long id, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+    public void GetUserActiveByCategory(long id, AsyncMethodCallback resultHandler) throws TException {
       checkReady();
       GetUserActiveByCategory_call method_call = new GetUserActiveByCategory_call(id, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
@@ -428,12 +482,12 @@ public class ProductService {
 
     public static class GetUserActiveByCategory_call extends org.apache.thrift.async.TAsyncMethodCall {
       private long id;
-      public GetUserActiveByCategory_call(long id, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      public GetUserActiveByCategory_call(long id, AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws TException {
         super(client, protocolFactory, transport, resultHandler, false);
         this.id = id;
       }
 
-      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws TException {
         prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("GetUserActiveByCategory", org.apache.thrift.protocol.TMessageType.CALL, 0));
         GetUserActiveByCategory_args args = new GetUserActiveByCategory_args();
         args.setId(id);
@@ -441,8 +495,8 @@ public class ProductService {
         prot.writeMessageEnd();
       }
 
-      public Map<Integer,Integer> getResult() throws org.apache.thrift.TException {
-        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+      public Map<Integer,Integer> getResult() throws TException {
+        if (getState() != State.RESPONSE_READ) {
           throw new IllegalStateException("Method call not finished!");
         }
         org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
@@ -451,7 +505,7 @@ public class ProductService {
       }
     }
 
-    public void CreateActiveBehavior(long uid, long pid, int cid, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+    public void CreateActiveBehavior(long uid, long pid, int cid, AsyncMethodCallback resultHandler) throws TException {
       checkReady();
       CreateActiveBehavior_call method_call = new CreateActiveBehavior_call(uid, pid, cid, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
@@ -462,14 +516,14 @@ public class ProductService {
       private long uid;
       private long pid;
       private int cid;
-      public CreateActiveBehavior_call(long uid, long pid, int cid, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      public CreateActiveBehavior_call(long uid, long pid, int cid, AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws TException {
         super(client, protocolFactory, transport, resultHandler, false);
         this.uid = uid;
         this.pid = pid;
         this.cid = cid;
       }
 
-      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws TException {
         prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("CreateActiveBehavior", org.apache.thrift.protocol.TMessageType.CALL, 0));
         CreateActiveBehavior_args args = new CreateActiveBehavior_args();
         args.setUid(uid);
@@ -479,8 +533,8 @@ public class ProductService {
         prot.writeMessageEnd();
       }
 
-      public boolean getResult() throws org.apache.thrift.TException {
-        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+      public boolean getResult() throws TException {
+        if (getState() != State.RESPONSE_READ) {
           throw new IllegalStateException("Method call not finished!");
         }
         org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
@@ -489,7 +543,7 @@ public class ProductService {
       }
     }
 
-    public void GetLastestActiveUsers(int userNum, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+    public void GetLastestActiveUsers(int userNum, AsyncMethodCallback resultHandler) throws TException {
       checkReady();
       GetLastestActiveUsers_call method_call = new GetLastestActiveUsers_call(userNum, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
@@ -498,12 +552,12 @@ public class ProductService {
 
     public static class GetLastestActiveUsers_call extends org.apache.thrift.async.TAsyncMethodCall {
       private int userNum;
-      public GetLastestActiveUsers_call(int userNum, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      public GetLastestActiveUsers_call(int userNum, AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws TException {
         super(client, protocolFactory, transport, resultHandler, false);
         this.userNum = userNum;
       }
 
-      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws TException {
         prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("GetLastestActiveUsers", org.apache.thrift.protocol.TMessageType.CALL, 0));
         GetLastestActiveUsers_args args = new GetLastestActiveUsers_args();
         args.setUserNum(userNum);
@@ -511,8 +565,8 @@ public class ProductService {
         prot.writeMessageEnd();
       }
 
-      public List<Long> getResult() throws org.apache.thrift.TException {
-        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+      public List<Long> getResult() throws TException {
+        if (getState() != State.RESPONSE_READ) {
           throw new IllegalStateException("Method call not finished!");
         }
         org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
@@ -521,7 +575,7 @@ public class ProductService {
       }
     }
 
-    public void GetUserActiveByProduct(long uid, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+    public void GetUserActiveByProduct(long uid, AsyncMethodCallback resultHandler) throws TException {
       checkReady();
       GetUserActiveByProduct_call method_call = new GetUserActiveByProduct_call(uid, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
@@ -530,12 +584,12 @@ public class ProductService {
 
     public static class GetUserActiveByProduct_call extends org.apache.thrift.async.TAsyncMethodCall {
       private long uid;
-      public GetUserActiveByProduct_call(long uid, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      public GetUserActiveByProduct_call(long uid, AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws TException {
         super(client, protocolFactory, transport, resultHandler, false);
         this.uid = uid;
       }
 
-      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws TException {
         prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("GetUserActiveByProduct", org.apache.thrift.protocol.TMessageType.CALL, 0));
         GetUserActiveByProduct_args args = new GetUserActiveByProduct_args();
         args.setUid(uid);
@@ -543,8 +597,8 @@ public class ProductService {
         prot.writeMessageEnd();
       }
 
-      public Set<Long> getResult() throws org.apache.thrift.TException {
-        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+      public Set<Long> getResult() throws TException {
+        if (getState() != State.RESPONSE_READ) {
           throw new IllegalStateException("Method call not finished!");
         }
         org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
@@ -553,7 +607,7 @@ public class ProductService {
       }
     }
 
-    public void GetProductByCategory(int cid, SearchOrder order, int prodNum, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+    public void GetProductByCategory(int cid, SearchOrder order, int prodNum, AsyncMethodCallback resultHandler) throws TException {
       checkReady();
       GetProductByCategory_call method_call = new GetProductByCategory_call(cid, order, prodNum, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
@@ -564,14 +618,14 @@ public class ProductService {
       private int cid;
       private SearchOrder order;
       private int prodNum;
-      public GetProductByCategory_call(int cid, SearchOrder order, int prodNum, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      public GetProductByCategory_call(int cid, SearchOrder order, int prodNum, AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws TException {
         super(client, protocolFactory, transport, resultHandler, false);
         this.cid = cid;
         this.order = order;
         this.prodNum = prodNum;
       }
 
-      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws TException {
         prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("GetProductByCategory", org.apache.thrift.protocol.TMessageType.CALL, 0));
         GetProductByCategory_args args = new GetProductByCategory_args();
         args.setCid(cid);
@@ -581,8 +635,8 @@ public class ProductService {
         prot.writeMessageEnd();
       }
 
-      public List<Long> getResult() throws org.apache.thrift.TException {
-        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+      public List<Long> getResult() throws TException {
+        if (getState() != State.RESPONSE_READ) {
           throw new IllegalStateException("Method call not finished!");
         }
         org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
@@ -591,7 +645,7 @@ public class ProductService {
       }
     }
 
-    public void GetProductBySimilarity(int cid, SearchOrder order, String words, int prodNum, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+    public void GetProductBySimilarity(int cid, SearchOrder order, String words, int prodNum, AsyncMethodCallback resultHandler) throws TException {
       checkReady();
       GetProductBySimilarity_call method_call = new GetProductBySimilarity_call(cid, order, words, prodNum, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
@@ -603,7 +657,7 @@ public class ProductService {
       private SearchOrder order;
       private String words;
       private int prodNum;
-      public GetProductBySimilarity_call(int cid, SearchOrder order, String words, int prodNum, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      public GetProductBySimilarity_call(int cid, SearchOrder order, String words, int prodNum, AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws TException {
         super(client, protocolFactory, transport, resultHandler, false);
         this.cid = cid;
         this.order = order;
@@ -611,7 +665,7 @@ public class ProductService {
         this.prodNum = prodNum;
       }
 
-      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws TException {
         prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("GetProductBySimilarity", org.apache.thrift.protocol.TMessageType.CALL, 0));
         GetProductBySimilarity_args args = new GetProductBySimilarity_args();
         args.setCid(cid);
@@ -622,8 +676,8 @@ public class ProductService {
         prot.writeMessageEnd();
       }
 
-      public List<Long> getResult() throws org.apache.thrift.TException {
-        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+      public List<Long> getResult() throws TException {
+        if (getState() != State.RESPONSE_READ) {
           throw new IllegalStateException("Method call not finished!");
         }
         org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
@@ -632,7 +686,7 @@ public class ProductService {
       }
     }
 
-    public void IncProductSales(long pid, int perchaseNum, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+    public void IncProductSales(long pid, int perchaseNum, AsyncMethodCallback resultHandler) throws TException {
       checkReady();
       IncProductSales_call method_call = new IncProductSales_call(pid, perchaseNum, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
@@ -642,13 +696,13 @@ public class ProductService {
     public static class IncProductSales_call extends org.apache.thrift.async.TAsyncMethodCall {
       private long pid;
       private int perchaseNum;
-      public IncProductSales_call(long pid, int perchaseNum, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      public IncProductSales_call(long pid, int perchaseNum, AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws TException {
         super(client, protocolFactory, transport, resultHandler, false);
         this.pid = pid;
         this.perchaseNum = perchaseNum;
       }
 
-      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws TException {
         prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("IncProductSales", org.apache.thrift.protocol.TMessageType.CALL, 0));
         IncProductSales_args args = new IncProductSales_args();
         args.setPid(pid);
@@ -657,8 +711,8 @@ public class ProductService {
         prot.writeMessageEnd();
       }
 
-      public ProductInfo getResult() throws org.apache.thrift.TException {
-        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+      public ProductInfo getResult() throws TException {
+        if (getState() != State.RESPONSE_READ) {
           throw new IllegalStateException("Method call not finished!");
         }
         org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
@@ -667,7 +721,39 @@ public class ProductService {
       }
     }
 
-    public void GetMerchantInfoById(long mid, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+    public void GetProdInfo(long pid, AsyncMethodCallback resultHandler) throws TException {
+      checkReady();
+      GetProdInfo_call method_call = new GetProdInfo_call(pid, resultHandler, this, ___protocolFactory, ___transport);
+      this.___currentMethod = method_call;
+      ___manager.call(method_call);
+    }
+
+    public static class GetProdInfo_call extends org.apache.thrift.async.TAsyncMethodCall {
+      private long pid;
+      public GetProdInfo_call(long pid, AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws TException {
+        super(client, protocolFactory, transport, resultHandler, false);
+        this.pid = pid;
+      }
+
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws TException {
+        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("GetProdInfo", org.apache.thrift.protocol.TMessageType.CALL, 0));
+        GetProdInfo_args args = new GetProdInfo_args();
+        args.setPid(pid);
+        args.write(prot);
+        prot.writeMessageEnd();
+      }
+
+      public ProductInfo getResult() throws TException {
+        if (getState() != State.RESPONSE_READ) {
+          throw new IllegalStateException("Method call not finished!");
+        }
+        org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
+        org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
+        return (new Client(prot)).recv_GetProdInfo();
+      }
+    }
+
+    public void GetMerchantInfoById(long mid, AsyncMethodCallback resultHandler) throws TException {
       checkReady();
       GetMerchantInfoById_call method_call = new GetMerchantInfoById_call(mid, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
@@ -676,12 +762,12 @@ public class ProductService {
 
     public static class GetMerchantInfoById_call extends org.apache.thrift.async.TAsyncMethodCall {
       private long mid;
-      public GetMerchantInfoById_call(long mid, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      public GetMerchantInfoById_call(long mid, AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws TException {
         super(client, protocolFactory, transport, resultHandler, false);
         this.mid = mid;
       }
 
-      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws TException {
         prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("GetMerchantInfoById", org.apache.thrift.protocol.TMessageType.CALL, 0));
         GetMerchantInfoById_args args = new GetMerchantInfoById_args();
         args.setMid(mid);
@@ -689,8 +775,8 @@ public class ProductService {
         prot.writeMessageEnd();
       }
 
-      public MerchantInfo getResult() throws org.apache.thrift.TException {
-        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+      public MerchantInfo getResult() throws TException {
+        if (getState() != State.RESPONSE_READ) {
           throw new IllegalStateException("Method call not finished!");
         }
         org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
@@ -699,7 +785,7 @@ public class ProductService {
       }
     }
 
-    public void BM4ComparePatternTrigger(List<Long> uidLst, List<Long> pidLst, List<Integer> cidLst, int compLoad, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+    public void BM4ComparePatternTrigger(List<Long> uidLst, List<Long> pidLst, List<Integer> cidLst, int compLoad, AsyncMethodCallback resultHandler) throws TException {
       checkReady();
       BM4ComparePatternTrigger_call method_call = new BM4ComparePatternTrigger_call(uidLst, pidLst, cidLst, compLoad, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
@@ -711,7 +797,7 @@ public class ProductService {
       private List<Long> pidLst;
       private List<Integer> cidLst;
       private int compLoad;
-      public BM4ComparePatternTrigger_call(List<Long> uidLst, List<Long> pidLst, List<Integer> cidLst, int compLoad, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      public BM4ComparePatternTrigger_call(List<Long> uidLst, List<Long> pidLst, List<Integer> cidLst, int compLoad, AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws TException {
         super(client, protocolFactory, transport, resultHandler, false);
         this.uidLst = uidLst;
         this.pidLst = pidLst;
@@ -719,7 +805,7 @@ public class ProductService {
         this.compLoad = compLoad;
       }
 
-      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws TException {
         prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("BM4ComparePatternTrigger", org.apache.thrift.protocol.TMessageType.CALL, 0));
         BM4ComparePatternTrigger_args args = new BM4ComparePatternTrigger_args();
         args.setUidLst(uidLst);
@@ -730,8 +816,8 @@ public class ProductService {
         prot.writeMessageEnd();
       }
 
-      public boolean getResult() throws org.apache.thrift.TException {
-        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+      public boolean getResult() throws TException {
+        if (getState() != State.RESPONSE_READ) {
           throw new IllegalStateException("Method call not finished!");
         }
         org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
@@ -740,7 +826,7 @@ public class ProductService {
       }
     }
 
-    public void BM5CompareTransferDataSize(int dataSize, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+    public void BM5CompareTransferDataSize(int dataSize, AsyncMethodCallback resultHandler) throws TException {
       checkReady();
       BM5CompareTransferDataSize_call method_call = new BM5CompareTransferDataSize_call(dataSize, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
@@ -749,12 +835,12 @@ public class ProductService {
 
     public static class BM5CompareTransferDataSize_call extends org.apache.thrift.async.TAsyncMethodCall {
       private int dataSize;
-      public BM5CompareTransferDataSize_call(int dataSize, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      public BM5CompareTransferDataSize_call(int dataSize, AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws TException {
         super(client, protocolFactory, transport, resultHandler, false);
         this.dataSize = dataSize;
       }
 
-      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws TException {
         prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("BM5CompareTransferDataSize", org.apache.thrift.protocol.TMessageType.CALL, 0));
         BM5CompareTransferDataSize_args args = new BM5CompareTransferDataSize_args();
         args.setDataSize(dataSize);
@@ -762,8 +848,8 @@ public class ProductService {
         prot.writeMessageEnd();
       }
 
-      public CommentInfo getResult() throws org.apache.thrift.TException {
-        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+      public CommentInfo getResult() throws TException {
+        if (getState() != State.RESPONSE_READ) {
           throw new IllegalStateException("Method call not finished!");
         }
         org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
@@ -772,7 +858,7 @@ public class ProductService {
       }
     }
 
-    public void BM6CompareMemBindWidth(int dataSize, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+    public void BM6CompareMemBindWidth(int dataSize, AsyncMethodCallback resultHandler) throws TException {
       checkReady();
       BM6CompareMemBindWidth_call method_call = new BM6CompareMemBindWidth_call(dataSize, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
@@ -781,12 +867,12 @@ public class ProductService {
 
     public static class BM6CompareMemBindWidth_call extends org.apache.thrift.async.TAsyncMethodCall {
       private int dataSize;
-      public BM6CompareMemBindWidth_call(int dataSize, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      public BM6CompareMemBindWidth_call(int dataSize, AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws TException {
         super(client, protocolFactory, transport, resultHandler, false);
         this.dataSize = dataSize;
       }
 
-      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws TException {
         prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("BM6CompareMemBindWidth", org.apache.thrift.protocol.TMessageType.CALL, 0));
         BM6CompareMemBindWidth_args args = new BM6CompareMemBindWidth_args();
         args.setDataSize(dataSize);
@@ -794,8 +880,8 @@ public class ProductService {
         prot.writeMessageEnd();
       }
 
-      public boolean getResult() throws org.apache.thrift.TException {
-        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+      public boolean getResult() throws TException {
+        if (getState() != State.RESPONSE_READ) {
           throw new IllegalStateException("Method call not finished!");
         }
         org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
@@ -804,7 +890,7 @@ public class ProductService {
       }
     }
 
-    public void GetComments(long prodId, int comtNum, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+    public void GetComments(long prodId, int comtNum, AsyncMethodCallback resultHandler) throws TException {
       checkReady();
       GetComments_call method_call = new GetComments_call(prodId, comtNum, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
@@ -814,13 +900,13 @@ public class ProductService {
     public static class GetComments_call extends org.apache.thrift.async.TAsyncMethodCall {
       private long prodId;
       private int comtNum;
-      public GetComments_call(long prodId, int comtNum, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      public GetComments_call(long prodId, int comtNum, AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws TException {
         super(client, protocolFactory, transport, resultHandler, false);
         this.prodId = prodId;
         this.comtNum = comtNum;
       }
 
-      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws TException {
         prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("GetComments", org.apache.thrift.protocol.TMessageType.CALL, 0));
         GetComments_args args = new GetComments_args();
         args.setProdId(prodId);
@@ -829,13 +915,45 @@ public class ProductService {
         prot.writeMessageEnd();
       }
 
-      public List<CommentInfo> getResult() throws org.apache.thrift.TException {
-        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+      public List<CommentInfo> getResult() throws TException {
+        if (getState() != State.RESPONSE_READ) {
           throw new IllegalStateException("Method call not finished!");
         }
         org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
         org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
         return (new Client(prot)).recv_GetComments();
+      }
+    }
+
+    public void GetMerchantInfoByProd(long pid, AsyncMethodCallback resultHandler) throws TException {
+      checkReady();
+      GetMerchantInfoByProd_call method_call = new GetMerchantInfoByProd_call(pid, resultHandler, this, ___protocolFactory, ___transport);
+      this.___currentMethod = method_call;
+      ___manager.call(method_call);
+    }
+
+    public static class GetMerchantInfoByProd_call extends org.apache.thrift.async.TAsyncMethodCall {
+      private long pid;
+      public GetMerchantInfoByProd_call(long pid, AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws TException {
+        super(client, protocolFactory, transport, resultHandler, false);
+        this.pid = pid;
+      }
+
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws TException {
+        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("GetMerchantInfoByProd", org.apache.thrift.protocol.TMessageType.CALL, 0));
+        GetMerchantInfoByProd_args args = new GetMerchantInfoByProd_args();
+        args.setPid(pid);
+        args.write(prot);
+        prot.writeMessageEnd();
+      }
+
+      public MerchantInfo getResult() throws TException {
+        if (getState() != State.RESPONSE_READ) {
+          throw new IllegalStateException("Method call not finished!");
+        }
+        org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
+        org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
+        return (new Client(prot)).recv_GetMerchantInfoByProd();
       }
     }
 
@@ -859,11 +977,13 @@ public class ProductService {
       processMap.put("GetProductByCategory", new GetProductByCategory());
       processMap.put("GetProductBySimilarity", new GetProductBySimilarity());
       processMap.put("IncProductSales", new IncProductSales());
+      processMap.put("GetProdInfo", new GetProdInfo());
       processMap.put("GetMerchantInfoById", new GetMerchantInfoById());
       processMap.put("BM4ComparePatternTrigger", new BM4ComparePatternTrigger());
       processMap.put("BM5CompareTransferDataSize", new BM5CompareTransferDataSize());
       processMap.put("BM6CompareMemBindWidth", new BM6CompareMemBindWidth());
       processMap.put("GetComments", new GetComments());
+      processMap.put("GetMerchantInfoByProd", new GetMerchantInfoByProd());
       return processMap;
     }
 
@@ -880,7 +1000,7 @@ public class ProductService {
         return false;
       }
 
-      public GetUserActiveByCategory_result getResult(I iface, GetUserActiveByCategory_args args) throws org.apache.thrift.TException {
+      public GetUserActiveByCategory_result getResult(I iface, GetUserActiveByCategory_args args) throws TException {
         GetUserActiveByCategory_result result = new GetUserActiveByCategory_result();
         result.success = iface.GetUserActiveByCategory(args.id);
         return result;
@@ -900,7 +1020,7 @@ public class ProductService {
         return false;
       }
 
-      public CreateActiveBehavior_result getResult(I iface, CreateActiveBehavior_args args) throws org.apache.thrift.TException {
+      public CreateActiveBehavior_result getResult(I iface, CreateActiveBehavior_args args) throws TException {
         CreateActiveBehavior_result result = new CreateActiveBehavior_result();
         result.success = iface.CreateActiveBehavior(args.uid, args.pid, args.cid);
         result.setSuccessIsSet(true);
@@ -921,7 +1041,7 @@ public class ProductService {
         return false;
       }
 
-      public GetLastestActiveUsers_result getResult(I iface, GetLastestActiveUsers_args args) throws org.apache.thrift.TException {
+      public GetLastestActiveUsers_result getResult(I iface, GetLastestActiveUsers_args args) throws TException {
         GetLastestActiveUsers_result result = new GetLastestActiveUsers_result();
         result.success = iface.GetLastestActiveUsers(args.userNum);
         return result;
@@ -941,7 +1061,7 @@ public class ProductService {
         return false;
       }
 
-      public GetUserActiveByProduct_result getResult(I iface, GetUserActiveByProduct_args args) throws org.apache.thrift.TException {
+      public GetUserActiveByProduct_result getResult(I iface, GetUserActiveByProduct_args args) throws TException {
         GetUserActiveByProduct_result result = new GetUserActiveByProduct_result();
         result.success = iface.GetUserActiveByProduct(args.uid);
         return result;
@@ -961,7 +1081,7 @@ public class ProductService {
         return false;
       }
 
-      public GetProductByCategory_result getResult(I iface, GetProductByCategory_args args) throws org.apache.thrift.TException {
+      public GetProductByCategory_result getResult(I iface, GetProductByCategory_args args) throws TException {
         GetProductByCategory_result result = new GetProductByCategory_result();
         result.success = iface.GetProductByCategory(args.cid, args.order, args.prodNum);
         return result;
@@ -981,7 +1101,7 @@ public class ProductService {
         return false;
       }
 
-      public GetProductBySimilarity_result getResult(I iface, GetProductBySimilarity_args args) throws org.apache.thrift.TException {
+      public GetProductBySimilarity_result getResult(I iface, GetProductBySimilarity_args args) throws TException {
         GetProductBySimilarity_result result = new GetProductBySimilarity_result();
         result.success = iface.GetProductBySimilarity(args.cid, args.order, args.words, args.prodNum);
         return result;
@@ -1001,9 +1121,29 @@ public class ProductService {
         return false;
       }
 
-      public IncProductSales_result getResult(I iface, IncProductSales_args args) throws org.apache.thrift.TException {
+      public IncProductSales_result getResult(I iface, IncProductSales_args args) throws TException {
         IncProductSales_result result = new IncProductSales_result();
         result.success = iface.IncProductSales(args.pid, args.perchaseNum);
+        return result;
+      }
+    }
+
+    public static class GetProdInfo<I extends Iface> extends org.apache.thrift.ProcessFunction<I, GetProdInfo_args> {
+      public GetProdInfo() {
+        super("GetProdInfo");
+      }
+
+      public GetProdInfo_args getEmptyArgsInstance() {
+        return new GetProdInfo_args();
+      }
+
+      protected boolean isOneway() {
+        return false;
+      }
+
+      public GetProdInfo_result getResult(I iface, GetProdInfo_args args) throws TException {
+        GetProdInfo_result result = new GetProdInfo_result();
+        result.success = iface.GetProdInfo(args.pid);
         return result;
       }
     }
@@ -1021,7 +1161,7 @@ public class ProductService {
         return false;
       }
 
-      public GetMerchantInfoById_result getResult(I iface, GetMerchantInfoById_args args) throws org.apache.thrift.TException {
+      public GetMerchantInfoById_result getResult(I iface, GetMerchantInfoById_args args) throws TException {
         GetMerchantInfoById_result result = new GetMerchantInfoById_result();
         result.success = iface.GetMerchantInfoById(args.mid);
         return result;
@@ -1041,7 +1181,7 @@ public class ProductService {
         return false;
       }
 
-      public BM4ComparePatternTrigger_result getResult(I iface, BM4ComparePatternTrigger_args args) throws org.apache.thrift.TException {
+      public BM4ComparePatternTrigger_result getResult(I iface, BM4ComparePatternTrigger_args args) throws TException {
         BM4ComparePatternTrigger_result result = new BM4ComparePatternTrigger_result();
         result.success = iface.BM4ComparePatternTrigger(args.uidLst, args.pidLst, args.cidLst, args.compLoad);
         result.setSuccessIsSet(true);
@@ -1062,7 +1202,7 @@ public class ProductService {
         return false;
       }
 
-      public BM5CompareTransferDataSize_result getResult(I iface, BM5CompareTransferDataSize_args args) throws org.apache.thrift.TException {
+      public BM5CompareTransferDataSize_result getResult(I iface, BM5CompareTransferDataSize_args args) throws TException {
         BM5CompareTransferDataSize_result result = new BM5CompareTransferDataSize_result();
         result.success = iface.BM5CompareTransferDataSize(args.dataSize);
         return result;
@@ -1082,7 +1222,7 @@ public class ProductService {
         return false;
       }
 
-      public BM6CompareMemBindWidth_result getResult(I iface, BM6CompareMemBindWidth_args args) throws org.apache.thrift.TException {
+      public BM6CompareMemBindWidth_result getResult(I iface, BM6CompareMemBindWidth_args args) throws TException {
         BM6CompareMemBindWidth_result result = new BM6CompareMemBindWidth_result();
         result.success = iface.BM6CompareMemBindWidth(args.dataSize);
         result.setSuccessIsSet(true);
@@ -1103,9 +1243,29 @@ public class ProductService {
         return false;
       }
 
-      public GetComments_result getResult(I iface, GetComments_args args) throws org.apache.thrift.TException {
+      public GetComments_result getResult(I iface, GetComments_args args) throws TException {
         GetComments_result result = new GetComments_result();
         result.success = iface.GetComments(args.prodId, args.comtNum);
+        return result;
+      }
+    }
+
+    public static class GetMerchantInfoByProd<I extends Iface> extends org.apache.thrift.ProcessFunction<I, GetMerchantInfoByProd_args> {
+      public GetMerchantInfoByProd() {
+        super("GetMerchantInfoByProd");
+      }
+
+      public GetMerchantInfoByProd_args getEmptyArgsInstance() {
+        return new GetMerchantInfoByProd_args();
+      }
+
+      protected boolean isOneway() {
+        return false;
+      }
+
+      public GetMerchantInfoByProd_result getResult(I iface, GetMerchantInfoByProd_args args) throws TException {
+        GetMerchantInfoByProd_result result = new GetMerchantInfoByProd_result();
+        result.success = iface.GetMerchantInfoByProd(args.pid);
         return result;
       }
     }
@@ -1130,11 +1290,13 @@ public class ProductService {
       processMap.put("GetProductByCategory", new GetProductByCategory());
       processMap.put("GetProductBySimilarity", new GetProductBySimilarity());
       processMap.put("IncProductSales", new IncProductSales());
+      processMap.put("GetProdInfo", new GetProdInfo());
       processMap.put("GetMerchantInfoById", new GetMerchantInfoById());
       processMap.put("BM4ComparePatternTrigger", new BM4ComparePatternTrigger());
       processMap.put("BM5CompareTransferDataSize", new BM5CompareTransferDataSize());
       processMap.put("BM6CompareMemBindWidth", new BM6CompareMemBindWidth());
       processMap.put("GetComments", new GetComments());
+      processMap.put("GetMerchantInfoByProd", new GetMerchantInfoByProd());
       return processMap;
     }
 
@@ -1184,7 +1346,7 @@ public class ProductService {
         return false;
       }
 
-      public void start(I iface, GetUserActiveByCategory_args args, org.apache.thrift.async.AsyncMethodCallback<Map<Integer,Integer>> resultHandler) throws TException {
+      public void start(I iface, GetUserActiveByCategory_args args, AsyncMethodCallback<Map<Integer,Integer>> resultHandler) throws TException {
         iface.GetUserActiveByCategory(args.id,resultHandler);
       }
     }
@@ -1236,7 +1398,7 @@ public class ProductService {
         return false;
       }
 
-      public void start(I iface, CreateActiveBehavior_args args, org.apache.thrift.async.AsyncMethodCallback<Boolean> resultHandler) throws TException {
+      public void start(I iface, CreateActiveBehavior_args args, AsyncMethodCallback<Boolean> resultHandler) throws TException {
         iface.CreateActiveBehavior(args.uid, args.pid, args.cid,resultHandler);
       }
     }
@@ -1287,7 +1449,7 @@ public class ProductService {
         return false;
       }
 
-      public void start(I iface, GetLastestActiveUsers_args args, org.apache.thrift.async.AsyncMethodCallback<List<Long>> resultHandler) throws TException {
+      public void start(I iface, GetLastestActiveUsers_args args, AsyncMethodCallback<List<Long>> resultHandler) throws TException {
         iface.GetLastestActiveUsers(args.userNum,resultHandler);
       }
     }
@@ -1338,7 +1500,7 @@ public class ProductService {
         return false;
       }
 
-      public void start(I iface, GetUserActiveByProduct_args args, org.apache.thrift.async.AsyncMethodCallback<Set<Long>> resultHandler) throws TException {
+      public void start(I iface, GetUserActiveByProduct_args args, AsyncMethodCallback<Set<Long>> resultHandler) throws TException {
         iface.GetUserActiveByProduct(args.uid,resultHandler);
       }
     }
@@ -1389,7 +1551,7 @@ public class ProductService {
         return false;
       }
 
-      public void start(I iface, GetProductByCategory_args args, org.apache.thrift.async.AsyncMethodCallback<List<Long>> resultHandler) throws TException {
+      public void start(I iface, GetProductByCategory_args args, AsyncMethodCallback<List<Long>> resultHandler) throws TException {
         iface.GetProductByCategory(args.cid, args.order, args.prodNum,resultHandler);
       }
     }
@@ -1440,7 +1602,7 @@ public class ProductService {
         return false;
       }
 
-      public void start(I iface, GetProductBySimilarity_args args, org.apache.thrift.async.AsyncMethodCallback<List<Long>> resultHandler) throws TException {
+      public void start(I iface, GetProductBySimilarity_args args, AsyncMethodCallback<List<Long>> resultHandler) throws TException {
         iface.GetProductBySimilarity(args.cid, args.order, args.words, args.prodNum,resultHandler);
       }
     }
@@ -1491,8 +1653,59 @@ public class ProductService {
         return false;
       }
 
-      public void start(I iface, IncProductSales_args args, org.apache.thrift.async.AsyncMethodCallback<ProductInfo> resultHandler) throws TException {
+      public void start(I iface, IncProductSales_args args, AsyncMethodCallback<ProductInfo> resultHandler) throws TException {
         iface.IncProductSales(args.pid, args.perchaseNum,resultHandler);
+      }
+    }
+
+    public static class GetProdInfo<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, GetProdInfo_args, ProductInfo> {
+      public GetProdInfo() {
+        super("GetProdInfo");
+      }
+
+      public GetProdInfo_args getEmptyArgsInstance() {
+        return new GetProdInfo_args();
+      }
+
+      public AsyncMethodCallback<ProductInfo> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
+        final org.apache.thrift.AsyncProcessFunction fcall = this;
+        return new AsyncMethodCallback<ProductInfo>() { 
+          public void onComplete(ProductInfo o) {
+            GetProdInfo_result result = new GetProdInfo_result();
+            result.success = o;
+            try {
+              fcall.sendResponse(fb,result, org.apache.thrift.protocol.TMessageType.REPLY,seqid);
+              return;
+            } catch (Exception e) {
+              LOGGER.error("Exception writing to internal frame buffer", e);
+            }
+            fb.close();
+          }
+          public void onError(Exception e) {
+            byte msgType = org.apache.thrift.protocol.TMessageType.REPLY;
+            org.apache.thrift.TBase msg;
+            GetProdInfo_result result = new GetProdInfo_result();
+            {
+              msgType = org.apache.thrift.protocol.TMessageType.EXCEPTION;
+              msg = (org.apache.thrift.TBase)new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.INTERNAL_ERROR, e.getMessage());
+            }
+            try {
+              fcall.sendResponse(fb,msg,msgType,seqid);
+              return;
+            } catch (Exception ex) {
+              LOGGER.error("Exception writing to internal frame buffer", ex);
+            }
+            fb.close();
+          }
+        };
+      }
+
+      protected boolean isOneway() {
+        return false;
+      }
+
+      public void start(I iface, GetProdInfo_args args, AsyncMethodCallback<ProductInfo> resultHandler) throws TException {
+        iface.GetProdInfo(args.pid,resultHandler);
       }
     }
 
@@ -1542,7 +1755,7 @@ public class ProductService {
         return false;
       }
 
-      public void start(I iface, GetMerchantInfoById_args args, org.apache.thrift.async.AsyncMethodCallback<MerchantInfo> resultHandler) throws TException {
+      public void start(I iface, GetMerchantInfoById_args args, AsyncMethodCallback<MerchantInfo> resultHandler) throws TException {
         iface.GetMerchantInfoById(args.mid,resultHandler);
       }
     }
@@ -1594,7 +1807,7 @@ public class ProductService {
         return false;
       }
 
-      public void start(I iface, BM4ComparePatternTrigger_args args, org.apache.thrift.async.AsyncMethodCallback<Boolean> resultHandler) throws TException {
+      public void start(I iface, BM4ComparePatternTrigger_args args, AsyncMethodCallback<Boolean> resultHandler) throws TException {
         iface.BM4ComparePatternTrigger(args.uidLst, args.pidLst, args.cidLst, args.compLoad,resultHandler);
       }
     }
@@ -1645,7 +1858,7 @@ public class ProductService {
         return false;
       }
 
-      public void start(I iface, BM5CompareTransferDataSize_args args, org.apache.thrift.async.AsyncMethodCallback<CommentInfo> resultHandler) throws TException {
+      public void start(I iface, BM5CompareTransferDataSize_args args, AsyncMethodCallback<CommentInfo> resultHandler) throws TException {
         iface.BM5CompareTransferDataSize(args.dataSize,resultHandler);
       }
     }
@@ -1697,7 +1910,7 @@ public class ProductService {
         return false;
       }
 
-      public void start(I iface, BM6CompareMemBindWidth_args args, org.apache.thrift.async.AsyncMethodCallback<Boolean> resultHandler) throws TException {
+      public void start(I iface, BM6CompareMemBindWidth_args args, AsyncMethodCallback<Boolean> resultHandler) throws TException {
         iface.BM6CompareMemBindWidth(args.dataSize,resultHandler);
       }
     }
@@ -1748,8 +1961,59 @@ public class ProductService {
         return false;
       }
 
-      public void start(I iface, GetComments_args args, org.apache.thrift.async.AsyncMethodCallback<List<CommentInfo>> resultHandler) throws TException {
+      public void start(I iface, GetComments_args args, AsyncMethodCallback<List<CommentInfo>> resultHandler) throws TException {
         iface.GetComments(args.prodId, args.comtNum,resultHandler);
+      }
+    }
+
+    public static class GetMerchantInfoByProd<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, GetMerchantInfoByProd_args, MerchantInfo> {
+      public GetMerchantInfoByProd() {
+        super("GetMerchantInfoByProd");
+      }
+
+      public GetMerchantInfoByProd_args getEmptyArgsInstance() {
+        return new GetMerchantInfoByProd_args();
+      }
+
+      public AsyncMethodCallback<MerchantInfo> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
+        final org.apache.thrift.AsyncProcessFunction fcall = this;
+        return new AsyncMethodCallback<MerchantInfo>() { 
+          public void onComplete(MerchantInfo o) {
+            GetMerchantInfoByProd_result result = new GetMerchantInfoByProd_result();
+            result.success = o;
+            try {
+              fcall.sendResponse(fb,result, org.apache.thrift.protocol.TMessageType.REPLY,seqid);
+              return;
+            } catch (Exception e) {
+              LOGGER.error("Exception writing to internal frame buffer", e);
+            }
+            fb.close();
+          }
+          public void onError(Exception e) {
+            byte msgType = org.apache.thrift.protocol.TMessageType.REPLY;
+            org.apache.thrift.TBase msg;
+            GetMerchantInfoByProd_result result = new GetMerchantInfoByProd_result();
+            {
+              msgType = org.apache.thrift.protocol.TMessageType.EXCEPTION;
+              msg = (org.apache.thrift.TBase)new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.INTERNAL_ERROR, e.getMessage());
+            }
+            try {
+              fcall.sendResponse(fb,msg,msgType,seqid);
+              return;
+            } catch (Exception ex) {
+              LOGGER.error("Exception writing to internal frame buffer", ex);
+            }
+            fb.close();
+          }
+        };
+      }
+
+      protected boolean isOneway() {
+        return false;
+      }
+
+      public void start(I iface, GetMerchantInfoByProd_args args, AsyncMethodCallback<MerchantInfo> resultHandler) throws TException {
+        iface.GetMerchantInfoByProd(args.pid,resultHandler);
       }
     }
 
@@ -1987,11 +2251,11 @@ public class ProductService {
       return _Fields.findByThriftId(fieldId);
     }
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws TException {
       schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws TException {
       schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
     }
 
@@ -2007,7 +2271,7 @@ public class ProductService {
       return sb.toString();
     }
 
-    public void validate() throws org.apache.thrift.TException {
+    public void validate() throws TException {
       // check for required fields
       // check for sub-struct validity
     }
@@ -2015,7 +2279,7 @@ public class ProductService {
     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
       try {
         write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -2025,7 +2289,7 @@ public class ProductService {
         // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
         __isset_bitfield = 0;
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -2038,7 +2302,7 @@ public class ProductService {
 
     private static class GetUserActiveByCategory_argsStandardScheme extends StandardScheme<GetUserActiveByCategory_args> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, GetUserActiveByCategory_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, GetUserActiveByCategory_args struct) throws TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -2067,7 +2331,7 @@ public class ProductService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, GetUserActiveByCategory_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, GetUserActiveByCategory_args struct) throws TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -2089,7 +2353,7 @@ public class ProductService {
     private static class GetUserActiveByCategory_argsTupleScheme extends TupleScheme<GetUserActiveByCategory_args> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, GetUserActiveByCategory_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, GetUserActiveByCategory_args struct) throws TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetId()) {
@@ -2102,7 +2366,7 @@ public class ProductService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, GetUserActiveByCategory_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, GetUserActiveByCategory_args struct) throws TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
@@ -2358,11 +2622,11 @@ public class ProductService {
       return _Fields.findByThriftId(fieldId);
     }
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws TException {
       schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws TException {
       schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
       }
 
@@ -2382,7 +2646,7 @@ public class ProductService {
       return sb.toString();
     }
 
-    public void validate() throws org.apache.thrift.TException {
+    public void validate() throws TException {
       // check for required fields
       // check for sub-struct validity
     }
@@ -2390,7 +2654,7 @@ public class ProductService {
     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
       try {
         write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -2398,7 +2662,7 @@ public class ProductService {
     private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
       try {
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -2411,7 +2675,7 @@ public class ProductService {
 
     private static class GetUserActiveByCategory_resultStandardScheme extends StandardScheme<GetUserActiveByCategory_result> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, GetUserActiveByCategory_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, GetUserActiveByCategory_result struct) throws TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -2452,7 +2716,7 @@ public class ProductService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, GetUserActiveByCategory_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, GetUserActiveByCategory_result struct) throws TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -2484,7 +2748,7 @@ public class ProductService {
     private static class GetUserActiveByCategory_resultTupleScheme extends TupleScheme<GetUserActiveByCategory_result> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, GetUserActiveByCategory_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, GetUserActiveByCategory_result struct) throws TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetSuccess()) {
@@ -2504,7 +2768,7 @@ public class ProductService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, GetUserActiveByCategory_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, GetUserActiveByCategory_result struct) throws TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
@@ -2907,11 +3171,11 @@ public class ProductService {
       return _Fields.findByThriftId(fieldId);
     }
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws TException {
       schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws TException {
       schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
     }
 
@@ -2935,7 +3199,7 @@ public class ProductService {
       return sb.toString();
     }
 
-    public void validate() throws org.apache.thrift.TException {
+    public void validate() throws TException {
       // check for required fields
       // check for sub-struct validity
     }
@@ -2943,7 +3207,7 @@ public class ProductService {
     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
       try {
         write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -2953,7 +3217,7 @@ public class ProductService {
         // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
         __isset_bitfield = 0;
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -2966,7 +3230,7 @@ public class ProductService {
 
     private static class CreateActiveBehavior_argsStandardScheme extends StandardScheme<CreateActiveBehavior_args> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, CreateActiveBehavior_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, CreateActiveBehavior_args struct) throws TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -3011,7 +3275,7 @@ public class ProductService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, CreateActiveBehavior_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, CreateActiveBehavior_args struct) throws TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -3039,7 +3303,7 @@ public class ProductService {
     private static class CreateActiveBehavior_argsTupleScheme extends TupleScheme<CreateActiveBehavior_args> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, CreateActiveBehavior_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, CreateActiveBehavior_args struct) throws TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetUid()) {
@@ -3064,7 +3328,7 @@ public class ProductService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, CreateActiveBehavior_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, CreateActiveBehavior_args struct) throws TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(3);
         if (incoming.get(0)) {
@@ -3316,11 +3580,11 @@ public class ProductService {
       return _Fields.findByThriftId(fieldId);
     }
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws TException {
       schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws TException {
       schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
       }
 
@@ -3336,7 +3600,7 @@ public class ProductService {
       return sb.toString();
     }
 
-    public void validate() throws org.apache.thrift.TException {
+    public void validate() throws TException {
       // check for required fields
       // check for sub-struct validity
     }
@@ -3344,7 +3608,7 @@ public class ProductService {
     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
       try {
         write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -3354,7 +3618,7 @@ public class ProductService {
         // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
         __isset_bitfield = 0;
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -3367,7 +3631,7 @@ public class ProductService {
 
     private static class CreateActiveBehavior_resultStandardScheme extends StandardScheme<CreateActiveBehavior_result> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, CreateActiveBehavior_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, CreateActiveBehavior_result struct) throws TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -3396,7 +3660,7 @@ public class ProductService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, CreateActiveBehavior_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, CreateActiveBehavior_result struct) throws TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -3420,7 +3684,7 @@ public class ProductService {
     private static class CreateActiveBehavior_resultTupleScheme extends TupleScheme<CreateActiveBehavior_result> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, CreateActiveBehavior_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, CreateActiveBehavior_result struct) throws TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetSuccess()) {
@@ -3433,7 +3697,7 @@ public class ProductService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, CreateActiveBehavior_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, CreateActiveBehavior_result struct) throws TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
@@ -3677,11 +3941,11 @@ public class ProductService {
       return _Fields.findByThriftId(fieldId);
     }
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws TException {
       schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws TException {
       schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
     }
 
@@ -3697,7 +3961,7 @@ public class ProductService {
       return sb.toString();
     }
 
-    public void validate() throws org.apache.thrift.TException {
+    public void validate() throws TException {
       // check for required fields
       // check for sub-struct validity
     }
@@ -3705,7 +3969,7 @@ public class ProductService {
     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
       try {
         write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -3715,7 +3979,7 @@ public class ProductService {
         // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
         __isset_bitfield = 0;
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -3728,7 +3992,7 @@ public class ProductService {
 
     private static class GetLastestActiveUsers_argsStandardScheme extends StandardScheme<GetLastestActiveUsers_args> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, GetLastestActiveUsers_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, GetLastestActiveUsers_args struct) throws TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -3757,7 +4021,7 @@ public class ProductService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, GetLastestActiveUsers_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, GetLastestActiveUsers_args struct) throws TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -3779,7 +4043,7 @@ public class ProductService {
     private static class GetLastestActiveUsers_argsTupleScheme extends TupleScheme<GetLastestActiveUsers_args> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, GetLastestActiveUsers_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, GetLastestActiveUsers_args struct) throws TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetUserNum()) {
@@ -3792,7 +4056,7 @@ public class ProductService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, GetLastestActiveUsers_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, GetLastestActiveUsers_args struct) throws TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
@@ -4051,11 +4315,11 @@ public class ProductService {
       return _Fields.findByThriftId(fieldId);
     }
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws TException {
       schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws TException {
       schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
       }
 
@@ -4075,7 +4339,7 @@ public class ProductService {
       return sb.toString();
     }
 
-    public void validate() throws org.apache.thrift.TException {
+    public void validate() throws TException {
       // check for required fields
       // check for sub-struct validity
     }
@@ -4083,7 +4347,7 @@ public class ProductService {
     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
       try {
         write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -4091,7 +4355,7 @@ public class ProductService {
     private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
       try {
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -4104,7 +4368,7 @@ public class ProductService {
 
     private static class GetLastestActiveUsers_resultStandardScheme extends StandardScheme<GetLastestActiveUsers_result> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, GetLastestActiveUsers_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, GetLastestActiveUsers_result struct) throws TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -4143,7 +4407,7 @@ public class ProductService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, GetLastestActiveUsers_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, GetLastestActiveUsers_result struct) throws TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -4174,7 +4438,7 @@ public class ProductService {
     private static class GetLastestActiveUsers_resultTupleScheme extends TupleScheme<GetLastestActiveUsers_result> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, GetLastestActiveUsers_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, GetLastestActiveUsers_result struct) throws TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetSuccess()) {
@@ -4193,7 +4457,7 @@ public class ProductService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, GetLastestActiveUsers_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, GetLastestActiveUsers_result struct) throws TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
@@ -4446,11 +4710,11 @@ public class ProductService {
       return _Fields.findByThriftId(fieldId);
     }
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws TException {
       schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws TException {
       schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
     }
 
@@ -4466,7 +4730,7 @@ public class ProductService {
       return sb.toString();
     }
 
-    public void validate() throws org.apache.thrift.TException {
+    public void validate() throws TException {
       // check for required fields
       // check for sub-struct validity
     }
@@ -4474,7 +4738,7 @@ public class ProductService {
     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
       try {
         write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -4484,7 +4748,7 @@ public class ProductService {
         // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
         __isset_bitfield = 0;
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -4497,7 +4761,7 @@ public class ProductService {
 
     private static class GetUserActiveByProduct_argsStandardScheme extends StandardScheme<GetUserActiveByProduct_args> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, GetUserActiveByProduct_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, GetUserActiveByProduct_args struct) throws TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -4526,7 +4790,7 @@ public class ProductService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, GetUserActiveByProduct_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, GetUserActiveByProduct_args struct) throws TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -4548,7 +4812,7 @@ public class ProductService {
     private static class GetUserActiveByProduct_argsTupleScheme extends TupleScheme<GetUserActiveByProduct_args> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, GetUserActiveByProduct_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, GetUserActiveByProduct_args struct) throws TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetUid()) {
@@ -4561,7 +4825,7 @@ public class ProductService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, GetUserActiveByProduct_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, GetUserActiveByProduct_args struct) throws TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
@@ -4820,11 +5084,11 @@ public class ProductService {
       return _Fields.findByThriftId(fieldId);
     }
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws TException {
       schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws TException {
       schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
       }
 
@@ -4844,7 +5108,7 @@ public class ProductService {
       return sb.toString();
     }
 
-    public void validate() throws org.apache.thrift.TException {
+    public void validate() throws TException {
       // check for required fields
       // check for sub-struct validity
     }
@@ -4852,7 +5116,7 @@ public class ProductService {
     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
       try {
         write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -4860,7 +5124,7 @@ public class ProductService {
     private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
       try {
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -4873,7 +5137,7 @@ public class ProductService {
 
     private static class GetUserActiveByProduct_resultStandardScheme extends StandardScheme<GetUserActiveByProduct_result> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, GetUserActiveByProduct_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, GetUserActiveByProduct_result struct) throws TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -4912,7 +5176,7 @@ public class ProductService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, GetUserActiveByProduct_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, GetUserActiveByProduct_result struct) throws TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -4943,7 +5207,7 @@ public class ProductService {
     private static class GetUserActiveByProduct_resultTupleScheme extends TupleScheme<GetUserActiveByProduct_result> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, GetUserActiveByProduct_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, GetUserActiveByProduct_result struct) throws TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetSuccess()) {
@@ -4962,7 +5226,7 @@ public class ProductService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, GetUserActiveByProduct_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, GetUserActiveByProduct_result struct) throws TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
@@ -5379,11 +5643,11 @@ public class ProductService {
       return _Fields.findByThriftId(fieldId);
     }
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws TException {
       schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws TException {
       schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
     }
 
@@ -5411,7 +5675,7 @@ public class ProductService {
       return sb.toString();
     }
 
-    public void validate() throws org.apache.thrift.TException {
+    public void validate() throws TException {
       // check for required fields
       // check for sub-struct validity
     }
@@ -5419,7 +5683,7 @@ public class ProductService {
     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
       try {
         write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -5429,7 +5693,7 @@ public class ProductService {
         // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
         __isset_bitfield = 0;
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -5442,7 +5706,7 @@ public class ProductService {
 
     private static class GetProductByCategory_argsStandardScheme extends StandardScheme<GetProductByCategory_args> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, GetProductByCategory_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, GetProductByCategory_args struct) throws TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -5462,7 +5726,7 @@ public class ProductService {
               break;
             case 2: // ORDER
               if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
-                struct.order = com.freeb.thrift.SearchOrder.findByValue(iprot.readI32());
+                struct.order = SearchOrder.findByValue(iprot.readI32());
                 struct.setOrderIsSet(true);
               } else { 
                 org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
@@ -5487,7 +5751,7 @@ public class ProductService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, GetProductByCategory_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, GetProductByCategory_args struct) throws TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -5517,7 +5781,7 @@ public class ProductService {
     private static class GetProductByCategory_argsTupleScheme extends TupleScheme<GetProductByCategory_args> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, GetProductByCategory_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, GetProductByCategory_args struct) throws TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetCid()) {
@@ -5542,7 +5806,7 @@ public class ProductService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, GetProductByCategory_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, GetProductByCategory_args struct) throws TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(3);
         if (incoming.get(0)) {
@@ -5550,7 +5814,7 @@ public class ProductService {
           struct.setCidIsSet(true);
         }
         if (incoming.get(1)) {
-          struct.order = com.freeb.thrift.SearchOrder.findByValue(iprot.readI32());
+          struct.order = SearchOrder.findByValue(iprot.readI32());
           struct.setOrderIsSet(true);
         }
         if (incoming.get(2)) {
@@ -5809,11 +6073,11 @@ public class ProductService {
       return _Fields.findByThriftId(fieldId);
     }
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws TException {
       schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws TException {
       schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
       }
 
@@ -5833,7 +6097,7 @@ public class ProductService {
       return sb.toString();
     }
 
-    public void validate() throws org.apache.thrift.TException {
+    public void validate() throws TException {
       // check for required fields
       // check for sub-struct validity
     }
@@ -5841,7 +6105,7 @@ public class ProductService {
     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
       try {
         write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -5849,7 +6113,7 @@ public class ProductService {
     private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
       try {
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -5862,7 +6126,7 @@ public class ProductService {
 
     private static class GetProductByCategory_resultStandardScheme extends StandardScheme<GetProductByCategory_result> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, GetProductByCategory_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, GetProductByCategory_result struct) throws TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -5901,7 +6165,7 @@ public class ProductService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, GetProductByCategory_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, GetProductByCategory_result struct) throws TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -5932,7 +6196,7 @@ public class ProductService {
     private static class GetProductByCategory_resultTupleScheme extends TupleScheme<GetProductByCategory_result> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, GetProductByCategory_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, GetProductByCategory_result struct) throws TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetSuccess()) {
@@ -5951,7 +6215,7 @@ public class ProductService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, GetProductByCategory_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, GetProductByCategory_result struct) throws TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
@@ -6442,11 +6706,11 @@ public class ProductService {
       return _Fields.findByThriftId(fieldId);
     }
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws TException {
       schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws TException {
       schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
     }
 
@@ -6482,7 +6746,7 @@ public class ProductService {
       return sb.toString();
     }
 
-    public void validate() throws org.apache.thrift.TException {
+    public void validate() throws TException {
       // check for required fields
       // check for sub-struct validity
     }
@@ -6490,7 +6754,7 @@ public class ProductService {
     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
       try {
         write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -6500,7 +6764,7 @@ public class ProductService {
         // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
         __isset_bitfield = 0;
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -6513,7 +6777,7 @@ public class ProductService {
 
     private static class GetProductBySimilarity_argsStandardScheme extends StandardScheme<GetProductBySimilarity_args> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, GetProductBySimilarity_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, GetProductBySimilarity_args struct) throws TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -6533,7 +6797,7 @@ public class ProductService {
               break;
             case 2: // ORDER
               if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
-                struct.order = com.freeb.thrift.SearchOrder.findByValue(iprot.readI32());
+                struct.order = SearchOrder.findByValue(iprot.readI32());
                 struct.setOrderIsSet(true);
               } else { 
                 org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
@@ -6566,7 +6830,7 @@ public class ProductService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, GetProductBySimilarity_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, GetProductBySimilarity_args struct) throws TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -6601,7 +6865,7 @@ public class ProductService {
     private static class GetProductBySimilarity_argsTupleScheme extends TupleScheme<GetProductBySimilarity_args> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, GetProductBySimilarity_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, GetProductBySimilarity_args struct) throws TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetCid()) {
@@ -6632,7 +6896,7 @@ public class ProductService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, GetProductBySimilarity_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, GetProductBySimilarity_args struct) throws TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(4);
         if (incoming.get(0)) {
@@ -6640,7 +6904,7 @@ public class ProductService {
           struct.setCidIsSet(true);
         }
         if (incoming.get(1)) {
-          struct.order = com.freeb.thrift.SearchOrder.findByValue(iprot.readI32());
+          struct.order = SearchOrder.findByValue(iprot.readI32());
           struct.setOrderIsSet(true);
         }
         if (incoming.get(2)) {
@@ -6903,11 +7167,11 @@ public class ProductService {
       return _Fields.findByThriftId(fieldId);
     }
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws TException {
       schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws TException {
       schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
       }
 
@@ -6927,7 +7191,7 @@ public class ProductService {
       return sb.toString();
     }
 
-    public void validate() throws org.apache.thrift.TException {
+    public void validate() throws TException {
       // check for required fields
       // check for sub-struct validity
     }
@@ -6935,7 +7199,7 @@ public class ProductService {
     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
       try {
         write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -6943,7 +7207,7 @@ public class ProductService {
     private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
       try {
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -6956,7 +7220,7 @@ public class ProductService {
 
     private static class GetProductBySimilarity_resultStandardScheme extends StandardScheme<GetProductBySimilarity_result> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, GetProductBySimilarity_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, GetProductBySimilarity_result struct) throws TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -6995,7 +7259,7 @@ public class ProductService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, GetProductBySimilarity_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, GetProductBySimilarity_result struct) throws TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -7026,7 +7290,7 @@ public class ProductService {
     private static class GetProductBySimilarity_resultTupleScheme extends TupleScheme<GetProductBySimilarity_result> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, GetProductBySimilarity_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, GetProductBySimilarity_result struct) throws TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetSuccess()) {
@@ -7045,7 +7309,7 @@ public class ProductService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, GetProductBySimilarity_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, GetProductBySimilarity_result struct) throws TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
@@ -7372,11 +7636,11 @@ public class ProductService {
       return _Fields.findByThriftId(fieldId);
     }
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws TException {
       schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws TException {
       schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
     }
 
@@ -7396,7 +7660,7 @@ public class ProductService {
       return sb.toString();
     }
 
-    public void validate() throws org.apache.thrift.TException {
+    public void validate() throws TException {
       // check for required fields
       // check for sub-struct validity
     }
@@ -7404,7 +7668,7 @@ public class ProductService {
     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
       try {
         write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -7414,7 +7678,7 @@ public class ProductService {
         // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
         __isset_bitfield = 0;
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -7427,7 +7691,7 @@ public class ProductService {
 
     private static class IncProductSales_argsStandardScheme extends StandardScheme<IncProductSales_args> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, IncProductSales_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, IncProductSales_args struct) throws TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -7464,7 +7728,7 @@ public class ProductService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, IncProductSales_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, IncProductSales_args struct) throws TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -7489,7 +7753,7 @@ public class ProductService {
     private static class IncProductSales_argsTupleScheme extends TupleScheme<IncProductSales_args> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, IncProductSales_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, IncProductSales_args struct) throws TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetPid()) {
@@ -7508,7 +7772,7 @@ public class ProductService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, IncProductSales_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, IncProductSales_args struct) throws TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
@@ -7754,11 +8018,11 @@ public class ProductService {
       return _Fields.findByThriftId(fieldId);
     }
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws TException {
       schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws TException {
       schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
       }
 
@@ -7778,7 +8042,7 @@ public class ProductService {
       return sb.toString();
     }
 
-    public void validate() throws org.apache.thrift.TException {
+    public void validate() throws TException {
       // check for required fields
       // check for sub-struct validity
       if (success != null) {
@@ -7789,7 +8053,7 @@ public class ProductService {
     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
       try {
         write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -7797,7 +8061,7 @@ public class ProductService {
     private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
       try {
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -7810,7 +8074,7 @@ public class ProductService {
 
     private static class IncProductSales_resultStandardScheme extends StandardScheme<IncProductSales_result> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, IncProductSales_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, IncProductSales_result struct) throws TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -7840,7 +8104,7 @@ public class ProductService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, IncProductSales_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, IncProductSales_result struct) throws TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -7864,7 +8128,7 @@ public class ProductService {
     private static class IncProductSales_resultTupleScheme extends TupleScheme<IncProductSales_result> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, IncProductSales_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, IncProductSales_result struct) throws TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetSuccess()) {
@@ -7877,7 +8141,732 @@ public class ProductService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, IncProductSales_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, IncProductSales_result struct) throws TException {
+        TTupleProtocol iprot = (TTupleProtocol) prot;
+        BitSet incoming = iprot.readBitSet(1);
+        if (incoming.get(0)) {
+          struct.success = new ProductInfo();
+          struct.success.read(iprot);
+          struct.setSuccessIsSet(true);
+        }
+      }
+    }
+
+  }
+
+  public static class GetProdInfo_args implements org.apache.thrift.TBase<GetProdInfo_args, GetProdInfo_args._Fields>, java.io.Serializable, Cloneable, Comparable<GetProdInfo_args>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("GetProdInfo_args");
+
+    private static final org.apache.thrift.protocol.TField PID_FIELD_DESC = new org.apache.thrift.protocol.TField("pid", org.apache.thrift.protocol.TType.I64, (short)1);
+
+    private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
+    static {
+      schemes.put(StandardScheme.class, new GetProdInfo_argsStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new GetProdInfo_argsTupleSchemeFactory());
+    }
+
+    public long pid; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      PID((short)1, "pid");
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 1: // PID
+            return PID;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    private static final int __PID_ISSET_ID = 0;
+    private byte __isset_bitfield = 0;
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.PID, new org.apache.thrift.meta_data.FieldMetaData("pid", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I64)));
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(GetProdInfo_args.class, metaDataMap);
+    }
+
+    public GetProdInfo_args() {
+    }
+
+    public GetProdInfo_args(
+      long pid)
+    {
+      this();
+      this.pid = pid;
+      setPidIsSet(true);
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public GetProdInfo_args(GetProdInfo_args other) {
+      __isset_bitfield = other.__isset_bitfield;
+      this.pid = other.pid;
+    }
+
+    public GetProdInfo_args deepCopy() {
+      return new GetProdInfo_args(this);
+    }
+
+    @Override
+    public void clear() {
+      setPidIsSet(false);
+      this.pid = 0;
+    }
+
+    public long getPid() {
+      return this.pid;
+    }
+
+    public GetProdInfo_args setPid(long pid) {
+      this.pid = pid;
+      setPidIsSet(true);
+      return this;
+    }
+
+    public void unsetPid() {
+      __isset_bitfield = EncodingUtils.clearBit(__isset_bitfield, __PID_ISSET_ID);
+    }
+
+    /** Returns true if field pid is set (has been assigned a value) and false otherwise */
+    public boolean isSetPid() {
+      return EncodingUtils.testBit(__isset_bitfield, __PID_ISSET_ID);
+    }
+
+    public void setPidIsSet(boolean value) {
+      __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __PID_ISSET_ID, value);
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      case PID:
+        if (value == null) {
+          unsetPid();
+        } else {
+          setPid((Long)value);
+        }
+        break;
+
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      case PID:
+        return getPid();
+
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      case PID:
+        return isSetPid();
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof GetProdInfo_args)
+        return this.equals((GetProdInfo_args)that);
+      return false;
+    }
+
+    public boolean equals(GetProdInfo_args that) {
+      if (that == null)
+        return false;
+
+      boolean this_present_pid = true;
+      boolean that_present_pid = true;
+      if (this_present_pid || that_present_pid) {
+        if (!(this_present_pid && that_present_pid))
+          return false;
+        if (this.pid != that.pid)
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      List<Object> list = new ArrayList<Object>();
+
+      boolean present_pid = true;
+      list.add(present_pid);
+      if (present_pid)
+        list.add(pid);
+
+      return list.hashCode();
+    }
+
+    @Override
+    public int compareTo(GetProdInfo_args other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+
+      lastComparison = Boolean.valueOf(isSetPid()).compareTo(other.isSetPid());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetPid()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.pid, other.pid);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws TException {
+      schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws TException {
+      schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
+    }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("GetProdInfo_args(");
+      boolean first = true;
+
+      sb.append("pid:");
+      sb.append(this.pid);
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws TException {
+      // check for required fields
+      // check for sub-struct validity
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
+        __isset_bitfield = 0;
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private static class GetProdInfo_argsStandardSchemeFactory implements SchemeFactory {
+      public GetProdInfo_argsStandardScheme getScheme() {
+        return new GetProdInfo_argsStandardScheme();
+      }
+    }
+
+    private static class GetProdInfo_argsStandardScheme extends StandardScheme<GetProdInfo_args> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, GetProdInfo_args struct) throws TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 1: // PID
+              if (schemeField.type == org.apache.thrift.protocol.TType.I64) {
+                struct.pid = iprot.readI64();
+                struct.setPidIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, GetProdInfo_args struct) throws TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        oprot.writeFieldBegin(PID_FIELD_DESC);
+        oprot.writeI64(struct.pid);
+        oprot.writeFieldEnd();
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class GetProdInfo_argsTupleSchemeFactory implements SchemeFactory {
+      public GetProdInfo_argsTupleScheme getScheme() {
+        return new GetProdInfo_argsTupleScheme();
+      }
+    }
+
+    private static class GetProdInfo_argsTupleScheme extends TupleScheme<GetProdInfo_args> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, GetProdInfo_args struct) throws TException {
+        TTupleProtocol oprot = (TTupleProtocol) prot;
+        BitSet optionals = new BitSet();
+        if (struct.isSetPid()) {
+          optionals.set(0);
+        }
+        oprot.writeBitSet(optionals, 1);
+        if (struct.isSetPid()) {
+          oprot.writeI64(struct.pid);
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, GetProdInfo_args struct) throws TException {
+        TTupleProtocol iprot = (TTupleProtocol) prot;
+        BitSet incoming = iprot.readBitSet(1);
+        if (incoming.get(0)) {
+          struct.pid = iprot.readI64();
+          struct.setPidIsSet(true);
+        }
+      }
+    }
+
+  }
+
+  public static class GetProdInfo_result implements org.apache.thrift.TBase<GetProdInfo_result, GetProdInfo_result._Fields>, java.io.Serializable, Cloneable, Comparable<GetProdInfo_result>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("GetProdInfo_result");
+
+    private static final org.apache.thrift.protocol.TField SUCCESS_FIELD_DESC = new org.apache.thrift.protocol.TField("success", org.apache.thrift.protocol.TType.STRUCT, (short)0);
+
+    private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
+    static {
+      schemes.put(StandardScheme.class, new GetProdInfo_resultStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new GetProdInfo_resultTupleSchemeFactory());
+    }
+
+    public ProductInfo success; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      SUCCESS((short)0, "success");
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 0: // SUCCESS
+            return SUCCESS;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, ProductInfo.class)));
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(GetProdInfo_result.class, metaDataMap);
+    }
+
+    public GetProdInfo_result() {
+    }
+
+    public GetProdInfo_result(
+      ProductInfo success)
+    {
+      this();
+      this.success = success;
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public GetProdInfo_result(GetProdInfo_result other) {
+      if (other.isSetSuccess()) {
+        this.success = new ProductInfo(other.success);
+      }
+    }
+
+    public GetProdInfo_result deepCopy() {
+      return new GetProdInfo_result(this);
+    }
+
+    @Override
+    public void clear() {
+      this.success = null;
+    }
+
+    public ProductInfo getSuccess() {
+      return this.success;
+    }
+
+    public GetProdInfo_result setSuccess(ProductInfo success) {
+      this.success = success;
+      return this;
+    }
+
+    public void unsetSuccess() {
+      this.success = null;
+    }
+
+    /** Returns true if field success is set (has been assigned a value) and false otherwise */
+    public boolean isSetSuccess() {
+      return this.success != null;
+    }
+
+    public void setSuccessIsSet(boolean value) {
+      if (!value) {
+        this.success = null;
+      }
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      case SUCCESS:
+        if (value == null) {
+          unsetSuccess();
+        } else {
+          setSuccess((ProductInfo)value);
+        }
+        break;
+
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      case SUCCESS:
+        return getSuccess();
+
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      case SUCCESS:
+        return isSetSuccess();
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof GetProdInfo_result)
+        return this.equals((GetProdInfo_result)that);
+      return false;
+    }
+
+    public boolean equals(GetProdInfo_result that) {
+      if (that == null)
+        return false;
+
+      boolean this_present_success = true && this.isSetSuccess();
+      boolean that_present_success = true && that.isSetSuccess();
+      if (this_present_success || that_present_success) {
+        if (!(this_present_success && that_present_success))
+          return false;
+        if (!this.success.equals(that.success))
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      List<Object> list = new ArrayList<Object>();
+
+      boolean present_success = true && (isSetSuccess());
+      list.add(present_success);
+      if (present_success)
+        list.add(success);
+
+      return list.hashCode();
+    }
+
+    @Override
+    public int compareTo(GetProdInfo_result other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+
+      lastComparison = Boolean.valueOf(isSetSuccess()).compareTo(other.isSetSuccess());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetSuccess()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.success, other.success);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws TException {
+      schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws TException {
+      schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
+      }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("GetProdInfo_result(");
+      boolean first = true;
+
+      sb.append("success:");
+      if (this.success == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.success);
+      }
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws TException {
+      // check for required fields
+      // check for sub-struct validity
+      if (success != null) {
+        success.validate();
+      }
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private static class GetProdInfo_resultStandardSchemeFactory implements SchemeFactory {
+      public GetProdInfo_resultStandardScheme getScheme() {
+        return new GetProdInfo_resultStandardScheme();
+      }
+    }
+
+    private static class GetProdInfo_resultStandardScheme extends StandardScheme<GetProdInfo_result> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, GetProdInfo_result struct) throws TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 0: // SUCCESS
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.success = new ProductInfo();
+                struct.success.read(iprot);
+                struct.setSuccessIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, GetProdInfo_result struct) throws TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.success != null) {
+          oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
+          struct.success.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class GetProdInfo_resultTupleSchemeFactory implements SchemeFactory {
+      public GetProdInfo_resultTupleScheme getScheme() {
+        return new GetProdInfo_resultTupleScheme();
+      }
+    }
+
+    private static class GetProdInfo_resultTupleScheme extends TupleScheme<GetProdInfo_result> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, GetProdInfo_result struct) throws TException {
+        TTupleProtocol oprot = (TTupleProtocol) prot;
+        BitSet optionals = new BitSet();
+        if (struct.isSetSuccess()) {
+          optionals.set(0);
+        }
+        oprot.writeBitSet(optionals, 1);
+        if (struct.isSetSuccess()) {
+          struct.success.write(oprot);
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, GetProdInfo_result struct) throws TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
@@ -8122,11 +9111,11 @@ public class ProductService {
       return _Fields.findByThriftId(fieldId);
     }
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws TException {
       schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws TException {
       schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
     }
 
@@ -8142,7 +9131,7 @@ public class ProductService {
       return sb.toString();
     }
 
-    public void validate() throws org.apache.thrift.TException {
+    public void validate() throws TException {
       // check for required fields
       // check for sub-struct validity
     }
@@ -8150,7 +9139,7 @@ public class ProductService {
     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
       try {
         write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -8160,7 +9149,7 @@ public class ProductService {
         // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
         __isset_bitfield = 0;
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -8173,7 +9162,7 @@ public class ProductService {
 
     private static class GetMerchantInfoById_argsStandardScheme extends StandardScheme<GetMerchantInfoById_args> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, GetMerchantInfoById_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, GetMerchantInfoById_args struct) throws TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -8202,7 +9191,7 @@ public class ProductService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, GetMerchantInfoById_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, GetMerchantInfoById_args struct) throws TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -8224,7 +9213,7 @@ public class ProductService {
     private static class GetMerchantInfoById_argsTupleScheme extends TupleScheme<GetMerchantInfoById_args> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, GetMerchantInfoById_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, GetMerchantInfoById_args struct) throws TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetMid()) {
@@ -8237,7 +9226,7 @@ public class ProductService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, GetMerchantInfoById_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, GetMerchantInfoById_args struct) throws TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
@@ -8479,11 +9468,11 @@ public class ProductService {
       return _Fields.findByThriftId(fieldId);
     }
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws TException {
       schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws TException {
       schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
       }
 
@@ -8503,7 +9492,7 @@ public class ProductService {
       return sb.toString();
     }
 
-    public void validate() throws org.apache.thrift.TException {
+    public void validate() throws TException {
       // check for required fields
       // check for sub-struct validity
       if (success != null) {
@@ -8514,7 +9503,7 @@ public class ProductService {
     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
       try {
         write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -8522,7 +9511,7 @@ public class ProductService {
     private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
       try {
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -8535,7 +9524,7 @@ public class ProductService {
 
     private static class GetMerchantInfoById_resultStandardScheme extends StandardScheme<GetMerchantInfoById_result> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, GetMerchantInfoById_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, GetMerchantInfoById_result struct) throws TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -8565,7 +9554,7 @@ public class ProductService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, GetMerchantInfoById_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, GetMerchantInfoById_result struct) throws TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -8589,7 +9578,7 @@ public class ProductService {
     private static class GetMerchantInfoById_resultTupleScheme extends TupleScheme<GetMerchantInfoById_result> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, GetMerchantInfoById_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, GetMerchantInfoById_result struct) throws TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetSuccess()) {
@@ -8602,7 +9591,7 @@ public class ProductService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, GetMerchantInfoById_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, GetMerchantInfoById_result struct) throws TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
@@ -9120,11 +10109,11 @@ public class ProductService {
       return _Fields.findByThriftId(fieldId);
     }
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws TException {
       schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws TException {
       schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
     }
 
@@ -9164,7 +10153,7 @@ public class ProductService {
       return sb.toString();
     }
 
-    public void validate() throws org.apache.thrift.TException {
+    public void validate() throws TException {
       // check for required fields
       // check for sub-struct validity
     }
@@ -9172,7 +10161,7 @@ public class ProductService {
     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
       try {
         write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -9182,7 +10171,7 @@ public class ProductService {
         // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
         __isset_bitfield = 0;
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -9195,7 +10184,7 @@ public class ProductService {
 
     private static class BM4ComparePatternTrigger_argsStandardScheme extends StandardScheme<BM4ComparePatternTrigger_args> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, BM4ComparePatternTrigger_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, BM4ComparePatternTrigger_args struct) throws TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -9278,7 +10267,7 @@ public class ProductService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, BM4ComparePatternTrigger_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, BM4ComparePatternTrigger_args struct) throws TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -9336,7 +10325,7 @@ public class ProductService {
     private static class BM4ComparePatternTrigger_argsTupleScheme extends TupleScheme<BM4ComparePatternTrigger_args> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, BM4ComparePatternTrigger_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, BM4ComparePatternTrigger_args struct) throws TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetUidLst()) {
@@ -9385,7 +10374,7 @@ public class ProductService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, BM4ComparePatternTrigger_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, BM4ComparePatternTrigger_args struct) throws TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(4);
         if (incoming.get(0)) {
@@ -9668,11 +10657,11 @@ public class ProductService {
       return _Fields.findByThriftId(fieldId);
     }
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws TException {
       schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws TException {
       schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
       }
 
@@ -9688,7 +10677,7 @@ public class ProductService {
       return sb.toString();
     }
 
-    public void validate() throws org.apache.thrift.TException {
+    public void validate() throws TException {
       // check for required fields
       // check for sub-struct validity
     }
@@ -9696,7 +10685,7 @@ public class ProductService {
     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
       try {
         write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -9706,7 +10695,7 @@ public class ProductService {
         // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
         __isset_bitfield = 0;
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -9719,7 +10708,7 @@ public class ProductService {
 
     private static class BM4ComparePatternTrigger_resultStandardScheme extends StandardScheme<BM4ComparePatternTrigger_result> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, BM4ComparePatternTrigger_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, BM4ComparePatternTrigger_result struct) throws TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -9748,7 +10737,7 @@ public class ProductService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, BM4ComparePatternTrigger_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, BM4ComparePatternTrigger_result struct) throws TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -9772,7 +10761,7 @@ public class ProductService {
     private static class BM4ComparePatternTrigger_resultTupleScheme extends TupleScheme<BM4ComparePatternTrigger_result> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, BM4ComparePatternTrigger_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, BM4ComparePatternTrigger_result struct) throws TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetSuccess()) {
@@ -9785,7 +10774,7 @@ public class ProductService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, BM4ComparePatternTrigger_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, BM4ComparePatternTrigger_result struct) throws TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
@@ -10029,11 +11018,11 @@ public class ProductService {
       return _Fields.findByThriftId(fieldId);
     }
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws TException {
       schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws TException {
       schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
     }
 
@@ -10049,7 +11038,7 @@ public class ProductService {
       return sb.toString();
     }
 
-    public void validate() throws org.apache.thrift.TException {
+    public void validate() throws TException {
       // check for required fields
       // check for sub-struct validity
     }
@@ -10057,7 +11046,7 @@ public class ProductService {
     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
       try {
         write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -10067,7 +11056,7 @@ public class ProductService {
         // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
         __isset_bitfield = 0;
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -10080,7 +11069,7 @@ public class ProductService {
 
     private static class BM5CompareTransferDataSize_argsStandardScheme extends StandardScheme<BM5CompareTransferDataSize_args> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, BM5CompareTransferDataSize_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, BM5CompareTransferDataSize_args struct) throws TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -10109,7 +11098,7 @@ public class ProductService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, BM5CompareTransferDataSize_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, BM5CompareTransferDataSize_args struct) throws TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -10131,7 +11120,7 @@ public class ProductService {
     private static class BM5CompareTransferDataSize_argsTupleScheme extends TupleScheme<BM5CompareTransferDataSize_args> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, BM5CompareTransferDataSize_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, BM5CompareTransferDataSize_args struct) throws TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetDataSize()) {
@@ -10144,7 +11133,7 @@ public class ProductService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, BM5CompareTransferDataSize_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, BM5CompareTransferDataSize_args struct) throws TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
@@ -10386,11 +11375,11 @@ public class ProductService {
       return _Fields.findByThriftId(fieldId);
     }
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws TException {
       schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws TException {
       schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
       }
 
@@ -10410,7 +11399,7 @@ public class ProductService {
       return sb.toString();
     }
 
-    public void validate() throws org.apache.thrift.TException {
+    public void validate() throws TException {
       // check for required fields
       // check for sub-struct validity
       if (success != null) {
@@ -10421,7 +11410,7 @@ public class ProductService {
     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
       try {
         write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -10429,7 +11418,7 @@ public class ProductService {
     private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
       try {
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -10442,7 +11431,7 @@ public class ProductService {
 
     private static class BM5CompareTransferDataSize_resultStandardScheme extends StandardScheme<BM5CompareTransferDataSize_result> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, BM5CompareTransferDataSize_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, BM5CompareTransferDataSize_result struct) throws TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -10472,7 +11461,7 @@ public class ProductService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, BM5CompareTransferDataSize_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, BM5CompareTransferDataSize_result struct) throws TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -10496,7 +11485,7 @@ public class ProductService {
     private static class BM5CompareTransferDataSize_resultTupleScheme extends TupleScheme<BM5CompareTransferDataSize_result> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, BM5CompareTransferDataSize_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, BM5CompareTransferDataSize_result struct) throws TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetSuccess()) {
@@ -10509,7 +11498,7 @@ public class ProductService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, BM5CompareTransferDataSize_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, BM5CompareTransferDataSize_result struct) throws TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
@@ -10754,11 +11743,11 @@ public class ProductService {
       return _Fields.findByThriftId(fieldId);
     }
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws TException {
       schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws TException {
       schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
     }
 
@@ -10774,7 +11763,7 @@ public class ProductService {
       return sb.toString();
     }
 
-    public void validate() throws org.apache.thrift.TException {
+    public void validate() throws TException {
       // check for required fields
       // check for sub-struct validity
     }
@@ -10782,7 +11771,7 @@ public class ProductService {
     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
       try {
         write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -10792,7 +11781,7 @@ public class ProductService {
         // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
         __isset_bitfield = 0;
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -10805,7 +11794,7 @@ public class ProductService {
 
     private static class BM6CompareMemBindWidth_argsStandardScheme extends StandardScheme<BM6CompareMemBindWidth_args> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, BM6CompareMemBindWidth_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, BM6CompareMemBindWidth_args struct) throws TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -10834,7 +11823,7 @@ public class ProductService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, BM6CompareMemBindWidth_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, BM6CompareMemBindWidth_args struct) throws TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -10856,7 +11845,7 @@ public class ProductService {
     private static class BM6CompareMemBindWidth_argsTupleScheme extends TupleScheme<BM6CompareMemBindWidth_args> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, BM6CompareMemBindWidth_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, BM6CompareMemBindWidth_args struct) throws TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetDataSize()) {
@@ -10869,7 +11858,7 @@ public class ProductService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, BM6CompareMemBindWidth_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, BM6CompareMemBindWidth_args struct) throws TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
@@ -11113,11 +12102,11 @@ public class ProductService {
       return _Fields.findByThriftId(fieldId);
     }
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws TException {
       schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws TException {
       schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
       }
 
@@ -11133,7 +12122,7 @@ public class ProductService {
       return sb.toString();
     }
 
-    public void validate() throws org.apache.thrift.TException {
+    public void validate() throws TException {
       // check for required fields
       // check for sub-struct validity
     }
@@ -11141,7 +12130,7 @@ public class ProductService {
     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
       try {
         write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -11151,7 +12140,7 @@ public class ProductService {
         // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
         __isset_bitfield = 0;
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -11164,7 +12153,7 @@ public class ProductService {
 
     private static class BM6CompareMemBindWidth_resultStandardScheme extends StandardScheme<BM6CompareMemBindWidth_result> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, BM6CompareMemBindWidth_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, BM6CompareMemBindWidth_result struct) throws TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -11193,7 +12182,7 @@ public class ProductService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, BM6CompareMemBindWidth_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, BM6CompareMemBindWidth_result struct) throws TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -11217,7 +12206,7 @@ public class ProductService {
     private static class BM6CompareMemBindWidth_resultTupleScheme extends TupleScheme<BM6CompareMemBindWidth_result> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, BM6CompareMemBindWidth_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, BM6CompareMemBindWidth_result struct) throws TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetSuccess()) {
@@ -11230,7 +12219,7 @@ public class ProductService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, BM6CompareMemBindWidth_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, BM6CompareMemBindWidth_result struct) throws TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
@@ -11548,11 +12537,11 @@ public class ProductService {
       return _Fields.findByThriftId(fieldId);
     }
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws TException {
       schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws TException {
       schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
     }
 
@@ -11572,7 +12561,7 @@ public class ProductService {
       return sb.toString();
     }
 
-    public void validate() throws org.apache.thrift.TException {
+    public void validate() throws TException {
       // check for required fields
       // check for sub-struct validity
     }
@@ -11580,7 +12569,7 @@ public class ProductService {
     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
       try {
         write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -11590,7 +12579,7 @@ public class ProductService {
         // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
         __isset_bitfield = 0;
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -11603,7 +12592,7 @@ public class ProductService {
 
     private static class GetComments_argsStandardScheme extends StandardScheme<GetComments_args> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, GetComments_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, GetComments_args struct) throws TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -11640,7 +12629,7 @@ public class ProductService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, GetComments_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, GetComments_args struct) throws TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -11665,7 +12654,7 @@ public class ProductService {
     private static class GetComments_argsTupleScheme extends TupleScheme<GetComments_args> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, GetComments_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, GetComments_args struct) throws TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetProdId()) {
@@ -11684,7 +12673,7 @@ public class ProductService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, GetComments_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, GetComments_args struct) throws TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
@@ -11950,11 +12939,11 @@ public class ProductService {
       return _Fields.findByThriftId(fieldId);
     }
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws TException {
       schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws TException {
       schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
       }
 
@@ -11974,7 +12963,7 @@ public class ProductService {
       return sb.toString();
     }
 
-    public void validate() throws org.apache.thrift.TException {
+    public void validate() throws TException {
       // check for required fields
       // check for sub-struct validity
     }
@@ -11982,7 +12971,7 @@ public class ProductService {
     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
       try {
         write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -11990,7 +12979,7 @@ public class ProductService {
     private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
       try {
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -12003,7 +12992,7 @@ public class ProductService {
 
     private static class GetComments_resultStandardScheme extends StandardScheme<GetComments_result> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, GetComments_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, GetComments_result struct) throws TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -12043,7 +13032,7 @@ public class ProductService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, GetComments_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, GetComments_result struct) throws TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -12074,7 +13063,7 @@ public class ProductService {
     private static class GetComments_resultTupleScheme extends TupleScheme<GetComments_result> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, GetComments_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, GetComments_result struct) throws TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetSuccess()) {
@@ -12093,7 +13082,7 @@ public class ProductService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, GetComments_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, GetComments_result struct) throws TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
@@ -12108,6 +13097,731 @@ public class ProductService {
               struct.success.add(_elem88);
             }
           }
+          struct.setSuccessIsSet(true);
+        }
+      }
+    }
+
+  }
+
+  public static class GetMerchantInfoByProd_args implements org.apache.thrift.TBase<GetMerchantInfoByProd_args, GetMerchantInfoByProd_args._Fields>, java.io.Serializable, Cloneable, Comparable<GetMerchantInfoByProd_args>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("GetMerchantInfoByProd_args");
+
+    private static final org.apache.thrift.protocol.TField PID_FIELD_DESC = new org.apache.thrift.protocol.TField("pid", org.apache.thrift.protocol.TType.I64, (short)1);
+
+    private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
+    static {
+      schemes.put(StandardScheme.class, new GetMerchantInfoByProd_argsStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new GetMerchantInfoByProd_argsTupleSchemeFactory());
+    }
+
+    public long pid; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      PID((short)1, "pid");
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 1: // PID
+            return PID;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    private static final int __PID_ISSET_ID = 0;
+    private byte __isset_bitfield = 0;
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.PID, new org.apache.thrift.meta_data.FieldMetaData("pid", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I64)));
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(GetMerchantInfoByProd_args.class, metaDataMap);
+    }
+
+    public GetMerchantInfoByProd_args() {
+    }
+
+    public GetMerchantInfoByProd_args(
+      long pid)
+    {
+      this();
+      this.pid = pid;
+      setPidIsSet(true);
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public GetMerchantInfoByProd_args(GetMerchantInfoByProd_args other) {
+      __isset_bitfield = other.__isset_bitfield;
+      this.pid = other.pid;
+    }
+
+    public GetMerchantInfoByProd_args deepCopy() {
+      return new GetMerchantInfoByProd_args(this);
+    }
+
+    @Override
+    public void clear() {
+      setPidIsSet(false);
+      this.pid = 0;
+    }
+
+    public long getPid() {
+      return this.pid;
+    }
+
+    public GetMerchantInfoByProd_args setPid(long pid) {
+      this.pid = pid;
+      setPidIsSet(true);
+      return this;
+    }
+
+    public void unsetPid() {
+      __isset_bitfield = EncodingUtils.clearBit(__isset_bitfield, __PID_ISSET_ID);
+    }
+
+    /** Returns true if field pid is set (has been assigned a value) and false otherwise */
+    public boolean isSetPid() {
+      return EncodingUtils.testBit(__isset_bitfield, __PID_ISSET_ID);
+    }
+
+    public void setPidIsSet(boolean value) {
+      __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __PID_ISSET_ID, value);
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      case PID:
+        if (value == null) {
+          unsetPid();
+        } else {
+          setPid((Long)value);
+        }
+        break;
+
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      case PID:
+        return getPid();
+
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      case PID:
+        return isSetPid();
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof GetMerchantInfoByProd_args)
+        return this.equals((GetMerchantInfoByProd_args)that);
+      return false;
+    }
+
+    public boolean equals(GetMerchantInfoByProd_args that) {
+      if (that == null)
+        return false;
+
+      boolean this_present_pid = true;
+      boolean that_present_pid = true;
+      if (this_present_pid || that_present_pid) {
+        if (!(this_present_pid && that_present_pid))
+          return false;
+        if (this.pid != that.pid)
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      List<Object> list = new ArrayList<Object>();
+
+      boolean present_pid = true;
+      list.add(present_pid);
+      if (present_pid)
+        list.add(pid);
+
+      return list.hashCode();
+    }
+
+    @Override
+    public int compareTo(GetMerchantInfoByProd_args other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+
+      lastComparison = Boolean.valueOf(isSetPid()).compareTo(other.isSetPid());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetPid()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.pid, other.pid);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws TException {
+      schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws TException {
+      schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
+    }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("GetMerchantInfoByProd_args(");
+      boolean first = true;
+
+      sb.append("pid:");
+      sb.append(this.pid);
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws TException {
+      // check for required fields
+      // check for sub-struct validity
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
+        __isset_bitfield = 0;
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private static class GetMerchantInfoByProd_argsStandardSchemeFactory implements SchemeFactory {
+      public GetMerchantInfoByProd_argsStandardScheme getScheme() {
+        return new GetMerchantInfoByProd_argsStandardScheme();
+      }
+    }
+
+    private static class GetMerchantInfoByProd_argsStandardScheme extends StandardScheme<GetMerchantInfoByProd_args> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, GetMerchantInfoByProd_args struct) throws TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 1: // PID
+              if (schemeField.type == org.apache.thrift.protocol.TType.I64) {
+                struct.pid = iprot.readI64();
+                struct.setPidIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, GetMerchantInfoByProd_args struct) throws TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        oprot.writeFieldBegin(PID_FIELD_DESC);
+        oprot.writeI64(struct.pid);
+        oprot.writeFieldEnd();
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class GetMerchantInfoByProd_argsTupleSchemeFactory implements SchemeFactory {
+      public GetMerchantInfoByProd_argsTupleScheme getScheme() {
+        return new GetMerchantInfoByProd_argsTupleScheme();
+      }
+    }
+
+    private static class GetMerchantInfoByProd_argsTupleScheme extends TupleScheme<GetMerchantInfoByProd_args> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, GetMerchantInfoByProd_args struct) throws TException {
+        TTupleProtocol oprot = (TTupleProtocol) prot;
+        BitSet optionals = new BitSet();
+        if (struct.isSetPid()) {
+          optionals.set(0);
+        }
+        oprot.writeBitSet(optionals, 1);
+        if (struct.isSetPid()) {
+          oprot.writeI64(struct.pid);
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, GetMerchantInfoByProd_args struct) throws TException {
+        TTupleProtocol iprot = (TTupleProtocol) prot;
+        BitSet incoming = iprot.readBitSet(1);
+        if (incoming.get(0)) {
+          struct.pid = iprot.readI64();
+          struct.setPidIsSet(true);
+        }
+      }
+    }
+
+  }
+
+  public static class GetMerchantInfoByProd_result implements org.apache.thrift.TBase<GetMerchantInfoByProd_result, GetMerchantInfoByProd_result._Fields>, java.io.Serializable, Cloneable, Comparable<GetMerchantInfoByProd_result>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("GetMerchantInfoByProd_result");
+
+    private static final org.apache.thrift.protocol.TField SUCCESS_FIELD_DESC = new org.apache.thrift.protocol.TField("success", org.apache.thrift.protocol.TType.STRUCT, (short)0);
+
+    private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
+    static {
+      schemes.put(StandardScheme.class, new GetMerchantInfoByProd_resultStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new GetMerchantInfoByProd_resultTupleSchemeFactory());
+    }
+
+    public MerchantInfo success; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      SUCCESS((short)0, "success");
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 0: // SUCCESS
+            return SUCCESS;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, MerchantInfo.class)));
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(GetMerchantInfoByProd_result.class, metaDataMap);
+    }
+
+    public GetMerchantInfoByProd_result() {
+    }
+
+    public GetMerchantInfoByProd_result(
+      MerchantInfo success)
+    {
+      this();
+      this.success = success;
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public GetMerchantInfoByProd_result(GetMerchantInfoByProd_result other) {
+      if (other.isSetSuccess()) {
+        this.success = new MerchantInfo(other.success);
+      }
+    }
+
+    public GetMerchantInfoByProd_result deepCopy() {
+      return new GetMerchantInfoByProd_result(this);
+    }
+
+    @Override
+    public void clear() {
+      this.success = null;
+    }
+
+    public MerchantInfo getSuccess() {
+      return this.success;
+    }
+
+    public GetMerchantInfoByProd_result setSuccess(MerchantInfo success) {
+      this.success = success;
+      return this;
+    }
+
+    public void unsetSuccess() {
+      this.success = null;
+    }
+
+    /** Returns true if field success is set (has been assigned a value) and false otherwise */
+    public boolean isSetSuccess() {
+      return this.success != null;
+    }
+
+    public void setSuccessIsSet(boolean value) {
+      if (!value) {
+        this.success = null;
+      }
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      case SUCCESS:
+        if (value == null) {
+          unsetSuccess();
+        } else {
+          setSuccess((MerchantInfo)value);
+        }
+        break;
+
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      case SUCCESS:
+        return getSuccess();
+
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      case SUCCESS:
+        return isSetSuccess();
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof GetMerchantInfoByProd_result)
+        return this.equals((GetMerchantInfoByProd_result)that);
+      return false;
+    }
+
+    public boolean equals(GetMerchantInfoByProd_result that) {
+      if (that == null)
+        return false;
+
+      boolean this_present_success = true && this.isSetSuccess();
+      boolean that_present_success = true && that.isSetSuccess();
+      if (this_present_success || that_present_success) {
+        if (!(this_present_success && that_present_success))
+          return false;
+        if (!this.success.equals(that.success))
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      List<Object> list = new ArrayList<Object>();
+
+      boolean present_success = true && (isSetSuccess());
+      list.add(present_success);
+      if (present_success)
+        list.add(success);
+
+      return list.hashCode();
+    }
+
+    @Override
+    public int compareTo(GetMerchantInfoByProd_result other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+
+      lastComparison = Boolean.valueOf(isSetSuccess()).compareTo(other.isSetSuccess());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetSuccess()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.success, other.success);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws TException {
+      schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws TException {
+      schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
+      }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("GetMerchantInfoByProd_result(");
+      boolean first = true;
+
+      sb.append("success:");
+      if (this.success == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.success);
+      }
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws TException {
+      // check for required fields
+      // check for sub-struct validity
+      if (success != null) {
+        success.validate();
+      }
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private static class GetMerchantInfoByProd_resultStandardSchemeFactory implements SchemeFactory {
+      public GetMerchantInfoByProd_resultStandardScheme getScheme() {
+        return new GetMerchantInfoByProd_resultStandardScheme();
+      }
+    }
+
+    private static class GetMerchantInfoByProd_resultStandardScheme extends StandardScheme<GetMerchantInfoByProd_result> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, GetMerchantInfoByProd_result struct) throws TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 0: // SUCCESS
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.success = new MerchantInfo();
+                struct.success.read(iprot);
+                struct.setSuccessIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, GetMerchantInfoByProd_result struct) throws TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.success != null) {
+          oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
+          struct.success.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class GetMerchantInfoByProd_resultTupleSchemeFactory implements SchemeFactory {
+      public GetMerchantInfoByProd_resultTupleScheme getScheme() {
+        return new GetMerchantInfoByProd_resultTupleScheme();
+      }
+    }
+
+    private static class GetMerchantInfoByProd_resultTupleScheme extends TupleScheme<GetMerchantInfoByProd_result> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, GetMerchantInfoByProd_result struct) throws TException {
+        TTupleProtocol oprot = (TTupleProtocol) prot;
+        BitSet optionals = new BitSet();
+        if (struct.isSetSuccess()) {
+          optionals.set(0);
+        }
+        oprot.writeBitSet(optionals, 1);
+        if (struct.isSetSuccess()) {
+          struct.success.write(oprot);
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, GetMerchantInfoByProd_result struct) throws TException {
+        TTupleProtocol iprot = (TTupleProtocol) prot;
+        BitSet incoming = iprot.readBitSet(1);
+        if (incoming.get(0)) {
+          struct.success = new MerchantInfo();
+          struct.success.read(iprot);
           struct.setSuccessIsSet(true);
         }
       }

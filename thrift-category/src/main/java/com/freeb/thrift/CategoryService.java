@@ -39,25 +39,25 @@ public class CategoryService {
 
   public interface Iface {
 
-    public ProductPage GetProductPage(long prodId) throws org.apache.thrift.TException;
+    public ProductPage GetProductPage(long prodId) throws TException;
 
-    public List<CategoryPage> GetCategoryPage(long userId, String searchKey) throws org.apache.thrift.TException;
+    public List<CategoryPage> GetCategoryPage(long userId, String searchKey) throws TException;
 
-    public List<com.freeb.thrift.ProductInfo> BM2CompareParallelRpcEfficiency(int totalComputationLoad, int threadNum) throws org.apache.thrift.TException;
+    public List<ProductInfo> BM2CompareParallelRpcEfficiency(int totalComputationLoad, int threadNum) throws TException;
 
-    public List<ProductPage> BM4ComparePatternFanout(List<Long> pidLst) throws org.apache.thrift.TException;
+    public List<ProductPage> BM4ComparePatternFanout(List<Long> pidLst) throws TException;
 
   }
 
   public interface AsyncIface {
 
-    public void GetProductPage(long prodId, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void GetProductPage(long prodId, AsyncMethodCallback resultHandler) throws TException;
 
-    public void GetCategoryPage(long userId, String searchKey, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void GetCategoryPage(long userId, String searchKey, AsyncMethodCallback resultHandler) throws TException;
 
-    public void BM2CompareParallelRpcEfficiency(int totalComputationLoad, int threadNum, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void BM2CompareParallelRpcEfficiency(int totalComputationLoad, int threadNum, AsyncMethodCallback resultHandler) throws TException;
 
-    public void BM4ComparePatternFanout(List<Long> pidLst, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void BM4ComparePatternFanout(List<Long> pidLst, AsyncMethodCallback resultHandler) throws TException;
 
   }
 
@@ -81,20 +81,20 @@ public class CategoryService {
       super(iprot, oprot);
     }
 
-    public ProductPage GetProductPage(long prodId) throws org.apache.thrift.TException
+    public ProductPage GetProductPage(long prodId) throws TException
     {
       send_GetProductPage(prodId);
       return recv_GetProductPage();
     }
 
-    public void send_GetProductPage(long prodId) throws org.apache.thrift.TException
+    public void send_GetProductPage(long prodId) throws TException
     {
       GetProductPage_args args = new GetProductPage_args();
       args.setProdId(prodId);
       sendBase("GetProductPage", args);
     }
 
-    public ProductPage recv_GetProductPage() throws org.apache.thrift.TException
+    public ProductPage recv_GetProductPage() throws TException
     {
       GetProductPage_result result = new GetProductPage_result();
       receiveBase(result, "GetProductPage");
@@ -104,13 +104,13 @@ public class CategoryService {
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "GetProductPage failed: unknown result");
     }
 
-    public List<CategoryPage> GetCategoryPage(long userId, String searchKey) throws org.apache.thrift.TException
+    public List<CategoryPage> GetCategoryPage(long userId, String searchKey) throws TException
     {
       send_GetCategoryPage(userId, searchKey);
       return recv_GetCategoryPage();
     }
 
-    public void send_GetCategoryPage(long userId, String searchKey) throws org.apache.thrift.TException
+    public void send_GetCategoryPage(long userId, String searchKey) throws TException
     {
       GetCategoryPage_args args = new GetCategoryPage_args();
       args.setUserId(userId);
@@ -118,7 +118,7 @@ public class CategoryService {
       sendBase("GetCategoryPage", args);
     }
 
-    public List<CategoryPage> recv_GetCategoryPage() throws org.apache.thrift.TException
+    public List<CategoryPage> recv_GetCategoryPage() throws TException
     {
       GetCategoryPage_result result = new GetCategoryPage_result();
       receiveBase(result, "GetCategoryPage");
@@ -128,13 +128,13 @@ public class CategoryService {
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "GetCategoryPage failed: unknown result");
     }
 
-    public List<com.freeb.thrift.ProductInfo> BM2CompareParallelRpcEfficiency(int totalComputationLoad, int threadNum) throws org.apache.thrift.TException
+    public List<ProductInfo> BM2CompareParallelRpcEfficiency(int totalComputationLoad, int threadNum) throws TException
     {
       send_BM2CompareParallelRpcEfficiency(totalComputationLoad, threadNum);
       return recv_BM2CompareParallelRpcEfficiency();
     }
 
-    public void send_BM2CompareParallelRpcEfficiency(int totalComputationLoad, int threadNum) throws org.apache.thrift.TException
+    public void send_BM2CompareParallelRpcEfficiency(int totalComputationLoad, int threadNum) throws TException
     {
       BM2CompareParallelRpcEfficiency_args args = new BM2CompareParallelRpcEfficiency_args();
       args.setTotalComputationLoad(totalComputationLoad);
@@ -142,7 +142,7 @@ public class CategoryService {
       sendBase("BM2CompareParallelRpcEfficiency", args);
     }
 
-    public List<com.freeb.thrift.ProductInfo> recv_BM2CompareParallelRpcEfficiency() throws org.apache.thrift.TException
+    public List<ProductInfo> recv_BM2CompareParallelRpcEfficiency() throws TException
     {
       BM2CompareParallelRpcEfficiency_result result = new BM2CompareParallelRpcEfficiency_result();
       receiveBase(result, "BM2CompareParallelRpcEfficiency");
@@ -152,20 +152,20 @@ public class CategoryService {
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "BM2CompareParallelRpcEfficiency failed: unknown result");
     }
 
-    public List<ProductPage> BM4ComparePatternFanout(List<Long> pidLst) throws org.apache.thrift.TException
+    public List<ProductPage> BM4ComparePatternFanout(List<Long> pidLst) throws TException
     {
       send_BM4ComparePatternFanout(pidLst);
       return recv_BM4ComparePatternFanout();
     }
 
-    public void send_BM4ComparePatternFanout(List<Long> pidLst) throws org.apache.thrift.TException
+    public void send_BM4ComparePatternFanout(List<Long> pidLst) throws TException
     {
       BM4ComparePatternFanout_args args = new BM4ComparePatternFanout_args();
       args.setPidLst(pidLst);
       sendBase("BM4ComparePatternFanout", args);
     }
 
-    public List<ProductPage> recv_BM4ComparePatternFanout() throws org.apache.thrift.TException
+    public List<ProductPage> recv_BM4ComparePatternFanout() throws TException
     {
       BM4ComparePatternFanout_result result = new BM4ComparePatternFanout_result();
       receiveBase(result, "BM4ComparePatternFanout");
@@ -193,7 +193,7 @@ public class CategoryService {
       super(protocolFactory, clientManager, transport);
     }
 
-    public void GetProductPage(long prodId, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+    public void GetProductPage(long prodId, AsyncMethodCallback resultHandler) throws TException {
       checkReady();
       GetProductPage_call method_call = new GetProductPage_call(prodId, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
@@ -202,12 +202,12 @@ public class CategoryService {
 
     public static class GetProductPage_call extends org.apache.thrift.async.TAsyncMethodCall {
       private long prodId;
-      public GetProductPage_call(long prodId, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      public GetProductPage_call(long prodId, AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws TException {
         super(client, protocolFactory, transport, resultHandler, false);
         this.prodId = prodId;
       }
 
-      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws TException {
         prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("GetProductPage", org.apache.thrift.protocol.TMessageType.CALL, 0));
         GetProductPage_args args = new GetProductPage_args();
         args.setProdId(prodId);
@@ -215,8 +215,8 @@ public class CategoryService {
         prot.writeMessageEnd();
       }
 
-      public ProductPage getResult() throws org.apache.thrift.TException {
-        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+      public ProductPage getResult() throws TException {
+        if (getState() != State.RESPONSE_READ) {
           throw new IllegalStateException("Method call not finished!");
         }
         org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
@@ -225,7 +225,7 @@ public class CategoryService {
       }
     }
 
-    public void GetCategoryPage(long userId, String searchKey, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+    public void GetCategoryPage(long userId, String searchKey, AsyncMethodCallback resultHandler) throws TException {
       checkReady();
       GetCategoryPage_call method_call = new GetCategoryPage_call(userId, searchKey, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
@@ -235,13 +235,13 @@ public class CategoryService {
     public static class GetCategoryPage_call extends org.apache.thrift.async.TAsyncMethodCall {
       private long userId;
       private String searchKey;
-      public GetCategoryPage_call(long userId, String searchKey, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      public GetCategoryPage_call(long userId, String searchKey, AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws TException {
         super(client, protocolFactory, transport, resultHandler, false);
         this.userId = userId;
         this.searchKey = searchKey;
       }
 
-      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws TException {
         prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("GetCategoryPage", org.apache.thrift.protocol.TMessageType.CALL, 0));
         GetCategoryPage_args args = new GetCategoryPage_args();
         args.setUserId(userId);
@@ -250,8 +250,8 @@ public class CategoryService {
         prot.writeMessageEnd();
       }
 
-      public List<CategoryPage> getResult() throws org.apache.thrift.TException {
-        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+      public List<CategoryPage> getResult() throws TException {
+        if (getState() != State.RESPONSE_READ) {
           throw new IllegalStateException("Method call not finished!");
         }
         org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
@@ -260,7 +260,7 @@ public class CategoryService {
       }
     }
 
-    public void BM2CompareParallelRpcEfficiency(int totalComputationLoad, int threadNum, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+    public void BM2CompareParallelRpcEfficiency(int totalComputationLoad, int threadNum, AsyncMethodCallback resultHandler) throws TException {
       checkReady();
       BM2CompareParallelRpcEfficiency_call method_call = new BM2CompareParallelRpcEfficiency_call(totalComputationLoad, threadNum, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
@@ -270,13 +270,13 @@ public class CategoryService {
     public static class BM2CompareParallelRpcEfficiency_call extends org.apache.thrift.async.TAsyncMethodCall {
       private int totalComputationLoad;
       private int threadNum;
-      public BM2CompareParallelRpcEfficiency_call(int totalComputationLoad, int threadNum, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      public BM2CompareParallelRpcEfficiency_call(int totalComputationLoad, int threadNum, AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws TException {
         super(client, protocolFactory, transport, resultHandler, false);
         this.totalComputationLoad = totalComputationLoad;
         this.threadNum = threadNum;
       }
 
-      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws TException {
         prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("BM2CompareParallelRpcEfficiency", org.apache.thrift.protocol.TMessageType.CALL, 0));
         BM2CompareParallelRpcEfficiency_args args = new BM2CompareParallelRpcEfficiency_args();
         args.setTotalComputationLoad(totalComputationLoad);
@@ -285,8 +285,8 @@ public class CategoryService {
         prot.writeMessageEnd();
       }
 
-      public List<com.freeb.thrift.ProductInfo> getResult() throws org.apache.thrift.TException {
-        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+      public List<ProductInfo> getResult() throws TException {
+        if (getState() != State.RESPONSE_READ) {
           throw new IllegalStateException("Method call not finished!");
         }
         org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
@@ -295,7 +295,7 @@ public class CategoryService {
       }
     }
 
-    public void BM4ComparePatternFanout(List<Long> pidLst, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+    public void BM4ComparePatternFanout(List<Long> pidLst, AsyncMethodCallback resultHandler) throws TException {
       checkReady();
       BM4ComparePatternFanout_call method_call = new BM4ComparePatternFanout_call(pidLst, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
@@ -304,12 +304,12 @@ public class CategoryService {
 
     public static class BM4ComparePatternFanout_call extends org.apache.thrift.async.TAsyncMethodCall {
       private List<Long> pidLst;
-      public BM4ComparePatternFanout_call(List<Long> pidLst, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      public BM4ComparePatternFanout_call(List<Long> pidLst, AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws TException {
         super(client, protocolFactory, transport, resultHandler, false);
         this.pidLst = pidLst;
       }
 
-      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws TException {
         prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("BM4ComparePatternFanout", org.apache.thrift.protocol.TMessageType.CALL, 0));
         BM4ComparePatternFanout_args args = new BM4ComparePatternFanout_args();
         args.setPidLst(pidLst);
@@ -317,8 +317,8 @@ public class CategoryService {
         prot.writeMessageEnd();
       }
 
-      public List<ProductPage> getResult() throws org.apache.thrift.TException {
-        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+      public List<ProductPage> getResult() throws TException {
+        if (getState() != State.RESPONSE_READ) {
           throw new IllegalStateException("Method call not finished!");
         }
         org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
@@ -360,7 +360,7 @@ public class CategoryService {
         return false;
       }
 
-      public GetProductPage_result getResult(I iface, GetProductPage_args args) throws org.apache.thrift.TException {
+      public GetProductPage_result getResult(I iface, GetProductPage_args args) throws TException {
         GetProductPage_result result = new GetProductPage_result();
         result.success = iface.GetProductPage(args.prodId);
         return result;
@@ -380,7 +380,7 @@ public class CategoryService {
         return false;
       }
 
-      public GetCategoryPage_result getResult(I iface, GetCategoryPage_args args) throws org.apache.thrift.TException {
+      public GetCategoryPage_result getResult(I iface, GetCategoryPage_args args) throws TException {
         GetCategoryPage_result result = new GetCategoryPage_result();
         result.success = iface.GetCategoryPage(args.userId, args.searchKey);
         return result;
@@ -400,7 +400,7 @@ public class CategoryService {
         return false;
       }
 
-      public BM2CompareParallelRpcEfficiency_result getResult(I iface, BM2CompareParallelRpcEfficiency_args args) throws org.apache.thrift.TException {
+      public BM2CompareParallelRpcEfficiency_result getResult(I iface, BM2CompareParallelRpcEfficiency_args args) throws TException {
         BM2CompareParallelRpcEfficiency_result result = new BM2CompareParallelRpcEfficiency_result();
         result.success = iface.BM2CompareParallelRpcEfficiency(args.totalComputationLoad, args.threadNum);
         return result;
@@ -420,7 +420,7 @@ public class CategoryService {
         return false;
       }
 
-      public BM4ComparePatternFanout_result getResult(I iface, BM4ComparePatternFanout_args args) throws org.apache.thrift.TException {
+      public BM4ComparePatternFanout_result getResult(I iface, BM4ComparePatternFanout_args args) throws TException {
         BM4ComparePatternFanout_result result = new BM4ComparePatternFanout_result();
         result.success = iface.BM4ComparePatternFanout(args.pidLst);
         return result;
@@ -493,7 +493,7 @@ public class CategoryService {
         return false;
       }
 
-      public void start(I iface, GetProductPage_args args, org.apache.thrift.async.AsyncMethodCallback<ProductPage> resultHandler) throws TException {
+      public void start(I iface, GetProductPage_args args, AsyncMethodCallback<ProductPage> resultHandler) throws TException {
         iface.GetProductPage(args.prodId,resultHandler);
       }
     }
@@ -544,12 +544,12 @@ public class CategoryService {
         return false;
       }
 
-      public void start(I iface, GetCategoryPage_args args, org.apache.thrift.async.AsyncMethodCallback<List<CategoryPage>> resultHandler) throws TException {
+      public void start(I iface, GetCategoryPage_args args, AsyncMethodCallback<List<CategoryPage>> resultHandler) throws TException {
         iface.GetCategoryPage(args.userId, args.searchKey,resultHandler);
       }
     }
 
-    public static class BM2CompareParallelRpcEfficiency<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, BM2CompareParallelRpcEfficiency_args, List<com.freeb.thrift.ProductInfo>> {
+    public static class BM2CompareParallelRpcEfficiency<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, BM2CompareParallelRpcEfficiency_args, List<ProductInfo>> {
       public BM2CompareParallelRpcEfficiency() {
         super("BM2CompareParallelRpcEfficiency");
       }
@@ -558,10 +558,10 @@ public class CategoryService {
         return new BM2CompareParallelRpcEfficiency_args();
       }
 
-      public AsyncMethodCallback<List<com.freeb.thrift.ProductInfo>> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
+      public AsyncMethodCallback<List<ProductInfo>> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
         final org.apache.thrift.AsyncProcessFunction fcall = this;
-        return new AsyncMethodCallback<List<com.freeb.thrift.ProductInfo>>() { 
-          public void onComplete(List<com.freeb.thrift.ProductInfo> o) {
+        return new AsyncMethodCallback<List<ProductInfo>>() {
+          public void onComplete(List<ProductInfo> o) {
             BM2CompareParallelRpcEfficiency_result result = new BM2CompareParallelRpcEfficiency_result();
             result.success = o;
             try {
@@ -595,7 +595,7 @@ public class CategoryService {
         return false;
       }
 
-      public void start(I iface, BM2CompareParallelRpcEfficiency_args args, org.apache.thrift.async.AsyncMethodCallback<List<com.freeb.thrift.ProductInfo>> resultHandler) throws TException {
+      public void start(I iface, BM2CompareParallelRpcEfficiency_args args, AsyncMethodCallback<List<ProductInfo>> resultHandler) throws TException {
         iface.BM2CompareParallelRpcEfficiency(args.totalComputationLoad, args.threadNum,resultHandler);
       }
     }
@@ -646,7 +646,7 @@ public class CategoryService {
         return false;
       }
 
-      public void start(I iface, BM4ComparePatternFanout_args args, org.apache.thrift.async.AsyncMethodCallback<List<ProductPage>> resultHandler) throws TException {
+      public void start(I iface, BM4ComparePatternFanout_args args, AsyncMethodCallback<List<ProductPage>> resultHandler) throws TException {
         iface.BM4ComparePatternFanout(args.pidLst,resultHandler);
       }
     }
@@ -885,11 +885,11 @@ public class CategoryService {
       return _Fields.findByThriftId(fieldId);
     }
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws TException {
       schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws TException {
       schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
     }
 
@@ -905,7 +905,7 @@ public class CategoryService {
       return sb.toString();
     }
 
-    public void validate() throws org.apache.thrift.TException {
+    public void validate() throws TException {
       // check for required fields
       // check for sub-struct validity
     }
@@ -913,7 +913,7 @@ public class CategoryService {
     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
       try {
         write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -923,7 +923,7 @@ public class CategoryService {
         // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
         __isset_bitfield = 0;
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -936,7 +936,7 @@ public class CategoryService {
 
     private static class GetProductPage_argsStandardScheme extends StandardScheme<GetProductPage_args> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, GetProductPage_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, GetProductPage_args struct) throws TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -965,7 +965,7 @@ public class CategoryService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, GetProductPage_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, GetProductPage_args struct) throws TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -987,7 +987,7 @@ public class CategoryService {
     private static class GetProductPage_argsTupleScheme extends TupleScheme<GetProductPage_args> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, GetProductPage_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, GetProductPage_args struct) throws TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetProdId()) {
@@ -1000,7 +1000,7 @@ public class CategoryService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, GetProductPage_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, GetProductPage_args struct) throws TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
@@ -1242,11 +1242,11 @@ public class CategoryService {
       return _Fields.findByThriftId(fieldId);
     }
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws TException {
       schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws TException {
       schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
       }
 
@@ -1266,7 +1266,7 @@ public class CategoryService {
       return sb.toString();
     }
 
-    public void validate() throws org.apache.thrift.TException {
+    public void validate() throws TException {
       // check for required fields
       // check for sub-struct validity
       if (success != null) {
@@ -1277,7 +1277,7 @@ public class CategoryService {
     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
       try {
         write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -1285,7 +1285,7 @@ public class CategoryService {
     private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
       try {
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -1298,7 +1298,7 @@ public class CategoryService {
 
     private static class GetProductPage_resultStandardScheme extends StandardScheme<GetProductPage_result> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, GetProductPage_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, GetProductPage_result struct) throws TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -1328,7 +1328,7 @@ public class CategoryService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, GetProductPage_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, GetProductPage_result struct) throws TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -1352,7 +1352,7 @@ public class CategoryService {
     private static class GetProductPage_resultTupleScheme extends TupleScheme<GetProductPage_result> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, GetProductPage_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, GetProductPage_result struct) throws TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetSuccess()) {
@@ -1365,7 +1365,7 @@ public class CategoryService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, GetProductPage_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, GetProductPage_result struct) throws TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
@@ -1684,11 +1684,11 @@ public class CategoryService {
       return _Fields.findByThriftId(fieldId);
     }
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws TException {
       schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws TException {
       schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
     }
 
@@ -1712,7 +1712,7 @@ public class CategoryService {
       return sb.toString();
     }
 
-    public void validate() throws org.apache.thrift.TException {
+    public void validate() throws TException {
       // check for required fields
       // check for sub-struct validity
     }
@@ -1720,7 +1720,7 @@ public class CategoryService {
     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
       try {
         write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -1730,7 +1730,7 @@ public class CategoryService {
         // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
         __isset_bitfield = 0;
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -1743,7 +1743,7 @@ public class CategoryService {
 
     private static class GetCategoryPage_argsStandardScheme extends StandardScheme<GetCategoryPage_args> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, GetCategoryPage_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, GetCategoryPage_args struct) throws TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -1780,7 +1780,7 @@ public class CategoryService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, GetCategoryPage_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, GetCategoryPage_args struct) throws TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -1807,7 +1807,7 @@ public class CategoryService {
     private static class GetCategoryPage_argsTupleScheme extends TupleScheme<GetCategoryPage_args> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, GetCategoryPage_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, GetCategoryPage_args struct) throws TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetUserId()) {
@@ -1826,7 +1826,7 @@ public class CategoryService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, GetCategoryPage_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, GetCategoryPage_args struct) throws TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
@@ -2092,11 +2092,11 @@ public class CategoryService {
       return _Fields.findByThriftId(fieldId);
     }
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws TException {
       schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws TException {
       schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
       }
 
@@ -2116,7 +2116,7 @@ public class CategoryService {
       return sb.toString();
     }
 
-    public void validate() throws org.apache.thrift.TException {
+    public void validate() throws TException {
       // check for required fields
       // check for sub-struct validity
     }
@@ -2124,7 +2124,7 @@ public class CategoryService {
     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
       try {
         write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -2132,7 +2132,7 @@ public class CategoryService {
     private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
       try {
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -2145,7 +2145,7 @@ public class CategoryService {
 
     private static class GetCategoryPage_resultStandardScheme extends StandardScheme<GetCategoryPage_result> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, GetCategoryPage_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, GetCategoryPage_result struct) throws TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -2185,7 +2185,7 @@ public class CategoryService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, GetCategoryPage_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, GetCategoryPage_result struct) throws TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -2216,7 +2216,7 @@ public class CategoryService {
     private static class GetCategoryPage_resultTupleScheme extends TupleScheme<GetCategoryPage_result> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, GetCategoryPage_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, GetCategoryPage_result struct) throws TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetSuccess()) {
@@ -2235,7 +2235,7 @@ public class CategoryService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, GetCategoryPage_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, GetCategoryPage_result struct) throws TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
@@ -2563,11 +2563,11 @@ public class CategoryService {
       return _Fields.findByThriftId(fieldId);
     }
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws TException {
       schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws TException {
       schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
     }
 
@@ -2587,7 +2587,7 @@ public class CategoryService {
       return sb.toString();
     }
 
-    public void validate() throws org.apache.thrift.TException {
+    public void validate() throws TException {
       // check for required fields
       // check for sub-struct validity
     }
@@ -2595,7 +2595,7 @@ public class CategoryService {
     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
       try {
         write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -2605,7 +2605,7 @@ public class CategoryService {
         // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
         __isset_bitfield = 0;
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -2618,7 +2618,7 @@ public class CategoryService {
 
     private static class BM2CompareParallelRpcEfficiency_argsStandardScheme extends StandardScheme<BM2CompareParallelRpcEfficiency_args> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, BM2CompareParallelRpcEfficiency_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, BM2CompareParallelRpcEfficiency_args struct) throws TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -2655,7 +2655,7 @@ public class CategoryService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, BM2CompareParallelRpcEfficiency_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, BM2CompareParallelRpcEfficiency_args struct) throws TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -2680,7 +2680,7 @@ public class CategoryService {
     private static class BM2CompareParallelRpcEfficiency_argsTupleScheme extends TupleScheme<BM2CompareParallelRpcEfficiency_args> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, BM2CompareParallelRpcEfficiency_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, BM2CompareParallelRpcEfficiency_args struct) throws TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetTotalComputationLoad()) {
@@ -2699,7 +2699,7 @@ public class CategoryService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, BM2CompareParallelRpcEfficiency_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, BM2CompareParallelRpcEfficiency_args struct) throws TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(2);
         if (incoming.get(0)) {
@@ -2726,7 +2726,7 @@ public class CategoryService {
       schemes.put(TupleScheme.class, new BM2CompareParallelRpcEfficiency_resultTupleSchemeFactory());
     }
 
-    public List<com.freeb.thrift.ProductInfo> success; // required
+    public List<ProductInfo> success; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
@@ -2792,7 +2792,7 @@ public class CategoryService {
       Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
       tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.DEFAULT, 
           new org.apache.thrift.meta_data.ListMetaData(org.apache.thrift.protocol.TType.LIST, 
-              new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, com.freeb.thrift.ProductInfo.class))));
+              new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, ProductInfo.class))));
       metaDataMap = Collections.unmodifiableMap(tmpMap);
       org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(BM2CompareParallelRpcEfficiency_result.class, metaDataMap);
     }
@@ -2801,7 +2801,7 @@ public class CategoryService {
     }
 
     public BM2CompareParallelRpcEfficiency_result(
-      List<com.freeb.thrift.ProductInfo> success)
+      List<ProductInfo> success)
     {
       this();
       this.success = success;
@@ -2812,9 +2812,9 @@ public class CategoryService {
      */
     public BM2CompareParallelRpcEfficiency_result(BM2CompareParallelRpcEfficiency_result other) {
       if (other.isSetSuccess()) {
-        List<com.freeb.thrift.ProductInfo> __this__success = new ArrayList<com.freeb.thrift.ProductInfo>(other.success.size());
-        for (com.freeb.thrift.ProductInfo other_element : other.success) {
-          __this__success.add(new com.freeb.thrift.ProductInfo(other_element));
+        List<ProductInfo> __this__success = new ArrayList<ProductInfo>(other.success.size());
+        for (ProductInfo other_element : other.success) {
+          __this__success.add(new ProductInfo(other_element));
         }
         this.success = __this__success;
       }
@@ -2833,22 +2833,22 @@ public class CategoryService {
       return (this.success == null) ? 0 : this.success.size();
     }
 
-    public java.util.Iterator<com.freeb.thrift.ProductInfo> getSuccessIterator() {
+    public java.util.Iterator<ProductInfo> getSuccessIterator() {
       return (this.success == null) ? null : this.success.iterator();
     }
 
-    public void addToSuccess(com.freeb.thrift.ProductInfo elem) {
+    public void addToSuccess(ProductInfo elem) {
       if (this.success == null) {
-        this.success = new ArrayList<com.freeb.thrift.ProductInfo>();
+        this.success = new ArrayList<ProductInfo>();
       }
       this.success.add(elem);
     }
 
-    public List<com.freeb.thrift.ProductInfo> getSuccess() {
+    public List<ProductInfo> getSuccess() {
       return this.success;
     }
 
-    public BM2CompareParallelRpcEfficiency_result setSuccess(List<com.freeb.thrift.ProductInfo> success) {
+    public BM2CompareParallelRpcEfficiency_result setSuccess(List<ProductInfo> success) {
       this.success = success;
       return this;
     }
@@ -2874,7 +2874,7 @@ public class CategoryService {
         if (value == null) {
           unsetSuccess();
         } else {
-          setSuccess((List<com.freeb.thrift.ProductInfo>)value);
+          setSuccess((List<ProductInfo>)value);
         }
         break;
 
@@ -2965,11 +2965,11 @@ public class CategoryService {
       return _Fields.findByThriftId(fieldId);
     }
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws TException {
       schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws TException {
       schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
       }
 
@@ -2989,7 +2989,7 @@ public class CategoryService {
       return sb.toString();
     }
 
-    public void validate() throws org.apache.thrift.TException {
+    public void validate() throws TException {
       // check for required fields
       // check for sub-struct validity
     }
@@ -2997,7 +2997,7 @@ public class CategoryService {
     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
       try {
         write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -3005,7 +3005,7 @@ public class CategoryService {
     private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
       try {
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -3018,7 +3018,7 @@ public class CategoryService {
 
     private static class BM2CompareParallelRpcEfficiency_resultStandardScheme extends StandardScheme<BM2CompareParallelRpcEfficiency_result> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, BM2CompareParallelRpcEfficiency_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, BM2CompareParallelRpcEfficiency_result struct) throws TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -3032,11 +3032,11 @@ public class CategoryService {
               if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
                 {
                   org.apache.thrift.protocol.TList _list16 = iprot.readListBegin();
-                  struct.success = new ArrayList<com.freeb.thrift.ProductInfo>(_list16.size);
-                  com.freeb.thrift.ProductInfo _elem17;
+                  struct.success = new ArrayList<ProductInfo>(_list16.size);
+                  ProductInfo _elem17;
                   for (int _i18 = 0; _i18 < _list16.size; ++_i18)
                   {
-                    _elem17 = new com.freeb.thrift.ProductInfo();
+                    _elem17 = new ProductInfo();
                     _elem17.read(iprot);
                     struct.success.add(_elem17);
                   }
@@ -3058,7 +3058,7 @@ public class CategoryService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, BM2CompareParallelRpcEfficiency_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, BM2CompareParallelRpcEfficiency_result struct) throws TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -3066,7 +3066,7 @@ public class CategoryService {
           oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
           {
             oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.success.size()));
-            for (com.freeb.thrift.ProductInfo _iter19 : struct.success)
+            for (ProductInfo _iter19 : struct.success)
             {
               _iter19.write(oprot);
             }
@@ -3089,7 +3089,7 @@ public class CategoryService {
     private static class BM2CompareParallelRpcEfficiency_resultTupleScheme extends TupleScheme<BM2CompareParallelRpcEfficiency_result> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, BM2CompareParallelRpcEfficiency_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, BM2CompareParallelRpcEfficiency_result struct) throws TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetSuccess()) {
@@ -3099,7 +3099,7 @@ public class CategoryService {
         if (struct.isSetSuccess()) {
           {
             oprot.writeI32(struct.success.size());
-            for (com.freeb.thrift.ProductInfo _iter20 : struct.success)
+            for (ProductInfo _iter20 : struct.success)
             {
               _iter20.write(oprot);
             }
@@ -3108,17 +3108,17 @@ public class CategoryService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, BM2CompareParallelRpcEfficiency_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, BM2CompareParallelRpcEfficiency_result struct) throws TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
           {
             org.apache.thrift.protocol.TList _list21 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-            struct.success = new ArrayList<com.freeb.thrift.ProductInfo>(_list21.size);
-            com.freeb.thrift.ProductInfo _elem22;
+            struct.success = new ArrayList<ProductInfo>(_list21.size);
+            ProductInfo _elem22;
             for (int _i23 = 0; _i23 < _list21.size; ++_i23)
             {
-              _elem22 = new com.freeb.thrift.ProductInfo();
+              _elem22 = new ProductInfo();
               _elem22.read(iprot);
               struct.success.add(_elem22);
             }
@@ -3377,11 +3377,11 @@ public class CategoryService {
       return _Fields.findByThriftId(fieldId);
     }
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws TException {
       schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws TException {
       schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
     }
 
@@ -3401,7 +3401,7 @@ public class CategoryService {
       return sb.toString();
     }
 
-    public void validate() throws org.apache.thrift.TException {
+    public void validate() throws TException {
       // check for required fields
       // check for sub-struct validity
     }
@@ -3409,7 +3409,7 @@ public class CategoryService {
     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
       try {
         write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -3417,7 +3417,7 @@ public class CategoryService {
     private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
       try {
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -3430,7 +3430,7 @@ public class CategoryService {
 
     private static class BM4ComparePatternFanout_argsStandardScheme extends StandardScheme<BM4ComparePatternFanout_args> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, BM4ComparePatternFanout_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, BM4ComparePatternFanout_args struct) throws TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -3469,7 +3469,7 @@ public class CategoryService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, BM4ComparePatternFanout_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, BM4ComparePatternFanout_args struct) throws TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -3500,7 +3500,7 @@ public class CategoryService {
     private static class BM4ComparePatternFanout_argsTupleScheme extends TupleScheme<BM4ComparePatternFanout_args> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, BM4ComparePatternFanout_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, BM4ComparePatternFanout_args struct) throws TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetPidLst()) {
@@ -3519,7 +3519,7 @@ public class CategoryService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, BM4ComparePatternFanout_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, BM4ComparePatternFanout_args struct) throws TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
@@ -3790,11 +3790,11 @@ public class CategoryService {
       return _Fields.findByThriftId(fieldId);
     }
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws TException {
       schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws TException {
       schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
       }
 
@@ -3814,7 +3814,7 @@ public class CategoryService {
       return sb.toString();
     }
 
-    public void validate() throws org.apache.thrift.TException {
+    public void validate() throws TException {
       // check for required fields
       // check for sub-struct validity
     }
@@ -3822,7 +3822,7 @@ public class CategoryService {
     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
       try {
         write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -3830,7 +3830,7 @@ public class CategoryService {
     private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
       try {
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -3843,7 +3843,7 @@ public class CategoryService {
 
     private static class BM4ComparePatternFanout_resultStandardScheme extends StandardScheme<BM4ComparePatternFanout_result> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, BM4ComparePatternFanout_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, BM4ComparePatternFanout_result struct) throws TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -3883,7 +3883,7 @@ public class CategoryService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, BM4ComparePatternFanout_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, BM4ComparePatternFanout_result struct) throws TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -3914,7 +3914,7 @@ public class CategoryService {
     private static class BM4ComparePatternFanout_resultTupleScheme extends TupleScheme<BM4ComparePatternFanout_result> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, BM4ComparePatternFanout_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, BM4ComparePatternFanout_result struct) throws TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetSuccess()) {
@@ -3933,7 +3933,7 @@ public class CategoryService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, BM4ComparePatternFanout_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, BM4ComparePatternFanout_result struct) throws TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {

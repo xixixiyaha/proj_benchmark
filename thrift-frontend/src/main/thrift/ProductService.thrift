@@ -1,4 +1,4 @@
-namespace java com.freeb.com.freeb.thrift
+namespace java com.freeb.thrift
 
 enum SearchOrder{
      PRICE_DESC = 0,
@@ -21,7 +21,7 @@ struct ProductInfo {
     2:required string prodName,
     3:optional i32 categoryId,
     4:required double prodPrice,
-    5:optional double prodSales,
+    5:optional i32 prodSales,
     6:optional i32 prodRemain,
     7:optional list<string> prodImages,
     8:optional i64 discountsId,
@@ -50,6 +50,8 @@ service ProductService{
 
     ProductInfo IncProductSales(1:i64 pid,2:i32 perchaseNum);
 
+    ProductInfo GetProdInfo(1:i64 pid);
+
     MerchantInfo GetMerchantInfoById(1:i64 mid);
 
     bool BM4ComparePatternTrigger(1:list<i64> uidLst,2:list<i64> pidLst,3:list<i32> cidLst,4:i32 compLoad);
@@ -60,7 +62,7 @@ service ProductService{
 
     list<CommentInfo> GetComments(1:i64 prodId,2:i32 comtNum);
 
-
+    MerchantInfo GetMerchantInfoByProd(1:i64 pid);
 
 
 

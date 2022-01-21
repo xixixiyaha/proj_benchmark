@@ -4,11 +4,9 @@
  * DO NOT EDIT UNLESS YOU ARE SURE THAT YOU KNOW WHAT YOU ARE DOING
  *  @generated
  */
-package com.freeb.thrift.SearchClients;
+package com.freeb.SearchClients;
 
 
-import java.util.Map;
-import java.util.HashMap;
 import org.apache.thrift.TEnum;
 
 public enum IdType implements TEnum {

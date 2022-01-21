@@ -573,11 +573,11 @@ public class ProductPage implements org.apache.thrift.TBase<ProductPage, Product
     return _Fields.findByThriftId(fieldId);
   }
 
-  public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+  public void read(org.apache.thrift.protocol.TProtocol iprot) throws TException {
     schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
   }
 
-  public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+  public void write(org.apache.thrift.protocol.TProtocol oprot) throws TException {
     schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
   }
 
@@ -625,10 +625,10 @@ public class ProductPage implements org.apache.thrift.TBase<ProductPage, Product
     return sb.toString();
   }
 
-  public void validate() throws org.apache.thrift.TException {
+  public void validate() throws TException {
     // check for required fields
     if (info == null) {
-      throw new org.apache.thrift.protocol.TProtocolException("Required field 'info' was not present! Struct: " + toString());
+      throw new TProtocolException("Required field 'info' was not present! Struct: " + toString());
     }
     // check for sub-struct validity
     if (info != null) {
@@ -639,7 +639,7 @@ public class ProductPage implements org.apache.thrift.TBase<ProductPage, Product
   private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
     try {
       write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-    } catch (org.apache.thrift.TException te) {
+    } catch (TException te) {
       throw new java.io.IOException(te);
     }
   }
@@ -649,7 +649,7 @@ public class ProductPage implements org.apache.thrift.TBase<ProductPage, Product
       // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
       __isset_bitfield = 0;
       read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-    } catch (org.apache.thrift.TException te) {
+    } catch (TException te) {
       throw new java.io.IOException(te);
     }
   }
@@ -662,7 +662,7 @@ public class ProductPage implements org.apache.thrift.TBase<ProductPage, Product
 
   private static class ProductPageStandardScheme extends StandardScheme<ProductPage> {
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot, ProductPage struct) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot, ProductPage struct) throws TException {
       org.apache.thrift.protocol.TField schemeField;
       iprot.readStructBegin();
       while (true)
@@ -735,7 +735,7 @@ public class ProductPage implements org.apache.thrift.TBase<ProductPage, Product
       struct.validate();
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot, ProductPage struct) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot, ProductPage struct) throws TException {
       struct.validate();
 
       oprot.writeStructBegin(STRUCT_DESC);
@@ -788,7 +788,7 @@ public class ProductPage implements org.apache.thrift.TBase<ProductPage, Product
   private static class ProductPageTupleScheme extends TupleScheme<ProductPage> {
 
     @Override
-    public void write(org.apache.thrift.protocol.TProtocol prot, ProductPage struct) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol prot, ProductPage struct) throws TException {
       TTupleProtocol oprot = (TTupleProtocol) prot;
       struct.info.write(oprot);
       BitSet optionals = new BitSet();
@@ -826,7 +826,7 @@ public class ProductPage implements org.apache.thrift.TBase<ProductPage, Product
     }
 
     @Override
-    public void read(org.apache.thrift.protocol.TProtocol prot, ProductPage struct) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol prot, ProductPage struct) throws TException {
       TTupleProtocol iprot = (TTupleProtocol) prot;
       struct.info = new com.freeb.thrift.ProductInfo();
       struct.info.read(iprot);

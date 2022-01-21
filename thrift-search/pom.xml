@@ -78,7 +78,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>com.freeb.com.freeb.CartServer</mainClass>
+                            <mainClass>com.freeb.com.freeb.thrift.CartServer</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

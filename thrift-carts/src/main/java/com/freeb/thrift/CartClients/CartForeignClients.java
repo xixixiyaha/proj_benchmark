@@ -1,10 +1,10 @@
-package com.freeb.CartClients;
+package com.freeb.thrift.CartClients;
 
 import com.freeb.Clients.CartClients;
 import com.freeb.Entity.OrderReq;
 import com.freeb.Entity.OrderResp;
 import com.freeb.Utils.LockObjectPool;
-import com.freeb.CartTypeConvert;
+import com.freeb.thrift.CartTypeConvert;
 import org.apache.thrift.TException;
 
 import java.io.Closeable;

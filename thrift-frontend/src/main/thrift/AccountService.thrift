@@ -1,4 +1,4 @@
-namespace java com.freeb.com.freeb.thrift
+namespace java com.freeb.thrift
 
 enum IdType{
     ACCOUNT_ID = 0,
@@ -14,8 +14,7 @@ struct AccountInfo{
     2: required string userName,
     3: required string userPasswd,
     4: optional string userDescription,
-    5: optional list<i32> userTag,
-    6: optional string userCard,
+    5: optional list<i32> userTag,    6: optional string userCard,
 }
 service AccountService{
     bool AccountExists(1: i64 id),

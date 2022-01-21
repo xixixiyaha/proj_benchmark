@@ -1,8 +1,8 @@
 package com.freeb;
 
 
-import com.freeb.thrift.SearchServer.SearchService;
-import com.freeb.thrift.SearchServer.SearchServiceServerImpl;
+import com.freeb.SearchServer.SearchService;
+import com.freeb.SearchServer.SearchServiceServerImpl;
 import org.apache.thrift.protocol.TBinaryProtocol;
 import org.apache.thrift.server.TServer;
 import org.apache.thrift.server.TThreadedSelectorServer;

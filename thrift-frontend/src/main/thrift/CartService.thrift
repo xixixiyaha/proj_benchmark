@@ -1,5 +1,4 @@
 namespace java com.freeb.thrift
-include "OrderService.thrift"
 
 struct CartInfo{
     1:required i64 cartId,
@@ -14,10 +13,10 @@ service CartService{
     * Big Data Transfer
     * */
 
-    List<CartInfo> GetCartInfosByAccount(1:i64 userId,2:i32 upperLimit);
+    list<CartInfo> GetCartInfosByAccount(1:i64 userId,2:i32 upperLimit);
 
-     OrderService.OrderResp BM3CompareChainNested(CartInfo info);
+    i64 BM3CompareChainNested(1:CartInfo info);
 
-     OrderService.OrderResp BM3CompareChainSequence(CartInfo info);
+    i64 BM3CompareChainSequence(2:CartInfo info);
 
 }

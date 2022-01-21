@@ -32,7 +32,7 @@ service PaymentService{
     /*
     * Normal Callback. High Concurrency.
     * */
-    i64 CreatePayment(PaymentInfo info);
+    i64 CreatePayment(1:PaymentInfo info);
 
     /*
     * Nested. Long waiting time.

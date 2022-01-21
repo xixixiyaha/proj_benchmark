@@ -14,13 +14,13 @@ public class ThriftAccountClientImpl implements Closeable {
     // not thread safe
     public final TTransport transport;
     public final TProtocol protocol;
-    public final AccountsService.Client client;
+    public final AccountService.Client client;
     private static int clientNum = 0;
     public ThriftAccountClientImpl(String host,int port) {
         // System.out.println("pre ThriftAccountClientImpl "+ clientNum);
         transport = new TFramedTransport(new TSocket(host, port));
         protocol = new TBinaryProtocol(transport);
-        client = new AccountsService.Client(protocol);
+        client = new AccountService.Client(protocol);
         try {
             transport.open();
         } catch (TTransportException e) {

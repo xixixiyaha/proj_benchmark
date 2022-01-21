@@ -12,9 +12,9 @@ import org.openjdk.jmh.runner.RunnerException;
 import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
 import org.openjdk.jmh.runner.options.TimeValue;
-import thrift.Accounts.AccountsService;
-import thrift.Accounts.AccountsServiceServerImpl;
-import thrift.search.AccountForeignClients;
+import thrift.AccountServer.AccountService;
+import thrift.AccountServer.AccountsServiceServerImpl;
+import thrift.AccountClients.AccountForeignClients;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -55,7 +55,7 @@ public class AccountsServer {
             TThreadedSelectorServer.Args serverParams = new TThreadedSelectorServer.Args(serverSocket);
             serverParams.protocolFactory(new TBinaryProtocol.Factory());
             Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-            serverParams.processor(new AccountsService.Processor<AccountsService.Iface>(new AccountsServiceServerImpl()));
+            serverParams.processor(new AccountService.Processor<AccountService.Iface>(new AccountsServiceServerImpl()));
             TServer server = new TThreadedSelectorServer(serverParams);
             timestamp = new Timestamp(System.currentTimeMillis());
             System.out.println("in thrift Server main() ==  =="+timestamp.toString());

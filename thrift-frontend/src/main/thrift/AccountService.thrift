@@ -17,7 +17,7 @@ struct AccountInfo{
     5: optional list<i32> userTag,
     6: optional string userCard,
 }
-service AccountsService{
+service AccountService{
     bool AccountExists(1: i64 id),
 
     bool VerifyAccessByAccount(1: i64 accountId, 2: i64 targetId,3:IdType idType),

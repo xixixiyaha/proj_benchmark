@@ -35,15 +35,17 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public OrderResp BM3CompareChainNested(CartInfo info) {
+    public Long BM3CompareChainNested(CartInfo info) {
+        logger.error("Method Not Implemented");
+
         OrderReq req = new OrderReq();
         req.setUserId(info.getUserId());
         req.setCartInfo(info);
-        return clients.CreateOrderByCartInfo(req);
+        return clients.CreateOrderByCartInfo(req).getOrderInfos().get(0).getOrderId();
     }
 
     @Override
-    public OrderResp BM3CompareChainSequence(CartInfo info) {
+    public Long BM3CompareChainSequence(CartInfo info) {
         logger.error("Method Not Implemented");
         return null;
     }

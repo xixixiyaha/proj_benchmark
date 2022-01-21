@@ -41,7 +41,7 @@ public class AccountsTypeConvert {
         }
     }
 
-    public static AccountInfo AccountsInfoThr2Ori(com.freeb.thrift.Accounts.AccountsInfo info) {
+    public static AccountInfo AccountsInfoThr2Ori(com.freeb.thrift.Accounts.AccountInfo info) {
         AccountInfo re = new AccountInfo();
         re.setUserId(info.getUserId());
         re.setUserName(info.getUserName());
@@ -51,8 +51,8 @@ public class AccountsTypeConvert {
         return re;
     }
 
-    public static com.freeb.thrift.Accounts.AccountsInfo AccountsInfoOri2Thr(AccountInfo info) {
-        AccountsInfo re = new AccountsInfo();
+    public static com.freeb.thrift.Accounts.AccountInfo AccountsInfoOri2Thr(AccountInfo info) {
+        com.freeb.thrift.Accounts.AccountInfo re = new com.freeb.thrift.Accounts.AccountInfo();
         re.setUserId(info.getUserId());
         re.setUserName(info.getUserName());
         re.setUserPasswd(info.getUserPasswd());

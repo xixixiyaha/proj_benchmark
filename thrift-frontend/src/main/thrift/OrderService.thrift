@@ -42,15 +42,15 @@ struct OrderReq{
 }
 
 service OrderSearvice{
-    OrderResp GetOrderListByUserId(OrderReq orderReq);
+    OrderResp GetOrderListByUserId(1:OrderReq orderReq);
 
-    OrderResp GetOrderByPaymentId(OrderReq orderReq);
+    OrderResp GetOrderByPaymentId(1:OrderReq orderReq);
 
 //    OrderResp CreatePaymentByOrderId(OrderReq orderReq);
 
-    OrderResp GetOrderByOrderId(OrderReq orderReq);
+    OrderResp GetOrderByOrderId(1:OrderReq orderReq);
 
-    OrderResp CreateOrderByCartInfo(OrderReq orderReq);
+    OrderResp CreateOrderByCartInfo(1:OrderReq orderReq);
 
 }
 

@@ -1,7 +1,7 @@
 package com.freeb.thrift;
 
 import com.freeb.Utils.LockObjectPool;
-import com.freeb.thrift.Accounts.AccountsInfo;
+import com.freeb.thrift.Accounts.AccountInfo;
 import com.freeb.thrift.Accounts.IdType;
 import com.freeb.thrift.Accounts.ThriftAccountClientImpl;
 import org.apache.thrift.TException;
@@ -59,31 +59,7 @@ public class FrontendClients implements Closeable {
         return null;
     }
 
-    public Map<Integer, Double> GetUserTags(long id) throws TException {
-        ThriftAccountClientImpl client = clientPool.borrow();
-        try{
-            return client.client.GetUserTags(id);
-        } catch (TException e) {
-            e.printStackTrace();
-        }finally {
-            clientPool.release(client);
-        }
-        return null;
-    }
-
-    public boolean SetUserTags(long id, Map<Integer, Double> tags) throws TException {
-        ThriftAccountClientImpl client = clientPool.borrow();
-        try{
-            return client.client.SetUserTags(id,tags);
-        } catch (TException e) {
-            e.printStackTrace();
-        }finally {
-            clientPool.release(client);
-        }
-        return false;
-    }
-
-    public boolean ChangeAccountPwd(AccountsInfo info, String passwd) throws TException {
+    public boolean ChangeAccountPwd(AccountInfo info, String passwd) throws TException {
         ThriftAccountClientImpl client = clientPool.borrow();
         try{
             return client.client.ChangeAccountPwd(info,passwd);
@@ -95,7 +71,7 @@ public class FrontendClients implements Closeable {
         return false;
     }
 
-    public boolean CreateAccount(AccountsInfo info) throws TException {
+    public boolean CreateAccount(AccountInfo info) throws TException {
         ThriftAccountClientImpl client = clientPool.borrow();
         try{
             return client.client.CreateAccount(info);
@@ -107,7 +83,7 @@ public class FrontendClients implements Closeable {
         return false;
     }
 
-    public AccountsInfo GetAccountInfo(long id) throws TException {
+    public AccountInfo GetAccountInfo(long id) throws TException {
         ThriftAccountClientImpl client = clientPool.borrow();
         try{
             return client.client.GetAccountInfo(id);

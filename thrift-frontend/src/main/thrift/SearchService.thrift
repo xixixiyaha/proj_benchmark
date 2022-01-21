@@ -20,7 +20,7 @@ enum SearchOrder{
 
 service SearchService {
 
-    list<i64> GetRecommendByProdName(1:i64 userId, String words, SearchType type, SearchOrder order)
+    list<i64> GetRecommendByProdName(1:i64 userId, 2:string words, 3:SearchType type, 4:SearchOrder order)
 
 	list<i64> IdealResEfficiencyTest(1: i32 totalComputationLoad,2:i32 threadName),
 

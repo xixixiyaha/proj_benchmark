@@ -13,9 +13,9 @@ public interface CartService {
 
     List<CartInfo> GetCartInfosByAccount(Long accountId,Integer upperLimit);
 
-    OrderResp BM3CompareChainNested(CartInfo info);
+    Long BM3CompareChainNested(CartInfo info);
 
-    OrderResp BM3CompareChainSequence(CartInfo info);
+    Long BM3CompareChainSequence(CartInfo info);
 
 
 }

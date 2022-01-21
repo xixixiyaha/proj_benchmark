@@ -46,7 +46,7 @@ service OrderSearvice{
 
     OrderResp GetOrderByPaymentId(OrderReq orderReq);
 
-    OrderResp CreatePaymentByOrderId(OrderReq orderReq);
+//    OrderResp CreatePaymentByOrderId(OrderReq orderReq);
 
     OrderResp GetOrderByOrderId(OrderReq orderReq);
 

@@ -26,7 +26,7 @@ struct ProductInfo {
     7:optional list<string> prodImages,
     8:optional i64 discountsId,
     9:required i64 merchantId,
-    20:optional string createTime,
+    10:optional string createTime,
     11:optional string updateTime,
 }
 

@@ -9,7 +9,7 @@ public class DiscountServiceImpl implements DiscountService {
 
 
     @Override
-    public DiscountInfo GetDiscounts(Long prodId, Integer type) {
+    public DiscountInfo GetProdDiscounts(Long prodId, Integer type) {
         return storage.GetDiscountInfo(prodId,type);
     }
 }

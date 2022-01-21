@@ -13,14 +13,15 @@ public class MarshalUtil {
 
 
     public static AccountInfo convertRs2Account(ResultSet rs){
-
+        //Notice 现在的marshal和accountDao配套 不含user Tags
         AccountInfo info=new AccountInfo();
         try{
             if(rs.next()){
                 info.setUserId(rs.getLong(1));
                 info.setUserName(rs.getString(2));
                 info.setUserPasswd(rs.getString(3));
-                info.setUserDescription(rs.getString(4));
+                info.setUserCard(rs.getString(4));
+                info.setUserDescription(rs.getString(5));
 
             }
         }catch(Exception e){

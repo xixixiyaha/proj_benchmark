@@ -81,8 +81,8 @@ public class AccountInfoStorage {
 
     }
 
-    static final String GET_ACCOUNT_BY_ID ="SELECT user_id, user_name, user_pwd, user_description FROM ACCOUNT_INFO WHERE user_id = ?";
-    static final String GET_ACCOUNT_BY_NAME ="SELECT user_id, user_name, user_pwd, user_description FROM ACCOUNT_INFO WHERE user_name = ?";
+    static final String GET_ACCOUNT_BY_ID ="SELECT user_id, user_name, user_pwd, user_card, user_description FROM ACCOUNT_INFO WHERE user_id = ?";
+    static final String GET_ACCOUNT_BY_NAME ="SELECT user_id, user_name, user_pwd, user_card, user_description FROM ACCOUNT_INFO WHERE user_name = ?";
 
     static final String UPDATE_ACCOUNT_BY_ID ="UPDATE ACCOUNT_INFO SET user_name =?, user_pwd = ?, user_description = ? WHERE user_id = ?";
     static final String DELETE_ACCOUNT_BY_ID ="DELETE FROM ACCOUNT_INFO WHERE user_id = ?";
@@ -183,7 +183,7 @@ public class AccountInfoStorage {
 
     }
 
-    private static final String CREATE_USER = "INSERT INTO ACCOUNT_INFO (user_name,user_pwd,user_description) VALUES (?,?,?)";
+    private static final String CREATE_USER = "INSERT INTO ACCOUNT_INFO (user_name,user_pwd,user_card,user_description) VALUES (?,?,?,?)";
 
     public Boolean CreateAccountInfo(AccountInfo info){
         return CreateAccountInfo(info.getUserName(),info.getUserPasswd(),info.getUserDescription());
@@ -194,7 +194,8 @@ public class AccountInfoStorage {
             PreparedStatement stmt = conn.prepareStatement(CREATE_USER);
             stmt.setString(1,userName);
             stmt.setString(2,pwd);
-            stmt.setString(3,description);
+            stmt.setString(3,"TODO USER CARD");
+            stmt.setString(4,description);
             int rs = stmt.executeUpdate();
             if(rs>0)return true;
 
@@ -227,7 +228,7 @@ public class AccountInfoStorage {
 
     public Boolean ExistsAccountInfo(Integer id){
         ResultSet rs=null;
-        try(Connection conn = DriverManager.getConnection(ACCOUNT_DB_URL, ACCOUNT_USER, ACCOUNT_PSW)){
+        try(Connection conn = druidUtil.GetConnection()){
             PreparedStatement stmt = conn.prepareStatement(EXISTS_ACCOUNT_BY_ID);
             stmt.setInt(1,id);
             rs = stmt.executeQuery();

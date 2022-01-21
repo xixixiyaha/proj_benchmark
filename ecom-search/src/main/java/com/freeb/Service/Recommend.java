@@ -1,15 +1,12 @@
 package com.freeb.Service;
 
 import com.freeb.Clients.SearchClients;
-import com.freeb.Entity.ProductInfo;
 import com.freeb.Entity.UserActive;
-import com.freeb.Entity.UserSimilarity;
 import com.freeb.Enum.SearchOrder;
 import com.freeb.Utils.MapUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.sql.Time;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -97,7 +94,7 @@ public class Recommend {
         ConcurrentHashMap<Long, ConcurrentHashMap<Integer, Integer>> activeMap = new ConcurrentHashMap<>();
         // 遍历查询到的用户点击行为数据
         // 获取最近活跃的 1000 个用户
-        List<Long> activeUsers = clients.GetLastestAvtiveUsers(1000);
+        List<Long> activeUsers = clients.GetLastestActiveUsers(1000);
         for(Long uid:activeUsers){
             activeMap.put(uid,clients.GetUserActiveByCategory(uid));
         }
@@ -117,7 +114,7 @@ public class Recommend {
             return activeMap;
         }
 
-        List<Long> activeUsers = clients.GetLastestAvtiveUsers(1000);
+        List<Long> activeUsers = clients.GetLastestActiveUsers(1000);
         for(Long uid:activeUsers){
             activeMap.put(uid,clients.GetUserActiveByProduct(uid));
         }

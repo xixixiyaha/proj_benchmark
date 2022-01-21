@@ -1,6 +1,7 @@
 package com.freeb.Entity;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 public class AccountInfo {
@@ -11,7 +12,7 @@ public class AccountInfo {
     private String userCard;
     private String userDescription;
     // 懒更新 alg: 最近的浏览中 top10 category的占比
-    private Map<Integer,Double> userTag;
+    private List<Integer> userTag;
     private Date createTime;
     private Date updateTime;
 
@@ -63,11 +64,11 @@ public class AccountInfo {
         this.updateTime = updateTime;
     }
 
-    public Map<Integer,Double> getUserTag() {
+    public List<Integer> getUserTag() {
         return userTag;
     }
 
-    public void setUserTag(Map<Integer,Double> userTag) {
+    public void setUserTag(List<Integer> userTag) {
         this.userTag = userTag;
     }
 

@@ -85,17 +85,17 @@ public class AccountServiceImpl implements AccountService {
         return re;
     }
 
-    @Override
-    public HashMap<Integer, Double> GetUserTags(Long id) {
-        logger.error("Method Not Implemented");
-        return null;
-    }
-
-    @Override
-    public Boolean SetUserTags(Long id, HashMap<Integer, Double> tags) {
-        logger.error("Method Not Implemented");
-        return null;
-    }
+//    @Override
+//    public HashMap<Integer, Double> GetUserTags(Long id) {
+//        logger.error("Method Not Implemented");
+//        return null;
+//    }
+//
+//    @Override
+//    public Boolean SetUserTags(Long id, HashMap<Integer, Double> tags) {
+//        logger.error("Method Not Implemented");
+//        return null;
+//    }
 
     @Override
     public Boolean CreateAccount(AccountInfo info) {

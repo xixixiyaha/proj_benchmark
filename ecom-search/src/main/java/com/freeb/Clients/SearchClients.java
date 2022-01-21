@@ -18,7 +18,7 @@ public abstract class SearchClients {
 
     public abstract Boolean CreateActiveBehavior(Long uid, Long pid, Integer cid);
 
-    public abstract List<Long> GetLastestAvtiveUsers(Integer userNum);
+    public abstract List<Long> GetLastestActiveUsers(Integer userNum);
 
     public abstract HashSet<Long> GetUserActiveByProduct(Long uid);
 

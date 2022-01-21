@@ -4,5 +4,5 @@ import com.freeb.Entity.DiscountInfo;
 
 public interface DiscountService {
 
-    public DiscountInfo GetDiscounts(Long prodId, Integer type);
+    public DiscountInfo GetProdDiscounts(Long prodId, Integer type);
 }

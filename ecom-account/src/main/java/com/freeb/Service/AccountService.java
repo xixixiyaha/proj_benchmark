@@ -19,8 +19,8 @@ public interface AccountService {
 
 
 //   current deprecated
-    public HashMap<Integer,Double> GetUserTags(Long id);
-    public Boolean SetUserTags(Long id, HashMap<Integer,Double> tags);
+//    public HashMap<Integer,Double> GetUserTags(Long id);
+//    public Boolean SetUserTags(Long id, HashMap<Integer,Double> tags);
 
     public Boolean ChangeAccountPwd(AccountInfo info, String pwd);
 

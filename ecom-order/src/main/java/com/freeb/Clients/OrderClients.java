@@ -8,9 +8,9 @@ public abstract class OrderClients {
 
     /*==== Accounts ====*/
 
-    public abstract Boolean verifyAccount(long accountId);
+    public abstract Boolean AccountExists(long accountId);
 
-    public abstract Boolean verifyAccessByAccount(long accountId, long targetId, IdType idType);
+    public abstract Boolean VerifyAccessByAccount(long accountId, long targetId, IdType idType);
 
     public abstract AccountInfo GetAccountInfo(Long id);
     /*==== Products ====*/
@@ -38,7 +38,7 @@ public abstract class OrderClients {
 
 
     /*==== Discounts ====*/
-    public abstract Double GetProdPrice(long prodId);
+//    public abstract Double GetProdPrice(long prodId);
 
-    public abstract DiscountInfo GetDiscounts(Long prodId, Integer type);
+    public abstract DiscountInfo GetProdDiscounts(Long prodId, Integer type);
 }

@@ -14,7 +14,7 @@ struct AccountInfo{
     2: required string userName,
     3: required string userPasswd,
     4: optional string userDescription,
-    5: optional map<i32,double> userTag,
+    5: optional list<i32> userTag,
     6: optional string userCard,
 }
 service AccountsService{
@@ -23,9 +23,9 @@ service AccountsService{
     bool VerifyAccessByAccount(1: i64 accountId, 2: i64 targetId,3:IdType idType),
 
 
-    map<i32,double> GetUserTags(1:i64 id),
-
-    bool SetUserTags(1:i64 id,2:map<i32,double> tags),
+//    map<i32,double> GetUserTags(1:i64 id),
+//
+//    bool SetUserTags(1:i64 id,2:map<i32,double> tags),
 
     list<i32> GetAccountTag(1:i64 id),
 

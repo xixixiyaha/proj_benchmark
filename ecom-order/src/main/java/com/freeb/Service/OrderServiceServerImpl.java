@@ -29,7 +29,7 @@ public class OrderServiceServerImpl implements OrderService {
     public OrderResp GetOrderListByUserId(OrderReq orderReq){
         OrderResp orderResp = new OrderResp();
 
-        if (!client.verifyAccount(orderReq.getUserId())){
+        if (!client.AccountExists(orderReq.getUserId())){
             orderResp.setBaseResp(PackResponse.packNoAuthority());
             orderResp.setHasMore(false);
             return orderResp;
@@ -50,7 +50,7 @@ public class OrderServiceServerImpl implements OrderService {
     @Override
     public OrderResp GetOrderByPaymentId(OrderReq orderReq) {
         OrderResp orderResp = new OrderResp();
-        if (!client.verifyAccessByAccount(orderReq.getUserId(),orderReq.getPaymentId(), IdType.PAYMENT_ID)){
+        if (!client.VerifyAccessByAccount(orderReq.getUserId(),orderReq.getPaymentId(), IdType.PAYMENT_ID)){
             orderResp.setBaseResp(PackResponse.packNoAuthority());
             orderResp.setHasMore(false);
             return orderResp;
@@ -65,43 +65,43 @@ public class OrderServiceServerImpl implements OrderService {
         return orderResp;
     }
 
-    @Override
-    public OrderResp CreatePaymentByOrderId(OrderReq orderReq) {
-        OrderResp orderResp = new OrderResp();
-        orderResp.setHasMore(false);
-        if (!client.verifyAccessByAccount(orderReq.getUserId(),orderReq.getOrderId(), IdType.ORDER_ID)){
-            orderResp.setBaseResp(PackResponse.packNoAuthority());
-            return orderResp;
-        }
-        AccountInfo aInfo = client.GetAccountInfo(orderReq.getUserId());
-        if(aInfo ==null){
-            logger.warn("create order failed OrderReq="+orderReq.toString());
-            orderResp.setBaseResp(PackResponse.packUnknownFailure());
-            return orderResp;
-        }
-        Double prodVal= client.GetProdPrice(orderReq.getProdId());
-        Double discountsVal= client.GetDiscounts(orderReq.getProdId(),0).getDiscountVal();
-
-        PaymentInfo payInfo = new PaymentInfo(prodVal,discountsVal,aInfo.getUserCard(),orderReq.getUserId());
-        Long paymentId = client.CreatePayment(payInfo);
-        if(paymentId ==-1L){
-            logger.warn("create payment failed OrderReq="+orderReq.toString());
-            //TODO 升级resp类型
-            orderResp.setBaseResp(PackResponse.packUnknownFailure());
-            return orderResp;
-        }
-        Boolean re =storage.UpdatePaymentIdByOrderId(orderReq.getOrderId(),paymentId);
-        //update order's paymentID
-        List<OrderInfo> infos = storage.getOrderInfoByOrderId(orderReq.getOrderId());
-        orderResp.setBaseResp(PackResponse.packSuccess());
-        orderResp.setOrderInfos(infos);
-        return orderResp;
-    }
+//    @Override
+//    public OrderResp CreatePaymentByOrderId(OrderReq orderReq) {
+//        OrderResp orderResp = new OrderResp();
+//        orderResp.setHasMore(false);
+//        if (!client.VerifyAccessByAccount(orderReq.getUserId(),orderReq.getOrderId(), IdType.ORDER_ID)){
+//            orderResp.setBaseResp(PackResponse.packNoAuthority());
+//            return orderResp;
+//        }
+//        AccountInfo aInfo = client.GetAccountInfo(orderReq.getUserId());
+//        if(aInfo ==null){
+//            logger.warn("create order failed OrderReq="+orderReq.toString());
+//            orderResp.setBaseResp(PackResponse.packUnknownFailure());
+//            return orderResp;
+//        }
+//        Double prodVal= client.GetProdPrice(orderReq.getProdId());
+//        Double discountsVal= client.GetProdDiscounts(orderReq.getProdId(),0).getDiscountVal();
+//
+//        PaymentInfo payInfo = new PaymentInfo(prodVal,discountsVal,aInfo.getUserCard(),orderReq.getUserId());
+//        Long paymentId = client.CreatePayment(payInfo);
+//        if(paymentId ==-1L){
+//            logger.warn("create payment failed OrderReq="+orderReq.toString());
+//            //TODO 升级resp类型
+//            orderResp.setBaseResp(PackResponse.packUnknownFailure());
+//            return orderResp;
+//        }
+//        Boolean re =storage.UpdatePaymentIdByOrderId(orderReq.getOrderId(),paymentId);
+//        //update order's paymentID
+//        List<OrderInfo> infos = storage.getOrderInfoByOrderId(orderReq.getOrderId());
+//        orderResp.setBaseResp(PackResponse.packSuccess());
+//        orderResp.setOrderInfos(infos);
+//        return orderResp;
+//    }
 
     @Override
     public OrderResp GetOrderByOrderId(OrderReq orderReq) {
         OrderResp orderResp = new OrderResp();
-        if (!client.verifyAccessByAccount(orderReq.getUserId(),orderReq.getOrderId(), IdType.ORDER_ID)){
+        if (!client.VerifyAccessByAccount(orderReq.getUserId(),orderReq.getOrderId(), IdType.ORDER_ID)){
             orderResp.setBaseResp(PackResponse.packNoAuthority());
             orderResp.setHasMore(false);
             return orderResp;
@@ -127,7 +127,7 @@ public class OrderServiceServerImpl implements OrderService {
             return orderResp;
         }
         // 1， user合法
-        if (!client.verifyAccount(orderReq.getUserId())){
+        if (!client.AccountExists(orderReq.getUserId())){
             orderResp.setBaseResp(PackResponse.packNoAuthority());
             orderResp.setHasMore(false);
             return orderResp;
@@ -151,7 +151,7 @@ public class OrderServiceServerImpl implements OrderService {
             orderResp.setBaseResp(PackResponse.packUnknownFailure());
             return orderResp;
         }
-        DiscountInfo dInfo = client.GetDiscounts(pInfo.getDiscountsId(),0);
+        DiscountInfo dInfo = client.GetProdDiscounts(pInfo.getProdId(),0);
         if(dInfo==null){
             logger.warn("create order failed dInfo = NULL OrderReq="+orderReq.toString());
             orderResp.setBaseResp(PackResponse.packUnknownFailure());

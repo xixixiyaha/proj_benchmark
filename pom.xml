@@ -23,12 +23,13 @@
         <module>ecom-carts</module>
         <module>ecom-search</module>
         <module>ecom-category</module>
-        <module>com.freeb.thrift-accounts</module>
-        <module>com.freeb.thrift-search</module>
-        <module>com.freeb.thrift-frontend</module>
+        <module>thrift-accounts</module>
+        <module>thrift-search</module>
+        <module>thrift-frontend</module>
         <module>ecom-product</module>
         <module>ecom-discount</module>
-        <module>com.freeb.thrift-carts</module>
+        <module>thrift-carts</module>
+        <module>thrift-discount</module>
     </modules>
 
     <properties>

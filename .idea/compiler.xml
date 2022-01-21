@@ -6,18 +6,20 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="ecom-search" />
-        <module name="ecom-common" />
-        <module name="ecom-discount" />
-        <module name="ecom-carts" />
-        <module name="thrift-accounts" />
-        <module name="thrift-search" />
-        <module name="ecom-payment" />
-        <module name="thrift-frontend" />
         <module name="ecom-category" />
+        <module name="thrift-search" />
+        <module name="ecom-discount" />
+        <module name="ecom-payment" />
         <module name="ecom-account" />
-        <module name="ecom-order" />
         <module name="ecom-product" />
+        <module name="ecom-common" />
+        <module name="thrift-frontend" />
+        <module name="ecom-carts" />
+        <module name="ecom-search" />
+        <module name="thrift-accounts" />
+        <module name="thrift-discount" />
+        <module name="ecom-order" />
+        <module name="thrift-carts" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

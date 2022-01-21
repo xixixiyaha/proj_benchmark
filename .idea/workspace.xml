@@ -2,9 +2,50 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e7402edc-f985-409d-9734-d8a746f29253" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/thrift-carts/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/thrift-discount/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/thrift-discount/src/main/java/com/freeb/DiscountServer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/thrift-discount/src/main/java/com/freeb/thrift/DiscountInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/thrift-discount/src/main/java/com/freeb/thrift/DiscountService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/thrift-discount/src/main/java/com/freeb/thrift/DiscountServiceServerImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/thrift-discount/src/main/java/com/freeb/thrift/DiscountTypeConvert.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecom-common/target/classes/META-INF/ecom-common.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecom-common/target/classes/com/freeb/Dao/DruidUtil.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecom-common/target/classes/com/freeb/Entity/AccountInfo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecom-common/target/classes/com/freeb/Entity/BaseResp.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecom-common/target/classes/com/freeb/Entity/CartInfo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecom-common/target/classes/com/freeb/Entity/CategoryPage.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecom-common/target/classes/com/freeb/Entity/CommentInfo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecom-common/target/classes/com/freeb/Entity/DiscountInfo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecom-common/target/classes/com/freeb/Entity/MerchantInfo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecom-common/target/classes/com/freeb/Entity/OrderInfo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecom-common/target/classes/com/freeb/Entity/OrderReq.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecom-common/target/classes/com/freeb/Entity/OrderResp.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecom-common/target/classes/com/freeb/Entity/PaymentInfo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecom-common/target/classes/com/freeb/Entity/ProductInfo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecom-common/target/classes/com/freeb/Entity/ProductPage.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecom-common/target/classes/com/freeb/Enum/IdType.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecom-common/target/classes/com/freeb/Enum/PaymentStatus.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecom-common/target/classes/com/freeb/Enum/RespCode.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecom-common/target/classes/com/freeb/Enum/SearchOrder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecom-common/target/classes/com/freeb/Enum/SearchType.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecom-common/target/classes/com/freeb/Utils/IdGenerator.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecom-common/target/classes/com/freeb/Utils/LockObjectPool$ObjectWithLock.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecom-common/target/classes/com/freeb/Utils/LockObjectPool.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecom-common/target/classes/com/freeb/Utils/MapUtil.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecom-common/target/classes/com/freeb/Utils/MarshalUtil.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecom-common/target/classes/com/freeb/Utils/PackResponse.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecom-discount/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ecom-discount/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecom-discount/target/classes/com/freeb/Dao/DiscountStorage.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecom-discount/target/classes/com/freeb/Service/DiscountService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecom-discount/target/classes/com/freeb/Service/DiscountServiceImpl.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/thrift-carts/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/thrift-carts/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/thrift-carts/thrift-carts.iml" beforeDir="false" afterPath="$PROJECT_DIR$/thrift-carts/thrift-carts.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/thrift-search/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/thrift-search/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -138,7 +179,7 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="jdk.selected.JAVA_MODULE" value="13" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/ecom-search/src/test/java" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/thrift-search/src/main/java/com/freeb/thrift/SearchClients" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/thrift-discount/src/main/java/com/freeb/thrift" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -170,11 +211,11 @@
       <recent name="benchmark.rpc.pipe" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\0_4th\proj_benchmark\thrift-search\src\main\java\com\freeb\thrift\SearchClients" />
-      <recent name="D:\0_4th\proj_benchmark\thrift-frontend\src\main\thrift\Account" />
-      <recent name="D:\0_4th\proj_benchmark\thrift-accounts\src\main\java\thrift\Accounts" />
-      <recent name="D:\0_4th\proj_benchmark\thrift-frontend\src\main\java\com\freeb\thrift\Accounts" />
-      <recent name="D:\0_4th\proj_benchmark\thrift-accounts\src\main\java\thrift\accounts" />
+      <recent name="D:\0_4th\proj_benchmark\thrift-discount\src\main\java\com\freeb\thrift" />
+      <recent name="D:\0_4th\proj_benchmark\thrift-carts\src\main\java\thrift\CartClients" />
+      <recent name="D:\0_4th\proj_benchmark\thrift-frontend\src\main\thrift\Order" />
+      <recent name="D:\0_4th\proj_benchmark\thrift-carts\src\main\java\thrift\CartServer" />
+      <recent name="D:\0_4th\proj_benchmark\thrift-frontend\src\main\thrift\Cart" />
     </key>
   </component>
   <component name="RunManager" selected="Application.DiscountStorage">
@@ -362,12 +403,22 @@
       <workItem from="1642497150912" duration="6062000" />
       <workItem from="1642556013729" duration="38043000" />
       <workItem from="1642726941321" duration="5472000" />
-      <workItem from="1642746545116" duration="7388000" />
+      <workItem from="1642746545116" duration="14757000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
+      </list>
+    </option>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -453,19 +504,19 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="399" y="105" key="#com.intellij.ide.fileTemplates.ui.ConfigureTemplatesDialog/0.0.1536.824@0.0.1536.824" timestamp="1636788265426" />
-    <state x="958" y="124" key="#com.intellij.ide.util.MemberChooser" timestamp="1642751770144">
+    <state x="958" y="124" key="#com.intellij.ide.util.MemberChooser" timestamp="1642762562209">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="-722" y="157" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1636859364147" />
-    <state x="958" y="124" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1642751770144" />
+    <state x="958" y="124" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1642762562209" />
     <state x="499" y="196" key="#com.intellij.ide.util.PackageChooserDialog" timestamp="1642409723914">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="499" y="196" key="#com.intellij.ide.util.PackageChooserDialog/0.0.1536.824@0.0.1536.824" timestamp="1642409723914" />
-    <state x="575" y="340" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1641385485717">
+    <state x="575" y="340" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1642759298824">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="575" y="340" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/0.0.1536.824@0.0.1536.824" timestamp="1641385485717" />
+    <state x="575" y="340" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/0.0.1536.824@0.0.1536.824" timestamp="1642759298824" />
     <state x="553" y="279" width="429" height="312" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1642409767820">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -474,14 +525,14 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="411" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.824@0.0.1536.824" timestamp="1642471571166" />
-    <state x="499" y="162" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1642750795036">
+    <state x="499" y="162" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1642759223170">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="499" y="162" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1642750795036" />
-    <state x="499" y="162" key="#com.intellij.refactoring.typeMigration.ui.FailedConversionsDialog" timestamp="1642407890259">
+    <state x="499" y="162" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1642759223170" />
+    <state x="499" y="162" key="#com.intellij.refactoring.typeMigration.ui.FailedConversionsDialog" timestamp="1642758809543">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="499" y="162" key="#com.intellij.refactoring.typeMigration.ui.FailedConversionsDialog/0.0.1536.824@0.0.1536.824" timestamp="1642407890259" />
+    <state x="499" y="162" key="#com.intellij.refactoring.typeMigration.ui.FailedConversionsDialog/0.0.1536.824@0.0.1536.824" timestamp="1642758809543" />
     <state x="385" y="9" key="CommitChangelistDialog2" timestamp="1642559451615">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -555,25 +606,25 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="212" height="477" key="HiddenNamespacesPopup/0.0.1536.824@0.0.1536.824" timestamp="1638857459964" />
-    <state x="557" y="141" key="Maven.ArtifactSearchDialog" timestamp="1641628385820">
+    <state x="557" y="141" key="Maven.ArtifactSearchDialog" timestamp="1642762183715">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="-1224" y="178" key="Maven.ArtifactSearchDialog/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1636855879210" />
-    <state x="557" y="141" key="Maven.ArtifactSearchDialog/0.0.1536.824@0.0.1536.824" timestamp="1641628385820" />
+    <state x="557" y="141" key="Maven.ArtifactSearchDialog/0.0.1536.824@0.0.1536.824" timestamp="1642762183715" />
     <state x="813" y="181" key="NewModule_or_Project.wizard" timestamp="1642497266973">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="813" y="181" key="NewModule_or_Project.wizard/0.0.1536.824@0.0.1536.824" timestamp="1642497266973" />
-    <state x="409" y="0" key="SettingsEditor" timestamp="1642755131498">
+    <state x="409" y="0" key="SettingsEditor" timestamp="1642762071329">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="-1040" y="81" key="SettingsEditor/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1636855190523" />
     <state x="536" y="-1080" key="SettingsEditor/0.0.1536.824/3.-1080.1920.1040@3.-1080.1920.1040" timestamp="1640434765051" />
-    <state x="409" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1642755131498" />
-    <state x="361" y="148" key="Vcs.Push.Dialog.v2" timestamp="1642754450525">
+    <state x="409" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1642762071329" />
+    <state x="361" y="148" key="Vcs.Push.Dialog.v2" timestamp="1642760867962">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="148" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1642754450525" />
+    <state x="361" y="148" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1642760867962" />
     <state x="440" y="149" key="VcsDiffUtil.ChangesDialog" timestamp="1635811459960">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -612,17 +663,17 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="732" y="397" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1641297584695" />
-    <state x="385" y="191" width="973" height="548" key="find.popup" timestamp="1642751022630">
+    <state x="385" y="191" width="973" height="548" key="find.popup" timestamp="1642762214210">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="775" y="141" width="755" height="548" key="find.popup/0.0.1536.824/3.-1080.1920.1040@0.0.1536.824" timestamp="1640178117663" />
     <state x="972" y="-902" width="944" height="692" key="find.popup/0.0.1536.824/3.-1080.1920.1040@3.-1080.1920.1040" timestamp="1640439648584" />
-    <state x="385" y="191" width="973" height="548" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1642751022630" />
-    <state x="356" y="179" key="new project wizard" timestamp="1642755102350">
+    <state x="385" y="191" width="973" height="548" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1642762214210" />
+    <state x="356" y="179" key="new project wizard" timestamp="1642761922444">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="229" y="-844" key="new project wizard/0.0.1536.824/3.-1080.1920.1040@3.-1080.1920.1040" timestamp="1640434658494" />
-    <state x="356" y="179" key="new project wizard/0.0.1536.824@0.0.1536.824" timestamp="1642755102350" />
+    <state x="356" y="179" key="new project wizard/0.0.1536.824@0.0.1536.824" timestamp="1642761922444" />
     <state x="862" y="48" key="refactoring.ChangeSignatureDialog" timestamp="1642754048651">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

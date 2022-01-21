@@ -1,4 +1,4 @@
-CREATE TABLE CART_INFOS(
+CREATE TABLE CART_INFO(
                            cart_id BIGINT PRIMARY KEY NOT NULL AUTO_INCREMENT,
                            user_id BIGINT NOT NULL ,
                            prod_id BIGINT NOT NULL ,

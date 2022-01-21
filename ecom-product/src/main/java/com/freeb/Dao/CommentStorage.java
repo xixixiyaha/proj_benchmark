@@ -107,7 +107,7 @@ public class CommentStorage {
             stmt.setLong(1,prodId);
             stmt.setInt(2,comtNum);
             ResultSet rs = stmt.executeQuery();
-            return MarshalUtil.convertRs2CommentLists(rs);
+            return MarshalUtil.convertRs2CommentList(rs);
         }catch (SQLException e){
             logger.error(String.format("DB connect failure %s",e.toString()));
             // Notice here

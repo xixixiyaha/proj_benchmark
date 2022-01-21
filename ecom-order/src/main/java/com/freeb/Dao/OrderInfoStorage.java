@@ -75,36 +75,38 @@ public class OrderInfoStorage {
     }
 
     static final String CREATE_ORDER_INFO = "INSERT INTO ORDER_INFO(user_id,merchant_id,merchant_name,prod_id,prod_name,cart_id) VALUES(?,?,?,?,?,?)";
-    public List<OrderInfo> CreateOrderInfoByCartInfo(long user_id,long merchant_id,String merchant_name,long prod_id,String prod_name,long cart_id) {
+    public Long CreateOrderInfoByCartInfo(long user_id,long merchant_id,String merchant_name,long prod_id,String prod_name,long cart_id) {
         ResultSet rs=null;
         //TODO 获取结果OrderInfo
         try(Connection conn = druidUtil.GetConnection()){
-            PreparedStatement stmt = conn.prepareStatement(CREATE_ORDER_INFO);
+            PreparedStatement stmt = conn.prepareStatement(CREATE_ORDER_INFO,Statement.RETURN_GENERATED_KEYS);
             stmt.setLong(1,user_id);
             stmt.setLong(2,merchant_id);
             stmt.setString(3,merchant_name);
             stmt.setLong(4,prod_id);
             stmt.setString(5,prod_name);
             stmt.setLong(6,cart_id);
-            rs = stmt.executeQuery();
+            rs = stmt.getGeneratedKeys();
+            if(rs.next()){
+                return rs.getLong(1);
+            }
         }catch (SQLException e){
             logger.error(String.format("DB connect failure %s",e.toString()));
             // Notice here
             e.printStackTrace();
-            return null;
         }
-        return MarshalUtil.convertRs2OrderList(rs);
+        return null;
     }
 
-    static final String ORDER_FULL_QUERY_BY_ORDERID ="SELECT order_id, user_id, payment_status, merchant_id,merchant_name,prod_id,prod_name,payment_id FROM ORDER_INFO WHERE order_id = ?";
-    static final String ORDER_FULL_QUERY_BY_ACCOUNTID ="SELECT order_id, user_id, payment_status, merchant_id,merchant_name,prod_id,prod_name,payment_id FROM ORDER_INFO WHERE user_id = ?";
-    static final String ORDER_FULL_QUERY_BY_MERCHANTID ="SELECT order_id, user_id, payment_status, merchant_id,merchant_name,prod_id,prod_name,payment_id FROM ORDER_INFO WHERE merchant_id = ?";
-    static final String ORDER_FULL_QUERY_BY_OBJID ="SELECT order_id, user_id, payment_status, merchant_id,merchant_name,prod_id,prod_name,payment_id FROM ORDER_INFO WHERE prod_id = ?";
-    static final String ORDER_FULL_QUERY_BY_PAYMENTID="SELECT order_id, user_id, payment_status, merchant_id,merchant_name,prod_id,prod_name,payment_id FROM ORDER_INFO WHERE payment_id = ?";
+    static final String ORDER_FULL_QUERY_BY_ORDERID ="SELECT order_id, user_id, payment_status, merchant_id,merchant_name,prod_id,prod_name,payment_id,cart_id FROM ORDER_INFO WHERE order_id = ?";
+    static final String ORDER_FULL_QUERY_BY_ACCOUNTID ="SELECT order_id, user_id, payment_status, merchant_id,merchant_name,prod_id,prod_name,payment_id,cart_id FROM ORDER_INFO WHERE user_id = ?";
+    static final String ORDER_FULL_QUERY_BY_MERCHANTID ="SELECT order_id, user_id, payment_status, merchant_id,merchant_name,prod_id,prod_name,payment_id,cart_id FROM ORDER_INFO WHERE merchant_id = ?";
+    static final String ORDER_FULL_QUERY_BY_OBJID ="SELECT order_id, user_id, payment_status, merchant_id,merchant_name,prod_id,prod_name,payment_id,cart_id FROM ORDER_INFO WHERE prod_id = ?";
+    static final String ORDER_FULL_QUERY_BY_PAYMENTID="SELECT order_id, user_id, payment_status, merchant_id,merchant_name,prod_id,prod_name,payment_id,cart_id FROM ORDER_INFO WHERE payment_id = ?";
     static final String UPDATE_PAYMENTID_BY_ORDERID = "UPDATE ORDER_INFO SET payment_id = ? WHERE order_id=?";
 
     public List<OrderInfo> getOrderInfoByOrderId(long orderId) {
-        ResultSet rs=null;
+        ResultSet rs;
         try(Connection conn = druidUtil.GetConnection()){
             PreparedStatement stmt = conn.prepareStatement(ORDER_FULL_QUERY_BY_ORDERID);
             stmt.setLong(1,orderId);

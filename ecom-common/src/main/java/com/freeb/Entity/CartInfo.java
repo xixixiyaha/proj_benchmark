@@ -8,6 +8,13 @@ public class CartInfo {
     Integer incartQuantity;
     Integer incartSelect;
 
+    public CartInfo() {
+    }
+
+    public CartInfo(Long cartId) {
+        this.cartId = cartId;
+    }
+
     public Long getCartId() {
         return cartId;
     }

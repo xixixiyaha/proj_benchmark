@@ -158,8 +158,8 @@ public class OrderServiceServerImpl implements OrderService {
             return orderResp;
         }
         // 3. Create Order
-        List<OrderInfo> order = storage.CreateOrderInfoByCartInfo(cInfo.getUserId(),mInfo.getMerchantId(),mInfo.getMerchantName(),pInfo.getProdId(),pInfo.getProdName(),cInfo.getCartId());
-        if(order.size()!=1){
+        Long orderId = storage.CreateOrderInfoByCartInfo(cInfo.getUserId(),mInfo.getMerchantId(),mInfo.getMerchantName(),pInfo.getProdId(),pInfo.getProdName(),cInfo.getCartId());
+        if(orderId==-1){
             logger.warn("create order failed");
             orderResp.setBaseResp(PackResponse.packUnknownFailure());
             return orderResp;
@@ -168,13 +168,13 @@ public class OrderServiceServerImpl implements OrderService {
         PaymentInfo payInfo = new PaymentInfo(cInfo.getIncartQuantity()*pInfo.getProdPrice(),cInfo.getIncartQuantity()*dInfo.getDiscountVal(),aInfo.getUserCard(),orderReq.getUserId());
         Long paymentId = client.CreatePayment(payInfo);
         // 5. 返回orderInfo
-        if(!storage.UpdatePaymentIdByOrderId(order.get(0).getOrderId(),paymentId)){
+        if(!storage.UpdatePaymentIdByOrderId(orderId,paymentId)){
             logger.warn("create order failed Update Payment"+payInfo.getPaymentId());
             orderResp.setBaseResp(PackResponse.packUnknownFailure());
             return orderResp;
         }
-        order = storage.getOrderInfoByOrderId(order.get(0).getOrderId());
-        orderResp.setOrderInfos(order);
+
+        orderResp.setOrderInfos(storage.getOrderInfoByOrderId(orderId));
         orderResp.setBaseResp(PackResponse.packSuccess());
         return orderResp;
     }

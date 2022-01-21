@@ -51,7 +51,7 @@ public class DiscountStorage {
         }
     }
 
-    private static final String CREATE_DISCOUNT = "INSERT INTO DISCOUNT_INFOS(discount_type,prod_id,discount_val) VALUES(?,?,?)";
+    private static final String CREATE_DISCOUNT = "INSERT INTO DISCOUNT_INFO(discount_type,prod_id,discount_val) VALUES(?,?,?)";
     public Boolean CreateDiscountInfo(Integer type,Long prodId,Double price){
 
         try(Connection conn = druidUtil.GetConnection()){
@@ -70,7 +70,7 @@ public class DiscountStorage {
         return false;
     }
 
-    private static final String GET_DISCOUNTS = "SELECT discount_id,discount_type,prod_id,discount_val FROM DISCOUNT_INFOS WHERE prod_id = ? and discount_type = ?";
+    private static final String GET_DISCOUNTS = "SELECT discount_id,discount_type,prod_id,discount_val FROM DISCOUNT_INFO WHERE prod_id = ? and discount_type = ?";
 
     public DiscountInfo GetDiscountInfo(Long prodId, Integer type){
         try(Connection conn = druidUtil.GetConnection()){

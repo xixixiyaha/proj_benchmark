@@ -32,9 +32,9 @@ public class MarshalUtil {
         return info;
     }
 
-    public static List<OrderInfo> convertString2OrderList(String str){
-        return null;
-    }
+//    public static List<OrderInfo> convertString2OrderList(String str){
+//        return null;
+//    }
 
     public static List<OrderInfo> convertRs2OrderList(ResultSet rs){
 
@@ -50,6 +50,7 @@ public class MarshalUtil {
                 info.setProdId(rs.getInt(6));
                 info.setProdName(rs.getString(7));
                 info.setPaymentId(rs.getInt(8));
+                info.setCartInfo(new CartInfo(rs.getLong(9)));
                 lst.add(info);
             }
         }catch(Exception e){
@@ -131,37 +132,8 @@ public class MarshalUtil {
         return lst;
     }
 
-    public static OrderInfo convertRs2OrderInfo(ResultSet rs){
-        OrderInfo info = new OrderInfo();
-        while (true){
-            try {
-                if (!rs.next()){
-                    long oid=rs.getLong(1);
-                    long uid = rs.getLong(2);
-                    //TODO 没有status会怎样 报错吗
-                    int status = rs.getInt(3);
-                    long mid = rs.getLong(4);
-                    String mName = rs.getString(5);
-                    long prodId = rs.getLong(6);
-                    String prodName=rs.getString(7);
-                    long paymentId=rs.getLong(8);
-                    info.setOrderId(oid);
-                    info.setUserId(uid);
-                    info.setMerchantId(mid);
-                    info.setMerchantName(mName);
-                    info.setProdId(prodId);
-                    info.setProdName(prodName);
-                    info.setPaymentId(paymentId);
-                    return info;
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-                return null;
-            }
 
-        }
-    }
-    public static List<CommentInfo> convertRs2CommentLists(ResultSet rs){
+    public static List<CommentInfo> convertRs2CommentList(ResultSet rs){
         JSONParser parser = new JSONParser();
         List<CommentInfo> lst=new ArrayList<>();
         try{
@@ -175,11 +147,10 @@ public class MarshalUtil {
                 info.setCommentDetails(rs.getString(4));
                 List<String> imageUrls = new ArrayList<>();
                 JSONArray jarr = (JSONArray) parser.parse(rs.getString(5));
-                List<String> re = new ArrayList<>();
                 for (Object jsonValue : jarr) {
-                    re.add( (String)jsonValue);
+                    imageUrls.add( (String)jsonValue);
                 }
-                info.setCommentImages(re);
+                info.setCommentImages(imageUrls);
                 lst.add(info);
             }
         }catch(Exception e){

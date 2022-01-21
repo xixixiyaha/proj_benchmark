@@ -74,17 +74,17 @@ public class CartInfoStorage {
         }
     }
 
-    static final String GET_CART_BY_ACCOUNT ="SELECT cart_id, user_id,prod_id,merchant_id,incart_quantity,incart_select FROM CART_INFOS WHERE user_id = ?";
-    static final String GET_LIMIT_CART_BY_ACCOUNT ="SELECT cart_id, user_id,prod_id,merchant_id,incart_quantity,incart_select FROM CART_INFOS WHERE user_id = ? ORDER BY update_time DESC LIMIT ?";
+    static final String GET_CART_BY_ACCOUNT ="SELECT cart_id, user_id,prod_id,merchant_id,incart_quantity,incart_select FROM CART_INFO WHERE user_id = ?";
+    static final String GET_LIMIT_CART_BY_ACCOUNT ="SELECT cart_id, user_id,prod_id,merchant_id,incart_quantity,incart_select FROM CART_INFO WHERE user_id = ? ORDER BY update_time DESC LIMIT ?";
 
-    static final String GET_OBJ_QUANTITY_BY_ACCOUNT_OBJ ="SELECT cart_id,incart_quantity FROM CART_INFOS WHERE user_id = ? AND obj_id = ?";
-    static final String UPDATE_OBJ_QUANTITY_BY_ID ="UPDATE CART_INFOS SET incart_quantity = ? WHERE cart_id=?";
-    static final String UPDATE_OBJ_SELECT_BY_ID ="UPDATE CART_INFOS SET incart_select = ? WHERE cart_id=?";
-    static final String UPDATE_OBJ_SELECT_BY_ACCOUNT_OBJ ="UPDATE CART_INFOS SET incart_select = ? WHERE  user_id = ? AND obj_id = ?";
+    static final String GET_OBJ_QUANTITY_BY_ACCOUNT_OBJ ="SELECT cart_id,incart_quantity FROM CART_INFO WHERE user_id = ? AND obj_id = ?";
+    static final String UPDATE_OBJ_QUANTITY_BY_ID ="UPDATE CART_INFO SET incart_quantity = ? WHERE cart_id=?";
+    static final String UPDATE_OBJ_SELECT_BY_ID ="UPDATE CART_INFO SET incart_select = ? WHERE cart_id=?";
+    static final String UPDATE_OBJ_SELECT_BY_ACCOUNT_OBJ ="UPDATE CART_INFO SET incart_select = ? WHERE  user_id = ? AND obj_id = ?";
 
-    static final String DELETE_CART_OBJ_BY_ID ="DELETE FROM CART_INFOS WHERE cart_id = ?";
-    static final String DELETE_CART_BY_ACCOUNT ="DELETE FROM CART_INFOS WHERE user_id = ?";
-    static final String ADD_CART_OBJ="INSERT INTO CART_INFOS (user_id,obj_id,merchant_id,incart_quantity,incart_select) VALUES(?,?,?,?,?)";
+    static final String DELETE_CART_OBJ_BY_ID ="DELETE FROM CART_INFO WHERE cart_id = ?";
+    static final String DELETE_CART_BY_ACCOUNT ="DELETE FROM CART_INFO WHERE user_id = ?";
+    static final String ADD_CART_OBJ="INSERT INTO CART_INFO (user_id,obj_id,merchant_id,incart_quantity,incart_select) VALUES(?,?,?,?,?)";
 
 
 

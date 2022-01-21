@@ -45,6 +45,8 @@ public class CartService {
 
     public long BM3CompareChainSequence(CartInfo info) throws org.apache.thrift.TException;
 
+    public CartInfo GetCartInfoById(long cartId, long userId) throws org.apache.thrift.TException;
+
   }
 
   public interface AsyncIface {
@@ -54,6 +56,8 @@ public class CartService {
     public void BM3CompareChainNested(CartInfo info, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
     public void BM3CompareChainSequence(CartInfo info, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+
+    public void GetCartInfoById(long cartId, long userId, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
 
   }
 
@@ -145,6 +149,30 @@ public class CartService {
         return result.success;
       }
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "BM3CompareChainSequence failed: unknown result");
+    }
+
+    public CartInfo GetCartInfoById(long cartId, long userId) throws org.apache.thrift.TException
+    {
+      send_GetCartInfoById(cartId, userId);
+      return recv_GetCartInfoById();
+    }
+
+    public void send_GetCartInfoById(long cartId, long userId) throws org.apache.thrift.TException
+    {
+      GetCartInfoById_args args = new GetCartInfoById_args();
+      args.setCartId(cartId);
+      args.setUserId(userId);
+      sendBase("GetCartInfoById", args);
+    }
+
+    public CartInfo recv_GetCartInfoById() throws org.apache.thrift.TException
+    {
+      GetCartInfoById_result result = new GetCartInfoById_result();
+      receiveBase(result, "GetCartInfoById");
+      if (result.isSetSuccess()) {
+        return result.success;
+      }
+      throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "GetCartInfoById failed: unknown result");
     }
 
   }
@@ -264,6 +292,41 @@ public class CartService {
       }
     }
 
+    public void GetCartInfoById(long cartId, long userId, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+      checkReady();
+      GetCartInfoById_call method_call = new GetCartInfoById_call(cartId, userId, resultHandler, this, ___protocolFactory, ___transport);
+      this.___currentMethod = method_call;
+      ___manager.call(method_call);
+    }
+
+    public static class GetCartInfoById_call extends org.apache.thrift.async.TAsyncMethodCall {
+      private long cartId;
+      private long userId;
+      public GetCartInfoById_call(long cartId, long userId, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+        super(client, protocolFactory, transport, resultHandler, false);
+        this.cartId = cartId;
+        this.userId = userId;
+      }
+
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("GetCartInfoById", org.apache.thrift.protocol.TMessageType.CALL, 0));
+        GetCartInfoById_args args = new GetCartInfoById_args();
+        args.setCartId(cartId);
+        args.setUserId(userId);
+        args.write(prot);
+        prot.writeMessageEnd();
+      }
+
+      public CartInfo getResult() throws org.apache.thrift.TException {
+        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+          throw new IllegalStateException("Method call not finished!");
+        }
+        org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
+        org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
+        return (new Client(prot)).recv_GetCartInfoById();
+      }
+    }
+
   }
 
   public static class Processor<I extends Iface> extends org.apache.thrift.TBaseProcessor<I> implements org.apache.thrift.TProcessor {
@@ -280,6 +343,7 @@ public class CartService {
       processMap.put("GetCartInfosByAccount", new GetCartInfosByAccount());
       processMap.put("BM3CompareChainNested", new BM3CompareChainNested());
       processMap.put("BM3CompareChainSequence", new BM3CompareChainSequence());
+      processMap.put("GetCartInfoById", new GetCartInfoById());
       return processMap;
     }
 
@@ -345,6 +409,26 @@ public class CartService {
       }
     }
 
+    public static class GetCartInfoById<I extends Iface> extends org.apache.thrift.ProcessFunction<I, GetCartInfoById_args> {
+      public GetCartInfoById() {
+        super("GetCartInfoById");
+      }
+
+      public GetCartInfoById_args getEmptyArgsInstance() {
+        return new GetCartInfoById_args();
+      }
+
+      protected boolean isOneway() {
+        return false;
+      }
+
+      public GetCartInfoById_result getResult(I iface, GetCartInfoById_args args) throws org.apache.thrift.TException {
+        GetCartInfoById_result result = new GetCartInfoById_result();
+        result.success = iface.GetCartInfoById(args.cartId, args.userId);
+        return result;
+      }
+    }
+
   }
 
   public static class AsyncProcessor<I extends AsyncIface> extends org.apache.thrift.TBaseAsyncProcessor<I> {
@@ -361,6 +445,7 @@ public class CartService {
       processMap.put("GetCartInfosByAccount", new GetCartInfosByAccount());
       processMap.put("BM3CompareChainNested", new BM3CompareChainNested());
       processMap.put("BM3CompareChainSequence", new BM3CompareChainSequence());
+      processMap.put("GetCartInfoById", new GetCartInfoById());
       return processMap;
     }
 
@@ -516,6 +601,57 @@ public class CartService {
 
       public void start(I iface, BM3CompareChainSequence_args args, org.apache.thrift.async.AsyncMethodCallback<Long> resultHandler) throws TException {
         iface.BM3CompareChainSequence(args.info,resultHandler);
+      }
+    }
+
+    public static class GetCartInfoById<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, GetCartInfoById_args, CartInfo> {
+      public GetCartInfoById() {
+        super("GetCartInfoById");
+      }
+
+      public GetCartInfoById_args getEmptyArgsInstance() {
+        return new GetCartInfoById_args();
+      }
+
+      public AsyncMethodCallback<CartInfo> getResultHandler(final AsyncFrameBuffer fb, final int seqid) {
+        final org.apache.thrift.AsyncProcessFunction fcall = this;
+        return new AsyncMethodCallback<CartInfo>() { 
+          public void onComplete(CartInfo o) {
+            GetCartInfoById_result result = new GetCartInfoById_result();
+            result.success = o;
+            try {
+              fcall.sendResponse(fb,result, org.apache.thrift.protocol.TMessageType.REPLY,seqid);
+              return;
+            } catch (Exception e) {
+              LOGGER.error("Exception writing to internal frame buffer", e);
+            }
+            fb.close();
+          }
+          public void onError(Exception e) {
+            byte msgType = org.apache.thrift.protocol.TMessageType.REPLY;
+            org.apache.thrift.TBase msg;
+            GetCartInfoById_result result = new GetCartInfoById_result();
+            {
+              msgType = org.apache.thrift.protocol.TMessageType.EXCEPTION;
+              msg = (org.apache.thrift.TBase)new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.INTERNAL_ERROR, e.getMessage());
+            }
+            try {
+              fcall.sendResponse(fb,msg,msgType,seqid);
+              return;
+            } catch (Exception ex) {
+              LOGGER.error("Exception writing to internal frame buffer", ex);
+            }
+            fb.close();
+          }
+        };
+      }
+
+      protected boolean isOneway() {
+        return false;
+      }
+
+      public void start(I iface, GetCartInfoById_args args, org.apache.thrift.async.AsyncMethodCallback<CartInfo> resultHandler) throws TException {
+        iface.GetCartInfoById(args.cartId, args.userId,resultHandler);
       }
     }
 
@@ -2124,7 +2260,7 @@ public class CartService {
   public static class BM3CompareChainSequence_args implements org.apache.thrift.TBase<BM3CompareChainSequence_args, BM3CompareChainSequence_args._Fields>, java.io.Serializable, Cloneable, Comparable<BM3CompareChainSequence_args>   {
     private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("BM3CompareChainSequence_args");
 
-    private static final org.apache.thrift.protocol.TField INFO_FIELD_DESC = new org.apache.thrift.protocol.TField("info", org.apache.thrift.protocol.TType.STRUCT, (short)2);
+    private static final org.apache.thrift.protocol.TField INFO_FIELD_DESC = new org.apache.thrift.protocol.TField("info", org.apache.thrift.protocol.TType.STRUCT, (short)1);
 
     private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
     static {
@@ -2136,7 +2272,7 @@ public class CartService {
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
-      INFO((short)2, "info");
+      INFO((short)1, "info");
 
       private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -2151,7 +2287,7 @@ public class CartService {
        */
       public static _Fields findByThriftId(int fieldId) {
         switch(fieldId) {
-          case 2: // INFO
+          case 1: // INFO
             return INFO;
           default:
             return null;
@@ -2417,7 +2553,7 @@ public class CartService {
             break;
           }
           switch (schemeField.id) {
-            case 2: // INFO
+            case 1: // INFO
               if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
                 struct.info = new CartInfo();
                 struct.info.read(iprot);
@@ -2841,6 +2977,830 @@ public class CartService {
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
           struct.success = iprot.readI64();
+          struct.setSuccessIsSet(true);
+        }
+      }
+    }
+
+  }
+
+  public static class GetCartInfoById_args implements org.apache.thrift.TBase<GetCartInfoById_args, GetCartInfoById_args._Fields>, java.io.Serializable, Cloneable, Comparable<GetCartInfoById_args>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("GetCartInfoById_args");
+
+    private static final org.apache.thrift.protocol.TField CART_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("cartId", org.apache.thrift.protocol.TType.I64, (short)1);
+    private static final org.apache.thrift.protocol.TField USER_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("userId", org.apache.thrift.protocol.TType.I64, (short)2);
+
+    private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
+    static {
+      schemes.put(StandardScheme.class, new GetCartInfoById_argsStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new GetCartInfoById_argsTupleSchemeFactory());
+    }
+
+    public long cartId; // required
+    public long userId; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      CART_ID((short)1, "cartId"),
+      USER_ID((short)2, "userId");
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 1: // CART_ID
+            return CART_ID;
+          case 2: // USER_ID
+            return USER_ID;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    private static final int __CARTID_ISSET_ID = 0;
+    private static final int __USERID_ISSET_ID = 1;
+    private byte __isset_bitfield = 0;
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.CART_ID, new org.apache.thrift.meta_data.FieldMetaData("cartId", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I64)));
+      tmpMap.put(_Fields.USER_ID, new org.apache.thrift.meta_data.FieldMetaData("userId", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I64)));
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(GetCartInfoById_args.class, metaDataMap);
+    }
+
+    public GetCartInfoById_args() {
+    }
+
+    public GetCartInfoById_args(
+      long cartId,
+      long userId)
+    {
+      this();
+      this.cartId = cartId;
+      setCartIdIsSet(true);
+      this.userId = userId;
+      setUserIdIsSet(true);
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public GetCartInfoById_args(GetCartInfoById_args other) {
+      __isset_bitfield = other.__isset_bitfield;
+      this.cartId = other.cartId;
+      this.userId = other.userId;
+    }
+
+    public GetCartInfoById_args deepCopy() {
+      return new GetCartInfoById_args(this);
+    }
+
+    @Override
+    public void clear() {
+      setCartIdIsSet(false);
+      this.cartId = 0;
+      setUserIdIsSet(false);
+      this.userId = 0;
+    }
+
+    public long getCartId() {
+      return this.cartId;
+    }
+
+    public GetCartInfoById_args setCartId(long cartId) {
+      this.cartId = cartId;
+      setCartIdIsSet(true);
+      return this;
+    }
+
+    public void unsetCartId() {
+      __isset_bitfield = EncodingUtils.clearBit(__isset_bitfield, __CARTID_ISSET_ID);
+    }
+
+    /** Returns true if field cartId is set (has been assigned a value) and false otherwise */
+    public boolean isSetCartId() {
+      return EncodingUtils.testBit(__isset_bitfield, __CARTID_ISSET_ID);
+    }
+
+    public void setCartIdIsSet(boolean value) {
+      __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __CARTID_ISSET_ID, value);
+    }
+
+    public long getUserId() {
+      return this.userId;
+    }
+
+    public GetCartInfoById_args setUserId(long userId) {
+      this.userId = userId;
+      setUserIdIsSet(true);
+      return this;
+    }
+
+    public void unsetUserId() {
+      __isset_bitfield = EncodingUtils.clearBit(__isset_bitfield, __USERID_ISSET_ID);
+    }
+
+    /** Returns true if field userId is set (has been assigned a value) and false otherwise */
+    public boolean isSetUserId() {
+      return EncodingUtils.testBit(__isset_bitfield, __USERID_ISSET_ID);
+    }
+
+    public void setUserIdIsSet(boolean value) {
+      __isset_bitfield = EncodingUtils.setBit(__isset_bitfield, __USERID_ISSET_ID, value);
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      case CART_ID:
+        if (value == null) {
+          unsetCartId();
+        } else {
+          setCartId((Long)value);
+        }
+        break;
+
+      case USER_ID:
+        if (value == null) {
+          unsetUserId();
+        } else {
+          setUserId((Long)value);
+        }
+        break;
+
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      case CART_ID:
+        return getCartId();
+
+      case USER_ID:
+        return getUserId();
+
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      case CART_ID:
+        return isSetCartId();
+      case USER_ID:
+        return isSetUserId();
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof GetCartInfoById_args)
+        return this.equals((GetCartInfoById_args)that);
+      return false;
+    }
+
+    public boolean equals(GetCartInfoById_args that) {
+      if (that == null)
+        return false;
+
+      boolean this_present_cartId = true;
+      boolean that_present_cartId = true;
+      if (this_present_cartId || that_present_cartId) {
+        if (!(this_present_cartId && that_present_cartId))
+          return false;
+        if (this.cartId != that.cartId)
+          return false;
+      }
+
+      boolean this_present_userId = true;
+      boolean that_present_userId = true;
+      if (this_present_userId || that_present_userId) {
+        if (!(this_present_userId && that_present_userId))
+          return false;
+        if (this.userId != that.userId)
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      List<Object> list = new ArrayList<Object>();
+
+      boolean present_cartId = true;
+      list.add(present_cartId);
+      if (present_cartId)
+        list.add(cartId);
+
+      boolean present_userId = true;
+      list.add(present_userId);
+      if (present_userId)
+        list.add(userId);
+
+      return list.hashCode();
+    }
+
+    @Override
+    public int compareTo(GetCartInfoById_args other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+
+      lastComparison = Boolean.valueOf(isSetCartId()).compareTo(other.isSetCartId());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetCartId()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.cartId, other.cartId);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = Boolean.valueOf(isSetUserId()).compareTo(other.isSetUserId());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetUserId()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.userId, other.userId);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
+    }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("GetCartInfoById_args(");
+      boolean first = true;
+
+      sb.append("cartId:");
+      sb.append(this.cartId);
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("userId:");
+      sb.append(this.userId);
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
+        __isset_bitfield = 0;
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private static class GetCartInfoById_argsStandardSchemeFactory implements SchemeFactory {
+      public GetCartInfoById_argsStandardScheme getScheme() {
+        return new GetCartInfoById_argsStandardScheme();
+      }
+    }
+
+    private static class GetCartInfoById_argsStandardScheme extends StandardScheme<GetCartInfoById_args> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, GetCartInfoById_args struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 1: // CART_ID
+              if (schemeField.type == org.apache.thrift.protocol.TType.I64) {
+                struct.cartId = iprot.readI64();
+                struct.setCartIdIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 2: // USER_ID
+              if (schemeField.type == org.apache.thrift.protocol.TType.I64) {
+                struct.userId = iprot.readI64();
+                struct.setUserIdIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, GetCartInfoById_args struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        oprot.writeFieldBegin(CART_ID_FIELD_DESC);
+        oprot.writeI64(struct.cartId);
+        oprot.writeFieldEnd();
+        oprot.writeFieldBegin(USER_ID_FIELD_DESC);
+        oprot.writeI64(struct.userId);
+        oprot.writeFieldEnd();
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class GetCartInfoById_argsTupleSchemeFactory implements SchemeFactory {
+      public GetCartInfoById_argsTupleScheme getScheme() {
+        return new GetCartInfoById_argsTupleScheme();
+      }
+    }
+
+    private static class GetCartInfoById_argsTupleScheme extends TupleScheme<GetCartInfoById_args> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, GetCartInfoById_args struct) throws org.apache.thrift.TException {
+        TTupleProtocol oprot = (TTupleProtocol) prot;
+        BitSet optionals = new BitSet();
+        if (struct.isSetCartId()) {
+          optionals.set(0);
+        }
+        if (struct.isSetUserId()) {
+          optionals.set(1);
+        }
+        oprot.writeBitSet(optionals, 2);
+        if (struct.isSetCartId()) {
+          oprot.writeI64(struct.cartId);
+        }
+        if (struct.isSetUserId()) {
+          oprot.writeI64(struct.userId);
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, GetCartInfoById_args struct) throws org.apache.thrift.TException {
+        TTupleProtocol iprot = (TTupleProtocol) prot;
+        BitSet incoming = iprot.readBitSet(2);
+        if (incoming.get(0)) {
+          struct.cartId = iprot.readI64();
+          struct.setCartIdIsSet(true);
+        }
+        if (incoming.get(1)) {
+          struct.userId = iprot.readI64();
+          struct.setUserIdIsSet(true);
+        }
+      }
+    }
+
+  }
+
+  public static class GetCartInfoById_result implements org.apache.thrift.TBase<GetCartInfoById_result, GetCartInfoById_result._Fields>, java.io.Serializable, Cloneable, Comparable<GetCartInfoById_result>   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("GetCartInfoById_result");
+
+    private static final org.apache.thrift.protocol.TField SUCCESS_FIELD_DESC = new org.apache.thrift.protocol.TField("success", org.apache.thrift.protocol.TType.STRUCT, (short)0);
+
+    private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
+    static {
+      schemes.put(StandardScheme.class, new GetCartInfoById_resultStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new GetCartInfoById_resultTupleSchemeFactory());
+    }
+
+    public CartInfo success; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      SUCCESS((short)0, "success");
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 0: // SUCCESS
+            return SUCCESS;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, CartInfo.class)));
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(GetCartInfoById_result.class, metaDataMap);
+    }
+
+    public GetCartInfoById_result() {
+    }
+
+    public GetCartInfoById_result(
+      CartInfo success)
+    {
+      this();
+      this.success = success;
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public GetCartInfoById_result(GetCartInfoById_result other) {
+      if (other.isSetSuccess()) {
+        this.success = new CartInfo(other.success);
+      }
+    }
+
+    public GetCartInfoById_result deepCopy() {
+      return new GetCartInfoById_result(this);
+    }
+
+    @Override
+    public void clear() {
+      this.success = null;
+    }
+
+    public CartInfo getSuccess() {
+      return this.success;
+    }
+
+    public GetCartInfoById_result setSuccess(CartInfo success) {
+      this.success = success;
+      return this;
+    }
+
+    public void unsetSuccess() {
+      this.success = null;
+    }
+
+    /** Returns true if field success is set (has been assigned a value) and false otherwise */
+    public boolean isSetSuccess() {
+      return this.success != null;
+    }
+
+    public void setSuccessIsSet(boolean value) {
+      if (!value) {
+        this.success = null;
+      }
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      case SUCCESS:
+        if (value == null) {
+          unsetSuccess();
+        } else {
+          setSuccess((CartInfo)value);
+        }
+        break;
+
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      case SUCCESS:
+        return getSuccess();
+
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      case SUCCESS:
+        return isSetSuccess();
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof GetCartInfoById_result)
+        return this.equals((GetCartInfoById_result)that);
+      return false;
+    }
+
+    public boolean equals(GetCartInfoById_result that) {
+      if (that == null)
+        return false;
+
+      boolean this_present_success = true && this.isSetSuccess();
+      boolean that_present_success = true && that.isSetSuccess();
+      if (this_present_success || that_present_success) {
+        if (!(this_present_success && that_present_success))
+          return false;
+        if (!this.success.equals(that.success))
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      List<Object> list = new ArrayList<Object>();
+
+      boolean present_success = true && (isSetSuccess());
+      list.add(present_success);
+      if (present_success)
+        list.add(success);
+
+      return list.hashCode();
+    }
+
+    @Override
+    public int compareTo(GetCartInfoById_result other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+
+      lastComparison = Boolean.valueOf(isSetSuccess()).compareTo(other.isSetSuccess());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetSuccess()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.success, other.success);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
+      }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("GetCartInfoById_result(");
+      boolean first = true;
+
+      sb.append("success:");
+      if (this.success == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.success);
+      }
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+      // check for sub-struct validity
+      if (success != null) {
+        success.validate();
+      }
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private static class GetCartInfoById_resultStandardSchemeFactory implements SchemeFactory {
+      public GetCartInfoById_resultStandardScheme getScheme() {
+        return new GetCartInfoById_resultStandardScheme();
+      }
+    }
+
+    private static class GetCartInfoById_resultStandardScheme extends StandardScheme<GetCartInfoById_result> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, GetCartInfoById_result struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 0: // SUCCESS
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.success = new CartInfo();
+                struct.success.read(iprot);
+                struct.setSuccessIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, GetCartInfoById_result struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.success != null) {
+          oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
+          struct.success.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class GetCartInfoById_resultTupleSchemeFactory implements SchemeFactory {
+      public GetCartInfoById_resultTupleScheme getScheme() {
+        return new GetCartInfoById_resultTupleScheme();
+      }
+    }
+
+    private static class GetCartInfoById_resultTupleScheme extends TupleScheme<GetCartInfoById_result> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, GetCartInfoById_result struct) throws org.apache.thrift.TException {
+        TTupleProtocol oprot = (TTupleProtocol) prot;
+        BitSet optionals = new BitSet();
+        if (struct.isSetSuccess()) {
+          optionals.set(0);
+        }
+        oprot.writeBitSet(optionals, 1);
+        if (struct.isSetSuccess()) {
+          struct.success.write(oprot);
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, GetCartInfoById_result struct) throws org.apache.thrift.TException {
+        TTupleProtocol iprot = (TTupleProtocol) prot;
+        BitSet incoming = iprot.readBitSet(1);
+        if (incoming.get(0)) {
+          struct.success = new CartInfo();
+          struct.success.read(iprot);
           struct.setSuccessIsSet(true);
         }
       }

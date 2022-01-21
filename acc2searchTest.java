@@ -60,8 +60,8 @@ public class acc2searchTest{
     private static void benchmark(String taskName) {
         try {
             System.out.println("<benchmark> [taskName]:"+taskName);
-            var serverPackage = packageAndGet(new File("thrift-search"));
-            var clientPackage = packageAndGet(new File("thrift-accounts"));
+            var serverPackage = packageAndGet(new File("com.freeb.thrift-search"));
+            var clientPackage = packageAndGet(new File("com.freeb.thrift-accounts"));
 
             startServer(serverPackage);
 //            startLocalServer(serverPackage);

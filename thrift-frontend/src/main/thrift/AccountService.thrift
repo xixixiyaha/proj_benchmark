@@ -1,4 +1,4 @@
-namespace java com.freeb.thrift
+namespace java com.freeb.com.freeb.thrift
 
 enum IdType{
     ACCOUNT_ID = 0,

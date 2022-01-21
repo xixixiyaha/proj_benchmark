@@ -29,7 +29,7 @@ public class Server {
 			serverParams.processor(new SearchService.Processor<SearchService.Iface>(new SearchServiceServerImpl()));
 			TServer server = new TThreadedSelectorServer(serverParams);
 			timestamp = new Timestamp(System.currentTimeMillis());
-			System.out.println("in thrift Server main() ==  =="+timestamp.toString());
+			System.out.println("in com.freeb.thrift Server main() ==  =="+timestamp.toString());
 			server.serve();
 		}catch (TTransportException e){
 			System.out.println("Server Exception is "+e.getMessage());

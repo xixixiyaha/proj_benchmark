@@ -1,4 +1,4 @@
-namespace java com.freeb.thrift
+namespace java com.freeb.com.freeb.thrift
 
 enum SearchType{
      ACCOUNT_ID = 0,

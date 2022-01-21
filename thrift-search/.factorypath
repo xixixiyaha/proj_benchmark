@@ -1,10 +1,10 @@
 <factorypath>
-    <factorypathentry kind="VARJAR" id="M2_REPO/org/apache/thrift/libthrift/0.9.3/libthrift-0.9.3.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/org/apache/com.freeb.thrift/libthrift/0.9.3/libthrift-0.9.3.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/slf4j/slf4j-api/1.7.12/slf4j-api-1.7.12.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/apache/httpcomponents/httpclient/4.4.1/httpclient-4.4.1.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/commons-codec/commons-codec/1.9/commons-codec-1.9.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/apache/httpcomponents/httpcore/4.4.1/httpcore-4.4.1.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="M2_REPO/org/apache/thrift/thrift-maven-plugin/0.9.3/thrift-maven-plugin-0.9.3.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/org/apache/com.freeb.thrift/com.freeb.thrift-maven-plugin/0.9.3/com.freeb.thrift-maven-plugin-0.9.3.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/apache/maven/maven-plugin-api/3.1.0/maven-plugin-api-3.1.0.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/apache/maven/maven-model/3.1.0/maven-model-3.1.0.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/apache/maven/maven-artifact/3.1.0/maven-artifact-3.1.0.jar" enabled="true" runInBatchMode="false"/>

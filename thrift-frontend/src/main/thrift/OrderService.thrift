@@ -1,6 +1,4 @@
-namespace java com.freeb.thrift
-include "CartService.thrift"
-
+namespace java com.freeb.com.freeb.thrift
 
 enum RespCode {
     SUCCESS=0,
@@ -21,7 +19,7 @@ struct OrderInfo{
     6:required i64 prodId,
     7:required string prodName,
     8:optional i64 paymentId,
-    9:optional CartService.CartInfo cartId,
+    9:optional i64 cartId,
 }
 struct OrderResp{
     1: optional list<OrderInfo> orderInfos;
@@ -35,13 +33,13 @@ struct OrderReq{
   3:optional i64 merchantId,
   4:optional string merchantName,
   5:optional i64 prodId,
-  6:optional i64 prodName,
+  6:optional string prodName,
   7:optional i64 orderId,
   8:optional i64 paymentId,
-  9:optional CartService.CartInfo cartId,
+  9:optional i64 cartId,
 }
 
-service OrderSearvice{
+service OrderService{
     OrderResp GetOrderListByUserId(1:OrderReq orderReq);
 
     OrderResp GetOrderByPaymentId(1:OrderReq orderReq);

@@ -1,9 +1,9 @@
-package thrift.AccountServer;
+package com.freeb.thrift.AccountServer;
 
 import com.freeb.Service.AccountServiceImpl;
 import org.apache.thrift.TException;
-import thrift.AccountsTypeConvert;
-import thrift.AccountClients.AccountForeignClients;
+import com.freeb.thrift.AccountsTypeConvert;
+import com.freeb.thrift.AccountClients.AccountForeignClients;
 
 import java.util.List;
 
@@ -50,11 +50,11 @@ public class AccountsServiceServerImpl implements AccountService.Iface{
     @Override
     public String CompareResEfficiencyBM1(String remoteFilePath, int testType) throws TException {
         if(IS_DBG){
-            System.out.println("IN AccountServiceImpl/thrift CompareResEfficiencyBM1");
+            System.out.println("IN AccountServiceImpl/com.freeb.thrift CompareResEfficiencyBM1");
         }
         String str = accountService.CompareResEfficiencyBM1(remoteFilePath,testType);
         if(IS_DBG) {
-            System.out.println("POST AccountServiceImpl/thrift CompareResEfficiencyBM1");
+            System.out.println("POST AccountServiceImpl/com.freeb.thrift CompareResEfficiencyBM1");
         }
         return str;
     }

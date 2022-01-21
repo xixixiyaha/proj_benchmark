@@ -53,16 +53,16 @@ public class launchBM1{
 
         return Stream.of(folder.list())
                 .filter(name -> (name.endsWith("-frontend")))
-                .map(name -> name.substring("thrift-".length()))
+                .map(name -> name.substring("com.freeb.thrift-".length()))
                 .sorted();
     }
 
     private static void benchmark(String taskName) {
         try {
             System.out.println("<benchmark> [taskName]:"+taskName);
-            var searchServerPackage = packageAndGet(new File("thrift-search"));
-            var accountsServerPackage = packageAndGet(new File("thrift-accounts"));
-            var frontendPackage = packageAndGet(new File("thrift-frontend"));
+            var searchServerPackage = packageAndGet(new File("com.freeb.thrift-search"));
+            var accountsServerPackage = packageAndGet(new File("com.freeb.thrift-accounts"));
+            var frontendPackage = packageAndGet(new File("com.freeb.thrift-frontend"));
             startServer(searchServerPackage,"bm-search-server");
             System.out.println("<benchmark server> [bm-search-server]");
 

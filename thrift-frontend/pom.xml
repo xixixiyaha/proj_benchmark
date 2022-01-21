@@ -12,13 +12,13 @@
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
-        <version.benchmark.rpc.thrift>0.9.3</version.benchmark.rpc.thrift>
+        <version.benchmark.rpc.com.freeb.thrift>0.9.3</version.benchmark.rpc.com.freeb.thrift>
         <version.benchmark-base>1.0-SNAPSHOT</version.benchmark-base>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jmh.version>1.28</jmh.version>
     </properties>
 
-    <artifactId>thrift-frontend</artifactId>
+    <artifactId>com.freeb.thrift-frontend</artifactId>
     <dependencies>
         <dependency>
             <groupId>free.benchmark</groupId>
@@ -27,7 +27,7 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>org.apache.thrift</groupId>
+            <groupId>org.apache.com.freeb.thrift</groupId>
             <artifactId>libthrift</artifactId>
             <version>0.12.0</version>
             <scope>compile</scope>

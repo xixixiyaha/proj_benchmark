@@ -1,4 +1,4 @@
-namespace java com.freeb.thrift
+namespace java com.freeb.com.freeb.thrift
 
 struct CartInfo{
     1:required i64 cartId,
@@ -17,6 +17,9 @@ service CartService{
 
     i64 BM3CompareChainNested(1:CartInfo info);
 
-    i64 BM3CompareChainSequence(2:CartInfo info);
+    i64 BM3CompareChainSequence(1:CartInfo info);
+
+    CartInfo GetCartInfoById(1:i64 cartId,2:i64 userId);
+
 
 }

@@ -133,7 +133,7 @@ public class OrderServiceServerImpl implements OrderService {
             return orderResp;
         }
         // 2. product 有余量 + Fetch Name + Fetch 商家名字
-        CartInfo cInfo = orderReq.getCartInfo();
+        CartInfo cInfo = orderReq.getCartId();
         if(cInfo==null){
             logger.warn("create order failed cInfo = NULL OrderReq="+orderReq.toString());
             orderResp.setBaseResp(PackResponse.packUnknownFailure());

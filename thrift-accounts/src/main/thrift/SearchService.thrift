@@ -1,4 +1,4 @@
-namespace java benchmark.rpc.thrift
+namespace java benchmark.rpc.com.freeb.thrift
  
 service SearchService {
   

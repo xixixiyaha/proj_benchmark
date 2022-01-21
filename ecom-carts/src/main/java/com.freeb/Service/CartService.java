@@ -17,5 +17,7 @@ public interface CartService {
 
     Long BM3CompareChainSequence(CartInfo info);
 
+    CartInfo GetCartInfoById(Long cartId,Long userId);
+
 
 }

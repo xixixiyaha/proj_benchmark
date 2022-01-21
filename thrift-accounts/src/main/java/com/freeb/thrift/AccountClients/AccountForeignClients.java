@@ -1,4 +1,4 @@
-package thrift.AccountClients;
+package com.freeb.thrift.AccountClients;
 
 import com.freeb.Clients.AccountClients;
 import com.freeb.Utils.LockObjectPool;

@@ -12,9 +12,9 @@ import org.openjdk.jmh.runner.RunnerException;
 import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
 import org.openjdk.jmh.runner.options.TimeValue;
-import thrift.AccountServer.AccountService;
-import thrift.AccountServer.AccountsServiceServerImpl;
-import thrift.AccountClients.AccountForeignClients;
+import com.freeb.thrift.AccountServer.AccountService;
+import com.freeb.thrift.AccountServer.AccountsServiceServerImpl;
+import com.freeb.thrift.AccountClients.AccountForeignClients;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -58,7 +58,7 @@ public class AccountsServer {
             serverParams.processor(new AccountService.Processor<AccountService.Iface>(new AccountsServiceServerImpl()));
             TServer server = new TThreadedSelectorServer(serverParams);
             timestamp = new Timestamp(System.currentTimeMillis());
-            System.out.println("in thrift Server main() ==  =="+timestamp.toString());
+            System.out.println("in com.freeb.thrift Server main() ==  =="+timestamp.toString());
             server.serve();
         }catch (TTransportException e){
             System.out.println("Server Exception is "+e.getMessage());
@@ -91,9 +91,9 @@ public class AccountsServer {
                 .forks(1)//
                 .build();
 
-        System.out.println("in thrift com.freeb.AccountsServer main() === 4 === ");
+        System.out.println("in com.freeb.thrift com.freeb.AccountsServer main() === 4 === ");
         new Runner(opt).run();
-        System.out.println("in thrift com.freeb.AccountsServer main() === 5 === ");
+        System.out.println("in com.freeb.thrift com.freeb.AccountsServer main() === 5 === ");
     }
 
     public static void main(String[] args) throws Exception {

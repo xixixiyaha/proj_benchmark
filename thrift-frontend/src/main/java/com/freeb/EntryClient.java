@@ -65,9 +65,9 @@ public class EntryClient {
                 .forks(1)//
                 .build();
 
-        System.out.println("in thrift com.freeb.BM! main() === 4 === ");
+        System.out.println("in com.freeb.thrift com.freeb.BM! main() === 4 === ");
         new Runner(opt).run();
-        System.out.println("in thrift com.freeb.BM! main() === 5 === ");
+        System.out.println("in com.freeb.thrift com.freeb.BM! main() === 5 === ");
 
 
     }

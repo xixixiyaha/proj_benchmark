@@ -14,8 +14,8 @@
 
     <modules>
 <!--        <module>base-benchmark</module>-->
-<!--        <module>thrift-client</module>-->
-<!--        <module>thrift-server</module>-->
+<!--        <module>com.freeb.thrift-client</module>-->
+<!--        <module>com.freeb.thrift-server</module>-->
         <module>ecom-order</module>
         <module>ecom-account</module>
         <module>ecom-common</module>
@@ -23,11 +23,12 @@
         <module>ecom-carts</module>
         <module>ecom-search</module>
         <module>ecom-category</module>
-        <module>thrift-accounts</module>
-        <module>thrift-search</module>
-        <module>thrift-frontend</module>
+        <module>com.freeb.thrift-accounts</module>
+        <module>com.freeb.thrift-search</module>
+        <module>com.freeb.thrift-frontend</module>
         <module>ecom-product</module>
         <module>ecom-discount</module>
+        <module>com.freeb.thrift-carts</module>
     </modules>
 
     <properties>

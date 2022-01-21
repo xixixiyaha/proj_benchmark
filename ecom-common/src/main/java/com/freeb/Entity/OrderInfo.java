@@ -20,7 +20,22 @@ public class OrderInfo {
     private long prodId;
     private String prodName;
     private long paymentId;
-    private CartInfo cartInfo;
+    private long cartId;
+
+    public OrderInfo() {
+    }
+
+    public OrderInfo(long orderId, long userId, int paymentStatus, long merchantId, String merchantName, long prodId, String prodName, long paymentId, long cartId) {
+        this.orderId = orderId;
+        this.userId = userId;
+        this.paymentStatus = paymentStatus;
+        this.merchantId = merchantId;
+        this.merchantName = merchantName;
+        this.prodId = prodId;
+        this.prodName = prodName;
+        this.paymentId = paymentId;
+        this.cartId = cartId;
+    }
 
     public long getOrderId() {
         return orderId;
@@ -87,12 +102,12 @@ public class OrderInfo {
     }
 
 
-    public CartInfo getCartInfo() {
-        return cartInfo;
+    public long getCartId() {
+        return cartId;
     }
 
-    public void setCartInfo(CartInfo cartInfo) {
-        this.cartInfo = cartInfo;
+    public void setCartInfo(long cartId) {
+        this.cartId = cartId;
     }
 
     @Override
@@ -106,7 +121,7 @@ public class OrderInfo {
                 ", prodId=" + prodId +
                 ", prodName='" + prodName + '\'' +
                 ", paymentId=" + paymentId +
-                ", cartInfo=" + cartInfo +
+                ", cartId=" + cartId +
                 '}';
     }
 }

@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <groupId>free.benchmark</groupId>
-    <artifactId>thrift-server</artifactId>
+    <artifactId>com.freeb.thrift-server</artifactId>
 
     <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
@@ -13,7 +13,7 @@
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
-        <version.thrift>0.9.3</version.thrift>
+        <version.com.freeb.thrift>0.9.3</version.com.freeb.thrift>
         <version.benchmark-base>1.0-SNAPSHOT</version.benchmark-base>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
@@ -24,13 +24,13 @@
             <version>${version.benchmark-base}</version>
         </dependency>
         <dependency>
-            <groupId>org.apache.thrift</groupId>
+            <groupId>org.apache.com.freeb.thrift</groupId>
             <artifactId>libthrift</artifactId>
-            <version>${version.thrift}</version>
+            <version>${version.com.freeb.thrift}</version>
         </dependency>
         <dependency>
-            <groupId>org.apache.thrift</groupId>
-            <artifactId>thrift-maven-plugin</artifactId>
+            <groupId>org.apache.com.freeb.thrift</groupId>
+            <artifactId>com.freeb.thrift-maven-plugin</artifactId>
             <version>0.9.3</version>
         </dependency>
         <dependency>
@@ -56,7 +56,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>benchmark.rpc.Server</mainClass>
+                            <mainClass>benchmark.rpc.com.freeb.CartServer</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

@@ -15,6 +15,15 @@ public class CartInfo {
         this.cartId = cartId;
     }
 
+    public CartInfo(Long cartId, Long userId, Long prodId, Long merchantId, Integer incartQuantity, Integer incartSelect) {
+        this.cartId = cartId;
+        this.userId = userId;
+        this.prodId = prodId;
+        this.merchantId = merchantId;
+        this.incartQuantity = incartQuantity;
+        this.incartSelect = incartSelect;
+    }
+
     public Long getCartId() {
         return cartId;
     }

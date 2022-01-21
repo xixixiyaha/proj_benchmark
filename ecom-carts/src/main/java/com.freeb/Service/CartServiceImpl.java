@@ -4,7 +4,6 @@ import com.freeb.Clients.CartClients;
 import com.freeb.Dao.CartInfoStorage;
 import com.freeb.Entity.CartInfo;
 import com.freeb.Entity.OrderReq;
-import com.freeb.Entity.OrderResp;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -40,7 +39,7 @@ public class CartServiceImpl implements CartService {
 
         OrderReq req = new OrderReq();
         req.setUserId(info.getUserId());
-        req.setCartInfo(info);
+        req.setCartId(info);
         return clients.CreateOrderByCartInfo(req).getOrderInfos().get(0).getOrderId();
     }
 

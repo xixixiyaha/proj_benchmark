@@ -20,7 +20,7 @@ public class OrderReq {
     private String prodName;
     private long orderId;
     private long paymentId;
-    private CartInfo cartInfo;
+    private long cartId;
 
     public long getPaymentId() {
         return paymentId;
@@ -87,12 +87,12 @@ public class OrderReq {
     }
 
 
-    public CartInfo getCartInfo() {
-        return cartInfo;
+    public long getCartId() {
+        return cartId;
     }
 
-    public void setCartInfo(CartInfo cartInfo) {
-        this.cartInfo = cartInfo;
+    public void setCartId(long cartId) {
+        this.cartId = cartId;
     }
 
     @Override
@@ -106,7 +106,7 @@ public class OrderReq {
                 ", prodName='" + prodName + '\'' +
                 ", orderId=" + orderId +
                 ", paymentId=" + paymentId +
-                ", cartInfo=" + cartInfo +
+                ", cartInfo=" + cartId +
                 '}';
     }
 }

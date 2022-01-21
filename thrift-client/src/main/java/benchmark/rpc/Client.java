@@ -83,9 +83,9 @@ public class Client extends AbstractUserClient {
 				.forks(1)//
 				.build();
 
-		System.out.println("in thrift Client main() === 4 === ");
+		System.out.println("in com.freeb.thrift Client main() === 4 === ");
 		new Runner(opt).run();
-		System.out.println("in thrift Client main() === 5 === ");
+		System.out.println("in com.freeb.thrift Client main() === 5 === ");
 
 	}
 

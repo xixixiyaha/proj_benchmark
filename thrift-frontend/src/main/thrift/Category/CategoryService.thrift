@@ -1,6 +1,6 @@
-namespace java com.freeb.thrift
-include "DiscountService.thrift"
-include "ProductService.thrift"
+namespace java com.freeb.com.freeb.thrift
+include "DiscountService.com.freeb.thrift"
+include "ProductService.com.freeb.thrift"
 
 struct ProductPage {
     1:required ProductService.ProductInfo info,

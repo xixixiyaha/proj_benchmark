@@ -36,9 +36,9 @@ in ThriftSearchClientImpl 31
 in LockObjectPool == 3 ==
 true
 <AccClient.testSearchRe>0
-in thrift com.freeb.AccountsServer main() === 4 ===
+in com.freeb.thrift com.freeb.AccountsServer main() === 4 ===
 # JMH version: 1.28
-# VM version: JDK 11.0.11, OpenJDK 64-Bit Server VM, 11.0.11+9-Ubuntu-0ubuntu2.18.04
+# VM version: JDK 11.0.11, OpenJDK 64-Bit com.freeb.CartServer VM, 11.0.11+9-Ubuntu-0ubuntu2.18.04
 # VM invoker: /usr/lib/jvm/java-11-openjdk-amd64/bin/java
 # VM options: -Xmx1g -Xms1g -XX:MaxDirectMemorySize=1g -XX:+UseG1GC
 # Blackhole mode: full + dont-inline hint
@@ -103,7 +103,7 @@ Result "com.freeb.AccountsServer.testSearchRe":
 
 
 # JMH version: 1.28
-# VM version: JDK 11.0.11, OpenJDK 64-Bit Server VM, 11.0.11+9-Ubuntu-0ubuntu2.18.04
+# VM version: JDK 11.0.11, OpenJDK 64-Bit com.freeb.CartServer VM, 11.0.11+9-Ubuntu-0ubuntu2.18.04
 # VM invoker: /usr/lib/jvm/java-11-openjdk-amd64/bin/java
 # VM options: -Xmx1g -Xms1g -XX:MaxDirectMemorySize=1g -XX:+UseG1GC
 # Blackhole mode: full + dont-inline hint
@@ -168,7 +168,7 @@ Result "com.freeb.AccountsServer.testSearchRe":
 
 
 # JMH version: 1.28
-# VM version: JDK 11.0.11, OpenJDK 64-Bit Server VM, 11.0.11+9-Ubuntu-0ubuntu2.18.04
+# VM version: JDK 11.0.11, OpenJDK 64-Bit com.freeb.CartServer VM, 11.0.11+9-Ubuntu-0ubuntu2.18.04
 # VM invoker: /usr/lib/jvm/java-11-openjdk-amd64/bin/java
 # VM options: -Xmx1g -Xms1g -XX:MaxDirectMemorySize=1g -XX:+UseG1GC
 # Blackhole mode: full + dont-inline hint
@@ -301,4 +301,4 @@ HalfBMOne.testSearchRe:testSearchRe·p0.99    sample       3191.446             
 HalfBMOne.testSearchRe:testSearchRe·p0.999   sample       4706.009             ms/op
 HalfBMOne.testSearchRe:testSearchRe·p0.9999  sample       4706.009             ms/op
 HalfBMOne.testSearchRe:testSearchRe·p1.00    sample       4706.009             ms/op
-in thrift com.freeb.AccountsServer main() === 5 ===
+in com.freeb.thrift com.freeb.AccountsServer main() === 5 ===

@@ -12,20 +12,21 @@
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
-        <version.benchmark.rpc.thrift>0.9.3</version.benchmark.rpc.thrift>
+        <version.benchmark.rpc.com.freeb.thrift>0.9.3</version.benchmark.rpc.com.freeb.thrift>
         <version.benchmark-base>1.0-SNAPSHOT</version.benchmark-base>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jmh.version>1.28</jmh.version>
     </properties>
 
-    <artifactId>thrift-accounts</artifactId>
+    <artifactId>com.freeb.thrift-accounts</artifactId>
 
     <dependencies>
         <dependency>
             <groupId>free.benchmark</groupId>
             <artifactId>ecom-account</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <!--<version>${version.benchmark-base}</version>-->
+            <version>${version.benchmark-base}</version>
+            <scope>compile</scope>
+<!--            ToDO@ high priority <scope> 是什么参数-->
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -49,8 +50,8 @@
             <version>1.7.32</version>
         </dependency>
         <dependency>
-            <groupId>org.apache.thrift</groupId>
-            <artifactId>thrift-maven-plugin</artifactId>
+            <groupId>org.apache.com.freeb.thrift</groupId>
+            <artifactId>com.freeb.thrift-maven-plugin</artifactId>
             <version>0.9.3</version>
         </dependency>
         <dependency>
@@ -70,7 +71,7 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.apache.thrift</groupId>
+            <groupId>org.apache.com.freeb.thrift</groupId>
             <artifactId>libthrift</artifactId>
             <version>0.12.0</version>
             <scope>compile</scope>
@@ -80,12 +81,12 @@
             <artifactId>javax.annotation-api</artifactId>
             <version>1.3.2</version>
         </dependency>
-        <dependency>
-            <groupId>free.benchmark</groupId>
-            <artifactId>ecom-account</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>free.benchmark</groupId>-->
+<!--            <artifactId>ecom-account</artifactId>-->
+<!--            <version>1.0-SNAPSHOT</version>-->
+<!--            <scope>compile</scope>-->
+<!--        </dependency>-->
     </dependencies>
 
     <build>

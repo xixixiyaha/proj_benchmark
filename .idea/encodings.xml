@@ -36,6 +36,8 @@
     <file url="file://$PROJECT_DIR$/thrift-frontend/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/thrift-payment/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/thrift-payment/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/thrift-product/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/thrift-product/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/thrift-search/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/thrift-search/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/thrift-server/src/main/java" charset="UTF-8" />

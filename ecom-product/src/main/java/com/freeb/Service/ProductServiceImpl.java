@@ -24,6 +24,10 @@ public class ProductServiceImpl implements ProductService {
     private int curClicks;
     private ProductClients clients;
 
+    public ProductServiceImpl(ProductClients clients) {
+        this.clients = clients;
+    }
+
 
     @Override
     public HashMap<Integer, Integer> GetUserActiveByCategory(Long id) {

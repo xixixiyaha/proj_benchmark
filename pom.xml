@@ -32,6 +32,7 @@
         <module>thrift-discount</module>
         <module>thrift-category</module>
         <module>thrift-payment</module>
+        <module>thrift-product</module>
     </modules>
 
     <properties>

@@ -22,6 +22,7 @@
         <module name="ecom-order" />
         <module name="thrift-category" />
         <module name="thrift-carts" />
+        <module name="thrift-product" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

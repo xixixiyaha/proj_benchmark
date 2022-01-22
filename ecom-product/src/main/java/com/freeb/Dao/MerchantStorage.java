@@ -78,11 +78,31 @@ public class MerchantStorage {
     }
 
     static final String GET_MERCHANT_BY_ID ="SELECT merchant_id, merchant_name FROM MERCHANT_INFO WHERE merchant_id = ?";
+    static final String GET_MERCHANT_BY_PROD ="SELECT merchant_id, merchant_name FROM MERCHANT_INFO WHERE prod_id = ?";
+
     static final String CREATE_MERTCHANT="INSERT INTO MERCHANT_INFO (merchant_name) VALUES(?)";
     public MerchantInfo GetMerchantInfoById(Long mid) {
         try(Connection conn = druidUtil.GetConnection()){
             PreparedStatement stmt = conn.prepareStatement(GET_MERCHANT_BY_ID);
             stmt.setLong(1,mid);
+            ResultSet rs = stmt.executeQuery();
+            if(rs.next()){
+                return new MerchantInfo(rs.getLong(1),rs.getString(2));
+            }
+
+        }catch (SQLException e){
+            logger.error(String.format("DB connect failure %s",e.toString()));
+            // Notice here
+            e.printStackTrace();
+        }
+        return null;
+
+
+    }
+    public MerchantInfo GetMerchantInfoByProd(Long pid) {
+        try(Connection conn = druidUtil.GetConnection()){
+            PreparedStatement stmt = conn.prepareStatement(GET_MERCHANT_BY_PROD);
+            stmt.setLong(1,pid);
             ResultSet rs = stmt.executeQuery();
             if(rs.next()){
                 return new MerchantInfo(rs.getLong(1),rs.getString(2));

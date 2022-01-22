@@ -178,7 +178,7 @@ public class CategoryServiceImpl implements CategoryService {
         return re;
     }
 
-    //TODO@ high-priority
+    //TODO@ high-priority executor
     @Override
     public List<ProductInfo> BM2CompareParallelRpcEfficiency(Integer totalComputationLoad, Integer threadNum) {
         int loopPerThread = totalComputationLoad/threadNum;

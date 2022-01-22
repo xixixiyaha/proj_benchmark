@@ -9,6 +9,10 @@ import com.freeb.Entity.MerchantInfo;
 import com.freeb.Entity.ProductInfo;
 import com.freeb.Enum.SearchOrder;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -23,9 +27,14 @@ public class ProductServiceImpl implements ProductService {
     private int updateEveryClicks;
     private int curClicks;
     private ProductClients clients;
+    private BufferedReader in = null;
+
 
     public ProductServiceImpl(ProductClients clients) {
         this.clients = clients;
+        storage = new ProductInfoStorage();
+        mstorage = new MerchantStorage();
+        cstorage = new CommentStorage();
     }
 
 
@@ -108,33 +117,51 @@ public class ProductServiceImpl implements ProductService {
         return true;
     }
 
+    private String GetCommentBySize(Integer datasize) {
+        String filepath = "./" + String.valueOf(datasize) + "KBdata.txt";
+        try {
+            in = new BufferedReader(new FileReader(filepath));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        char[] buf = new char[datasize];
+        try {
+            in.read(buf);
+            return String.valueOf(buf);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     @Override
     public CommentInfo BM5CompareTransferDataSize(Integer dataSize) {
-        //TODO@ high priority
-        return null;
+        CommentInfo cInfo = new CommentInfo();
+        cInfo.setCommentDetails(GetCommentBySize(dataSize));
+        return cInfo;
     }
 
     @Override
     public Boolean BM6CompareMemBindWidth(Integer dataSize) {
-        //TODO@ high priority
-        return null;
+        //Notice: 1-20000之后的pid的commentSize要特殊化； 2-现在一次取1000个 （32B* 1000 = KB）
+        Long prodId = 20000L+dataSize;
+        List<CommentInfo> re= cstorage.GetComments(prodId,1000);
+        return true;
     }
 
     @Override
     public List<CommentInfo> GetComments(Long prodId, Integer comtNum) {
-        //TODO@ high priority
-        return null;
+        return cstorage.GetComments(prodId,comtNum);
     }
 
     @Override
     public MerchantInfo GetMerchantInfoByProd(Long pid) {
-        //TODO@ high priority
-        return null;
+
+        return mstorage.GetMerchantInfoByProd(pid);
     }
 
     @Override
     public ProductInfo GetProdInfo(Long pid) {
-        //  //TODO@ high priority
-        return null;
+        return storage.GetProductById(pid);
     }
 }

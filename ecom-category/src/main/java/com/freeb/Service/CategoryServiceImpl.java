@@ -9,10 +9,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 public class CategoryServiceImpl implements CategoryService {
     private static final Logger logger = LoggerFactory.getLogger(CategoryServiceImpl.class);
@@ -24,42 +23,42 @@ public class CategoryServiceImpl implements CategoryService {
     public CategoryServiceImpl(CategoryClients c,Integer num) throws ClassNotFoundException {
         clients = c;
         cStorage = new CategoryStorage();
+        //TODO 配置参数
         executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(num);
     }
 
-    class GetProductInfo implements Runnable{
+    class GetProductInfo implements Callable<ProductInfo> {
         private ProductInfo info;
         private Long pid;
         GetProductInfo(Long id){
             pid=id;
         }
+
         @Override
-        public void run() {
-            info = clients.GetProductInfo(pid);
-        }
-        public ProductInfo GetInfo(){
-            return info;
+        public ProductInfo call() throws Exception {
+           info = clients.GetProductInfo(pid);
+           return info;
         }
     }
-    class GetProductInfoLst implements Runnable{
+    class GetProductInfoLst implements Callable<List<ProductInfo>>{
         private List<ProductInfo> info;
         private Long startPid,endPid;
         GetProductInfoLst(Long sid,Long eid){
             startPid=sid;
             endPid=eid;
         }
+
         @Override
-        public void run() {
+        public List<ProductInfo> call() throws Exception {
             for (long pid = startPid; pid <= endPid; pid++) {
                 info.add(clients.GetProductInfo(pid));
             }
-        }
-        public List<ProductInfo> GetInfoLst(){
             return info;
         }
+
     }
 
-    class GetProdComments implements Runnable{
+    class GetProdComments implements Callable<List<CommentInfo>>{
         private List<CommentInfo> infos;
         private Long pid;
         private Integer num;
@@ -68,16 +67,14 @@ public class CategoryServiceImpl implements CategoryService {
             num = commentNum;
         }
         @Override
-        public void run() {
+        public List<CommentInfo> call() {
             infos = clients.GetComments(pid,num);
-        }
-
-        public List<CommentInfo> GetComments(){
             return infos;
         }
+
     }
 
-    class GetProdDiscount implements Runnable{
+    class GetProdDiscount implements Callable<DiscountInfo>{
 
         private DiscountInfo info;
         private Long pid;
@@ -87,16 +84,14 @@ public class CategoryServiceImpl implements CategoryService {
             type = t;
         }
         @Override
-        public void run() {
+        public DiscountInfo call() {
             info = clients.GetDiscounts(pid,type);
-        }
-
-        public DiscountInfo GetDiscount(){
             return info;
         }
+
     }
 
-    class GetMerchantInfo implements Runnable{
+    class GetMerchantInfo implements Callable<MerchantInfo>{
         private MerchantInfo info;
         private Long pid;
         GetMerchantInfo(Long id){
@@ -104,10 +99,8 @@ public class CategoryServiceImpl implements CategoryService {
         }
 
         @Override
-        public void run() {
+        public MerchantInfo call() {
             info = clients.GetMerchantInfoByProd(pid);
-        }
-        public MerchantInfo GetInfo(){
             return info;
         }
     }
@@ -118,23 +111,23 @@ public class CategoryServiceImpl implements CategoryService {
         // 开线程
         // t1 => prodInfo
         GetProductInfo t1 = new GetProductInfo(prodId);
-        executor.submit(t1);
+        Future<ProductInfo> f1 =executor.submit(t1);
         // t2 => prodComments
         GetProdComments t2 = new GetProdComments(prodId,100);
-        executor.submit(t2);
+        Future<List<CommentInfo>> f2=executor.submit(t2);
         // t3 => discounts
         GetProdDiscount t3 = new GetProdDiscount(prodId,0);
-        executor.submit(t3);
+        Future<DiscountInfo> f3 =executor.submit(t3);
         try {
-            executor.awaitTermination(2, TimeUnit.SECONDS);
-        } catch (InterruptedException e) {
+            ProductInfo info = f1.get();
+            page.setInfo(info);
+            page.setProdComments(f2.get());
+            page.setDiscountVal(f3.get().getDiscountVal());
+        } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
-        ProductInfo info = t1.GetInfo();
-        page.setInfo(info);
-        page.setProdComments(t2.GetComments());
-        page.setDiscountVal(t3.GetDiscount().getDiscountVal());
-        return page;
+
+        return null;
     }
 
     @Override
@@ -155,27 +148,30 @@ public class CategoryServiceImpl implements CategoryService {
             tasks.add(t1);
             tasks2.add(t2);
         }
-        //TODO CHECK if the function is that meaning
+        //TODO CHECK if the function can work
         try {
-            executor.awaitTermination(3, TimeUnit.SECONDS);
-        } catch (InterruptedException e) {
+            List<Future<ProductInfo>> f1= executor.invokeAll(tasks);
+            List<Future<MerchantInfo>> f2=executor.invokeAll(tasks2);
+
+            List<CategoryPage> re = new ArrayList<>();
+            int pos = 0;
+            for(Long pid:prodIds){
+                ProductInfo pInfo = f1.get(pos).get();
+                MerchantInfo mInfo = f2.get(pos).get();
+                if(mInfo.getMerchantId().equals(pInfo.getMerchantId())){
+                    re.add(new CategoryPage(pid,pInfo.getProdName(),pInfo.getProdSales(),pInfo.getProdImages().get(0),pInfo.getMerchantId(),mInfo.getMerchantName()));
+                }else {
+                    logger.warn("product Info doesnt match ");
+                    re.add(new CategoryPage(pid,pInfo.getProdName(),pInfo.getProdSales(),pInfo.getProdImages().get(0),null,null));
+                }
+                pos+=1;
+                // TODO@ Notice ImagesList == null ?
+            }
+            return re;
+        } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
-
-        List<CategoryPage> re = new ArrayList<>();
-        int pos = 0;
-        for(Long pid:prodIds){
-            ProductInfo pInfo = tasks.get(pos).GetInfo();
-            MerchantInfo mInfo = tasks2.get(pos).GetInfo();
-            if(mInfo.getMerchantId().equals(pInfo.getMerchantId())){
-                re.add(new CategoryPage(pid,pInfo.getProdName(),pInfo.getProdSales(),pInfo.getProdImages().get(0),pInfo.getMerchantId(),mInfo.getMerchantName()));
-            }else {
-                logger.warn("product Info doesnt match ");
-                re.add(new CategoryPage(pid,pInfo.getProdName(),pInfo.getProdSales(),pInfo.getProdImages().get(0),null,null));
-            }
-            // Notice ImagesList == null ?
-        }
-        return re;
+        return null;
     }
 
     //TODO@ high-priority executor
@@ -183,7 +179,6 @@ public class CategoryServiceImpl implements CategoryService {
     public List<ProductInfo> BM2CompareParallelRpcEfficiency(Integer totalComputationLoad, Integer threadNum) {
         int loopPerThread = totalComputationLoad/threadNum;
             List<GetProductInfoLst> tasks = new ArrayList<>();
-
         for(int tid = 0; tid<threadNum; tid++){
 
             GetProductInfoLst t1 = new GetProductInfoLst((long) (tid * loopPerThread + 1),(long) (tid+1)*loopPerThread);
@@ -192,16 +187,17 @@ public class CategoryServiceImpl implements CategoryService {
         }
         //TODO CHECK if the function is that meaning
         try {
-            executor.awaitTermination(3, TimeUnit.SECONDS);
-        } catch (InterruptedException e) {
+            List<Future<List<ProductInfo>>> f1 = executor.invokeAll(tasks);
+            List<ProductInfo> re = new ArrayList<>();
+            for(Future<List<ProductInfo>> f:f1){
+                re.addAll(f.get());
+            }
+            return re;
+        } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
 
-        List<ProductInfo> re = new ArrayList<>();
-        for(GetProductInfoLst task:tasks){
-            re.addAll(task.GetInfoLst());
-        }
-        return re;
+        return null;
     }
 
     @Override

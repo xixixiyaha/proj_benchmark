@@ -51,6 +51,9 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public CartInfo GetCartInfoById(Long cartId, Long userId) {
-        //TODO@ high priority
+        if(!clients.AccountExists(userId)){
+            return null;
+        }
+        return storage.GetCartInfoById(cartId);
     }
 }

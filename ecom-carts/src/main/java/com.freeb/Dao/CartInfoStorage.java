@@ -11,6 +11,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.sql.*;
 import java.util.List;
+import java.util.Objects;
 import java.util.Properties;
 
 public class CartInfoStorage {
@@ -76,6 +77,7 @@ public class CartInfoStorage {
 
     static final String GET_CART_BY_ACCOUNT ="SELECT cart_id, user_id,prod_id,merchant_id,incart_quantity,incart_select FROM CART_INFO WHERE user_id = ?";
     static final String GET_LIMIT_CART_BY_ACCOUNT ="SELECT cart_id, user_id,prod_id,merchant_id,incart_quantity,incart_select FROM CART_INFO WHERE user_id = ? ORDER BY update_time DESC LIMIT ?";
+    static final String GET_CART_BY_ID ="SELECT cart_id, user_id,prod_id,merchant_id,incart_quantity,incart_select FROM CART_INFO WHERE cart_id = ?";
 
     static final String GET_OBJ_QUANTITY_BY_ACCOUNT_OBJ ="SELECT cart_id,incart_quantity FROM CART_INFO WHERE user_id = ? AND obj_id = ?";
     static final String UPDATE_OBJ_QUANTITY_BY_ID ="UPDATE CART_INFO SET incart_quantity = ? WHERE cart_id=?";
@@ -96,6 +98,21 @@ public class CartInfoStorage {
             stmt.setLong(1,aId);
             rs = stmt.executeQuery();
             return MarshalUtil.convertRs2CartList(rs);
+        }catch (SQLException e){
+            logger.error(String.format("DB connect failure %s",e.toString()));
+            // Notice here
+            e.printStackTrace();
+            return null;
+        }
+    }
+    public CartInfo GetCartInfoById(Long cId){
+
+        ResultSet rs=null;
+        try(Connection conn = druidUtil.GetConnection()){
+            PreparedStatement stmt = conn.prepareStatement(GET_CART_BY_ID);
+            stmt.setLong(1,cId);
+            rs = stmt.executeQuery();
+            return Objects.requireNonNull(MarshalUtil.convertRs2CartList(rs)).get(0);
         }catch (SQLException e){
             logger.error(String.format("DB connect failure %s",e.toString()));
             // Notice here

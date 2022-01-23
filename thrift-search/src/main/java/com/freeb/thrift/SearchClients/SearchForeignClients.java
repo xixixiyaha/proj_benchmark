@@ -14,7 +14,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class SearchForeignClients extends SearchClients implements Closeable {
     private static String account_host = "bm-account-server";
-    private static String prod_host = "bm-prod-server";
+    private static String prod_host = "bm-product-server";
 
     private static int search_port = 8080;
 

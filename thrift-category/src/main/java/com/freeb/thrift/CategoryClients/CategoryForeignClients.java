@@ -17,7 +17,7 @@ import java.util.List;
 
 public class CategoryForeignClients extends CategoryClients implements Closeable {
     private static String discount_host = "bm-discount-server";
-    private static String prod_host = "bm-prod-server";
+    private static String prod_host = "bm-product-server";
     private static String search_host = "bm-search-server";
     private static int search_port = 8080;
 

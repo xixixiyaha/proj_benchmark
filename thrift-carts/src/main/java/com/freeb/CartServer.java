@@ -28,10 +28,9 @@ public class CartServer {
 
             TThreadedSelectorServer.Args serverParams = new TThreadedSelectorServer.Args(serverSocket);
             serverParams.protocolFactory(new TBinaryProtocol.Factory());
-            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
             serverParams.processor(new CartService.Processor<CartService.Iface>(new CartServiceServerImpl()));
             TServer server = new TThreadedSelectorServer(serverParams);
-            timestamp = new Timestamp(System.currentTimeMillis());
+            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
             System.out.println("in com.freeb.thrift CartServer main() ==  =="+timestamp.toString());
             server.serve();
         }catch (TTransportException e){

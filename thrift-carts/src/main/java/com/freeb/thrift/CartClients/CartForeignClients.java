@@ -13,7 +13,7 @@ import java.io.IOException;
 public class CartForeignClients extends CartClients implements Closeable {
 
     private static String account_host = "bm-account-server";
-    private static String order_host = "bm-prod-server";
+    private static String order_host = "bm-order-server";
     private static int search_port = 8080;
 
     static {

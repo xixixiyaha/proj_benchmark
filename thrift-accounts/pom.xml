@@ -119,7 +119,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>com.freeb.AccountsServer</mainClass>
+                            <mainClass>com.freeb.AccountServer</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

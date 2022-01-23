@@ -46,7 +46,7 @@ public class Recommend {
         // 现在 user + prod => 查物品表 categoryId => 更新
         // 改进 直接给出 三者
 
-        //TODO & NOTICE 目前一个用户重复点击一个商品会重复计数
+        // NOTICE 目前一个用户重复点击一个商品会重复计数
 
         return flag;
     }

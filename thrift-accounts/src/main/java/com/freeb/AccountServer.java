@@ -14,8 +14,8 @@ import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
 import org.openjdk.jmh.runner.options.TimeValue;
 import com.freeb.thrift.AccountService;
-import com.freeb.AccountServer.AccountsServiceServerImpl;
-import com.freeb.AccountClients.AccountForeignClients;
+import com.freeb.thrift.AccountServer.AccountsServiceServerImpl;
+import com.freeb.thrift.AccountClients.AccountForeignClients;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 @State(Scope.Benchmark)
-public class AccountsServer {
+public class AccountServer {
     public static final int CONCURRENCY = 32;
     public static int callNum = 0;
     private final AccountForeignClients accClients = new AccountForeignClients();
@@ -69,7 +69,7 @@ public class AccountsServer {
     }
 
     public static void HalfTest() throws InterruptedException, RunnerException, IOException {
-        AccountsServer client = new AccountsServer();
+        AccountServer client = new AccountServer();
         for (int i = 0; i < 1; i++) {
             try {
                 System.out.println(client.testSearchRe());
@@ -84,7 +84,7 @@ public class AccountsServer {
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
         Options opt = new OptionsBuilder()//
-                .include(AccountsServer.class.getSimpleName())//
+                .include(AccountServer.class.getSimpleName())//
                 .warmupIterations(3)//
                 .warmupTime(TimeValue.seconds(10))//
                 .measurementIterations(3)//
@@ -93,9 +93,9 @@ public class AccountsServer {
                 .forks(1)//
                 .build();
 
-        System.out.println("in com.freeb.thrift com.freeb.AccountsServer main() === 4 === ");
+        System.out.println("in com.freeb.thrift com.freeb.thrift.AccountServer main() === 4 === ");
         new Runner(opt).run();
-        System.out.println("in com.freeb.thrift com.freeb.AccountsServer main() === 5 === ");
+        System.out.println("in com.freeb.thrift com.freeb.thrift.AccountServer main() === 5 === ");
     }
 
     public static void main(String[] args) throws Exception {

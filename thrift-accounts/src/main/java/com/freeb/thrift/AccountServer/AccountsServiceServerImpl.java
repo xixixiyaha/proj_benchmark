@@ -1,6 +1,6 @@
-package com.freeb.AccountServer;
+package com.freeb.thrift.AccountServer;
 
-import com.freeb.AccountClients.AccountForeignClients;
+import com.freeb.thrift.AccountClients.AccountForeignClients;
 import com.freeb.Service.AccountServiceImpl;
 import com.freeb.thrift.AccountInfo;
 import com.freeb.thrift.AccountService;

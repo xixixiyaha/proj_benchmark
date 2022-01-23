@@ -11,16 +11,16 @@ import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
-public class OrderServiceServerImpl implements OrderService {
+public class OrderServiceImpl implements OrderService {
 
-    private static final Logger logger = LoggerFactory.getLogger(OrderServiceServerImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(OrderServiceImpl.class);
     // TODO 初始化
     private OrderClients client;
 
     private Orders orders = new Orders();
     private OrderInfoStorage storage;
 
-    public OrderServiceServerImpl(OrderClients c){
+    public OrderServiceImpl(OrderClients c){
         storage = new OrderInfoStorage();
         this.client = c;
     }
@@ -133,7 +133,7 @@ public class OrderServiceServerImpl implements OrderService {
             return orderResp;
         }
         // 2. product 有余量 + Fetch Name + Fetch 商家名字
-        CartInfo cInfo = orderReq.getCartId();
+        CartInfo cInfo = client.GetCartInfoById(orderReq.getCartId(),orderReq.getUserId());//orderReq.getCartId();
         if(cInfo==null){
             logger.warn("create order failed cInfo = NULL OrderReq="+orderReq.toString());
             orderResp.setBaseResp(PackResponse.packUnknownFailure());

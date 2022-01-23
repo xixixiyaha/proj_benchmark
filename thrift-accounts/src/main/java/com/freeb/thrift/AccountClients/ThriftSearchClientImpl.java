@@ -1,4 +1,4 @@
-package com.freeb.AccountClients;
+package com.freeb.thrift.AccountClients;
 
 import com.freeb.thrift.SearchService;
 import org.apache.thrift.protocol.TBinaryProtocol;

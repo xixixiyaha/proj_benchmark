@@ -35,6 +35,7 @@
         <module>thrift-category</module>
         <module>thrift-payment</module>
         <module>thrift-product</module>
+        <module>thrift-order</module>
     </modules>
 
     <properties>

@@ -36,7 +36,7 @@ in ThriftSearchClientImpl 31
 in LockObjectPool == 3 ==
 true
 <AccClient.testSearchRe>0
-in com.freeb.thrift com.freeb.AccountsServer main() === 4 ===
+in com.freeb.thrift com.freeb.thrift.AccountServer main() === 4 ===
 # JMH version: 1.28
 # VM version: JDK 11.0.11, OpenJDK 64-Bit com.freeb.thrift.CartServer VM, 11.0.11+9-Ubuntu-0ubuntu2.18.04
 # VM invoker: /usr/lib/jvm/java-11-openjdk-amd64/bin/java
@@ -47,7 +47,7 @@ in com.freeb.thrift com.freeb.AccountsServer main() === 4 ===
 # Timeout: 10 min per iteration
 # Threads: 32 threads, will synchronize iterations
 # Benchmark mode: Throughput, ops/time
-# Benchmark: com.freeb.AccountsServer.testSearchRe
+# Benchmark: com.freeb.thrift.AccountServer.testSearchRe
 
 # Run progress: 0.00% complete, ETA 00:03:00
 # Fork: 1 of 1
@@ -96,7 +96,7 @@ Iteration   3: <AccClient.testSearchRe>0
 0.027 ops/ms
 
 
-Result "com.freeb.AccountsServer.testSearchRe":
+Result "com.freeb.thrift.AccountServer.testSearchRe":
   0.028 ±(99.9%) 0.017 ops/ms [Average]
   (min, avg, max) = (0.027, 0.028, 0.029), stdev = 0.001
   CI (99.9%): [0.011, 0.046] (assumes normal distribution)
@@ -112,7 +112,7 @@ Result "com.freeb.AccountsServer.testSearchRe":
 # Timeout: 10 min per iteration
 # Threads: 32 threads, will synchronize iterations
 # Benchmark mode: Average time, time/op
-# Benchmark: com.freeb.AccountsServer.testSearchRe
+# Benchmark: com.freeb.thrift.AccountServer.testSearchRe
 
 # Run progress: 33.33% complete, ETA 00:02:49
 # Fork: 1 of 1
@@ -161,7 +161,7 @@ Iteration   3: <AccClient.testSearchRe>0
 1188.602 ±(99.9%) 210.689 ms/op
 
 
-Result "com.freeb.AccountsServer.testSearchRe":
+Result "com.freeb.thrift.AccountServer.testSearchRe":
   1213.218 ±(99.9%) 402.185 ms/op [Average]
   (min, avg, max) = (1188.602, 1213.218, 1231.141), stdev = 22.045
   CI (99.9%): [811.033, 1615.403] (assumes normal distribution)
@@ -177,7 +177,7 @@ Result "com.freeb.AccountsServer.testSearchRe":
 # Timeout: 10 min per iteration
 # Threads: 32 threads, will synchronize iterations
 # Benchmark mode: Sampling time
-# Benchmark: com.freeb.AccountsServer.testSearchRe
+# Benchmark: com.freeb.thrift.AccountServer.testSearchRe
 
 # Run progress: 66.67% complete, ETA 00:01:24
 # Fork: 1 of 1
@@ -253,7 +253,7 @@ Iteration   3: <AccClient.testSearchRe>0
 
 
 
-Result "com.freeb.AccountsServer.testSearchRe":
+Result "com.freeb.thrift.AccountServer.testSearchRe":
   N = 921
   mean =   1057.422 ±(99.9%) 65.727 ms/op
 
@@ -301,4 +301,4 @@ HalfBMOne.testSearchRe:testSearchRe·p0.99    sample       3191.446             
 HalfBMOne.testSearchRe:testSearchRe·p0.999   sample       4706.009             ms/op
 HalfBMOne.testSearchRe:testSearchRe·p0.9999  sample       4706.009             ms/op
 HalfBMOne.testSearchRe:testSearchRe·p1.00    sample       4706.009             ms/op
-in com.freeb.thrift com.freeb.AccountsServer main() === 5 ===
+in com.freeb.thrift com.freeb.thrift.AccountServer main() === 5 ===

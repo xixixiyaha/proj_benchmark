@@ -13,7 +13,7 @@ import java.util.stream.Stream;
 public class acc2searchTest{
 
 
-    // TODO 查找命令行
+
     private final static String jvmOps = "java -server -Xmx1g -Xms1g -XX:MaxDirectMemorySize=1g -XX:+UseG1GC";
 
     private final static File resultFolder = new File("acc2searchTest-result");

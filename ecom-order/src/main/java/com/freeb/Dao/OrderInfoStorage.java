@@ -77,7 +77,7 @@ public class OrderInfoStorage {
     static final String CREATE_ORDER_INFO = "INSERT INTO ORDER_INFO(user_id,merchant_id,merchant_name,prod_id,prod_name,cart_id) VALUES(?,?,?,?,?,?)";
     public Long CreateOrderInfoByCartInfo(long user_id,long merchant_id,String merchant_name,long prod_id,String prod_name,long cart_id) {
         ResultSet rs=null;
-        //TODO 获取结果OrderInfo
+
         try(Connection conn = druidUtil.GetConnection()){
             PreparedStatement stmt = conn.prepareStatement(CREATE_ORDER_INFO,Statement.RETURN_GENERATED_KEYS);
             stmt.setLong(1,user_id);

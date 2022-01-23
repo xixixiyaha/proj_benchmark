@@ -39,7 +39,7 @@ public class CartServiceImpl implements CartService {
 
         OrderReq req = new OrderReq();
         req.setUserId(info.getUserId());
-        req.setCartId(info);
+        req.setCartId(info.getCartId());
         return clients.CreateOrderByCartInfo(req).getOrderInfos().get(0).getOrderId();
     }
 
@@ -47,5 +47,10 @@ public class CartServiceImpl implements CartService {
     public Long BM3CompareChainSequence(CartInfo info) {
         logger.error("Method Not Implemented");
         return null;
+    }
+
+    @Override
+    public CartInfo GetCartInfoById(Long cartId, Long userId) {
+        //TODO@ high priority
     }
 }

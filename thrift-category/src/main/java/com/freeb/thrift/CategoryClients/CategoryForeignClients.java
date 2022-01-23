@@ -39,7 +39,8 @@ public class CategoryForeignClients extends CategoryClients implements Closeable
             return  client.client.GetRecommendByProdName(userId,words,CategoryTypeConvert.ConvertSearchTypeOri2Thr(type),CategoryTypeConvert.ConvertSearchOrderOri2Thr(order));
         } catch (TException e) {
             e.printStackTrace();
-        }        return null;
+        }
+        return null;
     }
 
     @Override

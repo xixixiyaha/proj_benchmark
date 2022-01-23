@@ -172,8 +172,6 @@ public class AccountInfoStorage {
             stmt.setString(2,info.getUserPasswd());
             stmt.setString(3,info.getUserDescription());
             return (stmt.executeUpdate()==1);
-            // TODO true / false
-
         }catch (SQLException e){
             logger.error(String.format("DB connect failure %s",e.toString()));
             // Notice here

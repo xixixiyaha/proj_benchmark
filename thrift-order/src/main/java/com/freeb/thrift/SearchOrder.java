@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.HashMap;
 import org.apache.thrift.TEnum;
 
-public enum SearchOrder implements org.apache.thrift.TEnum {
+public enum SearchOrder implements TEnum {
   PRICE_DESC(0),
   PRICE_ASC(1),
   SIMILARITY(2),

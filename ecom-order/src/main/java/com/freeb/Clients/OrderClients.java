@@ -41,4 +41,6 @@ public abstract class OrderClients {
 //    public abstract Double GetProdPrice(long prodId);
 
     public abstract DiscountInfo GetProdDiscounts(Long prodId, Integer type);
+
+    public abstract CartInfo GetCartInfoById(Long cartId,Long userId);
 }

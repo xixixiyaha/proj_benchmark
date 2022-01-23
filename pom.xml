@@ -16,18 +16,20 @@
 <!--        <module>base-benchmark</module>-->
 <!--        <module>com.freeb.thrift-client</module>-->
 <!--        <module>com.freeb.thrift-server</module>-->
-        <module>ecom-order</module>
+
         <module>ecom-account</module>
         <module>ecom-common</module>
-        <module>ecom-payment</module>
-        <module>ecom-carts</module>
-        <module>ecom-search</module>
         <module>ecom-category</module>
+        <module>ecom-carts</module>
+        <module>ecom-discount</module>
+        <module>ecom-order</module>
+        <module>ecom-payment</module>
+        <module>ecom-product</module>
+        <module>ecom-search</module>
+
         <module>thrift-accounts</module>
         <module>thrift-search</module>
         <module>thrift-frontend</module>
-        <module>ecom-product</module>
-        <module>ecom-discount</module>
         <module>thrift-carts</module>
         <module>thrift-discount</module>
         <module>thrift-category</module>
@@ -79,13 +81,6 @@
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
             <version>2.9.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>mysql</groupId>

@@ -1,5 +1,6 @@
 package com.freeb;
 
+import com.freeb.Utils.IPUtil;
 import org.apache.thrift.protocol.TBinaryProtocol;
 import org.apache.thrift.server.TServer;
 import org.apache.thrift.server.TThreadedSelectorServer;
@@ -17,8 +18,10 @@ public class DiscountServer {
         try {
 
 
-            InetSocketAddress serverAddress = new InetSocketAddress("10.0.16.14", 8080);
-
+//            InetSocketAddress serverAddress = new InetSocketAddress("10.0.16.14", 8080);
+            String serverHost = IPUtil.getIPAddress();
+            System.out.println("init Server socket IP addr = "+serverHost);
+            InetSocketAddress serverAddress = new InetSocketAddress(serverHost, 8080);
             TNonblockingServerTransport serverSocket = new TNonblockingServerSocket(serverAddress);
 
             TThreadedSelectorServer.Args serverParams = new TThreadedSelectorServer.Args(serverSocket);
@@ -27,7 +30,7 @@ public class DiscountServer {
             serverParams.processor(new DiscountService.Processor<DiscountService.Iface>(new DiscountServiceServerImpl()));
             TServer server = new TThreadedSelectorServer(serverParams);
             timestamp = new Timestamp(System.currentTimeMillis());
-            System.out.println("in com.freeb.thrift CartServer main() ==  =="+timestamp.toString());
+            System.out.println("in com.freeb.thrift DiscountServer main() ==  =="+timestamp.toString());
             server.serve();
         }catch (TTransportException e){
             System.out.println("CartServer Exception is "+e.getMessage());

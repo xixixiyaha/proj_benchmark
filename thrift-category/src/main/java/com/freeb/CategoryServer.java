@@ -4,6 +4,7 @@ import java.net.InetSocketAddress;
 import java.sql.Timestamp;
 import java.util.Arrays;
 
+import com.freeb.Utils.IPUtil;
 import com.freeb.thrift.CategoryServer.CategoryServiceServerImpl;
 import com.freeb.thrift.CategoryService;
 import org.apache.thrift.protocol.TBinaryProtocol;
@@ -18,8 +19,10 @@ public class CategoryServer {
         try {
 
 
-            InetSocketAddress serverAddress = new InetSocketAddress("10.0.16.14", 8080);
-
+//            InetSocketAddress serverAddress = new InetSocketAddress("10.0.16.14", 8080);
+            String serverHost = IPUtil.getIPAddress();
+            System.out.println("init Server socket IP addr = "+serverHost);
+            InetSocketAddress serverAddress = new InetSocketAddress(serverHost, 8080);
             TNonblockingServerTransport serverSocket = new TNonblockingServerSocket(serverAddress);
 
             TThreadedSelectorServer.Args serverParams = new TThreadedSelectorServer.Args(serverSocket);
@@ -30,7 +33,7 @@ public class CategoryServer {
             timestamp = new Timestamp(System.currentTimeMillis());
             System.out.println("in com.freeb.thrift CartServer main() ==  =="+timestamp.toString());
             server.serve();
-        }catch (TTransportException e){
+        }catch (TTransportException | ClassNotFoundException e){
             System.out.println("CartServer Exception is "+e.getMessage());
             System.out.println(Arrays.toString(e.getStackTrace()));
         }

@@ -1,5 +1,6 @@
 package com.freeb;
 
+import com.freeb.Utils.IPUtil;
 import org.apache.thrift.protocol.TBinaryProtocol;
 import org.apache.thrift.server.TServer;
 import org.apache.thrift.server.TThreadedSelectorServer;
@@ -12,7 +13,7 @@ import org.openjdk.jmh.runner.RunnerException;
 import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
 import org.openjdk.jmh.runner.options.TimeValue;
-import com.freeb.AccountServer.AccountService;
+import com.freeb.thrift.AccountService;
 import com.freeb.AccountServer.AccountsServiceServerImpl;
 import com.freeb.AccountClients.AccountForeignClients;
 
@@ -46,10 +47,11 @@ public class AccountsServer {
 
     private static void initAccountService(){
         try {
-            //TODO auto-acquire private addr
 
-            InetSocketAddress serverAddress = new InetSocketAddress("10.0.16.14", 8081);
-
+//            InetSocketAddress serverAddress = new InetSocketAddress("10.0.16.14", 8081);
+            String serverHost = IPUtil.getIPAddress();
+            System.out.println("init Server socket IP addr = "+serverHost);
+            InetSocketAddress serverAddress = new InetSocketAddress(serverHost, 8080);
             TNonblockingServerTransport serverSocket = new TNonblockingServerSocket(serverAddress);
 
             TThreadedSelectorServer.Args serverParams = new TThreadedSelectorServer.Args(serverSocket);
@@ -58,7 +60,7 @@ public class AccountsServer {
             serverParams.processor(new AccountService.Processor<AccountService.Iface>(new AccountsServiceServerImpl()));
             TServer server = new TThreadedSelectorServer(serverParams);
             timestamp = new Timestamp(System.currentTimeMillis());
-            System.out.println("in com.freeb.thrift Server main() ==  =="+timestamp.toString());
+            System.out.println("in com.freeb.thrift AccountServer main() ==  =="+timestamp.toString());
             server.serve();
         }catch (TTransportException e){
             System.out.println("Server Exception is "+e.getMessage());

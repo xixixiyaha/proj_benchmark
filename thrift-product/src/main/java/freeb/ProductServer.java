@@ -1,7 +1,8 @@
 package freeb;
 
 
-import freeb.thrift.SearchServer.ProductServiceServerImpl;
+import com.freeb.Utils.IPUtil;
+import freeb.thrift.ProductServer.ProductServiceServerImpl;
 import freeb.thrift.ProductService;
 import org.apache.thrift.protocol.TBinaryProtocol;
 import org.apache.thrift.server.TServer;
@@ -19,8 +20,10 @@ public class ProductServer {
 		try {
 
 
-			InetSocketAddress serverAddress = new InetSocketAddress("10.0.16.14", 8080);
-
+//			InetSocketAddress serverAddress = new InetSocketAddress("10.0.16.14", 8080);
+			String serverHost = IPUtil.getIPAddress();
+			System.out.println("init Server socket IP addr = "+serverHost);
+			InetSocketAddress serverAddress = new InetSocketAddress(serverHost, 8080);
 			TNonblockingServerTransport serverSocket = new TNonblockingServerSocket(serverAddress);
 
 			TThreadedSelectorServer.Args serverParams = new TThreadedSelectorServer.Args(serverSocket);

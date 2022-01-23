@@ -1,6 +1,6 @@
 package com.freeb;
 
-import com.freeb.SearchClients.SearchOrder;
+import com.freeb.thrift.SearchOrder;
 
 public class SearchTypeConvert {
     public static SearchOrder SearchOrderOri2Thr(com.freeb.Enum.SearchOrder order){

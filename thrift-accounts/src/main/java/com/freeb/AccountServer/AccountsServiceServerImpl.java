@@ -2,6 +2,9 @@ package com.freeb.AccountServer;
 
 import com.freeb.AccountClients.AccountForeignClients;
 import com.freeb.Service.AccountServiceImpl;
+import com.freeb.thrift.AccountInfo;
+import com.freeb.thrift.AccountService;
+import com.freeb.thrift.IdType;
 import org.apache.thrift.TException;
 import com.freeb.AccountsTypeConvert;
 

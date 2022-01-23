@@ -1,13 +1,15 @@
 package com.freeb;
 
+import com.freeb.Utils.IPUtil;
+import com.freeb.thrift.CartServer.CartServiceServerImpl;
+import com.freeb.thrift.CartService;
 import org.apache.thrift.protocol.TBinaryProtocol;
 import org.apache.thrift.server.TServer;
 import org.apache.thrift.server.TThreadedSelectorServer;
 import org.apache.thrift.transport.TNonblockingServerSocket;
 import org.apache.thrift.transport.TNonblockingServerTransport;
 import org.apache.thrift.transport.TTransportException;
-import CartService;
-import CartServiceServerImpl;
+
 
 import java.net.InetSocketAddress;
 import java.sql.Timestamp;
@@ -18,8 +20,10 @@ public class CartServer {
         try {
 
 
-            InetSocketAddress serverAddress = new InetSocketAddress("10.0.16.14", 8080);
-
+//            InetSocketAddress serverAddress = new InetSocketAddress("10.0.16.14", 8080);
+            String serverHost = IPUtil.getIPAddress();
+            System.out.println("init Server socket IP addr = "+serverHost);
+            InetSocketAddress serverAddress = new InetSocketAddress(serverHost, 8080);
             TNonblockingServerTransport serverSocket = new TNonblockingServerSocket(serverAddress);
 
             TThreadedSelectorServer.Args serverParams = new TThreadedSelectorServer.Args(serverSocket);

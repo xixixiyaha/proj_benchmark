@@ -106,7 +106,7 @@ public class OrderInfo {
         return cartId;
     }
 
-    public void setCartInfo(long cartId) {
+    public void setCartId(long cartId) {
         this.cartId = cartId;
     }
 

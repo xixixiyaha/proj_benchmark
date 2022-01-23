@@ -1,5 +1,6 @@
 package com.freeb;
 
+import com.freeb.Utils.IPUtil;
 import com.freeb.thrift.PaymentService;
 import com.freeb.thrift.PaymentServiceServerImpl;
 import org.apache.thrift.protocol.TBinaryProtocol;
@@ -18,8 +19,10 @@ public class PaymentServer {
         try {
 
 
-            InetSocketAddress serverAddress = new InetSocketAddress("10.0.16.14", 8080);
-
+//            InetSocketAddress serverAddress = new InetSocketAddress("10.0.16.14", 8080);
+            String serverHost = IPUtil.getIPAddress();
+            System.out.println("init Server socket IP addr = "+serverHost);
+            InetSocketAddress serverAddress = new InetSocketAddress(serverHost, 8080);
             TNonblockingServerTransport serverSocket = new TNonblockingServerSocket(serverAddress);
 
             TThreadedSelectorServer.Args serverParams = new TThreadedSelectorServer.Args(serverSocket);
@@ -28,7 +31,7 @@ public class PaymentServer {
             serverParams.processor(new PaymentService.Processor<PaymentService.Iface>(new PaymentServiceServerImpl()));
             TServer server = new TThreadedSelectorServer(serverParams);
             timestamp = new Timestamp(System.currentTimeMillis());
-            System.out.println("in com.freeb.thrift CartServer main() ==  =="+timestamp.toString());
+            System.out.println("in com.freeb.thrift PAymentServer main() ==  =="+timestamp.toString());
             server.serve();
         }catch (TTransportException | ClassNotFoundException e){
             System.out.println("CartServer Exception is "+e.getMessage());

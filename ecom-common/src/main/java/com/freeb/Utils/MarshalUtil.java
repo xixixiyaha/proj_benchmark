@@ -50,7 +50,7 @@ public class MarshalUtil {
                 info.setProdId(rs.getInt(6));
                 info.setProdName(rs.getString(7));
                 info.setPaymentId(rs.getInt(8));
-                info.setCartInfo(new CartInfo(rs.getLong(9)));
+                info.setCartId(rs.getLong(9));
                 lst.add(info);
             }
         }catch(Exception e){

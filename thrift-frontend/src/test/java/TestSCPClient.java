@@ -112,7 +112,7 @@ public class TestSCPClient {
         return bool;
     }
 
-    //TODO Notice
+
     private static String IP = "124.223.34.172"; // account 到 search host 下载 json
     private static Integer PORT = 22;
     private static String USER_Name = "benchmark";

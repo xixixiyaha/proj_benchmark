@@ -72,7 +72,6 @@ public class CategoryStorage {
             return true;
         }catch (SQLException e){
             logger.error(String.format("DB connect failure %s",e.toString()));
-            // Notice here
             e.printStackTrace();
             return false;
         }

@@ -1,6 +1,5 @@
 package com.freeb.Dao;
 
-import com.freeb.Entity.MerchantInfo;
 import com.freeb.Entity.ProductInfo;
 import com.freeb.Enum.SearchOrder;
 import com.freeb.Utils.MarshalUtil;
@@ -11,7 +10,10 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.*;
 
 public class ProductInfoStorage {
@@ -56,7 +58,7 @@ public class ProductInfoStorage {
         }
     }
 
-    public ProductInfoStorage(String url,String user,String psw) throws ClassNotFoundException {
+    public ProductInfoStorage(String url, String user, String psw) throws ClassNotFoundException {
         PROD_DB_URL = url;
         PROD_USER=user;
         PROD_PSW = psw;

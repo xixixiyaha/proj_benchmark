@@ -14,7 +14,7 @@ public abstract class SearchClients {
 
     public abstract Boolean AccountExists(Long id);
 
-    public abstract ConcurrentHashMap<Integer, Integer> GetUserActiveByCategory(Long id);
+    public abstract HashMap<Integer, Integer> GetUserActiveByCategory(Long id);
 
     public abstract Boolean CreateActiveBehavior(Long uid, Long pid, Integer cid);
 

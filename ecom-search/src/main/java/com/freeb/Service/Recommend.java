@@ -1,6 +1,8 @@
 package com.freeb.Service;
 
 import com.freeb.Clients.SearchClients;
+import com.freeb.Dao.ProductInfoStorage;
+import com.freeb.Entity.ProductInfo;
 import com.freeb.Entity.UserActive;
 import com.freeb.Enum.SearchOrder;
 import com.freeb.Utils.MapUtil;
@@ -16,19 +18,32 @@ public class Recommend {
 
     SearchClients clients;
 
-    //TODO
     private ConcurrentHashMap<Long,HashSet<Long>> activeMap;
     private long updateTime;
+
+    private ProductInfoStorage storage;
+    private Boolean IS_OFFLINE = false;
 
     public Recommend(SearchClients c){
         this.clients = c;
         this.updateTime= 0;
+        this.activeMap=null;
+    }
+    public void SetStorage(){
+        storage = new ProductInfoStorage();
+    }
+    public void SetOffline(Boolean status){
+        IS_OFFLINE = status;
     }
 
 
     public Map<Integer,Double> GetUserTags(Long id){
-        // TODO & NOTICE : This is local version -- should in account
-        ConcurrentHashMap<Integer, Integer> categoryTags = clients.GetUserActiveByCategory(id);
+        HashMap<Integer, Integer> categoryTags;
+        if(IS_OFFLINE){
+            categoryTags = storage.GetUserActiveByCategory(id);
+        }else{
+            categoryTags = clients.GetUserActiveByCategory(id);
+        }
         Integer sumClicks = 0;
         Map<Integer,Double> tags = new HashMap<>();
         for (Map.Entry<Integer, Integer> integerIntegerEntry : categoryTags.entrySet()) {
@@ -42,7 +57,7 @@ public class Recommend {
 
     public boolean CreateUserClickBehavior(Long userId, Long prodId) {
         boolean flag = false;
-        //TODO 数据库/json 添加数据
+        //TODO@ low priority 数据库/json 添加数据
         // 现在 user + prod => 查物品表 categoryId => 更新
         // 改进 直接给出 三者
 
@@ -56,7 +71,7 @@ public class Recommend {
     * */
 
     public ConcurrentHashMap<Long, ConcurrentHashMap<Long, Long>> AssembleUserBehavior(List<UserActive> userActiveList) {
-        ConcurrentHashMap<Long, ConcurrentHashMap<Long, Long>> activeMap = new ConcurrentHashMap<>();
+        ConcurrentHashMap<Long, ConcurrentHashMap<Long, Long>> activemap = new ConcurrentHashMap<>();
         // 遍历查询到的用户点击行为数据
         for (UserActive userActive : userActiveList) {
             // 1.获取用户id
@@ -65,24 +80,24 @@ public class Recommend {
             Long categoryId = userActive.getCategoryId();
 
             // 判断activeMap中是否已经存在了该userId的信息，如果存在则进行更新
-            if (activeMap.containsKey(userId)) {
-                ConcurrentHashMap<Long, Long> tempMap = activeMap.get(userId);
+            if (activemap.containsKey(userId)) {
+                ConcurrentHashMap<Long, Long> tempMap = activemap.get(userId);
                 if(tempMap.containsKey(categoryId)){
                     Long hits = tempMap.get(categoryId) + 1L;
                     tempMap.put(categoryId, hits);
                 }else {
                     tempMap.put(categoryId, 1L);
                 }
-                activeMap.put(userId, tempMap);
+                activemap.put(userId, tempMap);
             } else {
                 // 不存在则直接put进
                 ConcurrentHashMap<Long, Long> category2Map = new ConcurrentHashMap<Long, Long>();
                 category2Map.put(categoryId, 1L);
-                activeMap.put(userId, category2Map);
+                activemap.put(userId, category2Map);
             }
         }
 
-        return activeMap;
+        return activemap;
     }
 
     /**
@@ -90,16 +105,16 @@ public class Recommend {
      * 计算一个 userId 的浏览行为
      * @return 用户的 各个 categoryId 的点击频率
      */
-    public ConcurrentHashMap<Long, ConcurrentHashMap<Integer, Integer>> AssembleUserBehavior() {
-        ConcurrentHashMap<Long, ConcurrentHashMap<Integer, Integer>> activeMap = new ConcurrentHashMap<>();
+    public HashMap<Long, HashMap<Integer, Integer>> AssembleUserBehavior() {
+        HashMap<Long, HashMap<Integer, Integer>> activemap = new HashMap<>();
         // 遍历查询到的用户点击行为数据
         // 获取最近活跃的 1000 个用户
         List<Long> activeUsers = clients.GetLastestActiveUsers(1000);
         for(Long uid:activeUsers){
-            activeMap.put(uid,clients.GetUserActiveByCategory(uid));
+            activemap.put(uid,clients.GetUserActiveByCategory(uid));
         }
-        logger.info("assemable user num="+activeMap.size());
-        return activeMap;
+        logger.info("assemable user num="+activemap.size());
+        return activemap;
     }
 
 
@@ -113,7 +128,7 @@ public class Recommend {
         if(activeMap!=null&&(now-updateTime)/1000<120){
             return activeMap;
         }
-
+        activeMap = new ConcurrentHashMap<>();
         List<Long> activeUsers = clients.GetLastestActiveUsers(1000);
         for(Long uid:activeUsers){
             activeMap.put(uid,clients.GetUserActiveByProduct(uid));
@@ -230,18 +245,16 @@ public class Recommend {
         // 用来记录与userId相似度最高的前N个用户的id
         List<Map.Entry<Long,Double>> similarityList = new ArrayList<>(topN);
         // 堆排序找出最高的前N个用户，建立小根堆，遍历的时候当前的这个相似度比堆顶元素大就剔掉堆顶的值，把这个数入堆(把小的都删除干净,所以要建立小根堆)
-        PriorityQueue<Map.Entry<Long,Double>> minHeap = new PriorityQueue<Map.Entry<Long,Double>>(new Comparator<Map.Entry<Long,Double>>() {
-            @Override
-            public int compare(Map.Entry<Long,Double> o1, Map.Entry<Long,Double> o2) {
-                if (o1.getValue() - o2.getValue() > 0) {
-                    return 1;
-                } else if (o1.getValue() - o2.getValue() == 0) {
-                    return 0;
-                } else {
-                    return -1;
-                }
+        PriorityQueue<Map.Entry<Long,Double>> minHeap = new PriorityQueue<Map.Entry<Long,Double>>((o1, o2) -> {
+            if (o1.getValue() - o2.getValue() > 0) {
+                return 1;
+            } else if (o1.getValue() - o2.getValue() == 0) {
+                return 0;
+            } else {
+                return -1;
             }
         });
+
         StringBuilder builder = new StringBuilder();
         for (Map.Entry<Long,Double> entry : userSimilarityMap.entrySet()) {
             if (minHeap.size() < topN) {
@@ -259,6 +272,7 @@ public class Recommend {
         }
         // 把得到的最大的相似度的用户的id取出来(不要取它自己)
         for (Map.Entry<Long,Double> entry : minHeap) {
+            //Notice 这里对吗
             similarityList.add(entry);
             builder.append(String.format("refUserId=%d similarity=%f %n",entry.getKey(),entry.getValue()));
         }
@@ -284,13 +298,12 @@ public class Recommend {
         for (Map.Entry<Long, Double> simEntry: similarUserList) {
             Double similarity = simEntry.getValue();
             if(similarity<0.3){
-                // Todo: Notice the threshold - Is 0.3 reasonable ?
+                // Todo@ Notice the threshold - Is 0.3 reasonable ?
                 continue;
             }
             cnter++;
             // 找到当前这个用户的浏览行为
-            // TODO 要获得 refUser的偏好
-            Map<Integer,Double> refTagsMap = GetUserTags(simEntry.getKey());
+            LinkedHashMap<Integer,Double> refTagsMap = (LinkedHashMap<Integer, Double>) GetUserTags(simEntry.getKey());
             // 排序
             refTagsMap = (LinkedHashMap<Integer, Double>) MapUtil.sortByBigValue(refTagsMap);
 
@@ -389,7 +402,7 @@ public class Recommend {
         return prodList;
     }
 
-    // TODO & NOTICE 现阶段提供两种 order: by SALES 和 模糊搜索
+    // NOTICE 现阶段提供两种 order: by SALES 和 模糊搜索
     public List<Long> GetProductByCategory(Integer categoryId, SearchOrder order,String words,Integer prodNum){
         switch (order){
             case SALES:

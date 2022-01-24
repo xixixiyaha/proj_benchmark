@@ -13,8 +13,8 @@ import redis.clients.jedis.JedisPoolConfig;
 import java.util.Arrays;
 
 public class OrderInfoCache {
+    //TODO@ low priority
 
-    //TODO
     public static String convertSearchKey2String(OrderSearchKey key){
         return "123";
     }
@@ -29,7 +29,7 @@ public class OrderInfoCache {
     private static JedisPool pool=null;
 
     private static JedisPool getPool(){
-        // todo concurrency
+        // TODO@ low priority concurrency
         if(pool==null){
             JedisPoolConfig config = new JedisPoolConfig();
 

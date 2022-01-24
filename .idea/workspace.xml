@@ -2,11 +2,49 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e7402edc-f985-409d-9734-d8a746f29253" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/thrift-search/src/test/java/LaunchSystem.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ecom-search/src/main/java/com/freeb/Dao/ProductInfoStorage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/thrift-frontend/src/main/thrift/gen-java/com/freeb/thrift/DiscountInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/thrift-frontend/src/main/thrift/gen-java/com/freeb/thrift/DiscountService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecom-carts/src/main/java/com.freeb/Dao/CartInfoStorage.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecom-carts/src/main/java/com.freeb/Dao/CartInfoStorage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ecom-carts/src/main/java/com.freeb/Service/CartServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecom-carts/src/main/java/com.freeb/Service/CartServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/acc2searchTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/acc2searchTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/base-benchmark/src/main/java/Bean/UserFull.java" beforeDir="false" afterPath="$PROJECT_DIR$/base-benchmark/src/main/java/Bean/UserFull.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/base-benchmark/src/main/java/Dao/SqlConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/base-benchmark/src/main/java/Dao/SqlConnection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/base-benchmark/src/main/java/Dao/UserDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/base-benchmark/src/main/java/Dao/UserDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/base-benchmark/src/main/java/com/freeb/Service/UserServiceClientJsonImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/base-benchmark/src/main/java/com/freeb/Service/UserServiceClientJsonImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecom-account/src/main/java/com/freeb/Dao/AccountInfoStorage.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecom-account/src/main/java/com/freeb/Dao/AccountInfoStorage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecom-account/src/main/java/com/freeb/Service/AccountServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecom-account/src/main/java/com/freeb/Service/AccountServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecom-category/src/main/java/com/freeb/Dao/CategoryStorage.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecom-category/src/main/java/com/freeb/Dao/CategoryStorage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ecom-category/src/main/java/com/freeb/Service/CategoryServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecom-category/src/main/java/com/freeb/Service/CategoryServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecom-common/src/main/java/com/freeb/Utils/MarshalUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecom-common/src/main/java/com/freeb/Utils/MarshalUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecom-order/src/main/java/com/freeb/Dao/OrderInfoCache.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecom-order/src/main/java/com/freeb/Dao/OrderInfoCache.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecom-order/src/main/java/com/freeb/Orders/Orders.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecom-order/src/main/java/com/freeb/Orders/Orders.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecom-order/src/main/java/com/freeb/Service/OrderServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecom-order/src/main/java/com/freeb/Service/OrderServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecom-product/src/main/java/com/freeb/Dao/ProductInfoStorage.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecom-product/src/main/java/com/freeb/Dao/ProductInfoStorage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecom-search/src/main/java/com/freeb/Clients/SearchClients.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecom-search/src/main/java/com/freeb/Clients/SearchClients.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecom-search/src/main/java/com/freeb/Service/Recommend.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecom-search/src/main/java/com/freeb/Service/Recommend.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecom-search/src/main/java/com/freeb/Service/SearchServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecom-search/src/main/java/com/freeb/Service/SearchServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ecom-search/src/test/java/com/test/TestRecommend.java" beforeDir="false" afterPath="$PROJECT_DIR$/ecom-search/src/test/java/com/test/TestRecommend.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/thrift-accounts/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/thrift-accounts/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/thrift-accounts/src/main/java/com/freeb/thrift/AccountClients/AccountForeignClients.java" beforeDir="false" afterPath="$PROJECT_DIR$/thrift-accounts/src/main/java/com/freeb/thrift/AccountClients/AccountForeignClients.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/thrift-category/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/thrift-category/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/thrift-category/src/main/java/com/freeb/thrift/CategoryClients/CategoryForeignClients.java" beforeDir="false" afterPath="$PROJECT_DIR$/thrift-category/src/main/java/com/freeb/thrift/CategoryClients/CategoryForeignClients.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/thrift-category/src/main/java/com/freeb/thrift/DiscountInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/thrift-category/src/main/java/com/freeb/thrift/DiscountInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/thrift-category/src/main/java/com/freeb/thrift/DiscountService.java" beforeDir="false" afterPath="$PROJECT_DIR$/thrift-category/src/main/java/com/freeb/thrift/DiscountService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/thrift-client/src/main/java/benchmark/rpc/thrift/UserServiceClientImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/thrift-client/src/main/java/benchmark/rpc/thrift/UserServiceClientImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/thrift-discount/src/main/java/com/freeb/DiscountInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/thrift-discount/src/main/java/com/freeb/DiscountInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/thrift-discount/src/main/java/com/freeb/DiscountService.java" beforeDir="false" afterPath="$PROJECT_DIR$/thrift-discount/src/main/java/com/freeb/DiscountService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/thrift-discount/src/main/java/com/freeb/DiscountServiceServerImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/thrift-discount/src/main/java/com/freeb/DiscountServiceServerImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/thrift-frontend/src/main/thrift/Discount/DiscountInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/thrift-frontend/src/main/thrift/Discount/DiscountInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/thrift-frontend/src/main/thrift/Discount/DiscountService.java" beforeDir="false" afterPath="$PROJECT_DIR$/thrift-frontend/src/main/thrift/Discount/DiscountService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/thrift-frontend/src/main/thrift/DiscountService.thrift" beforeDir="false" afterPath="$PROJECT_DIR$/thrift-frontend/src/main/thrift/DiscountService.thrift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/thrift-frontend/src/test/java/TestSCPClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/thrift-frontend/src/test/java/TestSCPClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/thrift-order/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/thrift-order/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/thrift-order/src/main/java/com/freeb/thrift/AccountService.java" beforeDir="false" afterPath="$PROJECT_DIR$/thrift-order/src/main/java/com/freeb/thrift/AccountService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/thrift-order/src/main/java/com/freeb/thrift/DiscountInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/thrift-order/src/main/java/com/freeb/thrift/DiscountInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/thrift-order/src/main/java/com/freeb/thrift/DiscountService.java" beforeDir="false" afterPath="$PROJECT_DIR$/thrift-order/src/main/java/com/freeb/thrift/DiscountService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/thrift-order/src/main/java/com/freeb/thrift/OrderClient/OrderForeignClients.java" beforeDir="false" afterPath="$PROJECT_DIR$/thrift-order/src/main/java/com/freeb/thrift/OrderClient/OrderForeignClients.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/thrift-search/src/main/java/com/freeb/thrift/SearchClients/SearchForeignClients.java" beforeDir="false" afterPath="$PROJECT_DIR$/thrift-search/src/main/java/com/freeb/thrift/SearchClients/SearchForeignClients.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -140,7 +178,7 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="jdk.selected.JAVA_MODULE" value="13" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/ecom-search/src/test/java" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/thrift-order/src/main/java/com/freeb/thrift" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/thrift-category/src/main/java/com/freeb/thrift" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -150,33 +188,33 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="settings.github" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
-      <recent name="" />
-      <recent name="com.freeb.Dao" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\0_4th\proj_benchmark\thrift-order\src\main\java\com\freeb\thrift" />
-      <recent name="D:\0_4th\proj_benchmark\thrift-frontend\src\main\thrift\Discount" />
-      <recent name="D:\0_4th\proj_benchmark\thrift-order\src\main\java\com\freeb\thrift\OrderClient" />
-      <recent name="D:\0_4th\proj_benchmark\thrift-product\src\main\resources" />
-      <recent name="D:\0_4th\proj_benchmark\thrift-payment\src\main\resources" />
-    </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="com.freeb.thrift.OrderClient" />
-      <recent name="com.freeb.thrift" />
-      <recent name="" />
-      <recent name="thrift" />
-      <recent name="com.freeb.Utils" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\0_4th\proj_benchmark\thrift-frontend\src\main\thrift\Cart" />
       <recent name="D:\0_4th\proj_benchmark\thrift-frontend\src\main\thrift\Product" />
       <recent name="D:\0_4th\proj_benchmark\thrift-frontend\src\main\thrift\Payment" />
       <recent name="D:\0_4th\proj_benchmark\thrift-frontend\src\main\thrift\Account" />
       <recent name="D:\0_4th\proj_benchmark\thrift-frontend\src\main\thrift\Order" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="" />
+      <recent name="com.freeb.Dao" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.freeb.Dao" />
+      <recent name="com.freeb.thrift.OrderClient" />
+      <recent name="com.freeb.thrift" />
+      <recent name="" />
+      <recent name="thrift" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\0_4th\proj_benchmark\thrift-category\src\main\java\com\freeb\thrift" />
+      <recent name="D:\0_4th\proj_benchmark\thrift-discount\src\main\java\com\freeb" />
+      <recent name="D:\0_4th\proj_benchmark\thrift-order\src\main\java\com\freeb\thrift" />
+      <recent name="D:\0_4th\proj_benchmark\thrift-frontend\src\main\thrift\Discount" />
+      <recent name="D:\0_4th\proj_benchmark\thrift-order\src\main\java\com\freeb\thrift\OrderClient" />
     </key>
   </component>
   <component name="RunManager" selected="JUnit.TestIP.TestFetchLocalIP">
@@ -313,7 +351,7 @@
     </option>
   </component>
   <component name="SvnConfiguration">
-    <configuration />
+    <configuration>C:\Users\28642\AppData\Roaming\Subversion</configuration>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -365,7 +403,8 @@
       <workItem from="1642556013729" duration="38043000" />
       <workItem from="1642726941321" duration="5472000" />
       <workItem from="1642746545116" duration="28361000" />
-      <workItem from="1642904678491" duration="20588000" />
+      <workItem from="1642904678491" duration="21367000" />
+      <workItem from="1642993755916" duration="8797000" />
     </task>
     <task id="LOCAL-00001" summary="add log4j">
       <created>1642930595376</created>
@@ -525,38 +564,38 @@
     </state>
     <state x="1169" y="-932" key="FileChooserDialogImpl/0.0.1536.824/3.-1080.1920.1040@3.-1080.1920.1040" timestamp="1640764652182" />
     <state x="933" y="117" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1642497253130" />
-    <state width="1493" height="192" key="GridCell.Tab.0.bottom" timestamp="1642923937256">
+    <state width="1493" height="192" key="GridCell.Tab.0.bottom" timestamp="1642948653104">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1495" height="205" key="GridCell.Tab.0.bottom/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1636859865510" />
     <state width="1877" height="212" key="GridCell.Tab.0.bottom/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1636882128867" />
     <state width="1024" height="5" key="GridCell.Tab.0.bottom/0.0.1536.824/3.-1080.1920.1040@0.0.1536.824" timestamp="1640177992521" />
     <state width="1877" height="379" key="GridCell.Tab.0.bottom/0.0.1536.824/3.-1080.1920.1040@3.-1080.1920.1040" timestamp="1640439796646" />
-    <state width="1493" height="192" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1642923937256" />
-    <state width="1493" height="192" key="GridCell.Tab.0.center" timestamp="1642923937256">
+    <state width="1493" height="192" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1642948653104" />
+    <state width="1493" height="192" key="GridCell.Tab.0.center" timestamp="1642948653103">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1495" height="205" key="GridCell.Tab.0.center/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1636859865510" />
     <state width="1877" height="212" key="GridCell.Tab.0.center/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1636882128867" />
     <state width="1024" height="5" key="GridCell.Tab.0.center/0.0.1536.824/3.-1080.1920.1040@0.0.1536.824" timestamp="1640177992521" />
     <state width="1877" height="379" key="GridCell.Tab.0.center/0.0.1536.824/3.-1080.1920.1040@3.-1080.1920.1040" timestamp="1640439796646" />
-    <state width="1493" height="192" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1642923937256" />
-    <state width="1493" height="192" key="GridCell.Tab.0.left" timestamp="1642923937256">
+    <state width="1493" height="192" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1642948653103" />
+    <state width="1493" height="192" key="GridCell.Tab.0.left" timestamp="1642948653103">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1495" height="205" key="GridCell.Tab.0.left/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1636859865510" />
     <state width="1877" height="212" key="GridCell.Tab.0.left/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1636882128866" />
     <state width="1024" height="5" key="GridCell.Tab.0.left/0.0.1536.824/3.-1080.1920.1040@0.0.1536.824" timestamp="1640177992520" />
     <state width="1877" height="379" key="GridCell.Tab.0.left/0.0.1536.824/3.-1080.1920.1040@3.-1080.1920.1040" timestamp="1640439796646" />
-    <state width="1493" height="192" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1642923937256" />
-    <state width="1493" height="192" key="GridCell.Tab.0.right" timestamp="1642923937256">
+    <state width="1493" height="192" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1642948653103" />
+    <state width="1493" height="192" key="GridCell.Tab.0.right" timestamp="1642948653104">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1495" height="205" key="GridCell.Tab.0.right/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1636859865510" />
     <state width="1877" height="212" key="GridCell.Tab.0.right/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1636882128867" />
     <state width="1024" height="5" key="GridCell.Tab.0.right/0.0.1536.824/3.-1080.1920.1040@0.0.1536.824" timestamp="1640177992521" />
     <state width="1877" height="379" key="GridCell.Tab.0.right/0.0.1536.824/3.-1080.1920.1040@3.-1080.1920.1040" timestamp="1640439796646" />
-    <state width="1493" height="192" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1642923937256" />
+    <state width="1493" height="192" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1642948653104" />
     <state width="1493" height="239" key="GridCell.Tab.1.bottom" timestamp="1642001286143">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -590,12 +629,12 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="813" y="181" key="NewModule_or_Project.wizard/0.0.1536.824@0.0.1536.824" timestamp="1642497266973" />
-    <state x="409" y="0" key="SettingsEditor" timestamp="1642942133997">
+    <state x="409" y="0" key="SettingsEditor" timestamp="1642997206060">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="-1040" y="81" key="SettingsEditor/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1636855190523" />
     <state x="536" y="-1080" key="SettingsEditor/0.0.1536.824/3.-1080.1920.1040@3.-1080.1920.1040" timestamp="1640434765051" />
-    <state x="409" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1642942133997" />
+    <state x="409" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1642997206060" />
     <state x="361" y="148" key="Vcs.Push.Dialog.v2" timestamp="1642936987898">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -622,14 +661,14 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="937" y="106" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog/0.0.1536.824@0.0.1536.824" timestamp="1642729888558" />
-    <state x="461" y="240" key="com.intellij.ide.util.TipDialog" timestamp="1642904680524">
+    <state x="461" y="240" key="com.intellij.ide.util.TipDialog" timestamp="1642993769347">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="461" y="240" key="com.intellij.ide.util.TipDialog/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1639962966401" />
     <state x="2496" y="303" key="com.intellij.ide.util.TipDialog/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1637196385518" />
     <state x="461" y="240" key="com.intellij.ide.util.TipDialog/0.0.1536.824/3.-1080.1920.1040@0.0.1536.824" timestamp="1640430145466" />
     <state x="579" y="-777" key="com.intellij.ide.util.TipDialog/0.0.1536.824/3.-1080.1920.1040@3.-1080.1920.1040" timestamp="1640764587563" />
-    <state x="461" y="240" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1642904680524" />
+    <state x="461" y="240" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1642993769347" />
     <state x="485" y="313" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1638854296100">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -638,21 +677,21 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="732" y="397" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1641297584695" />
-    <state x="455" y="276" width="973" height="548" key="find.popup" timestamp="1642946726601">
+    <state x="479" y="276" width="973" height="548" key="find.popup" timestamp="1643013764798">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="775" y="141" width="755" height="548" key="find.popup/0.0.1536.824/3.-1080.1920.1040@0.0.1536.824" timestamp="1640178117663" />
     <state x="972" y="-902" width="944" height="692" key="find.popup/0.0.1536.824/3.-1080.1920.1040@3.-1080.1920.1040" timestamp="1640439648584" />
-    <state x="455" y="276" width="973" height="548" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1642946726601" />
+    <state x="479" y="276" width="973" height="548" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1643013764798" />
     <state x="356" y="179" key="new project wizard" timestamp="1642930680402">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="229" y="-844" key="new project wizard/0.0.1536.824/3.-1080.1920.1040@3.-1080.1920.1040" timestamp="1640434658494" />
     <state x="356" y="179" key="new project wizard/0.0.1536.824@0.0.1536.824" timestamp="1642930680402" />
-    <state x="862" y="48" key="refactoring.ChangeSignatureDialog" timestamp="1642754048651">
+    <state x="862" y="48" key="refactoring.ChangeSignatureDialog" timestamp="1642996757321">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="862" y="48" key="refactoring.ChangeSignatureDialog/0.0.1536.824@0.0.1536.824" timestamp="1642754048651" />
+    <state x="862" y="48" key="refactoring.ChangeSignatureDialog/0.0.1536.824@0.0.1536.824" timestamp="1642996757321" />
     <state x="493" y="190" width="672" height="677" key="run.anything.popup" timestamp="1642588332829">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

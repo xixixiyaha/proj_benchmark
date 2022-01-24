@@ -69,7 +69,7 @@ public class CategoryForeignClients extends CategoryClients implements Closeable
     public DiscountInfo GetDiscounts(Long prodId, Integer type) {
         ThriftDiscountClientImpl client = discClientPool.borrow();
         try {
-            return CategoryTypeConvert.ConvertDiscountInfoThr2Ori(client.client.GetDiscounts(prodId,type));
+            return CategoryTypeConvert.ConvertDiscountInfoThr2Ori(client.client.GetProdDiscounts(prodId,type));
         } catch (TException e) {
             e.printStackTrace();
         }

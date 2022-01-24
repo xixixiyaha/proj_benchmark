@@ -21,7 +21,6 @@ public class AccountForeignClients extends AccountClients implements Closeable {
         clientPool.close();
     }
 
-    //Todo Notice if valid
     @Override
     protected AccountClients getClient() {
         return this;

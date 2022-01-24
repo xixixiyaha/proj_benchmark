@@ -141,7 +141,7 @@ public class MarshalUtil {
                 CommentInfo info = new CommentInfo();
                 info.setCommentId(rs.getLong(1));
                 info.setUserId(rs.getLong(2));
-                //TODO DB only stores the path. Tags should be read from .txt/.csv/.json/ ...
+                //Notice: DB only stores the path. Tags should be read from .txt/.csv/.json/ ...
 //                info.setProdTag(rs.get(3));
                 info.setProdId(rs.getLong(3));
                 info.setCommentDetails(rs.getString(4));

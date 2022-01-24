@@ -26,6 +26,43 @@ public class AccountServiceImpl implements AccountService {
     private Boolean useStorage = true;
     private AccountClients client ;
 
+    private static String BM1_IP; //= "124.223.34.172"; // account 到 search host 下载 json
+    private static Integer BM1_PORT; // = 22;
+    private static String BM1_USER_NAME; // = "benchmark";
+    private static String BM1_PSW; // = "benchmark";
+    private static String BM1_LOCAL_PATH; // = "/home/benchmark/";
+    private static String BM1_LOCAL_FILENAME; // = "bm1test1.json";
+
+    static {
+
+
+        Properties properties = new Properties();
+        // 使用ClassLoader加载properties配置文件生成对应的输入流
+        BufferedReader in = null;
+        try {
+            in = new BufferedReader(new FileReader("./proj_benchmark.properties"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        // 使用properties对象加载输入流
+        try {
+            assert in != null;
+            properties.load(in);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        BM1_IP = properties.getProperty("BM1_IP");
+        BM1_PORT = Integer.valueOf(properties.getProperty("BM1_PORT"));
+        BM1_USER_NAME = properties.getProperty("BM1_USER_NAME");
+        BM1_PSW = properties.getProperty("BM1_PSW");
+        BM1_LOCAL_PATH = properties.getProperty("BM1_LOCAL_PATH");
+        BM1_USER_NAME = properties.getProperty("BM1_USER_NAME");
+        BM1_LOCAL_FILENAME = properties.getProperty("BM1_LOCAL_FILENAME");
+
+
+
+    }
+
     public AccountServiceImpl(AccountClients accClient){
         this.client = accClient;
 
@@ -55,8 +92,8 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public Boolean VerifyAccessByAccount(Long accountId, Long targetId, IdType idType) {
-        //TODO
-        return null;
+        //TODO@ low priority -- wrong design
+        return true;
     }
 
     @Override
@@ -257,13 +294,7 @@ public class AccountServiceImpl implements AccountService {
         return bool;
     }
 
-    //TODO Notice
-    private static String BM1_IP = "124.223.34.172"; // account 到 search host 下载 json
-    private static Integer BM1_PORT = 22;
-    private static String BM1_USER_NAME = "benchmark";
-    private static String BM1_PSW = "benchmark";
-    private static String BM1_LOCAL_PATH = "/home/benchmark/";
-    private static String BM1_LOCAL_FILENAME = "bm1test1.json";
+
 
     @Override
     public String CompareResEfficiencyBM1(String remoteFilePath,Integer testType) {

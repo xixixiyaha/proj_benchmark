@@ -34,14 +34,12 @@ public class acc2searchTest{
 
         System.out.println("找到以下benchmark项目:");
         System.out.println(allTasks);
-        // //TODO Notice Here
         allTasks.forEach(acc2searchTest::benchmark);
 
         // report();
     }
 
     private static void installSearchService() throws Exception {
-        //TODO 看一下 proj_bm 要不要 install
         exec("mvn clean install");
         // exec("ecom-common","mvn clean install");
         // exec("ecom-search", "mvn clean install");

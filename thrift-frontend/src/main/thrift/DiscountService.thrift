@@ -8,5 +8,5 @@ struct DiscountInfo{
 }
 
 service DiscountService{
-       DiscountInfo GetDiscounts(1:i64 prodId, 2:i32 discountType);
+       DiscountInfo GetProdDiscounts(1:i64 prodId, 2:i32 discountType);
 }

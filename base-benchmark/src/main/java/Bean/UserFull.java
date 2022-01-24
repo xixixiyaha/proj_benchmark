@@ -21,7 +21,7 @@ public class UserFull implements Serializable {
      * updateTime : 12345
      */
 
-    // TODO 1: 增加变量类型 + 类的长度
+    // TODO@ low priority   1: 增加变量类型 + 类的长度
 
     private long uuid;
     private String name;

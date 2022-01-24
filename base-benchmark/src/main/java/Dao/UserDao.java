@@ -133,7 +133,6 @@ public class UserDao {
             // first param is 1
             ps.setObject(1,uuid);
             rs = ps.executeQuery();
-            // TODO 校验结果
 
             return 0;
         } catch (SQLException e) {
@@ -148,8 +147,6 @@ public class UserDao {
             ps.setInt(1,uuid);
             ps.execute();
 
-
-            // TODO 校验结果
         }
         return 1;
     }

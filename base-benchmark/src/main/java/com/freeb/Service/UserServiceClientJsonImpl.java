@@ -25,7 +25,7 @@ public class UserServiceClientJsonImpl implements UserService {
 
     private final CloseableHttpClient client;
     private final ObjectMapper objectMapper = JsonUtils.objectMapper;
-    // TODO: 查询 下面函数的用法
+
     private final JavaType userType = objectMapper.getTypeFactory().constructParametricType(UserFull.class,List.class);
 
     public UserServiceClientJsonImpl(int concurrency){

@@ -12,7 +12,7 @@ import java.io.IOException;
 
 public class UserServiceClientImpl implements UserService, Closeable {
 
-    // TODO
+
     private static String host = "benchmark-server";
     private static int port = 8080;
     static {

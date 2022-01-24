@@ -133,8 +133,7 @@ public class OrderForeignClients extends OrderClients implements Closeable {
     public DiscountInfo GetProdDiscounts(Long prodId, Integer type){
         ThriftDiscountClientImpl client = discClientPool.borrow();
         try {
-                                                                         //TODO 改函数名称
-            return OrderTypeConvert.ConvertDiscountInfoThr2Ori(client.client.GetDiscounts(prodId,type));
+            return OrderTypeConvert.ConvertDiscountInfoThr2Ori(client.client.GetProdDiscounts(prodId,type));
         } catch (TException e) {
             e.printStackTrace();
         }

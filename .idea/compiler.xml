@@ -9,19 +9,19 @@
         <module name="thrift-payment" />
         <module name="ecom-category" />
         <module name="thrift-search" />
+        <module name="ecom-search" />
         <module name="ecom-discount" />
         <module name="ecom-payment" />
         <module name="ecom-account" />
         <module name="ecom-product" />
         <module name="ecom-common" />
+        <module name="thrift-frontend" />
         <module name="thrift-accounts" />
         <module name="ecom-carts" />
         <module name="thrift-discount" />
-        <module name="thrift-frontend" />
         <module name="ecom-order" />
-        <module name="thrift-carts" />
         <module name="thrift-category" />
-        <module name="ecom-search" />
+        <module name="thrift-carts" />
         <module name="thrift-product" />
         <module name="thrift-order" />
       </profile>

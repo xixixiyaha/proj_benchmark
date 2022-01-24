@@ -9,7 +9,7 @@ public class DiscountServiceServerImpl implements DiscountService.Iface {
 
 
     @Override
-    public DiscountInfo GetDiscounts(long prodId, int discountType) throws TException {
+    public DiscountInfo GetProdDiscounts(long prodId, int discountType) throws TException {
         return DiscountTypeConvert.DiscountInfoOri2Thr(discService.GetProdDiscounts(prodId,discountType));
     }
 }

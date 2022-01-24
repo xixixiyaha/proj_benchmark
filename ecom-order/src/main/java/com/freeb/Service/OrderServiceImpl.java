@@ -14,15 +14,15 @@ import java.util.List;
 public class OrderServiceImpl implements OrderService {
 
     private static final Logger logger = LoggerFactory.getLogger(OrderServiceImpl.class);
-    // TODO 初始化
     private OrderClients client;
 
-    private Orders orders = new Orders();
+    private Orders orders;
     private OrderInfoStorage storage;
 
     public OrderServiceImpl(OrderClients c){
         storage = new OrderInfoStorage();
         this.client = c;
+        orders = new Orders();
     }
 
     @Override
@@ -43,14 +43,14 @@ public class OrderServiceImpl implements OrderService {
 
         orderResp.setBaseResp(PackResponse.packSuccess());
         orderResp.setOrderInfos(infos);
-        //TODO has more
+        orderResp.setHasMore(false);
         return orderResp;
     }
 
     @Override
     public OrderResp GetOrderByPaymentId(OrderReq orderReq) {
         OrderResp orderResp = new OrderResp();
-        if (!client.VerifyAccessByAccount(orderReq.getUserId(),orderReq.getPaymentId(), IdType.PAYMENT_ID)){
+        if (!client.AccountExists(orderReq.getUserId())){
             orderResp.setBaseResp(PackResponse.packNoAuthority());
             orderResp.setHasMore(false);
             return orderResp;
@@ -86,7 +86,7 @@ public class OrderServiceImpl implements OrderService {
 //        Long paymentId = client.CreatePayment(payInfo);
 //        if(paymentId ==-1L){
 //            logger.warn("create payment failed OrderReq="+orderReq.toString());
-//            //TODO 升级resp类型
+//
 //            orderResp.setBaseResp(PackResponse.packUnknownFailure());
 //            return orderResp;
 //        }
@@ -101,7 +101,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public OrderResp GetOrderByOrderId(OrderReq orderReq) {
         OrderResp orderResp = new OrderResp();
-        if (!client.VerifyAccessByAccount(orderReq.getUserId(),orderReq.getOrderId(), IdType.ORDER_ID)){
+        if (!client.AccountExists(orderReq.getUserId())){
             orderResp.setBaseResp(PackResponse.packNoAuthority());
             orderResp.setHasMore(false);
             return orderResp;

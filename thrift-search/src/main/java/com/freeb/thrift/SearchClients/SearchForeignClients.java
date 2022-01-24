@@ -8,6 +8,7 @@ import org.apache.thrift.TException;
 
 import java.io.Closeable;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
@@ -61,10 +62,10 @@ public class SearchForeignClients extends SearchClients implements Closeable {
     }
 
     @Override
-    public ConcurrentHashMap<Integer, Integer> GetUserActiveByCategory(Long id) {
+    public HashMap<Integer, Integer> GetUserActiveByCategory(Long id) {
         ThriftProdClientImpl client = prodClientPool.borrow();
         try {
-            return (ConcurrentHashMap<Integer, Integer>) client.client.GetUserActiveByCategory(id);
+            return (HashMap<Integer, Integer>) client.client.GetUserActiveByCategory(id);
         } catch (TException e) {
             e.printStackTrace();
         }

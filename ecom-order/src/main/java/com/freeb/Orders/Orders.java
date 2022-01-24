@@ -15,10 +15,15 @@ import java.util.List;
 
 public class Orders {
     private static final Logger logger = LoggerFactory.getLogger(Orders.class);
+    private OrderInfoCache cache;
+    private OrderInfoStorage storage;
+    public Orders(){
 
-    //TODO 我觉得这个声明方式不对
-    OrderInfoCache cache = new OrderInfoCache();
-    OrderInfoStorage storage = new OrderInfoStorage();
+        cache = new OrderInfoCache();
+        storage = new OrderInfoStorage();
+    }
+
+
 
     public List<OrderInfo> getOrderListByAccountId(long accountId, Integer paymentStatus){
         OrderSearchKey key = new OrderSearchKey();
@@ -120,12 +125,11 @@ public class Orders {
 //        if(str!=null){
 //            return MarshalUtil.convertString2OrderList(key);
 //        }
+        //TODO@ low priority
         switch (type){
             case OBJ_NAME:
-                //TODO
                 return null;
             case MERCHANT_NAME:
-                //TODO
                 return null;
             default:
                 logger.warn("unsupported type");

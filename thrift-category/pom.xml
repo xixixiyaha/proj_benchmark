@@ -26,7 +26,6 @@
             <artifactId>ecom-category</artifactId>
             <version>${version.benchmark-base}</version>
             <scope>compile</scope>
-            <!--            ToDO@ high priority <scope> 是什么参数-->
         </dependency>
         <dependency>
             <groupId>junit</groupId>

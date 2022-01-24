@@ -5,17 +5,17 @@ import com.freeb.Entity.ProductInfo;
 import com.freeb.Enum.SearchOrder;
 import com.freeb.Enum.SearchType;
 
+import com.freeb.Utils.MapUtil;
+import org.json.simple.JSONArray;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class SearchServiceImpl implements SearchService {
 
     private static final Logger logger = LoggerFactory.getLogger(SearchServiceImpl.class);
-//TODO
+
     private SearchClients clients ;
     private Recommend rcmd;
     private Boolean forceSearch = true;
@@ -36,14 +36,14 @@ public class SearchServiceImpl implements SearchService {
 //        List<Integer> tags = clients.GetAccountTag(userId);
 
         if(!forceSearch){
-            //TODO buffer
-            logger.info("TODO@ GetRecommendByProdName: need add buffer");
+            //TODO@ low priority buffer
+            logger.info("GetRecommendByProdName: need add buffer");
         }else {
             switch (type){
                 case OBJ_NAME:
                     return rcmd.GetRecommendProductsByProdName(userId,order,words);
                 case MERCHANT_NAME:
-                    //todo
+
                     break;
                 default:
                     break;
@@ -68,7 +68,6 @@ public class SearchServiceImpl implements SearchService {
             Integer a;
             Integer b;
             long temp = 0L;
-//            System.out.println("DBG@ loopTime "+loopTime);
             for(int time = 0; time<this.loopTime; time++){
                 a = seed.nextInt(100)+50;
                 b= seed.nextInt(100)+50;
@@ -133,12 +132,42 @@ public class SearchServiceImpl implements SearchService {
                 return true;
         }
     }
+    private List<Integer> SortMapByVal(Map<Integer,Double> map,Integer topN){
+        List<Map.Entry<Integer,Double>> list = new ArrayList<>(map.entrySet());
+        list.sort(Map.Entry.comparingByValue());
+        Collections.reverse(list);
+        List<Integer> result = new ArrayList<>();
+        for(int i=0;i<topN;i++){
+            result.add(list.get(i).getKey());
+        }
+        return result;
+    }
+    private String ConvertList2JsonArray(List<Integer> cidLst){
+        JSONArray jarr = new JSONArray();
+        //TODO --check 这个警告是什么
+        jarr.addAll(cidLst);
+        return jarr.toJSONString();
+    }
 
     @Override
     public Boolean OfflineUserTagComputation(List<Long> uidLst) {
-        //TODO@ high priority 直接从数据库拿数据计算 不走client
+        //直接从数据库拿数据计算 不走client
 
-        return null;
+        // 1. 取得 Product sql 连接
+        this.rcmd.SetStorage();
+        this.rcmd.SetOffline(true);
+        // 2. 获取要计算的 List<userId> => 参数 uidLst
+        Map<Long,String> usersTag = new HashMap<>();
+        // 3.  for(uid:List<uid>) Recommend 模块通过本地SQL连接获取计算数据
+        for(Long uid:uidLst){
+            usersTag.put(uid,ConvertList2JsonArray(SortMapByVal(rcmd.GetUserTags(uid),10)));
+        }
+        // 4. 对于得到的数据 调用RPC更新Account的UserTag
+        for(Map.Entry<Long,String> entry:usersTag.entrySet()){
+            clients.SetAccountTag(entry.getKey(),entry.getValue());
+        }
+
+        return true;
     }
 
     class CompRpcThread extends Thread{
@@ -187,7 +216,7 @@ public class SearchServiceImpl implements SearchService {
             }
         }
 //        for(int i = 0; i<threadNum; i++){
-//            //TODO & Notice: not in hurry. current Result is useless
+//            //TODO @low priority Notice: not in hurry. current Result is useless
 //        }
         long endtime = System.currentTimeMillis();
         long costtime = (endtime-begintime);

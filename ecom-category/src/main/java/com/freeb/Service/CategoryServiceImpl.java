@@ -15,7 +15,6 @@ import java.util.concurrent.*;
 
 public class CategoryServiceImpl implements CategoryService {
     private static final Logger logger = LoggerFactory.getLogger(CategoryServiceImpl.class);
-    //TODO excutor
     private ThreadPoolExecutor executor;
     private CategoryStorage cStorage;
     private CategoryClients clients;
@@ -28,7 +27,6 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     class GetProductInfo implements Callable<ProductInfo> {
-        private ProductInfo info;
         private Long pid;
         GetProductInfo(Long id){
             pid=id;
@@ -36,8 +34,7 @@ public class CategoryServiceImpl implements CategoryService {
 
         @Override
         public ProductInfo call() throws Exception {
-           info = clients.GetProductInfo(pid);
-           return info;
+            return clients.GetProductInfo(pid);
         }
     }
     class GetProductInfoLst implements Callable<List<ProductInfo>>{
@@ -59,7 +56,6 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     class GetProdComments implements Callable<List<CommentInfo>>{
-        private List<CommentInfo> infos;
         private Long pid;
         private Integer num;
         GetProdComments(Long id,Integer commentNum){
@@ -68,15 +64,13 @@ public class CategoryServiceImpl implements CategoryService {
         }
         @Override
         public List<CommentInfo> call() {
-            infos = clients.GetComments(pid,num);
-            return infos;
+            return clients.GetComments(pid, num);
         }
 
     }
 
     class GetProdDiscount implements Callable<DiscountInfo>{
 
-        private DiscountInfo info;
         private Long pid;
         private Integer type;
         GetProdDiscount(Long id,Integer t){
@@ -85,14 +79,12 @@ public class CategoryServiceImpl implements CategoryService {
         }
         @Override
         public DiscountInfo call() {
-            info = clients.GetDiscounts(pid,type);
-            return info;
+            return clients.GetDiscounts(pid, type);
         }
 
     }
 
     class GetMerchantInfo implements Callable<MerchantInfo>{
-        private MerchantInfo info;
         private Long pid;
         GetMerchantInfo(Long id){
             pid = id;
@@ -100,7 +92,7 @@ public class CategoryServiceImpl implements CategoryService {
 
         @Override
         public MerchantInfo call() {
-            info = clients.GetMerchantInfoByProd(pid);
+            MerchantInfo info = clients.GetMerchantInfoByProd(pid);
             return info;
         }
     }
@@ -148,7 +140,7 @@ public class CategoryServiceImpl implements CategoryService {
             tasks.add(t1);
             tasks2.add(t2);
         }
-        //TODO CHECK if the function can work
+        //TODO@ runtime: CHECK if the function can work
         try {
             List<Future<ProductInfo>> f1= executor.invokeAll(tasks);
             List<Future<MerchantInfo>> f2=executor.invokeAll(tasks2);
@@ -165,7 +157,7 @@ public class CategoryServiceImpl implements CategoryService {
                     re.add(new CategoryPage(pid,pInfo.getProdName(),pInfo.getProdSales(),pInfo.getProdImages().get(0),null,null));
                 }
                 pos+=1;
-                // TODO@ Notice ImagesList == null ?
+                // Notice@ Notice ImagesList == null ?
             }
             return re;
         } catch (InterruptedException | ExecutionException e) {
@@ -174,7 +166,6 @@ public class CategoryServiceImpl implements CategoryService {
         return null;
     }
 
-    //TODO@ high-priority executor
     @Override
     public List<ProductInfo> BM2CompareParallelRpcEfficiency(Integer totalComputationLoad, Integer threadNum) {
         int loopPerThread = totalComputationLoad/threadNum;
@@ -185,7 +176,6 @@ public class CategoryServiceImpl implements CategoryService {
             executor.submit(t1);
             tasks.add(t1);
         }
-        //TODO CHECK if the function is that meaning
         try {
             List<Future<List<ProductInfo>>> f1 = executor.invokeAll(tasks);
             List<ProductInfo> re = new ArrayList<>();

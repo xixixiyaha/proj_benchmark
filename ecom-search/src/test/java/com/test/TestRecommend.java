@@ -82,7 +82,7 @@ public class TestRecommend {
         TruncateDB();
         CreateData(1500L,200L,15,0L);
         long startTime = System.nanoTime();
-        ConcurrentHashMap<Long, ConcurrentHashMap<Integer, Integer>> activeMap = rcmdService.AssembleUserBehavior();
+        HashMap<Long, HashMap<Integer, Integer>> activeMap = rcmdService.AssembleUserBehavior();
         long endTime = System.nanoTime();
         long duration = (long) ((endTime - startTime)/1e6);  //divide by 1000000 to get milliseconds.
 

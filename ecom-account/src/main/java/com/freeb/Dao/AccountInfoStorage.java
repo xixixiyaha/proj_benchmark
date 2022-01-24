@@ -1,5 +1,6 @@
 package com.freeb.Dao;
 
+import com.freeb.Enum.IdType;
 import org.json.simple.parser.JSONParser;
 import com.freeb.Entity.AccountInfo;
 import com.freeb.Utils.MarshalUtil;
@@ -83,12 +84,15 @@ public class AccountInfoStorage {
 
     static final String GET_ACCOUNT_BY_ID ="SELECT user_id, user_name, user_pwd, user_card, user_description FROM ACCOUNT_INFO WHERE user_id = ?";
     static final String GET_ACCOUNT_BY_NAME ="SELECT user_id, user_name, user_pwd, user_card, user_description FROM ACCOUNT_INFO WHERE user_name = ?";
+    static final String GET_ACCOUNT_ID_BY_IDTYPE ="SELECT user_id FROM ACCOUNT_INFO WHERE ";
 
     static final String UPDATE_ACCOUNT_BY_ID ="UPDATE ACCOUNT_INFO SET user_name =?, user_pwd = ?, user_description = ? WHERE user_id = ?";
     static final String DELETE_ACCOUNT_BY_ID ="DELETE FROM ACCOUNT_INFO WHERE user_id = ?";
     static final String EXISTS_ACCOUNT_BY_ID ="SELECT user_id FROM ACCOUNT_INFO WHERE user_id = ?";
     static final String GET_ACCOUNT_TAG_BY_ID = "SELECT user_tag FROM ACCOUNT_INFO WHERE user_id=?";
     static final String SET_ACCOUNT_TAG_BY_ID = "UPDATE ACCOUNT_INFO SET user_tag = ? WHERE user_id=?";
+
+
 
     public AccountInfo GetAccountInfoByName(String name){
 
@@ -192,7 +196,7 @@ public class AccountInfoStorage {
             PreparedStatement stmt = conn.prepareStatement(CREATE_USER);
             stmt.setString(1,userName);
             stmt.setString(2,pwd);
-            stmt.setString(3,"TODO USER CARD");
+            stmt.setString(3,"TODO@low USER CARD");
             stmt.setString(4,description);
             int rs = stmt.executeUpdate();
             if(rs>0)return true;

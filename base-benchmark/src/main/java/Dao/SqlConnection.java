@@ -4,7 +4,6 @@ import java.sql.*;
 
 public class SqlConnection {
 
-    // TODO 从命令行读取数据库连接信息
     private static final String URL = "jdbc:mysql://ip:port/dbName";
     private static final String NAME = "root";
     private static final String PASSWORD = "root";

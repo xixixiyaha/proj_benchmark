@@ -415,4 +415,51 @@ public class Recommend {
         return null;
     }
 
+    class CompRpcThread extends Thread{
+        private Integer startUid,endUid;
+        private SearchClients c;
+        private List<List<Long>> computationRe;
+        CompRpcThread(Integer sUid,Integer eUid,SearchClients cc){
+            this.startUid = sUid;
+            this.endUid = eUid;
+            this.c = cc;
+        }
+
+        @Override
+        public void run() {
+            computationRe = new ArrayList<>();
+            for(long uid=startUid;uid<=endUid;uid++){
+                computationRe.add(GetRecommendProductsByProdName(uid, SearchOrder.SIMILARITY,""));
+            }
+        }
+
+        public List<List<Long>> GetComputationRe(){
+            return this.computationRe;
+        }
+
+    }
+    public Boolean CompRpcEfficiency(Integer totalUserNum,Integer threadNum){
+        int loopPerThread = totalUserNum/threadNum;
+        List<CompRpcThread> threads = new ArrayList<>();
+        for(int i=0;i<threadNum;i++){
+            CompRpcThread thread = new CompRpcThread(i*loopPerThread+1,(i+1)*loopPerThread,this.clients); //Notice: Uid start from 1
+            thread.start();
+//            System.out.println("DBG@ threads len = "+threads.size());
+            threads.add(thread);
+//            System.out.println("DBG@ put "+i+" thread");
+        }
+        for(CompRpcThread thread:threads){
+            try {
+                thread.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+//        for(int i = 0; i<threadNum; i++){
+//            //TODO @low priority Notice: not in hurry. current Result is useless
+//        }
+
+        return true;
+    }
+
 }

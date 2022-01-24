@@ -22,8 +22,6 @@ public class SearchForeignClients extends SearchClients implements Closeable {
     static {
         System.out.println("in SearchForeignClients");
     }
-    // TODO@ high priority port是否可以共用
-
 
     private final LockObjectPool<ThriftAccountClientImpl> accClientPool = new LockObjectPool<>(32,()->new ThriftAccountClientImpl(account_host, search_port));
     private final LockObjectPool<ThriftProdClientImpl> prodClientPool = new LockObjectPool<>(32,()->new ThriftProdClientImpl(prod_host, search_port));

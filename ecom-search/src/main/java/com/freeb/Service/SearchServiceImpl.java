@@ -170,54 +170,13 @@ public class SearchServiceImpl implements SearchService {
         return true;
     }
 
-    class CompRpcThread extends Thread{
-        private Integer startUid,endUid;
-        private SearchClients c;
-        private List<List<Long>> computationRe;
-        CompRpcThread(Integer sUid,Integer eUid,SearchClients cc){
-            this.startUid = sUid;
-            this.endUid = eUid;
-            this.c = cc;
-        }
 
-        @Override
-        public void run() {
-            //TODO notice RCMD 并发
-            Recommend rcmd = new Recommend(c);
-            computationRe = new ArrayList<>();
-            for(long uid=startUid;uid<=endUid;uid++){
-                computationRe.add(rcmd.GetRecommendProductsByProdName(uid, SearchOrder.SIMILARITY,""));
-            }
-        }
 
-        public List<List<Long>> GetComputationRe(){
-            return this.computationRe;
-        }
-
-    }
-
-    private Boolean BM2CompRpcEfficiency(Integer totalUserNum,Integer threadNum){
+    public Boolean BM2CompRpcEfficiency(Integer totalUserNum,Integer threadNum){
         long begintime = System.currentTimeMillis();
 
-        int loopPerThread = totalUserNum/threadNum;
-        List<CompRpcThread> threads = new ArrayList<>();
-        for(int i=0;i<threadNum;i++){
-            CompRpcThread thread = new CompRpcThread(i*loopPerThread+1,(i+1)*loopPerThread,this.clients); //Notice: Uid start from 1
-            thread.start();
-//            System.out.println("DBG@ threads len = "+threads.size());
-            threads.add(thread);
-//            System.out.println("DBG@ put "+i+" thread");
-        }
-        for(CompRpcThread thread:threads){
-            try {
-                thread.join();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-//        for(int i = 0; i<threadNum; i++){
-//            //TODO @low priority Notice: not in hurry. current Result is useless
-//        }
+        Boolean re =rcmd.CompRpcEfficiency(totalUserNum,threadNum);
+
         long endtime = System.currentTimeMillis();
         long costtime = (endtime-begintime);
         logger.info("beginTime = "+begintime);

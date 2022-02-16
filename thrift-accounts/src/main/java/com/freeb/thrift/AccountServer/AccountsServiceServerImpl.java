@@ -6,7 +6,7 @@ import com.freeb.thrift.AccountInfo;
 import com.freeb.thrift.AccountService;
 import com.freeb.thrift.IdType;
 import org.apache.thrift.TException;
-import com.freeb.AccountsTypeConvert;
+import com.freeb.AccountTypeConvert;
 
 import java.util.List;
 
@@ -22,7 +22,7 @@ public class AccountsServiceServerImpl implements AccountService.Iface{
 
     @Override
     public boolean VerifyAccessByAccount(long accountId, long targetId, IdType idType) throws TException {
-        return accountService.VerifyAccessByAccount(accountId,targetId,AccountsTypeConvert.IdTypeThr2Ori(idType));
+        return accountService.VerifyAccessByAccount(accountId,targetId, AccountTypeConvert.IdTypeThr2Ori(idType));
     }
 
     @Override
@@ -37,17 +37,17 @@ public class AccountsServiceServerImpl implements AccountService.Iface{
 
     @Override
     public boolean ChangeAccountPwd(AccountInfo info, String passwd) throws TException {
-        return accountService.ChangeAccountPwd(AccountsTypeConvert.AccountsInfoThr2Ori(info),passwd);
+        return accountService.ChangeAccountPwd(AccountTypeConvert.AccountsInfoThr2Ori(info),passwd);
     }
 
     @Override
     public boolean CreateAccount(AccountInfo info) throws TException {
-        return accountService.CreateAccount(AccountsTypeConvert.AccountsInfoThr2Ori(info));
+        return accountService.CreateAccount(AccountTypeConvert.AccountsInfoThr2Ori(info));
     }
 
     @Override
     public AccountInfo GetAccountInfo(long id) throws TException {
-        return AccountsTypeConvert.AccountsInfoOri2Thr(accountService.GetAccountInfo(id));
+        return AccountTypeConvert.AccountsInfoOri2Thr(accountService.GetAccountInfo(id));
     }
 
     @Override

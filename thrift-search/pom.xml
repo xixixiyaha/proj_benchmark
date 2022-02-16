@@ -21,6 +21,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.ibm.darpc</groupId>
+            <artifactId>darpc</artifactId>
+            <version>1.9</version>
+        </dependency>
+        <dependency>
             <groupId>free.benchmark</groupId>
             <artifactId>ecom-search</artifactId>
             <version>${version.benchmark-base}</version>

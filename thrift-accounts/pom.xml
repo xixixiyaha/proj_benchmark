@@ -22,6 +22,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.ibm.darpc</groupId>
+            <artifactId>darpc</artifactId>
+            <version>1.9</version>
+        </dependency>
+        <dependency>
             <groupId>free.benchmark</groupId>
             <artifactId>ecom-account</artifactId>
             <version>${version.benchmark-base}</version>
@@ -96,8 +101,8 @@
                 <version>3.8.0</version>
                 <configuration>
 
-                    <source>${maven.compiler.source}</source>
-                    <target>${maven.compiler.target}</target>
+                    <source>13</source>
+                    <target>13</target>
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>

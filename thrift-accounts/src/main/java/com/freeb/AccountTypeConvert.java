@@ -3,7 +3,7 @@ package com.freeb;
 import com.freeb.Entity.AccountInfo;
 import com.freeb.Enum.IdType;
 
-public class AccountsTypeConvert {
+public class AccountTypeConvert {
 
     public static com.freeb.Enum.IdType IdTypeThr2Ori(com.freeb.thrift.IdType idType) {
         switch (idType) {

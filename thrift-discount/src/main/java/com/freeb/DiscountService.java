@@ -173,7 +173,7 @@ public class DiscountService {
 
   }
 
-  public static class AsyncProcessor<I extends AsyncIface> extends org.apache.thrift.TBaseAsyncProcessor<I> {
+  public static class AsyncProcessor<I extends AsyncIface> extends org.apache.thrift.TBaseAsyncProcessor<I>{
     private static final Logger LOGGER = LoggerFactory.getLogger(AsyncProcessor.class.getName());
     public AsyncProcessor(I iface) {
       super(iface, getProcessMap(new HashMap<String, org.apache.thrift.AsyncProcessFunction<I, ? extends org.apache.thrift.TBase, ?>>()));
@@ -476,6 +476,7 @@ public class DiscountService {
 
       boolean this_present_prodId = true;
       boolean that_present_prodId = true;
+      //TODO@MEAINNG 没看懂这一步的意义
       if (this_present_prodId || that_present_prodId) {
         if (!(this_present_prodId && that_present_prodId))
           return false;
@@ -501,6 +502,7 @@ public class DiscountService {
 
       boolean present_prodId = true;
       list.add(present_prodId);
+      //TODO@MEAINNG 没看懂这一步的意义
       if (present_prodId)
         list.add(prodId);
 

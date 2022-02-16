@@ -15,9 +15,9 @@
         <module name="ecom-product" />
         <module name="ecom-common" />
         <module name="ecom-carts" />
-        <module name="thrift-accounts" />
         <module name="ecom-search" />
         <module name="thrift-discount" />
+        <module name="thrift-accounts" />
         <module name="thrift-frontend" />
         <module name="ecom-order" />
         <module name="thrift-category" />

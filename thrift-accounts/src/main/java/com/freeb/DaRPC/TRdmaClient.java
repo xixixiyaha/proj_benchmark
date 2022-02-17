@@ -9,7 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.net.InetSocketAddress;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
@@ -18,7 +17,7 @@ public class TRdmaClient extends TTransport {
     * Todo: 复用req&resp 以及 清空 req的时机
     *
     * */
-
+    Boolean isRead = false;
     private static final Logger logger = LoggerFactory.getLogger(TRdmaClient.class.getName());
     private int rdmaTimeout__;
     private int connectTimeout__;
@@ -27,11 +26,8 @@ public class TRdmaClient extends TTransport {
     private DaRPCClientGroup<RdmaRpcRequest, RdmaRpcResponse> group_;
     private DaRPCClientEndpoint<RdmaRpcRequest,RdmaRpcResponse> endpoint_;
 
-    private int mode;
-    private int batchSize;
-    private int maxInline;
-    private int recvQueueDepth;
-    private int sendQueueDepth;
+    private int pos_,size_;
+
 
     /* Real transport */
     private RdmaRpcRequest req_;
@@ -39,42 +35,20 @@ public class TRdmaClient extends TTransport {
     private DaRPCFuture<RdmaRpcRequest,RdmaRpcResponse> future_;
     private DaRPCStream<RdmaRpcRequest, RdmaRpcResponse> stream_;
 
-    /* Rdma 交换信息时用的 IpAddr */
-    private String host_;
-    private int port_;
+
 
     /* 传输内部 buf*/
     private final byte[] i32buf = new byte[4];
     private final TByteArrayOutputStream writeBuffer_ = new TByteArrayOutputStream(1024);
     private final TMemoryInputTransport readBuffer_ = new TMemoryInputTransport(new byte[0]);
 
+    public TRdmaClient(TRdma rdmaInstance){
 
-
-    public TRdmaClient(String host,int port){
-        this.host_ = host;
-        this.port_ = port;
     }
 
-    public TRdmaClient(String host,int port,int timeout){
-        this.host_ = host;
-        this.port_ = port;
+    public TRdmaClient(int timeout){
         this.rdmaTimeout__ = timeout;
         this.connectTimeout__ = timeout;
-    }
-
-
-    private void initRdma() throws Exception {
-
-        RdmaRpcProtocol rpcProtocol = new RdmaRpcProtocol();
-        if(this.group_!=null){
-            this.group_ = DaRPCClientGroup.createClientGroup(rpcProtocol, 100, this.maxInline, this.recvQueueDepth, this.sendQueueDepth);
-        }
-        InetSocketAddress address = new InetSocketAddress(this.host_, this.port_);
-
-        DaRPCClientEndpoint<RdmaRpcRequest, RdmaRpcResponse> clientEp = this.group_.createEndpoint();
-        clientEp.connect(address, 1000);
-        this.endpoint_ = clientEp;
-        this.stream_ = this.endpoint_.createStream();
     }
 
     @Override
@@ -84,23 +58,7 @@ public class TRdmaClient extends TTransport {
 
     @Override
     public void open() throws TTransportException {
-        if (this.isOpen()) {
-            throw new TTransportException(2, "Socket already connected.");
-        } else if (this.host_ != null && this.host_.length() != 0) {
-            if (this.port_ > 0 && this.port_ <= 65535) {
-                if (this.endpoint_ == null) {
-                    try {
-                        this.initRdma();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            } else {
-                throw new TTransportException(1, "Invalid port " + this.port_);
-            }
-        } else {
-            throw new TTransportException(1, "Cannot open null host.");
-        }
+
     }
 
     @Override
@@ -116,14 +74,12 @@ public class TRdmaClient extends TTransport {
 
     @Override
     public int read(byte[] bytes, int offset, int len) throws TTransportException {
-
-        int got = this.readBuffer_.read(bytes, offset, len);
-        if (got > 0) {
-            return got;
-        } else {
+        if(!isRead){
             this.readFrame();
+            this.isRead = true;
             return this.readBuffer_.read(bytes, offset, len);
         }
+        return this.readBuffer_.read(bytes, offset, len);
     }
 
 
@@ -150,12 +106,15 @@ public class TRdmaClient extends TTransport {
         if (size < 0) {
             this.close();
             throw new TTransportException(5, "Read a negative frame size (" + size + ")!");
-        } else if (size > RdmaRpcResponse.SERIALIZE_LENGTH) {
+        } else if (size > RdmaRpcResponse.PARAM_SIZE) {
             this.close();
-            throw new TTransportException(5, "Frame size (" + size + ") larger than max length (" + RdmaRpcResponse.SERIALIZE_LENGTH + ")!");
+            throw new TTransportException(5, "Frame size (" + size + ") larger than max length (" + RdmaRpcResponse.PARAM_SIZE + ")!");
         } else {
             byte[] buff = new byte[size];
-            this.resp_.readFromParam(buff,0, size);
+            this.pos_ = 0;
+            this.size_ = size;
+            this.req_.clear();
+            this.resp_.readFromParam(buff,0, size,this.pos_,size);
             this.readBuffer_.reset(buff);
         }
         // TODO 这里是不是可以释放 send & recv
@@ -163,19 +122,19 @@ public class TRdmaClient extends TTransport {
 
     @Override
     public void write(byte[] bytes, int offset, int len) throws TTransportException {
-        if(this.req_ == null){
-            this.req_ = new RdmaRpcRequest();
-        }
-        this.req_.writeToParam(bytes,offset,len);
-    }
+        int wrote= this.req_.writeToParam(bytes,offset,len,this.pos_);
+        this.pos_+=wrote;    }
 
     public void flush(){
+        this.isRead = false;
+        this.resp_.clear();
         //TODO cmd
         this.req_.setTime_(System.currentTimeMillis());
-        int len = this.req_.getPosition();
+        int len = this.pos_;
+        this.pos_ = 0;
         encodeFrameSize(len,this.i32buf);
         this.req_.setLength_(this.i32buf);
-        //TODO 差流控
+        //TODO 流控
         this.resp_ = new RdmaRpcResponse();
         try {
             this.future_ = this.stream_.request(this.req_, this.resp_, false);
@@ -207,23 +166,5 @@ public class TRdmaClient extends TTransport {
         this.endpoint_ = endpoint_;
     }
 
-    public void setMode(int mode) {
-        this.mode = mode;
-    }
 
-    public void setBatchSize(int batchSize) {
-        this.batchSize = batchSize;
-    }
-
-    public void setMaxInline(int maxInline) {
-        this.maxInline = maxInline;
-    }
-
-    public void setRecvQueueDepth(int recvQueueDepth) {
-        this.recvQueueDepth = recvQueueDepth;
-    }
-
-    public void setSendQueueDepth(int sendQueueDepth) {
-        this.sendQueueDepth = sendQueueDepth;
-    }
 }

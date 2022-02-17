@@ -4,30 +4,23 @@ import org.apache.commons.math3.exception.OutOfRangeException;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.util.Arrays;
 
 public class RdmaRpcRequest implements DaRPCMessage{
 
     public static int SERIALIZED_SIZE = 200;
-    public static int SERIALIZE_LENGTH = 184;
+    public static int PARAM_SIZE = 184;
     private int cmd_;
     private long time_;
     private byte[] length_ = new byte[4];
-    private byte[] param_ = new byte[SERIALIZE_LENGTH];
-    private int pos = 0;
-
-    public void clear(){
-        this.pos = 0;
-    }
-    public int getPosition(){
-        return this.pos;
-    }
+    private byte[] param_ = new byte[PARAM_SIZE];
 
     @Override
     public int write(ByteBuffer byteBuffer) throws IOException {
         byteBuffer.putInt(cmd_);
         byteBuffer.putLong(time_);
         byteBuffer.put(byteBuffer.position(), length_,0,4);
-        byteBuffer.put(byteBuffer.position(), param_,0,SERIALIZE_LENGTH);
+        byteBuffer.put(byteBuffer.position(), param_,0, PARAM_SIZE);
         return SERIALIZED_SIZE;
     }
 
@@ -36,7 +29,7 @@ public class RdmaRpcRequest implements DaRPCMessage{
         cmd_ = byteBuffer.getInt();
         time_ = byteBuffer.getLong();
         byteBuffer.get(byteBuffer.position(), length_,0,4);
-        byteBuffer.get(byteBuffer.position(), param_,0,SERIALIZE_LENGTH);
+        byteBuffer.get(byteBuffer.position(), param_,0, PARAM_SIZE);
     }
 
     @Override
@@ -46,7 +39,7 @@ public class RdmaRpcRequest implements DaRPCMessage{
 
     @Override
     public String toString() {
-        String strParam = new String(param_,0,SERIALIZE_LENGTH);
+        String strParam = new String(param_,0, PARAM_SIZE);
         return "RdmaRpcRequest{" +
                 "cmd=" + cmd_ +
                 ", time=" + time_ +
@@ -81,16 +74,23 @@ public class RdmaRpcRequest implements DaRPCMessage{
     }
 
 
-    public void writeToParam(byte[] bytes, int offset, int len) {
-        //TODO Notice
-        for(int j=offset;j<offset+len&&pos<SERIALIZE_LENGTH;j++){
-            this.param_[pos++] = bytes[j];
+    public int writeToParam(byte[] bytes, int offset, int len,int pos) {
+        int i = 0,j=offset;
+        for(; j<offset+len&&(pos+i)< PARAM_SIZE; i++,j++){
+            this.param_[pos+i] = bytes[j];
         }
-        if(pos == SERIALIZE_LENGTH){
-            throw new OutOfRangeException(pos,0,SERIALIZE_LENGTH);
+        if(pos == PARAM_SIZE){
+            throw new OutOfRangeException(pos+i,0, PARAM_SIZE);
         }
+        return i;
     }
 
+    public void clear(){
+        cmd_ = 0;
+        time_ = 0L;
+        Arrays.fill(length_, (byte)0);
+        Arrays.fill(param_, (byte)0);
+    }
 
 
     public void setCmd_(int cmd_) {

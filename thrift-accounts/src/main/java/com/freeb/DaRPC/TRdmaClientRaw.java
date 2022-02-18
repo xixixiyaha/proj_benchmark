@@ -1,9 +1,6 @@
 package com.freeb.DaRPC;
 
-import com.ibm.darpc.DaRPCClientEndpoint;
-import com.ibm.darpc.DaRPCClientGroup;
-import com.ibm.darpc.DaRPCFuture;
-import com.ibm.darpc.DaRPCStream;
+import com.ibm.darpc.*;
 import org.apache.thrift.transport.TTransport;
 import org.apache.thrift.transport.TTransportException;
 
@@ -11,8 +8,7 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.util.concurrent.TimeUnit;
 
-public class TRdmaRaw extends TTransport {
-
+public class TRdmaClientRaw extends TTransport {
     private Boolean isOpen = false;
     private Boolean isRead = false;
     private int pos_,size_;
@@ -43,26 +39,37 @@ public class TRdmaRaw extends TTransport {
     private int mode;
     private int batchSize;
 
-    public TRdmaRaw(String host,int port){
+    public TRdmaClientRaw(String host, int port){
         this.host_ = host;
         this.port_ = port;
         this.pos_ = 0;
         this.size_ = -1;
+
+    }
+
+    public TRdmaClientRaw(DaRPCClientEndpoint<RdmaRpcRequest,RdmaRpcResponse> endpoint, RdmaRpcRequest req, RdmaRpcResponse resp, Boolean serverSide){
+        this.pos_ = 0;
+        this.size_ = -1;
+        this.endpoint_ = endpoint;
+        this.req_ = req;
+        this.resp_ = resp;
+
     }
 
     public void init() throws Exception {
+
         RdmaRpcProtocol rpcProtocol = new RdmaRpcProtocol();
-        if(this.group_!=null){
+        if (this.group_ != null) {
             this.group_ = DaRPCClientGroup.createClientGroup(rpcProtocol, 100, this.maxInline, this.recvQueueDepth, this.sendQueueDepth);
         }
         InetSocketAddress address = new InetSocketAddress(this.host_, this.port_);
-
         DaRPCClientEndpoint<RdmaRpcRequest, RdmaRpcResponse> clientEp = this.group_.createEndpoint();
         clientEp.connect(address, 1000);
         this.endpoint_ = clientEp;
         this.stream_ = this.endpoint_.createStream();
         this.req_ = new RdmaRpcRequest();
         this.resp_ = new RdmaRpcResponse();
+
     }
     @Override
     public boolean isOpen() {
@@ -96,7 +103,10 @@ public class TRdmaRaw extends TTransport {
         try {
             //TODO Notice
             this.endpoint_.close();
-            this.group_.close();
+            if(this.group_!=null){
+                this.group_.close();
+            }
+
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
@@ -105,6 +115,7 @@ public class TRdmaRaw extends TTransport {
     @Override
     public int read(byte[] bytes, int offset, int len) throws TTransportException {
         int got;
+
         if (!isRead) {
             try {
                 this.readFrame();
@@ -118,18 +129,12 @@ public class TRdmaRaw extends TTransport {
         return got;
     }
 
-
-
-
     private void readFrame() throws Exception {
-
         if(this.future_==null){
             throw new Exception("Future is null! not waiting a resp");
         }
-
         //TODO switch mode
         this.future_.get(this.rdmaTimeout__, TimeUnit.MILLISECONDS);
-
         this.resp_ = this.future_.getReceiveMessage();
         this.resp_.getLength_(this.i32buf);
         int size = decodeFrameSize(this.i32buf);
@@ -148,7 +153,9 @@ public class TRdmaRaw extends TTransport {
 
     @Override
     public void write(byte[] bytes, int offset, int len) throws TTransportException {
-        int wrote= this.req_.writeToParam(bytes,offset,len,this.pos_);
+
+        int wrote = this.req_.writeToParam(bytes,offset,len,this.pos_);
+
         this.pos_+=wrote;
     }
 
@@ -163,15 +170,32 @@ public class TRdmaRaw extends TTransport {
         this.req_.setLength_(this.i32buf);
         //TODO 流控
 //        this.resp_ = new RdmaRpcResponse();
-
         try {
             this.future_ = this.stream_.request(this.req_, this.resp_, false);
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
 
+    @Override
+    public byte[] getBuffer() {
+        return this.resp_.getParam_();
+    }
 
+    @Override
+    public int getBytesRemainingInBuffer(){
+        return this.size_-this.pos_;
+    }
 
+    @Override
+    public void consumeBuffer(int len) {
+        this.pos_+=len;
+    }
+
+    @Override
+    public int getBufferPosition() {
+
+        return this.pos_;
     }
 
     public static final void encodeFrameSize(int frameSize, byte[] buf) {

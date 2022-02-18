@@ -104,4 +104,20 @@ public class RdmaRpcRequest implements DaRPCMessage{
     public void setLength_(byte[] i32buf) {
         System.arraycopy(i32buf, 0,this.length_, 0, 4);
     }
+    public void getLength_(byte[] i32buf) {
+        System.arraycopy(this.length_, 0, i32buf, 0, 4);
+    }
+
+    public int readFromParam(byte[] bytes, int offset, int len, int pos, int size) {
+        //TODO Notice
+        int i=0,j = offset;
+        for(;(i<len)&&(pos+i)<size;i++){
+            bytes[j++] = this.param_[pos+i];
+        }
+        return i;
+    }
+
+    public byte[] getParam_() {
+        return this.param_;
+    }
 }

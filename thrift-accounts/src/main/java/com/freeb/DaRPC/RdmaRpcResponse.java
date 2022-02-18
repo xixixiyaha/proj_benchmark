@@ -1,6 +1,7 @@
 package com.freeb.DaRPC;
 
 import com.ibm.darpc.DaRPCMessage;
+import org.apache.commons.math3.exception.OutOfRangeException;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -16,12 +17,19 @@ public class RdmaRpcResponse implements DaRPCMessage {
 
     @Override
     public int write(ByteBuffer byteBuffer) throws IOException {
-        return 0;
+        byteBuffer.putInt(cmd_);
+        byteBuffer.putLong(time_);
+        byteBuffer.put(byteBuffer.position(), length_,0,4);
+        byteBuffer.put(byteBuffer.position(), param_,0, PARAM_SIZE);
+        return SERIALIZED_SIZE;
     }
 
     @Override
     public void update(ByteBuffer byteBuffer) throws IOException {
-
+        cmd_ = byteBuffer.getInt();
+        time_ = byteBuffer.getLong();
+        byteBuffer.get(byteBuffer.position(), length_,0,4);
+        byteBuffer.get(byteBuffer.position(), param_,0, PARAM_SIZE);
     }
 
     @Override
@@ -37,11 +45,27 @@ public class RdmaRpcResponse implements DaRPCMessage {
         }
         return i;
     }
+    public int writeToParam(byte[] bytes, int offset, int len,int pos) {
+        int i = 0,j=offset;
+        for(; j<offset+len&&(pos+i)< PARAM_SIZE; i++,j++){
+            this.param_[pos+i] = bytes[j];
+        }
+        if(pos == PARAM_SIZE){
+            throw new OutOfRangeException(pos+i,0, PARAM_SIZE);
+        }
+        return i;
+    }
     public byte[] getParam_(){
         return this.param_;
     }
     public void getLength_(byte[] i32buf) {
         System.arraycopy(this.length_, 0, i32buf, 0, 4);
+    }
+    public void setLength_(byte[] i32buf) {
+        System.arraycopy(i32buf, 0,this.length_, 0, 4);
+    }
+    public void setTime_(long time_) {
+        this.time_ = time_;
     }
     public void clear(){
         cmd_ = 0;

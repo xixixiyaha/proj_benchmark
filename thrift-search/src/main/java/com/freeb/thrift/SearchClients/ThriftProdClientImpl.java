@@ -23,6 +23,9 @@ public class ThriftProdClientImpl implements Closeable {
         protocol = new TBinaryProtocol(transport);
         client = new ProductService.Client(protocol);
         try {
+            if(clientNum == 0){
+                return;
+            }
             transport.open();
         } catch (TTransportException e) {
             System.out.println(e.getMessage());

@@ -1,9 +1,14 @@
 package com.freeb;
 
 
+import com.freeb.DaRPC.DaRPCServerEvent;
+import com.freeb.DaRPC.RdmaRpcRequest;
+import com.freeb.DaRPC.RdmaRpcResponse;
+import com.freeb.DaRPC.TRdmaService;
 import com.freeb.Utils.IPUtil;
 import com.freeb.thrift.SearchService;
 import com.freeb.thrift.SearchServer.SearchServiceServerImpl;
+
 import org.apache.thrift.protocol.TBinaryProtocol;
 import org.apache.thrift.server.TServer;
 import org.apache.thrift.server.TThreadedSelectorServer;
@@ -11,14 +16,41 @@ import org.apache.thrift.transport.TNonblockingServerSocket;
 import org.apache.thrift.transport.TNonblockingServerTransport;
 import org.apache.thrift.transport.TTransportException;
 
+import java.io.*;
 import java.net.InetSocketAddress;
 import java.sql.Timestamp;
 import java.util.Arrays;
 
 public class SearchServer {
+	private static Boolean rdma= true;
 	public static void main(String[] args) {
 		try {
-
+			if(rdma){
+				TRdmaService service = new TRdmaService(new SearchService.Processor<SearchService.Iface>(new SearchServiceServerImpl()));
+				service.setProtocolFactory(new TBinaryProtocol.Factory());
+				RdmaRpcResponse resp = new RdmaRpcResponse();
+				RdmaRpcRequest req = new RdmaRpcRequest();
+				try {
+					File file = new File("./test.txt");
+					FileInputStream fis = new FileInputStream(file);
+					ByteArrayOutputStream bos = new ByteArrayOutputStream(1024);
+					byte[] b = new byte[1024];
+					int n;
+					while ((n = fis.read(b)) != -1) {
+						bos.write(b, 0, n);
+					}
+					fis.close();
+					bos.close();
+					req.setLimit(bos.size());
+					req.writeToParam(bos.toByteArray(),0,bos.size());
+					req.setPos(4);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				DaRPCServerEvent<RdmaRpcRequest, RdmaRpcResponse> event = new DaRPCServerEvent<>(null,req,resp);
+				service.process(event);
+				return;
+			}
 			String serverHost = IPUtil.getIPAddress();
 			System.out.println("init Server socket IP addr = "+serverHost);
 			InetSocketAddress serverAddress = new InetSocketAddress(serverHost, 8080);

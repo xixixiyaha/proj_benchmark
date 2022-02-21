@@ -101,20 +101,20 @@ public class TRdmaClient extends TTransport {
             e.printStackTrace();
         }
         this.resp_ = this.future_.getReceiveMessage();
-        this.resp_.getLength_(this.i32buf);
+
         int size = decodeFrameSize(this.i32buf);
         if (size < 0) {
             this.close();
             throw new TTransportException(5, "Read a negative frame size (" + size + ")!");
-        } else if (size > RdmaRpcResponse.PARAM_SIZE) {
+        } else if (size > RdmaRpcResponse.SERIALIZED_SIZE) {
             this.close();
-            throw new TTransportException(5, "Frame size (" + size + ") larger than max length (" + RdmaRpcResponse.PARAM_SIZE + ")!");
+            throw new TTransportException(5, "Frame size (" + size + ") larger than max length (" + RdmaRpcResponse.SERIALIZED_SIZE + ")!");
         } else {
             byte[] buff = new byte[size];
             this.pos_ = 0;
             this.size_ = size;
             this.req_.clear();
-            this.resp_.readFromParam(buff,0, size,this.pos_,size);
+            this.resp_.readFromParam(buff,0, size);
             this.readBuffer_.reset(buff);
         }
         // TODO 这里是不是可以释放 send & recv
@@ -122,20 +122,15 @@ public class TRdmaClient extends TTransport {
 
     @Override
     public void write(byte[] bytes, int offset, int len) throws TTransportException {
-        int wrote= this.req_.writeToParam(bytes,offset,len,this.pos_);
+        int wrote= this.req_.writeToParam(bytes,offset,len);
         this.pos_+=wrote;    }
 
     public void flush(){
         this.isRead = false;
         this.resp_.clear();
-        //TODO cmd
-        this.req_.setTime_(System.currentTimeMillis());
-        int len = this.pos_;
+        int len = this.req_.getBufferPosition();
         this.pos_ = 0;
         encodeFrameSize(len,this.i32buf);
-        this.req_.setLength_(this.i32buf);
-        //TODO 流控
-        this.resp_ = new RdmaRpcResponse();
         try {
             this.future_ = this.stream_.request(this.req_, this.resp_, false);
         } catch (IOException e) {

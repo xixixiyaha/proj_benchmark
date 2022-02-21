@@ -1,15 +1,21 @@
 package com.freeb.DaRPC;
 
 import com.ibm.darpc.DaRPCServerEndpoint;
+import org.apache.thrift.TByteArrayOutputStream;
 import org.apache.thrift.transport.TTransport;
 import org.apache.thrift.transport.TTransportException;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 public class TRdmaServerRaw extends TTransport {
+
+    private Boolean testMode  = true;
     private Boolean isOpen = false;
     private Boolean isRead = false;
-    private int pos_,size_;
 
     /* Rdma startup IpAddr */
     private String host_;
@@ -18,6 +24,7 @@ public class TRdmaServerRaw extends TTransport {
     private int rdmaTimeout__;
     // TODO raw 模式下可以remove
     private final byte[] i32buf = new byte[4];
+    private final TByteArrayOutputStream writeBuffer_ = new TByteArrayOutputStream(1024);
 
     /* rdma Conn */
 //    private DaRPCServerEndpoint<RdmaRpcRequest,RdmaRpcResponse> endpoint_;
@@ -38,13 +45,9 @@ public class TRdmaServerRaw extends TTransport {
     public TRdmaServerRaw(String host, int port){
         this.host_ = host;
         this.port_ = port;
-        this.pos_ = 0;
-        this.size_ = -1;
     }
 
     public TRdmaServerRaw(RdmaRpcRequest req, RdmaRpcResponse resp){
-        this.pos_ = 0;
-        this.size_ = -1;
         this.req_ = req;
         this.resp_ = resp;
     }
@@ -70,47 +73,41 @@ public class TRdmaServerRaw extends TTransport {
     @Override
     public int read(byte[] bytes, int offset, int len) throws TTransportException {
         int got;
-
-            if (!isRead) {
-                try {
-                    this.readFrame();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                this.isRead = true;
+        if (!isRead) {
+            try {
+                this.readFrame();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-            got =  this.req_.readFromParam(bytes, offset, len,this.pos_,this.size_);
-            this.pos_+=got;
-            return got;
-
+            this.isRead = true;
+        }
+        got =  this.req_.readFromParam(bytes, offset, len);
+        return got;
 
     }
 
     private void readFrame() throws Exception {
 
-            this.req_.getLength_(this.i32buf);
-            int size = decodeFrameSize(this.i32buf);
-            if (size < 0) {
-                this.close();
-                throw new TTransportException(5, "Read a negative frame size (" + size + ")!");
-            } else if (size > RdmaRpcResponse.PARAM_SIZE) {
-                this.close();
-                throw new TTransportException(5, "Frame size (" + size + ") larger than max length (" + RdmaRpcResponse.PARAM_SIZE + ")!");
-            } else {
-                this.pos_ = 0;
-                this.size_ = size;
-                this.resp_.clear();
-            }
-
-
+        //TODO@feature switch mode
+        this.req_.readFromParam(this.i32buf,0,4);
+        int size = decodeFrameSize(this.i32buf);
+        if (size < 0) {
+            this.close();
+            throw new TTransportException(5, "Read a negative frame size (" + size + ")!");
+        } else if (size > RdmaRpcResponse.SERIALIZED_SIZE) {
+            this.close();
+            throw new TTransportException(5, "Frame size (" + size + ") larger than max length (" + RdmaRpcResponse.SERIALIZED_SIZE + ")!");
+        } else {
+            //TODO@Notice 在这里清除req=>复用
+            this.req_.setLimit(size+4);
+            this.resp_.clear();
+        }
     }
 
     @Override
     public void write(byte[] bytes, int offset, int len) throws TTransportException {
 
-        int wrote = this.resp_.writeToParam(bytes,offset,len,this.pos_);
-
-        this.pos_+=wrote;
+        writeBuffer_.write(bytes,offset,len);
     }
 
     @Override
@@ -120,28 +117,59 @@ public class TRdmaServerRaw extends TTransport {
 
     @Override
     public int getBytesRemainingInBuffer(){
-        return this.size_-this.pos_;
+        return this.req_.getBytesRemainingInBuffer();
     }
 
     @Override
     public void consumeBuffer(int len) {
-        this.pos_+=len;
+        this.req_.consumeBuffer(len);
     }
 
     @Override
     public int getBufferPosition() {
 
-        return this.pos_;
+        return this.req_.getBufferPosition();
     }
 
     public void flush(){
         this.isRead = false;
-            this.resp_.setTime_(System.currentTimeMillis());
-            int len = this.pos_;
-            this.pos_ = 0;
-            encodeFrameSize(len,this.i32buf);
-            this.resp_.setLength_(this.i32buf);
+        byte[] buf = writeBuffer_.get();
+        this.req_.clear();
+        int len = writeBuffer_.len();
+        writeBuffer_.reset();
+        encodeFrameSize(len,this.i32buf);
+        this.resp_.setLimit(4+len);
+        this.resp_.writeToParam(i32buf,0,4);
+        this.resp_.writeToParam(buf,0,len);
 
+        if(testMode){
+            System.out.println(this.resp_.getBufferPosition());
+            File file = new File("./testResp.txt");
+            FileOutputStream fos = null;
+            BufferedOutputStream bos = null;
+            try {
+                fos = new FileOutputStream(file);
+                bos = new BufferedOutputStream(fos);
+                bos.write(this.resp_.getParam_());
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                if (bos != null) {
+                    try {
+                        bos.close();
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    }
+                }
+                if(fos!=null){
+                    try {
+                        fos.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
 
     }
 

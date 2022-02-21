@@ -15,6 +15,7 @@ import java.io.IOException;
 
 public class TRdmaService extends RdmaRpcProtocol implements DaRPCService<RdmaRpcRequest, RdmaRpcResponse>  {
 
+    private Boolean testMode=true;
     public static class Args extends TServer.AbstractServerArgs<Args>{
 
         public Args(TServerTransport transport) {
@@ -45,7 +46,9 @@ public class TRdmaService extends RdmaRpcProtocol implements DaRPCService<RdmaRp
             e.printStackTrace();
         }
         //req=>inputTrans resp=>outputTrans
-        event.triggerResponse();
+        if(!testMode){
+            event.triggerResponse();
+        }
 
     }
 

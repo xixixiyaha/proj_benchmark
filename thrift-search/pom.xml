@@ -61,8 +61,8 @@
                 <version>3.8.0</version>
                 <configuration>
 
-                    <source>${maven.compiler.source}</source>
-                    <target>${maven.compiler.target}</target>
+                    <source>13</source>
+                    <target>13</target>
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>

@@ -22,6 +22,9 @@ public class ThriftAccountClientImpl implements Closeable {
         protocol = new TBinaryProtocol(transport);
         client = new AccountService.Client(protocol);
         try {
+            if(clientNum == 0){
+                return;
+            }
             transport.open();
         } catch (TTransportException e) {
             System.out.println(e.getMessage());

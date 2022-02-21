@@ -39,4 +39,10 @@ public class AccountForeignClients extends AccountClients implements Closeable {
         }
         return null;
     }
+
+    public static void main(String[] args){
+        AccountForeignClients clients = new AccountForeignClients();
+        List<Long> re = clients.IdealResEfficiencyTest(100,1);
+        System.out.println(re);
+    }
 }

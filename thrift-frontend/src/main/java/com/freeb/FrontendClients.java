@@ -1,8 +1,8 @@
 package com.freeb;
 
 import com.freeb.Utils.LockObjectPool;
-import com.freeb.Accounts.AccountInfo;
-import com.freeb.Accounts.IdType;
+import com.freeb.thrift.AccountInfo;
+import com.freeb.thrift.IdType;
 import com.freeb.Accounts.ThriftAccountClientImpl;
 import org.apache.thrift.TException;
 

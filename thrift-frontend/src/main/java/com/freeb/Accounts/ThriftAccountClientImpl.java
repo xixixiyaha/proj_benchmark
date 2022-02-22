@@ -1,5 +1,6 @@
 package com.freeb.Accounts;
 
+import com.freeb.thrift.AccountService;
 import org.apache.thrift.protocol.TBinaryProtocol;
 import org.apache.thrift.protocol.TProtocol;
 import org.apache.thrift.transport.TFramedTransport;

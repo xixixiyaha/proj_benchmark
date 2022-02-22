@@ -15,7 +15,7 @@ import java.io.IOException;
 
 public class TRdmaService extends RdmaRpcProtocol implements DaRPCService<RdmaRpcRequest, RdmaRpcResponse>  {
 
-    private Boolean testMode=true;
+    private Boolean testMode=false;
     public static class Args extends TServer.AbstractServerArgs<Args>{
 
         public Args(TServerTransport transport) {
@@ -42,7 +42,7 @@ public class TRdmaService extends RdmaRpcProtocol implements DaRPCService<RdmaRp
         // protocol(transport)
         RdmaRpcRequest request = event.getReceiveMessage();
         RdmaRpcResponse response = event.getSendMessage();
-        TRdmaServerRaw transport = new TRdmaServerRaw(request,response);
+        TRdmaServerRawTrans transport = new TRdmaServerRawTrans(request,response);
         TProtocol protocol = protocolFactory_.getProtocol(transport);
         try {
             processor_.process(protocol,protocol);
@@ -58,7 +58,7 @@ public class TRdmaService extends RdmaRpcProtocol implements DaRPCService<RdmaRp
     public void process(com.freeb.DaRPC.DaRPCServerEvent<RdmaRpcRequest, RdmaRpcResponse> event){
         RdmaRpcRequest request = event.getReceiveMessage();
         RdmaRpcResponse response = event.getSendMessage();
-        TRdmaServerRaw transport = new TRdmaServerRaw(request,response);
+        TRdmaServerRawTrans transport = new TRdmaServerRawTrans(request,response);
         TProtocol protocol = protocolFactory_.getProtocol(transport);
         try {
             processor_.process(protocol,protocol);

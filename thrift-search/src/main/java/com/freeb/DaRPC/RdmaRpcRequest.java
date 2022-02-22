@@ -12,6 +12,11 @@ public class RdmaRpcRequest implements DaRPCMessage{
     private int pos,limit;
     private byte[] param_ = new byte[SERIALIZED_SIZE];
 
+    public RdmaRpcRequest() {
+        pos = 0;
+        limit = SERIALIZED_SIZE;
+    }
+
     @Override
     public int write(ByteBuffer byteBuffer) throws IOException {
         byteBuffer.put(byteBuffer.position(), param_,0, SERIALIZED_SIZE);

@@ -12,13 +12,13 @@ import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
-public class TRdmaClient extends TTransport {
+public class TRdmaClientJVerb extends TTransport {
     /*
     * Todo: 复用req&resp 以及 清空 req的时机
     *
     * */
     Boolean isRead = false;
-    private static final Logger logger = LoggerFactory.getLogger(TRdmaClient.class.getName());
+    private static final Logger logger = LoggerFactory.getLogger(TRdmaClientJVerb.class.getName());
     private int rdmaTimeout__;
     private int connectTimeout__;
 
@@ -42,11 +42,11 @@ public class TRdmaClient extends TTransport {
     private final TByteArrayOutputStream writeBuffer_ = new TByteArrayOutputStream(1024);
     private final TMemoryInputTransport readBuffer_ = new TMemoryInputTransport(new byte[0]);
 
-    public TRdmaClient(TRdma rdmaInstance){
+    public TRdmaClientJVerb(TRdma rdmaInstance){
 
     }
 
-    public TRdmaClient(int timeout){
+    public TRdmaClientJVerb(int timeout){
         this.rdmaTimeout__ = timeout;
         this.connectTimeout__ = timeout;
     }

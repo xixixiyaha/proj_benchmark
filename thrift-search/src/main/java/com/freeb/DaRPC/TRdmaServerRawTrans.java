@@ -1,6 +1,5 @@
 package com.freeb.DaRPC;
 
-import com.ibm.darpc.DaRPCServerEndpoint;
 import org.apache.thrift.TByteArrayOutputStream;
 import org.apache.thrift.transport.TTransport;
 import org.apache.thrift.transport.TTransportException;
@@ -9,9 +8,8 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.concurrent.TimeUnit;
 
-public class TRdmaServerRaw extends TTransport {
+public class TRdmaServerRawTrans extends TTransport {
 
     private Boolean testMode  = true;
     private Boolean isOpen = false;
@@ -42,12 +40,12 @@ public class TRdmaServerRaw extends TTransport {
     private int mode;
     private int batchSize;
 
-    public TRdmaServerRaw(String host, int port){
+    public TRdmaServerRawTrans(String host, int port){
         this.host_ = host;
         this.port_ = port;
     }
 
-    public TRdmaServerRaw(RdmaRpcRequest req, RdmaRpcResponse resp){
+    public TRdmaServerRawTrans(RdmaRpcRequest req, RdmaRpcResponse resp){
         this.req_ = req;
         this.resp_ = resp;
     }
@@ -98,8 +96,8 @@ public class TRdmaServerRaw extends TTransport {
             this.close();
             throw new TTransportException(5, "Frame size (" + size + ") larger than max length (" + RdmaRpcResponse.SERIALIZED_SIZE + ")!");
         } else {
-            //TODO@Notice 在这里清除req=>复用
             this.req_.setLimit(size+4);
+            this.req_.setPos(4);
             this.resp_.clear();
         }
     }
@@ -112,22 +110,53 @@ public class TRdmaServerRaw extends TTransport {
 
     @Override
     public byte[] getBuffer() {
+        if (!isRead) {
+            try {
+                this.readFrame();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            this.isRead = true;
+        }
         return this.req_.getParam_();
     }
 
     @Override
     public int getBytesRemainingInBuffer(){
+        if (!isRead) {
+            try {
+                this.readFrame();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            this.isRead = true;
+        }
         return this.req_.getBytesRemainingInBuffer();
     }
 
     @Override
     public void consumeBuffer(int len) {
+        if (!isRead) {
+            try {
+                this.readFrame();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            this.isRead = true;
+        }
         this.req_.consumeBuffer(len);
     }
 
     @Override
     public int getBufferPosition() {
-
+        if (!isRead) {
+            try {
+                this.readFrame();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            this.isRead = true;
+        }
         return this.req_.getBufferPosition();
     }
 

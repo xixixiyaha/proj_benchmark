@@ -1,10 +1,7 @@
 package com.freeb;
 
 
-import com.freeb.DaRPC.DaRPCServerEvent;
-import com.freeb.DaRPC.RdmaRpcRequest;
-import com.freeb.DaRPC.RdmaRpcResponse;
-import com.freeb.DaRPC.TRdmaService;
+import com.freeb.DaRPC.*;
 import com.freeb.Utils.IPUtil;
 import com.freeb.thrift.SearchService;
 import com.freeb.thrift.SearchServer.SearchServiceServerImpl;
@@ -26,29 +23,32 @@ public class SearchServer {
 	public static void main(String[] args) {
 		try {
 			if(rdma){
-				TRdmaService service = new TRdmaService(new SearchService.Processor<SearchService.Iface>(new SearchServiceServerImpl()));
-				service.setProtocolFactory(new TBinaryProtocol.Factory());
-				RdmaRpcResponse resp = new RdmaRpcResponse();
-				RdmaRpcRequest req = new RdmaRpcRequest();
-				try {
-					File file = new File("./test.txt");
-					FileInputStream fis = new FileInputStream(file);
-					ByteArrayOutputStream bos = new ByteArrayOutputStream(1024);
-					byte[] b = new byte[1024];
-					int n;
-					while ((n = fis.read(b)) != -1) {
-						bos.write(b, 0, n);
-					}
-					fis.close();
-					bos.close();
-					req.setLimit(bos.size());
-					req.writeToParam(bos.toByteArray(),0,bos.size());
-					req.setPos(4);
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-				DaRPCServerEvent<RdmaRpcRequest, RdmaRpcResponse> event = new DaRPCServerEvent<>(null,req,resp);
-				service.process(event);
+//				TRdmaService service = new TRdmaService(new SearchService.Processor<SearchService.Iface>(new SearchServiceServerImpl()));
+//				service.setProtocolFactory(new TBinaryProtocol.Factory());
+//				RdmaRpcResponse resp = new RdmaRpcResponse();
+//				RdmaRpcRequest req = new RdmaRpcRequest();
+//				try {
+//					File file = new File("./test.txt");
+//					FileInputStream fis = new FileInputStream(file);
+//					ByteArrayOutputStream bos = new ByteArrayOutputStream(1024);
+//					byte[] b = new byte[1024];
+//					int n;
+//					while ((n = fis.read(b)) != -1) {
+//						bos.write(b, 0, n);
+//					}
+//					fis.close();
+//					bos.close();
+//					req.setLimit(bos.size());
+//					req.writeToParam(bos.toByteArray(),0,bos.size());
+//					req.setPos(0);
+//				} catch (IOException e) {
+//					e.printStackTrace();
+//				}
+//				DaRPCServerEvent<RdmaRpcRequest, RdmaRpcResponse> event = new DaRPCServerEvent<>(null,req,resp);
+//				service.process(event);
+
+				TrdmaServerRaw server = new TrdmaServerRaw();
+				server.launch(args);
 				return;
 			}
 			String serverHost = IPUtil.getIPAddress();
@@ -68,6 +68,8 @@ public class SearchServer {
 		}catch (TTransportException e){
 			System.out.println("SearchServer Exception is "+e.getMessage());
 			System.out.println(Arrays.toString(e.getStackTrace()));
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 

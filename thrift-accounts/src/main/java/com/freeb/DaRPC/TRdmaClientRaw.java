@@ -2,19 +2,17 @@ package com.freeb.DaRPC;
 
 import com.ibm.darpc.*;
 import org.apache.thrift.TByteArrayOutputStream;
-import org.apache.thrift.transport.TFramedTransport;
 import org.apache.thrift.transport.TTransport;
 import org.apache.thrift.transport.TTransportException;
-import org.apache.thrift.transport.TTransportFactory;
 
 import java.io.*;
 import java.net.InetSocketAddress;
+import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.TimeUnit;
 
 public class TRdmaClientRaw extends TTransport {
 
     protected static final int DEFAULT_MAX_LENGTH = 16384000;
-    private int maxLength_;
 
     private int rdmaTimeout__;
     private final byte[] i32buf = new byte[4];
@@ -31,24 +29,29 @@ public class TRdmaClientRaw extends TTransport {
 
     /* rdma var*/
 //    private static int DEFAULT_QUEUE_SIZE = 20;
-    private int maxInline;
-    private int recvQueueDepth = 1;
-    private int sendQueueDepth = 1;
+    private int maxInline_;
+    private int recvQueueDepth_ = 1;
+    private int sendQueueDepth_ = 1;
+    private int pipelineSize_ = 1;
+
 
     /* Real transport */
     private RdmaRpcRequest req_;
     private RdmaRpcResponse resp_;
     private DaRPCFuture<RdmaRpcRequest,RdmaRpcResponse> future_;
+//    private ArrayBlockingQueue<RdmaRpcResponse> freeResponses_;
 
     private int mode;
     private int batchSize;
 
     private Boolean testMode=true;
 
-    public TRdmaClientRaw(String host, int port){
+    public TRdmaClientRaw(String host, int port,int maxInline,int sendQueueDepth,int recvQueueDepth){
         this.host_ = host;
         this.port_ = port;
-
+        this.maxInline_ = maxInline;
+        this.sendQueueDepth_ = sendQueueDepth;
+        this.recvQueueDepth_ = recvQueueDepth;
     }
 
     public TRdmaClientRaw(DaRPCClientEndpoint<RdmaRpcRequest,RdmaRpcResponse> endpoint, RdmaRpcRequest req, RdmaRpcResponse resp){
@@ -64,17 +67,23 @@ public class TRdmaClientRaw extends TTransport {
         }
         RdmaRpcProtocol rpcProtocol = new RdmaRpcProtocol();
         if (this.group_ != null) {
-            this.group_ = DaRPCClientGroup.createClientGroup(rpcProtocol, 100, this.maxInline, this.recvQueueDepth, this.sendQueueDepth);
+            this.group_ = DaRPCClientGroup.createClientGroup(rpcProtocol, 100, this.maxInline_, this.recvQueueDepth_, this.sendQueueDepth_);
         }
         InetSocketAddress address = new InetSocketAddress(this.host_, this.port_);
         DaRPCClientEndpoint<RdmaRpcRequest, RdmaRpcResponse> clientEp = this.group_.createEndpoint();
         clientEp.connect(address, 1000);
         this.endpoint_ = clientEp;
         this.stream_ = this.endpoint_.createStream();
+
+        this.pipelineSize_ = Math.min(sendQueueDepth_,recvQueueDepth_);
+//        this.freeResponses = new ArrayBlockingQueue<RdmaRpcResponse>(this.pipelineSize_);
+//        for(int i=0;i<pipelineSize_;i++){
+//            freeResponses.add(new RdmaRpcResponse());
+//        }
         this.req_ = new RdmaRpcRequest();
         this.resp_ = new RdmaRpcResponse();
-
     }
+
     @Override
     public boolean isOpen() {
         if(testMode){
@@ -191,13 +200,14 @@ public class TRdmaClientRaw extends TTransport {
         byte[] buf = writeBuffer_.get();
 
         this.isRead = false;
-        this.resp_.clear();
+//        this.resp_=freeResponses.poll();
         int len = writeBuffer_.len();
         writeBuffer_.reset();
         encodeFrameSize(len,this.i32buf);
         this.req_.setLimit(4+len);
         this.req_.writeToParam(i32buf,0,4);
         this.req_.writeToParam(buf,0,len);
+        this.resp_.clear();
         //TODO 流控
         if(!testMode){
             // if it is not local test, send req to the HCA
@@ -304,15 +314,15 @@ public class TRdmaClientRaw extends TTransport {
     }
 
     public void setMaxInline(int maxInline) {
-        this.maxInline = maxInline;
+        this.maxInline_ = maxInline;
     }
 
     public void setRecvQueueDepth(int recvQueueDepth) {
-        this.recvQueueDepth = recvQueueDepth;
+        this.recvQueueDepth_ = recvQueueDepth;
     }
 
     public void setSendQueueDepth(int sendQueueDepth) {
-        this.sendQueueDepth = sendQueueDepth;
+        this.sendQueueDepth_ = sendQueueDepth;
     }
 
     public void setMode(int mode) {

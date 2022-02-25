@@ -2,7 +2,7 @@ D:\0_4th\proj_benchmark\thrift-accounts\src\main\java\com\freeb\thrift\SearchSer
 D:\0_4th\proj_benchmark\thrift-accounts\src\main\java\com\freeb\DaRPC\TServerRdmaRaw.java
 D:\0_4th\proj_benchmark\thrift-accounts\src\main\java\com\freeb\DaRPC\RdmaRpcResponse.java
 D:\0_4th\proj_benchmark\thrift-accounts\src\main\java\com\freeb\DaRPC\TRdma.java
-D:\0_4th\proj_benchmark\thrift-accounts\src\main\java\com\freeb\DaRPC\TRdmaClient.java
+D:\0_4th\proj_benchmark\thrift-accounts\src\main\java\com\freeb\DaRPC\TRdmaClientJVerb.java
 D:\0_4th\proj_benchmark\thrift-accounts\src\main\java\com\freeb\DaRPC\TRdmaClientRaw.java
 D:\0_4th\proj_benchmark\thrift-accounts\src\main\java\com\freeb\thrift\AccountInfo.java
 D:\0_4th\proj_benchmark\thrift-accounts\src\main\java\com\freeb\thrift\AccountServer\AccountsServiceServerImpl.java
@@ -13,6 +13,4 @@ D:\0_4th\proj_benchmark\thrift-accounts\src\main\java\com\freeb\AccountServer.ja
 D:\0_4th\proj_benchmark\thrift-accounts\src\main\java\com\freeb\thrift\AccountService.java
 D:\0_4th\proj_benchmark\thrift-accounts\src\main\java\com\freeb\DaRPC\RdmaRpcProtocol.java
 D:\0_4th\proj_benchmark\thrift-accounts\src\main\java\com\freeb\thrift\AccountClients\ThriftSearchClientImpl.java
-D:\0_4th\proj_benchmark\thrift-accounts\src\main\java\com\freeb\DaRPC\TRdmaServerRaw.java
-D:\0_4th\proj_benchmark\thrift-accounts\src\main\java\com\freeb\DaRPC\TRdmaService.java
 D:\0_4th\proj_benchmark\thrift-accounts\src\main\java\com\freeb\thrift\AccountClients\AccountForeignClients.java

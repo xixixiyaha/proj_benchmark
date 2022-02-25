@@ -11,7 +11,7 @@ import java.io.IOException;
 
 public class TRdmaServerRawTrans extends TTransport {
 
-    private Boolean testMode  = true;
+    private Boolean testMode  = false;
     private Boolean isOpen = false;
     private Boolean isRead = false;
 
@@ -170,7 +170,7 @@ public class TRdmaServerRawTrans extends TTransport {
         this.resp_.setLimit(4+len);
         this.resp_.writeToParam(i32buf,0,4);
         this.resp_.writeToParam(buf,0,len);
-
+        this.req_.clear();
         if(testMode){
             System.out.println(this.resp_.getBufferPosition());
             File file = new File("./testResp.txt");
@@ -199,6 +199,7 @@ public class TRdmaServerRawTrans extends TTransport {
                 }
             }
         }
+        System.out.println("TRdmaClientRaw flush end");
 
     }
 

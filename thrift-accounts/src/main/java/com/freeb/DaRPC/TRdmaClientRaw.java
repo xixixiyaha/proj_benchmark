@@ -14,7 +14,7 @@ public class TRdmaClientRaw extends TTransport {
 
     protected static final int DEFAULT_MAX_LENGTH = 16384000;
 
-    private int rdmaTimeout__;
+    private int rdmaTimeout__=3000;
     private final byte[] i32buf = new byte[4];
     private final TByteArrayOutputStream writeBuffer_ = new TByteArrayOutputStream(1024);
     private Boolean isRead = false;
@@ -44,7 +44,7 @@ public class TRdmaClientRaw extends TTransport {
     private int mode;
     private int batchSize;
 
-    private Boolean testMode=true;
+    private Boolean testMode=false;
 
     public TRdmaClientRaw(String host, int port,int maxInline,int sendQueueDepth,int recvQueueDepth){
         this.host_ = host;
@@ -58,11 +58,13 @@ public class TRdmaClientRaw extends TTransport {
         this.endpoint_ = endpoint;
         this.req_ = req;
         this.resp_ = resp;
+
     }
 
 
     public void init() throws Exception {
-        if(testMode){
+        if(!testMode){
+            this.stream_ = this.endpoint_.createStream();
             return;
         }
         RdmaRpcProtocol rpcProtocol = new RdmaRpcProtocol();
@@ -95,7 +97,12 @@ public class TRdmaClientRaw extends TTransport {
 
     @Override
     public void open() throws TTransportException {
-        if(testMode){
+        if(!testMode){
+            try {
+                this.init();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             return;
         }
         if (this.isOpen()) {
@@ -118,9 +125,6 @@ public class TRdmaClientRaw extends TTransport {
     }
     @Override
     public void close() {
-        if(testMode){
-            return;
-        }
         try {
             this.endpoint_.close();
             if(this.group_!=null){
@@ -178,6 +182,8 @@ public class TRdmaClientRaw extends TTransport {
         this.resp_.setLimit(4);
         this.resp_.readFromParam(this.i32buf,0,4);
         this.resp_.consumeBuffer(4);
+        System.out.println("TRdmaClientRaw ReadFrame resp_ pos="+this.resp_.getBufferPosition());
+
         int size = decodeFrameSize(this.i32buf);
         if (size < 0) {
             this.close();
@@ -197,8 +203,8 @@ public class TRdmaClientRaw extends TTransport {
     }
 
     public void flush(){
+        System.out.println("TRdmaClientRaw Ready to flush()");
         byte[] buf = writeBuffer_.get();
-
         this.isRead = false;
 //        this.resp_=freeResponses.poll();
         int len = writeBuffer_.len();
@@ -207,12 +213,18 @@ public class TRdmaClientRaw extends TTransport {
         this.req_.setLimit(4+len);
         this.req_.writeToParam(i32buf,0,4);
         this.req_.writeToParam(buf,0,len);
+        System.out.println("TRdmaClientRaw req_ len="+this.req_.getBufferPosition());
+
         this.resp_.clear();
         //TODO 流控
         if(!testMode){
             // if it is not local test, send req to the HCA
             try {
+                System.out.println("TRdmaClientRaw future this.stream==null?"+(this.stream_ == null));
+
                 this.future_ = this.stream_.request(this.req_, this.resp_, false);
+                System.out.println("TRdmaClientRaw future tend");
+
             } catch (IOException e) {
                 e.printStackTrace();
             }

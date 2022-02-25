@@ -26,12 +26,5 @@
         <module name="thrift-order" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="base-benchmark" target="1.8" />
-      <module name="ecom-accounts" target="11" />
-      <module name="ecom-orders" target="11" />
-      <module name="thrift-client" target="1.8" />
-      <module name="thrift-server" target="1.8" />
-    </bytecodeTargetLevel>
   </component>
 </project>

@@ -45,12 +45,15 @@ public class TRdmaService extends RdmaRpcProtocol implements DaRPCService<RdmaRp
         TRdmaServerRawTrans transport = new TRdmaServerRawTrans(request,response);
         TProtocol protocol = protocolFactory_.getProtocol(transport);
         try {
+            System.out.println("== processor_.process(protocol,protocol) ==");
             processor_.process(protocol,protocol);
         } catch (TException e) {
             e.printStackTrace();
         }
         //req=>inputTrans resp=>outputTrans
         if(!testMode){
+            System.out.println("event.resp = "+event.getSendMessage().getBufferPosition());
+            System.out.println("== event.triggerResponse() ==");
             event.triggerResponse();
         }
 

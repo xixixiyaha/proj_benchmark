@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="TerminalProjectOptionsProvider">
+    <envs>
+      <env key="CLASSPATH" value=" D:\Apps\apache-ant-1.7.1\lib;C:\Program Files\Java\jdk-13.0.2\lib;" />
+      <env key="Path" value="C:\Program Files\Java\jdk-13.0.2\bin;D:\ThirdYear\lastM\bin\;C:\Program Files (x86)\NetSarang\Xftp 6\;C:\Program Files (x86)\NetSarang\Xshell 6\;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;&quot;D:\Apps\apache-ant-1.7.1\bin;&quot;;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;&quot;%JAVA_HOMEb%\bin;&quot;;D:\mysql;D:\mysql\bin;D:\xmapp\php;D:\Microsoft VS Code\bin;C:\Users\28642\Anaconda3\Scripts;C:\Users\28642\Anaconda3;C:\Program Files\nodejs\;D:\aMavenMap;D:\Apache\apache-maven-3.6.3\bin;D:\ztestgo;C:\Program Files\PuTTY\;C:\Program Files\Git\bin;D:\aPathSWs;C:\Program Files\nodejs;C:\Program Files\nodejs\node-global;C:\Program Files (x86)\NetSarang\Xshell 7\;C:\Program Files (x86)\NetSarang\Xftp 7\;D:\0uz4py\Scripts\;D:\0uz4py\;C:\Users\28642\AppData\Local\Microsoft\WindowsApps;D:\IDEA\IntelliJ IDEA Community Edition 2019.3.3\bin;;D:\IDEA\IntelliJ IDEA 2019.3.3\bin;;D:\Apps\apache-ant-1.7.1\bin;D:\mysql;D:\mysql\bin;D:\Microsoft VS Code\bin;D:\sqlite;C:\Users\28642\AppData\Roaming\npm;D:\aMavenMap;D:\Go\;D:\0GoCode\bin;D:\ztestgo;D:\aPathSWs;" />
+    </envs>
+  </component>
+</project>

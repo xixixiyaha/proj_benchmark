@@ -12,6 +12,8 @@ import org.apache.thrift.server.TThreadedSelectorServer;
 import org.apache.thrift.transport.TNonblockingServerSocket;
 import org.apache.thrift.transport.TNonblockingServerTransport;
 import org.apache.thrift.transport.TTransportException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.*;
 import java.net.InetSocketAddress;
@@ -19,6 +21,8 @@ import java.sql.Timestamp;
 import java.util.Arrays;
 
 public class SearchServer {
+	private static final Logger logger = LoggerFactory.getLogger(SearchServer.class);
+
 	private static Boolean rdma= true;
 	public static void main(String[] args) {
 		try {

@@ -1,5 +1,8 @@
 package com.freeb.DaRPC;
 
+import com.freeb.DaRPC.RawVersion.RdmaRpcProtocol;
+import com.freeb.DaRPC.RawVersion.RdmaRpcRequest;
+import com.freeb.DaRPC.RawVersion.RdmaRpcResponse;
 import com.ibm.darpc.DaRPCClientEndpoint;
 import com.ibm.darpc.DaRPCClientGroup;
 import com.ibm.darpc.DaRPCStream;

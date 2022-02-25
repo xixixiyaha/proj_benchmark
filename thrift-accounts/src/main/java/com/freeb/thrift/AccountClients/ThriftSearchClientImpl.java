@@ -1,11 +1,10 @@
 package com.freeb.thrift.AccountClients;
 
-import com.freeb.DaRPC.RdmaRpcRequest;
-import com.freeb.DaRPC.RdmaRpcResponse;
-import com.freeb.DaRPC.TRdmaClientRaw;
+import com.freeb.DaRPC.RawVersion.RdmaRpcRequest;
+import com.freeb.DaRPC.RawVersion.RdmaRpcResponse;
+import com.freeb.DaRPC.RawVersion.TRdmaClientRawTrans;
 import com.freeb.thrift.SearchService;
 import com.ibm.darpc.DaRPCClientEndpoint;
-import com.ibm.darpc.DaRPCClientGroup;
 import org.apache.thrift.protocol.TBinaryProtocol;
 import org.apache.thrift.protocol.TProtocol;
 import org.apache.thrift.transport.TFramedTransport;
@@ -32,7 +31,7 @@ public class ThriftSearchClientImpl implements Closeable {
 		System.out.println("ThriftSearchClientImpl@ create Endpoint 2 - start connect");
 		endpoint.connect(address,1000);
 		System.out.println("ThriftSearchClientImpl@ create Endpoint 3 - end connect");
-		transport = new TRdmaClientRaw(endpoint,new RdmaRpcRequest(),new RdmaRpcResponse());
+		transport = new TRdmaClientRawTrans(endpoint,new RdmaRpcRequest(),new RdmaRpcResponse());
 		transport.open();
 		System.out.println("ThriftSearchClientImpl@ create Endpoint 4");
 		protocol = new TBinaryProtocol(transport);

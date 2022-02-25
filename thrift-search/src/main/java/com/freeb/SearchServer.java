@@ -15,7 +15,6 @@ import org.apache.thrift.transport.TTransportException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.*;
 import java.net.InetSocketAddress;
 import java.sql.Timestamp;
 import java.util.Arrays;
@@ -51,7 +50,7 @@ public class SearchServer {
 //				DaRPCServerEvent<RdmaRpcRequest, RdmaRpcResponse> event = new DaRPCServerEvent<>(null,req,resp);
 //				service.process(event);
 
-				TrdmaServerRaw server = new TrdmaServerRaw();
+				TRdmaServerRaw server = new TRdmaServerRaw();
 				server.launch(args);
 				return;
 			}

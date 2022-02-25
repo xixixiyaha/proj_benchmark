@@ -1,5 +1,7 @@
 package com.freeb.DaRPC;
 
+import com.freeb.DaRPC.RawVersion.RdmaRpcRequest;
+import com.freeb.DaRPC.RawVersion.RdmaRpcResponse;
 import com.ibm.darpc.DaRPCServerEndpoint;
 import com.ibm.darpc.DaRPCServerGroup;
 import com.ibm.darpc.DaRPCService;
@@ -8,17 +10,13 @@ import org.apache.thrift.TProcessor;
 import org.apache.thrift.protocol.TProtocol;
 import org.apache.thrift.server.ServerContext;
 import org.apache.thrift.server.TServer;
-import org.apache.thrift.server.TThreadedSelectorServer;
-import org.apache.thrift.transport.TNonblockingServerTransport;
 import org.apache.thrift.transport.TTransport;
-import org.apache.thrift.transport.TTransportException;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
-import java.nio.channels.Selector;
 
 public class TServerRdmaRaw extends TServer {
-    DaRPCServerGroup<RdmaRpcRequest,RdmaRpcResponse> group_;
+    DaRPCServerGroup<RdmaRpcRequest, RdmaRpcResponse> group_;
     RdmaServerEndpoint<DaRPCServerEndpoint<RdmaRpcRequest, RdmaRpcResponse>> endpoint_;
     long[] clusterAffinities;
     int maxinline;

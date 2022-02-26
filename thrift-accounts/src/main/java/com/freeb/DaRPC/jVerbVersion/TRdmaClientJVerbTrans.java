@@ -127,19 +127,38 @@ public class TRdmaClientJVerbTrans extends TTransport {
 
     @Override
     public void write(byte[] bytes, int offset, int len) throws TTransportException {
-        int wrote= this.req_.writeToParam(bytes,offset,len);
-        this.pos_+=wrote;    }
+          writeBuffer_.write(bytes,offset,len);
+    }
 
 
     @Override
     public void flush(){
         this.isRead=false;
-        ByteBuffer buf = this.endpoint_.getSendWQ(ticket.get());
+        ByteBuffer buf = null;
+
+        while (true){
+            try {
+                if (!((buf = this.endpoint_.getSendWQ(ticket.get()))==null)) break;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                endpoint_.pollOnce();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         int len = this.writeBuffer_.len();
         encodeFrameSize(len,this.i32buf);
+        buf.putInt(this.ticket.get());
         buf.put(this.i32buf,0,4);
         buf.put(writeBuffer_.get(),0,len);
         writeBuffer_.reset();
+        try {
+            this.endpoint_.request(ticket.get());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static final void encodeFrameSize(int frameSize, byte[] buf) {

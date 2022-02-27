@@ -81,7 +81,6 @@ public class TRdmaServerRawTrans extends TTransport {
         }
         got =  this.req_.readFromParam(bytes, offset, len);
         return got;
-
     }
 
     private void readFrame() throws Exception {

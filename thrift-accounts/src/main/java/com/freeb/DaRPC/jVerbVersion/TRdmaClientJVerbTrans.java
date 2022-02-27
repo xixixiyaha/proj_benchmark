@@ -1,9 +1,6 @@
 package com.freeb.DaRPC.jVerbVersion;
 
-import com.freeb.DaRPC.RawVersion.RdmaRpcRequest;
 import com.freeb.DaRPC.RawVersion.RdmaRpcResponse;
-import com.freeb.DaRPC.TRdma;
-import com.ibm.darpc.*;
 import com.ibm.disni.verbs.SVCPostSend;
 import org.apache.thrift.TByteArrayOutputStream;
 import org.apache.thrift.transport.TMemoryInputTransport;
@@ -14,31 +11,28 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
-import java.nio.ByteBuffer;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class TRdmaClientJVerbTrans extends TTransport {
     /*
     * Todo: 复用req&resp 以及 清空 req的时机
     *
     * */
-    Boolean isRead = false;
     private static final Logger logger = LoggerFactory.getLogger(TRdmaClientJVerbTrans.class.getName());
+
+    Boolean isRead = false;
     private int rdmaTimeout_,connTimeout_;
 
     /* Rdma startup IpAddr */
     private String host_;
     private int port_;
-
+    private byte[] readBufRaw = new byte[1024];
     private TRdmaClientEndpoint endpoint_;
 
     /* 传输内部 buf*/
     private final byte[] i32buf = new byte[4];
     private final TByteArrayOutputStream writeBuffer_ = new TByteArrayOutputStream(1024);
     private final TMemoryInputTransport readBuffer_ = new TMemoryInputTransport(new byte[0]);
-    private AtomicInteger ticket;
+    private int ticket_;
 
     public TRdmaClientJVerbTrans(TRdmaClientEndpoint ep,String host,int port,int timeout){
         this.endpoint_ = ep;
@@ -46,7 +40,6 @@ public class TRdmaClientJVerbTrans extends TTransport {
         this.port_ = port;
         this.rdmaTimeout_ = timeout;
         this.connTimeout_ = timeout;
-        ticket = new AtomicInteger(0);
     }
 
     @Override
@@ -100,14 +93,17 @@ public class TRdmaClientJVerbTrans extends TTransport {
         return this.readBuffer_.read(bytes, offset, len);
     }
 
-
-
-
     private void readFrame() throws TTransportException {
-
-        ByteBuffer recvContent = this.endpoint_.eventTake(ticket.get());
-        // TODO@ high 看一下 recv 何时free()/buffer清空
-        recvContent.get(this.i32buf,0,4);
+        readBuffer_.reset(this.readBufRaw);
+        //TODO@ high strategy
+        while (!endpoint_.eventTake(ticket_)){
+            try {
+                endpoint_.pollOnce();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        readBuffer_.read(this.i32buf,0,4);
         int size = decodeFrameSize(this.i32buf);
         if (size < 0) {
             this.close();
@@ -116,11 +112,11 @@ public class TRdmaClientJVerbTrans extends TTransport {
             this.close();
             throw new TTransportException(5, "Frame size (" + size + ") larger than max length (" + RdmaRpcResponse.SERIALIZED_SIZE + ")!");
         } else {
-            byte[] buff = new byte[size];
-            recvContent.get(buff,0,size);
-            this.readBuffer_.reset(buff);
-            endpoint_.freeRecv(ticket.getAndIncrement());
-            // TODO@ high 看一下 recv 何时free()/buffer清空
+//            byte[] buff = new byte[size];
+//            readBuffer_.read(buff,0,size);
+//            this.readBuffer_.reset(buff);
+            //TODO
+            logger.info("readFrame finish");
         }
 
     }
@@ -134,11 +130,10 @@ public class TRdmaClientJVerbTrans extends TTransport {
     @Override
     public void flush(){
         this.isRead=false;
-        ByteBuffer buf = null;
-
+        SVCPostSend p;
         while (true){
             try {
-                if (!((buf = this.endpoint_.getSendWQ(ticket.get()))==null)) break;
+                if (!((p = endpoint_.getSendWQ())==null)) break;
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -150,15 +145,20 @@ public class TRdmaClientJVerbTrans extends TTransport {
         }
         int len = this.writeBuffer_.len();
         encodeFrameSize(len,this.i32buf);
-        buf.putInt(this.ticket.get());
-        buf.put(this.i32buf,0,4);
-        buf.put(writeBuffer_.get(),0,len);
-        writeBuffer_.reset();
         try {
-            this.endpoint_.request(ticket.get());
+            int idx = (int)p.getWrMod(0).getWr_id();
+            endpoint_.writeBuf(idx,this.i32buf,0,4);
+            endpoint_.writeBuf(idx,writeBuffer_.get(),0,len);
+            writeBuffer_.reset();
+            try {
+                ticket_ = this.endpoint_.request(idx,p,readBufRaw);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 
     public static final void encodeFrameSize(int frameSize, byte[] buf) {

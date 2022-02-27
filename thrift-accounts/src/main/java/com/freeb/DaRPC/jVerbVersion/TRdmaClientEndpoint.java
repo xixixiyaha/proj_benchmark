@@ -17,99 +17,26 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class TRdmaClientEndpoint extends RdmaActiveEndpoint {
-
+public class TRdmaClientEndpoint extends TRdmaEndpoint {
+    //TODO :
+    // 1 并发控制: 包括 类型选择 锁 hasFree发送
+    //                          比如 hasFree 如果并发lock太麻烦 也可以改成令牌式的一个线程安全的queue 但如果线程安全的queue本身也是lock实现的 那就不如直接用lock
+    // 2. PostSend的参数可以放进Trans层 让trans决定 signal与否 inline与否 长度 etc.
+    // 3. 临界控制 null/不存在的ticket etc
     private static final Logger logger = LoggerFactory.getLogger(TRdmaClientEndpoint.class);
 
-    /* Endpoint Usage */
-    private ArrayBlockingQueue<SVCPostSend> freePostSend;
-    private ConcurrentLinkedQueue<SVCPostSend> pendingPostSend; // TODO 和 ArrayBlocking Queue的区别
-    private ConcurrentHashMap<Integer,byte[]> ticket2readBuf = new ConcurrentHashMap<>();
-    private AtomicInteger hasFreeRecv = new AtomicInteger(0);
-    private Set<Integer> finishedTickets = ConcurrentHashMap.newKeySet();
+    protected ConcurrentHashMap<Integer,byte[]> ticket2readBuf = new ConcurrentHashMap<>();
+    protected AtomicInteger hasFreeRecv = new AtomicInteger(0);
+    protected Set<Integer> finishedTickets = ConcurrentHashMap.newKeySet();
 
-
-    private AtomicInteger ticket;
-
-
-    /*=== Raw Usage ===*/
-    private ReentrantLock lock;
-    private SVCPollCq poll;
-    private IbvWC[] wcList; //work complete list
-
-    /* === Buffer ===*/
-
-//    private ConcurrentHashMap<Integer, SVCPostSend> pendingPostSend;
-
-
-    private ByteBuffer[] sendBufs;
-    private SVCPostSend[] sendCall;
-    private int rawMsgSize_;
-
-    private ByteBuffer[] recvBufs;
-    private SVCPostRecv[] recvCall;
-
-    private ByteBuffer dataBuffer;
-    private IbvMr dataMr;
-
-
-    private void allocatePostRecvRes() throws IOException {
-        this.sendCall = new SVCPostSend[this.pipeLength_];
-        this.sendBufs = new ByteBuffer[this.pipeLength_];
-        this.freePostSend = new ArrayBlockingQueue<SVCPostSend>(this.pipeLength_);
-        this.pendingPostSend = new ConcurrentLinkedQueue<>();
-
-        this.recvCall = new SVCPostRecv[this.pipeLength_];
-        this.recvBufs = new ByteBuffer[this.pipeLength_];
-
-        int sendBufferOffset = pipeLength_ * rawMsgSize_;
-        dataBuffer = ByteBuffer.allocateDirect(sendBufferOffset*2);
-        dataMr = registerMemory(dataBuffer).execute().free().getMr();
-
-        ByteBuffer recvBuffer;
-        ByteBuffer sendBuffer;
-
-        // TODO@high 为何这么分, recv在前 send在后
-        /* Receive memory region is the first half of the main buffer. */
-        dataBuffer.limit(dataBuffer.position() + sendBufferOffset);
-        recvBuffer = dataBuffer.slice();
-
-        /* Send memory region is the second half of the main buffer. */
-        dataBuffer.position(sendBufferOffset);
-        dataBuffer.limit(dataBuffer.position() + sendBufferOffset);
-        sendBuffer = dataBuffer.slice();
-
-        for(int i = 0; i < pipeLength_; i++) {
-            /* Create single receive buffers within the receive region in form of slices. */
-            recvBuffer.position(i * rawMsgSize_);
-            recvBuffer.limit(recvBuffer.position() + rawMsgSize_);
-            recvBufs[i] = recvBuffer.slice();
-
-            /* Create single send buffers within the send region in form of slices. */
-            sendBuffer.position(i * rawMsgSize_);
-            sendBuffer.limit(sendBuffer.position() + rawMsgSize_);
-            sendBufs[i] = sendBuffer.slice();
-
-            this.recvCall[i] = setupRecvTask(i);
-            this.sendCall[i] = setupSendTask(i);
-            freePostSend.add(sendCall[i]);
-            //TODO
-            recvCall[i].execute();
-        }
-    }
-
-
-    // TODO@high
-    private static int MAX_MESSAGE_SIZE = 1024;
-    private int pipeLength_ = 1;
-
+    protected ConcurrentLinkedQueue<SVCPostSend> pendingPostSend; // TODO 和 ArrayBlocking Queue的区别
 
     public TRdmaClientEndpoint(RdmaActiveEndpointGroup<? extends RdmaActiveEndpoint> group, RdmaCmId idPriv, boolean serverSide) throws IOException {
         super(group, idPriv, serverSide);
-        this.rawMsgSize_ = 4+MAX_MESSAGE_SIZE;
+        this.pendingPostSend = new ConcurrentLinkedQueue<>();
+
 //        this.pipeLength = //TODO@high
     }
 
@@ -136,21 +63,20 @@ public class TRdmaClientEndpoint extends RdmaActiveEndpoint {
             ByteBuffer recvBuffer = recvBufs[index];
             int ticket = recvBuffer.getInt(0);
             recvBuffer.position(4);
-            dispatchReceive(recvBuffer, ticket, index);
+            dispatchReceive(index,recvBuffer, ticket);
         } else if (wc.getOpcode() == 0) {
             //send completion
             int index = (int) wc.getWr_id();
-            ByteBuffer sendBuffer = sendBufs[index];
             dispatchSend(index);
         } else {
             throw new IOException("Unkown opcode " + wc.getOpcode());
         }
     }
 
-    public void dispatchReceive(ByteBuffer recvBuffer, int ticket, int recvIndex) throws IOException {
+    public void dispatchReceive(int recvIndex,ByteBuffer recvBuffer, int ticket) throws IOException {
         // Step1 把buffer内容 放进 Map<ticket,buffer>
-        byte[] buf = this.ticket2readBuf.get(ticket);
-        recvBuffer.get(buf,0,MAX_MESSAGE_SIZE);
+        byte[] buf = this.ticket2readBuf.remove(ticket);
+        recvBuffer.get(buf,0,Math.min(MAX_MESSAGE_SIZE,buf.length));
         this.finishedTickets.add(ticket);
 
         // TODO notifyAll()/signal
@@ -162,6 +88,7 @@ public class TRdmaClientEndpoint extends RdmaActiveEndpoint {
         SVCPostSend p = pendingPostSend.poll();
         if (p == null){
             logger.info("no pending (postSend) for ticket " + ticket);
+            //TODO@ 并发控制
             this.hasFreeRecv.incrementAndGet();
         }else{
             p.execute();
@@ -184,10 +111,10 @@ public class TRdmaClientEndpoint extends RdmaActiveEndpoint {
         if(p!=null){
             int tkt = ticket.incrementAndGet();
             int idx = (int)p.getWrMod(0).getWr_id();
-            //TODO 这里应该初始化时侯就set了不用改的 =>notice 这里 把该这些参数挪进了Trans层
-//            p.getWrMod(0).getSgeMod(0).setLength(4+MAX_MESSAGE_SIZE);
+            //TODO 这里应该初始化时侯就set了不用改的 =>notice
+            p.getWrMod(0).getSgeMod(0).setLength(4+MAX_MESSAGE_SIZE);
             // TODO@后期的selected signaling
-//            p.getWrMod(0).setSend_flags(IbvSendWR.IBV_SEND_SIGNALED);
+            p.getWrMod(0).setSend_flags(IbvSendWR.IBV_SEND_SIGNALED);
             // TODO 真的支持 inline吗 TODO@high 这里是 this.maxInline()
             if (4+MAX_MESSAGE_SIZE <= 1024) {
                 p.getWrMod(0).setSend_flags(p.getWrMod(0).getSend_flags() | IbvSendWR.IBV_SEND_INLINE);
@@ -198,7 +125,14 @@ public class TRdmaClientEndpoint extends RdmaActiveEndpoint {
         return null;
     }
 
-    public void request(SVCPostSend postSend,int ticket,byte[] readBuf) throws IOException {
+    public int writeBuf(int index,byte[] buf,int offset,int len){
+        sendBufs[index].put(buf,offset,len);
+        return sendBufs.length;
+    }
+
+    public int request(int idx,SVCPostSend postSend,byte[] readBuf) throws IOException {
+
+        int ticket = sendBufs[idx].clear().getInt();
         //Step1
         this.ticket2readBuf.put(ticket,readBuf);
 
@@ -215,71 +149,6 @@ public class TRdmaClientEndpoint extends RdmaActiveEndpoint {
         }else{
             pendingPostSend.add(postSend);
         }
+        return ticket;
     }
-
-    private SVCPostSend setupSendTask(int wrid) throws IOException {
-        ArrayList<IbvSendWR> sendWRs = new ArrayList<IbvSendWR>(1);
-        LinkedList<IbvSge> sgeList = new LinkedList<IbvSge>();
-
-        IbvSge sge = new IbvSge();
-        sge.setAddr(MemoryUtils.getAddress(sendBufs[wrid]));
-        sge.setLength(rawMsgSize_);
-        sge.setLkey(dataMr.getLkey());
-        sgeList.add(sge);
-
-        IbvSendWR sendWR = new IbvSendWR();
-        sendWR.setSg_list(sgeList);
-        sendWR.setWr_id(wrid);
-        sendWRs.add(sendWR);
-        sendWR.setSend_flags(IbvSendWR.IBV_SEND_SIGNALED);
-        sendWR.setOpcode(IbvSendWR.IbvWrOcode.IBV_WR_SEND.ordinal());
-        //TODO@track batching
-        return postSend(sendWRs);
-    }
-
-    private SVCPostRecv setupRecvTask(int wrid) throws IOException {
-        ArrayList<IbvRecvWR> recvWRs = new ArrayList<IbvRecvWR>(1);
-        LinkedList<IbvSge> sgeList = new LinkedList<IbvSge>();
-
-        IbvSge sge = new IbvSge();
-        sge.setAddr(MemoryUtils.getAddress(recvBufs[wrid]));
-        sge.setLength(rawMsgSize_);
-        sge.setLkey(dataMr.getLkey());
-        sgeList.add(sge);
-
-        IbvRecvWR recvWR = new IbvRecvWR();
-        recvWR.setWr_id(wrid);
-        recvWR.setSg_list(sgeList);
-        recvWRs.add(recvWR);
-
-        return postRecv(recvWRs);
-    }
-
-    public void pollOnce() throws IOException {
-        if (!lock.tryLock()){
-            return;
-        }
-
-        try {
-            _pollOnce();
-        } finally {
-            lock.unlock();
-        }
-    }
-
-
-
-    private int _pollOnce() throws IOException {
-        int res = poll.execute().getPolls();
-        if (res > 0) {
-            for (int i = 0; i < res; i++){
-                IbvWC wc = wcList[i];
-                dispatchCqEvent(wc);
-            }
-
-        }
-        return res;
-    }
-
-
 }

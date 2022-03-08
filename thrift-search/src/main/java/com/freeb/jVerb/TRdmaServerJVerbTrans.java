@@ -16,11 +16,15 @@ public class TRdmaServerJVerbTrans extends TTransport {
 
 
     private TRdmaServerEndpoint endpoint_;
+
     private final byte[] i32buf = new byte[4];
-    private final TByteArrayOutputStream writeBuffer_ = new TByteArrayOutputStream(1024);
-    private final TMemoryInputTransport readBuffer_ = new TMemoryInputTransport(new byte[1024]);
+    private static final int MAX_MSG_SIZE = 1024;
+    private final TByteArrayOutputStream writeBuffer_ = new TByteArrayOutputStream(MAX_MSG_SIZE);
+    private final TMemoryInputTransport readBuffer_ = new TMemoryInputTransport(new byte[MAX_MSG_SIZE]);
     private int ticket_;
     private boolean isRead = false;
+
+    //TODO@ 初始化 MSG_SIZE
 
 
     public void setEndpoint(TRdmaServerEndpoint endpoint){
@@ -45,8 +49,7 @@ public class TRdmaServerJVerbTrans extends TTransport {
     @Override
     public int read(byte[] bytes, int offset, int len) throws TTransportException {
         if(!isRead){
-            //todo throw exception
-            return -1;
+            throw new TTransportException("use before update ReadBuffer!");
         }
         return this.readBuffer_.read(bytes,offset,len);
     }
@@ -59,7 +62,9 @@ public class TRdmaServerJVerbTrans extends TTransport {
     }
 
     public void updateReadBuff(ByteBuffer buffer){
-        ticket_ = buffer.getInt();
+        // Notice: this is safe, the pos would automatically+4
+        this.ticket_ = buffer.getInt();
+
         buffer.get(this.i32buf,0,4);
         int size = decodeFrameSize(this.i32buf);
         buffer.get(readBuffer_.getBuffer(),0,size);
@@ -68,7 +73,6 @@ public class TRdmaServerJVerbTrans extends TTransport {
 
     @Override
     public void flush(){
-
         this.isRead = false;
         SVCPostSend p;
         while (true){
@@ -87,12 +91,12 @@ public class TRdmaServerJVerbTrans extends TTransport {
         encodeFrameSize(len,this.i32buf);
         try {
             int idx = (int)p.getWrMod(0).getWr_id();
-            endpoint_.writeInt(idx,ticket);
+            endpoint_.writeInt(idx,ticket_);
             endpoint_.writeBuf(idx,this.i32buf,0,4);
             endpoint_.writeBuf(idx,writeBuffer_.get(),0,len);
             writeBuffer_.reset();
             try {
-                this.endpoint_.request(p);
+                this.endpoint_.sendResponse(p);
             } catch (IOException e) {
                 e.printStackTrace();
             }

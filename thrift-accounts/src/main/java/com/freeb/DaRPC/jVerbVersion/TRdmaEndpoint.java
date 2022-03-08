@@ -19,11 +19,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.ReentrantLock;
 
 public abstract class TRdmaEndpoint extends RdmaActiveEndpoint {
-    //TODO :
-    // 1 并发控制: 包括 类型选择 锁 hasFree发送
-    //                          比如 hasFree 如果并发lock太麻烦 也可以改成令牌式的一个线程安全的queue 但如果线程安全的queue本身也是lock实现的 那就不如直接用lock
-    // 2. PostSend的参数可以放进Trans层 让trans决定 signal与否 inline与否 长度 etc.
-    // 3. 临界控制 null/不存在的ticket etc
+
     private static final Logger logger = LoggerFactory.getLogger(TRdmaEndpoint.class);
 
     /* Endpoint Usage */
@@ -125,7 +121,7 @@ public abstract class TRdmaEndpoint extends RdmaActiveEndpoint {
 
     public int writeBuf(int index,byte[] buf,int offset,int len){
         sendBufs[index].put(buf,offset,len);
-        return sendBufs.length;
+        return sendBufs[index].position();
     }
 
     private SVCPostSend setupSendTask(int wrid) throws IOException {

@@ -130,7 +130,11 @@ public abstract class TRdmaEndpoint extends RdmaActiveEndpoint {
 
     public int writeBuf(int index,byte[] buf,int offset,int len){
         sendBufs[index].put(buf,offset,len);
-        return sendBufs.length;
+        return sendBufs[index].position();
+    }
+    public int writeInt(int index,int intVal){
+        sendBufs[index].putInt(intVal);
+        return sendBufs[index].position();
     }
 
     private SVCPostSend setupSendTask(int wrid) throws IOException {

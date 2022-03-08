@@ -1,6 +1,6 @@
 package com.freeb.DaRPC.jVerbVersion;
 
-import com.ibm.darpc.DaRPCFuture;
+
 import com.ibm.disni.RdmaActiveEndpoint;
 import com.ibm.disni.RdmaActiveEndpointGroup;
 import com.ibm.disni.util.MemoryUtils;
@@ -62,7 +62,7 @@ public class TRdmaClientEndpoint extends TRdmaEndpoint {
             int index = (int) wc.getWr_id();
             ByteBuffer recvBuffer = recvBufs[index];
             int ticket = recvBuffer.getInt(0);
-            recvBuffer.position(4);
+//            recvBuffer.position(4);
             dispatchReceive(index,recvBuffer, ticket);
         } else if (wc.getOpcode() == 0) {
             //send completion
@@ -123,11 +123,6 @@ public class TRdmaClientEndpoint extends TRdmaEndpoint {
             return p;
         }
         return null;
-    }
-
-    public int writeBuf(int index,byte[] buf,int offset,int len){
-        sendBufs[index].put(buf,offset,len);
-        return sendBufs.length;
     }
 
     public int request(int idx,SVCPostSend postSend,byte[] readBuf) throws IOException {

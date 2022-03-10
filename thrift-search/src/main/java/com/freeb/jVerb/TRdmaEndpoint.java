@@ -2,6 +2,7 @@ package com.freeb.jVerb;
 
 import com.ibm.disni.RdmaActiveEndpoint;
 import com.ibm.disni.RdmaActiveEndpointGroup;
+import com.ibm.disni.RdmaEndpoint;
 import com.ibm.disni.util.MemoryUtils;
 import com.ibm.disni.verbs.*;
 import org.slf4j.Logger;
@@ -18,7 +19,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.ReentrantLock;
 
-public abstract class TRdmaEndpoint extends RdmaActiveEndpoint {
+public abstract class TRdmaEndpoint extends RdmaEndpoint {
     //TODO :
     // 1 并发控制: 包括 类型选择 锁 hasFree发送
     //                          比如 hasFree 如果并发lock太麻烦 也可以改成令牌式的一个线程安全的queue 但如果线程安全的queue本身也是lock实现的 那就不如直接用lock
@@ -118,10 +119,10 @@ public abstract class TRdmaEndpoint extends RdmaActiveEndpoint {
         return super.isConnected();
     }
 
-    @Override
+//    @Override
     public abstract void dispatchCqEvent(IbvWC wc) throws IOException;
 
-    public abstract void dispatchReceive(int recvIndex,ByteBuffer recvBuffer, int ticket) throws IOException;
+    public abstract void dispatchReceive(ByteBuffer recvBuffer, int ticket,int recvIndex) throws IOException;
 
     public abstract void dispatchSend(int index) throws IOException;
 

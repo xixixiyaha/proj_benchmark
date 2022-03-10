@@ -19,14 +19,16 @@ public class TRdmaServerEndpoint extends TRdmaEndpoint {
     private static final Logger logger = LoggerFactory.getLogger(TRdmaServerEndpoint.class);
 
     private TRdmaServerGroup<? extends RdmaActiveEndpoint> group_;
-    private TProcessor processor_;
+//    private TProcessor processor_;
     private TProtocolFactory protocolFactory_;
 
+    private int clusterId;
 
-    public TRdmaServerEndpoint(TRdmaServerGroup<?extends RdmaActiveEndpoint> group, RdmaCmId idPriv, boolean serverSide, TProcessor processor) throws IOException {
+
+    public TRdmaServerEndpoint(TRdmaServerGroup<?extends RdmaActiveEndpoint> group, RdmaCmId idPriv, boolean serverSide) throws IOException {
         super(group, idPriv, serverSide);
         this.group_=group;
-        this.processor_ = processor;
+//        this.processor_ = processor;
     }
 
     @Override
@@ -40,7 +42,7 @@ public class TRdmaServerEndpoint extends TRdmaEndpoint {
             //receiving a message
             int index = (int) wc.getWr_id();
             ByteBuffer recvBuffer = recvBufs[index];
-            dispatchReceive(index,recvBuffer, -1);
+            dispatchReceive(recvBuffer, -1,index);
         } else if (wc.getOpcode() == 0) {
             //send completion
             int index = (int) wc.getWr_id();
@@ -51,7 +53,7 @@ public class TRdmaServerEndpoint extends TRdmaEndpoint {
     }
 
     @Override
-    public void dispatchReceive(int recvIndex, ByteBuffer recvBuffer, int ticket) throws IOException {
+    public void dispatchReceive( ByteBuffer recvBuffer, int ticket,int recvIndex) throws IOException {
         //Step1 获取freeTrans TODO:trans可不可以池化 而不是新声明
         TRdmaServerJVerbTrans trans = new TRdmaServerJVerbTrans();
         TProtocol protocol = protocolFactory_.getProtocol(trans);
@@ -62,11 +64,7 @@ public class TRdmaServerEndpoint extends TRdmaEndpoint {
         trans.updateReadBuff(recvBuffer);
 
         //Step3 执行
-        try {
-            processor_.process(protocol,protocol);
-        } catch (TException e) {
-            e.printStackTrace();
-        }
+        group_.processServerEvent(protocol);
 
     }
 
@@ -104,4 +102,7 @@ public class TRdmaServerEndpoint extends TRdmaEndpoint {
     }
 
 
+    public int getClusterId() {
+        return clusterId;
+    }
 }

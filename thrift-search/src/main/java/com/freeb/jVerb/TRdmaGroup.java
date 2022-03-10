@@ -7,7 +7,7 @@ import com.ibm.disni.verbs.*;
 
 import java.io.IOException;
 
-public abstract class TRdmaGroup <E extends RdmaEndpoint> extends RdmaActiveEndpointGroup<E> {
+public abstract class TRdmaGroup <E extends RdmaEndpoint> extends RdmaEndpointGroup<E> {
     private int recvQueueSize;
     private int sendQueueSize;
     private int timeout;
@@ -15,7 +15,7 @@ public abstract class TRdmaGroup <E extends RdmaEndpoint> extends RdmaActiveEndp
     private int maxInline;
 
     public TRdmaGroup(int timeout, int maxinline, int recvQueue, int sendQueue,int bufferSize) throws IOException {
-        super(timeout,false,recvQueue,sendQueue,bufferSize);
+        super(timeout);
 //        super(timeout);
         this.recvQueueSize = recvQueue;
         this.sendQueueSize = Math.max(recvQueue, sendQueue);

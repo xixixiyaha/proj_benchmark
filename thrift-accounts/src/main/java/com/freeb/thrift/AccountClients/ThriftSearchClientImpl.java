@@ -12,63 +12,48 @@ import org.apache.thrift.transport.TFramedTransport;
 import org.apache.thrift.transport.TSocket;
 import org.apache.thrift.transport.TTransport;
 import org.apache.thrift.transport.TTransportException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.Closeable;
 import java.io.IOException;
-import java.net.InetSocketAddress;
 
 public class ThriftSearchClientImpl implements Closeable {
-	private Boolean rdma = true;
+
+	private static final Logger logger = LoggerFactory.getLogger(ThriftSearchClientImpl.class.getName());
+
 	// not thread safe
-	public final TTransport transport;
-	public final TProtocol protocol;
-	public final SearchService.Client client;
-	private static int clientNum = 0;
-
-	public ThriftSearchClientImpl(String host, int port,DaRPCClientEndpoint<RdmaRpcRequest,RdmaRpcResponse> endpoint) throws Exception {
-		System.out.println("ThriftSearchClientImpl@ create Endpoint 1");
-
-		InetSocketAddress address = new InetSocketAddress(host, port);
-		System.out.println("ThriftSearchClientImpl@ create Endpoint 2 - start connect");
-		endpoint.connect(address,1000);
-		DaRPCStream<RdmaRpcRequest,RdmaRpcResponse> stream = endpoint.createStream();
-		System.out.println("ThriftSearchClientImpl@ create Endpoint 3 - end connect");
-		transport = new TRdmaClientRawTrans(endpoint,stream,new RdmaRpcRequest(),new RdmaRpcResponse());
-		transport.open();
-		System.out.println("ThriftSearchClientImpl@ create Endpoint 4");
-		protocol = new TBinaryProtocol(transport);
-		client = new SearchService.Client(protocol);
-		System.out.println("ThriftSearchClientImpl@ create Endpoint 5");
-	}
+	public final TTransport transport_;
+	public final TProtocol protocol_;
+	public final SearchService.Client client_;
+	private static int clientNum_ = 0;
 
 	public ThriftSearchClientImpl(DaRPCClientEndpoint<RdmaRpcRequest,RdmaRpcResponse> endpoint, DaRPCStream<RdmaRpcRequest,RdmaRpcResponse> stream) {
-		transport = new TRdmaClientRawTrans(endpoint,stream,new RdmaRpcRequest(),new RdmaRpcResponse());
-
-		System.out.println("ThriftSearchClientImpl@ create Endpoint 6");
-		protocol = new TBinaryProtocol(transport);
-		client = new SearchService.Client(protocol);
-		System.out.println("ThriftSearchClientImpl@ create Endpoint 7");
+		transport_ = new TRdmaClientRawTrans(endpoint,stream,new RdmaRpcRequest(),new RdmaRpcResponse());
+		protocol_ = new TBinaryProtocol(transport_);
+		client_ = new SearchService.Client(protocol_);
+		logger.info("ThriftSearchClientImpl@ create Rdma Endpoint");
 	}
 
 
 	public ThriftSearchClientImpl(String host, int port) {
 
-		transport = new TFramedTransport(new TSocket(host, port));
+		transport_ = new TFramedTransport(new TSocket(host, port));
 
-		protocol = new TBinaryProtocol(transport);
-		client = new SearchService.Client(protocol);
+		protocol_ = new TBinaryProtocol(transport_);
+		client_ = new SearchService.Client(protocol_);
 		try {
-			transport.open();
+			transport_.open();
 		} catch (TTransportException e) {
 			System.out.println(e.getMessage());
 			throw new Error(e);
 		}
-		// System.out.println("in ThriftSearchClientImpl/Accounts "+ clientNum++);
+		logger.info("ThriftSearchClientImpl@ create Socket");
 	}
 
 	@Override
 	public void close() throws IOException {
-		transport.close();
+		transport_.close();
 	}
 
 }

@@ -7,7 +7,6 @@ import com.freeb.DaRPC.RawVersion.RdmaRpcResponse;
 import com.freeb.Utils.LockObjectPool;
 import com.ibm.darpc.DaRPCClientEndpoint;
 import com.ibm.darpc.DaRPCClientGroup;
-import com.ibm.darpc.DaRPCEndpoint;
 import com.ibm.darpc.DaRPCStream;
 import org.apache.thrift.TException;
 import org.slf4j.Logger;
@@ -85,7 +84,7 @@ public class AccountForeignClients extends AccountClients implements Closeable {
     public List<Long> IdealResEfficiencyTest(Integer totalComputationLoad, Integer threadNum) {
         ThriftSearchClientImpl client = clientPool_.borrow();
         try{
-            List<Long> re = client.client.IdealResEfficiencyTest(totalComputationLoad,threadNum);
+            List<Long> re = client.client_.IdealResEfficiencyTest(totalComputationLoad,threadNum);
             logger.debug("IdealResEfficiencyTest result = "+re);
             return re;
         } catch (TException e) {

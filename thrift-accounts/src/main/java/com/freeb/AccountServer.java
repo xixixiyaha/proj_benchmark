@@ -47,7 +47,8 @@ public class AccountServer {
         int port=0;
         String host="";
         int maxInline = 1;
-        int timeout=3000,recvQueueDepth=0, sendQueueDepth=0,poolSize=2;
+        int timeout=3000,recvQueueDepth=0, sendQueueDepth=0;
+        int poolSize=2,endpointSize=1;
 
         Option rdmaOption = Option.builder("m").required().desc("commute mode").hasArg().build();
         Option addressOption = Option.builder("a").required().desc("server address").hasArg().build();
@@ -58,6 +59,7 @@ public class AccountServer {
         Option timeoutOption = Option.builder("t").desc("time out").hasArg().build();
         Option maxinlineOption = Option.builder("i").desc("max inline data").hasArg().build();
         Option poolSizeOption = Option.builder("p").desc("pool size").hasArg().build();
+        Option epSizeOption = Option.builder("e").desc("pool size").hasArg().build();
 
         Option recvQueueOption = Option.builder("r").desc("receive queue").hasArg().build();
         Option sendQueueOption = Option.builder("s").desc("send queue").hasArg().build();
@@ -95,6 +97,9 @@ public class AccountServer {
             if (line.hasOption(poolSizeOption.getOpt())) {
                 poolSize = Integer.parseInt(line.getOptionValue(poolSizeOption.getOpt()));
             }
+            if (line.hasOption(epSizeOption.getOpt())) {
+                endpointSize = Integer.parseInt(line.getOptionValue(poolSizeOption.getOpt()));
+            }
             if (line.hasOption(recvQueueOption.getOpt())) {
                 recvQueueDepth = Integer.parseInt(line.getOptionValue(recvQueueOption.getOpt()));
             }
@@ -111,7 +116,7 @@ public class AccountServer {
             System.exit(-1);
         }
         if(RDMA_MODE>0){
-            accClients= new AccountForeignClients(host,port,timeout,maxInline,sendQueueDepth,recvQueueDepth,poolSize);
+            accClients= new AccountForeignClients(host,port,timeout,maxInline,sendQueueDepth,recvQueueDepth,poolSize,endpointSize);
 
         }else if(RDMA_MODE==0){
             accClients= new AccountForeignClients(host,port);

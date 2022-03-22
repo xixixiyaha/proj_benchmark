@@ -7,8 +7,11 @@ import com.freeb.DaRPC.RawVersion.RdmaRpcResponse;
 import com.freeb.Utils.LockObjectPool;
 import com.ibm.darpc.DaRPCClientEndpoint;
 import com.ibm.darpc.DaRPCClientGroup;
+import com.ibm.darpc.DaRPCEndpoint;
 import com.ibm.darpc.DaRPCStream;
 import org.apache.thrift.TException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.Closeable;
 import java.io.IOException;
@@ -18,58 +21,42 @@ import java.util.List;
 public class AccountForeignClients extends AccountClients implements Closeable {
     private static String search_host = "bm-search-server";
     private static int search_port = 8080;
-    static {
-        System.out.println("in AccountForeignClients");
-    }
-//    private final LockObjectPool<ThriftSearchClientImpl> clientPool = new LockObjectPool<>(32,()->new ThriftSearchClientImpl(search_host, search_port));
+
     private DaRPCClientGroup<RdmaRpcRequest, RdmaRpcResponse> group_;
     private final LockObjectPool<ThriftSearchClientImpl> clientPool_;
+    private static final Logger logger = LoggerFactory.getLogger(AccountForeignClients.class.getName());
 
-    public AccountForeignClients(String hostt,int portt,int timeout,int maxInline, int sendQueueDepth,int recvQueueDepth,int poolSize){
-        System.out.println("AccountForeignClients@ == IN ==");
-        System.out.println("host = "+hostt+" port = "+ portt+" maxInline = "+maxInline+" send/recvDepth = "+sendQueueDepth);
-
-
+    public AccountForeignClients(String hostt,int portt,int timeout,int maxInline, int sendQueueDepth,int recvQueueDepth,int poolSize,int endpointSize){
+       logger.info("host = "+hostt+" port = "+ portt+" maxInline = "+maxInline+" send/recvDepth = "+sendQueueDepth);
         try {
             group_ = DaRPCClientGroup.createClientGroup(new RdmaRpcProtocol(), timeout, maxInline, recvQueueDepth, sendQueueDepth);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        System.out.println("AccountForeignClients@ create Group Done");
-
-//        this.clientPool = new LockObjectPool<>(poolSize, () -> {
-//            try {
-//                return new ThriftSearchClientImpl(hostt, portt, group_.createEndpoint());
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//            System.out.println("AccountForeignClients@ create Endpoint Failed");
-//            return null;
-//        });
-        DaRPCClientEndpoint<RdmaRpcRequest,RdmaRpcResponse> endpoint1 = null;
-        DaRPCClientEndpoint<RdmaRpcRequest,RdmaRpcResponse> endpoint2 = null;
-        DaRPCStream<RdmaRpcRequest,RdmaRpcResponse> s1=null;
-        DaRPCStream<RdmaRpcRequest,RdmaRpcResponse> s2=null;
-        try {
-            endpoint1 = group_.createEndpoint();
-            endpoint2 = group_.createEndpoint();
-            InetSocketAddress address = new InetSocketAddress(hostt, portt);
-            endpoint1.connect(address,1000);
-            s1 = endpoint1.createStream();
-            endpoint2.connect(address,1000);
-            s2 =endpoint2.createStream();
+            logger.info("AccountForeignClients@ create Group Done");
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-
+        if(poolSize%endpointSize!=0){
+            logger.warn("poolSize%endpointSize is not 0, poolSize={} endpointSize={}",poolSize,endpointSize);
+        }
         clientPool_ = new LockObjectPool<ThriftSearchClientImpl>(poolSize);
-        for(int p = 0;p<poolSize;p++){
-            if(p<poolSize/2){
-                this.clientPool_.setObject(p,new ThriftSearchClientImpl(endpoint1,s1));
-            }else {
-                this.clientPool_.setObject(p,new ThriftSearchClientImpl(endpoint2,s2));
+//        DaRPCEndpoint<?,?>[] rpcConnections = new DaRPCEndpoint[endpointSize];
+        int transPerEndpoint = (int) Math.ceil(poolSize/endpointSize);
+        int poolNum = 0;
+        try {
+            assert group_ != null;
+            InetSocketAddress address = new InetSocketAddress(hostt, portt);
+            for (int i = 0; i < endpointSize; i++){
+                DaRPCClientEndpoint<RdmaRpcRequest, RdmaRpcResponse> clientEp = group_.createEndpoint();
+                clientEp.connect(address, 1000);
+//                rpcConnections[i] = clientEp;
+                DaRPCStream<RdmaRpcRequest,RdmaRpcResponse> stream = clientEp.createStream();
+                for(int j = 0;(poolNum<poolSize)&&(j<transPerEndpoint);j++){
+                    clientPool_.setObject(poolNum,new ThriftSearchClientImpl(clientEp,stream));
+                    poolNum +=1;
+                }
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -78,12 +65,14 @@ public class AccountForeignClients extends AccountClients implements Closeable {
     }
 
     public AccountForeignClients(){
+        // This is used when Account serve as Server
         clientPool_ = new LockObjectPool<>(16,()->new ThriftSearchClientImpl(search_host, search_port));
     }
 
 
     @Override
     public void close() throws IOException {
+        // It is ok to close an endpoint for multiple times => later ones will do nothing and just return
         clientPool_.close();
     }
 
@@ -95,12 +84,9 @@ public class AccountForeignClients extends AccountClients implements Closeable {
     @Override
     public List<Long> IdealResEfficiencyTest(Integer totalComputationLoad, Integer threadNum) {
         ThriftSearchClientImpl client = clientPool_.borrow();
-//        System.out.println("IdealResEfficiencyTest/AccountForeignClients");
         try{
             List<Long> re = client.client.IdealResEfficiencyTest(totalComputationLoad,threadNum);
-//            List<Long> re2 = client.client.IdealResEfficiencyTest(totalComputationLoad,threadNum);
-//            re.addAll(re2);
-//            System.out.println(re);
+            logger.debug("IdealResEfficiencyTest result = "+re);
             return re;
         } catch (TException e) {
             e.printStackTrace();
@@ -110,9 +96,4 @@ public class AccountForeignClients extends AccountClients implements Closeable {
         return null;
     }
 
-//    public static void main(String[] args){
-//        AccountForeignClients clients = new AccountForeignClients();
-//        List<Long> re = clients.IdealResEfficiencyTest(100,1);
-//        System.out.println(re);
-//    }
 }

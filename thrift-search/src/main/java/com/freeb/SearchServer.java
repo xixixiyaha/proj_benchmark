@@ -27,30 +27,6 @@ public class SearchServer {
 	public static void main(String[] args) {
 		try {
 			if(rdma){
-//				TRdmaService service = new TRdmaService(new SearchService.Processor<SearchService.Iface>(new SearchServiceServerImpl()));
-//				service.setProtocolFactory(new TBinaryProtocol.Factory());
-//				RdmaRpcResponse resp = new RdmaRpcResponse();
-//				RdmaRpcRequest req = new RdmaRpcRequest();
-//				try {
-//					File file = new File("./test.txt");
-//					FileInputStream fis = new FileInputStream(file);
-//					ByteArrayOutputStream bos = new ByteArrayOutputStream(1024);
-//					byte[] b = new byte[1024];
-//					int n;
-//					while ((n = fis.read(b)) != -1) {
-//						bos.write(b, 0, n);
-//					}
-//					fis.close();
-//					bos.close();
-//					req.setLimit(bos.size());
-//					req.writeToParam(bos.toByteArray(),0,bos.size());
-//					req.setPos(0);
-//				} catch (IOException e) {
-//					e.printStackTrace();
-//				}
-//				DaRPCServerEvent<RdmaRpcRequest, RdmaRpcResponse> event = new DaRPCServerEvent<>(null,req,resp);
-//				service.process(event);
-
 				TRdmaServerRaw server = new TRdmaServerRaw();
 				server.launch(args);
 				return;
@@ -81,7 +57,7 @@ public class SearchServer {
 
 			TThreadedSelectorServer.Args serverParams = new TThreadedSelectorServer.Args(serverSocket);
 			serverParams.protocolFactory(new TBinaryProtocol.Factory());
-			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+			Timestamp timestamp;
 			serverParams.processor(new SearchService.Processor<SearchService.Iface>(new SearchServiceServerImpl()));
 			TServer server = new TThreadedSelectorServer(serverParams);
 			timestamp = new Timestamp(System.currentTimeMillis());

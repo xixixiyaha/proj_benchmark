@@ -3,8 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e7402edc-f985-409d-9734-d8a746f29253" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thrift-accounts/src/main/java/com/freeb/AccountServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/thrift-accounts/src/main/java/com/freeb/AccountServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thrift-accounts/src/main/java/com/freeb/thrift/AccountClients/AccountForeignClients.java" beforeDir="false" afterPath="$PROJECT_DIR$/thrift-accounts/src/main/java/com/freeb/thrift/AccountClients/AccountForeignClients.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/thrift-search/src/main/java/com/freeb/SearchServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/thrift-search/src/main/java/com/freeb/SearchServer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -446,7 +445,7 @@
       <workItem from="1647523763602" duration="2736000" />
       <workItem from="1647593366546" duration="6911000" />
       <workItem from="1647674613420" duration="10243000" />
-      <workItem from="1647917078988" duration="3598000" />
+      <workItem from="1647917078988" duration="4562000" />
     </task>
     <task id="LOCAL-00001" summary="add log4j">
       <created>1642930595376</created>
@@ -579,9 +578,10 @@
     </state>
     <state x="2611" y="352" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1646709355962" />
     <state x="553" y="279" width="429" height="312" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1536.824@0.0.1536.824" timestamp="1642409767820" />
-    <state x="411" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1645496334511">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="2434" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1647921168389">
+      <screen x="1920" y="0" width="1920" height="1040" />
     </state>
+    <state x="2434" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1647921168389" />
     <state x="411" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.824@0.0.1536.824" timestamp="1645496334511" />
     <state x="499" y="162" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1645501595434">
       <screen x="0" y="0" width="1536" height="824" />
@@ -682,11 +682,11 @@
     <state x="2168" y="0" key="SettingsEditor/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1647911392854" />
     <state x="536" y="-1080" key="SettingsEditor/0.0.1536.824/3.-1080.1920.1040@3.-1080.1920.1040" timestamp="1640434765051" />
     <state x="198" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1645581732683" />
-    <state x="2371" y="187" key="Vcs.Push.Dialog.v2" timestamp="1647920894491">
+    <state x="2371" y="187" key="Vcs.Push.Dialog.v2" timestamp="1647921403022">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="361" y="148" key="Vcs.Push.Dialog.v2/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1647367271501" />
-    <state x="2371" y="187" key="Vcs.Push.Dialog.v2/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1647920894491" />
+    <state x="2371" y="187" key="Vcs.Push.Dialog.v2/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1647921403022" />
     <state x="361" y="148" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1645883886638" />
     <state x="653" y="305" width="333" height="294" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1" timestamp="1642035125035">
       <screen x="0" y="0" width="1536" height="824" />

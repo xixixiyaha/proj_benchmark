@@ -30,22 +30,31 @@ import java.util.concurrent.TimeUnit;
 public class AccountServer {
     public static final int CONCURRENCY = 16;
     public static int callNum = 0;
+    public static int RDMA_MODE = 0;
+    public static int TEST_LOOP = 3000;
+
     private final AccountForeignClients accClients;
 
+    // JMH Test in here
     public AccountServer(){
         accClients= new AccountForeignClients("10.137.144.83",8080);
     }
 
+
     public AccountServer(String[] args) throws Exception {
+
 
         int port=0;
         String host="";
         int maxInline = 1;
         int timeout=3000,recvQueueDepth=0, sendQueueDepth=0,poolSize=2;
 
+        Option rdmaOption = Option.builder("m").required().desc("commute mode").hasArg().build();
         Option addressOption = Option.builder("a").required().desc("server address").hasArg().build();
-
         Option portOption = Option.builder("o").required().desc("server port").hasArg().build();
+
+        Option loopOption = Option.builder("l").desc("loop times in test latency").hasArg().build();
+
         Option timeoutOption = Option.builder("t").desc("time out").hasArg().build();
         Option maxinlineOption = Option.builder("i").desc("max inline data").hasArg().build();
         Option poolSizeOption = Option.builder("p").desc("pool size").hasArg().build();
@@ -53,9 +62,14 @@ public class AccountServer {
         Option recvQueueOption = Option.builder("r").desc("receive queue").hasArg().build();
         Option sendQueueOption = Option.builder("s").desc("send queue").hasArg().build();
         Option serializedSizeOption = Option.builder("l").desc("serialized size").hasArg().build();
+
+
+
         org.apache.commons.cli.Options options = new Options();
+        options.addOption(rdmaOption);
         options.addOption(addressOption);
         options.addOption(portOption);
+        options.addOption(loopOption);
         options.addOption(timeoutOption);
         options.addOption(maxinlineOption);
         options.addOption(poolSizeOption);
@@ -66,8 +80,12 @@ public class AccountServer {
 
         try {
             CommandLine line = parser.parse(options, args);
+            RDMA_MODE = Integer.parseInt(line.getOptionValue(rdmaOption.getOpt()));
             host = line.getOptionValue(addressOption.getOpt());
             port = Integer.parseInt(line.getOptionValue(portOption.getOpt()));
+            if (line.hasOption(loopOption.getOpt())) {
+                TEST_LOOP = Integer.parseInt(line.getOptionValue(loopOption.getOpt()));
+            }
             if (line.hasOption(timeoutOption.getOpt())) {
                 timeout = Integer.parseInt(line.getOptionValue(timeoutOption.getOpt()));
             }
@@ -92,14 +110,16 @@ public class AccountServer {
             formatter.printHelp("DaRPCForeign Clients", options);
             System.exit(-1);
         }
+        if(RDMA_MODE>0){
+            accClients= new AccountForeignClients(host,port,timeout,maxInline,sendQueueDepth,recvQueueDepth,poolSize);
 
-         accClients= new AccountForeignClients(host,port,timeout,maxInline,sendQueueDepth,recvQueueDepth,poolSize);
-//        accClients= new AccountForeignClients(host,port);
+        }else if(RDMA_MODE==0){
+            accClients= new AccountForeignClients(host,port);
+        }else{
+            accClients = null;
+        }
 
         System.out.println("accClients Initialization Success");
-
-//        List<Long> re = accClients.IdealResEfficiencyTest(100,1);
-//        System.out.println(re);
     }
 
     @TearDown
@@ -108,7 +128,7 @@ public class AccountServer {
         System.out.println("<AccClient.testSearchRe>"+callNum++);
 
     }
-//
+
     @Benchmark
     @BenchmarkMode({ Mode.Throughput, Mode.AverageTime, Mode.SampleTime })
     @OutputTimeUnit(TimeUnit.MILLISECONDS)
@@ -140,62 +160,36 @@ public class AccountServer {
         }
     }
 
-//    public static void HalfTest(String[] args) throws Exception {
-//        AccountServer client = new AccountServer(args);
-//        for (int i = 0; i < 1; i++) {
-//            try {
-//                System.out.println(client.testSearchRe());
-//                break;
-//            } catch (Exception e) {
-//                Thread.sleep(1000);
-//            }
-//        }
-
-//        client.close();
-
-//        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-//
-//        Options opt = new OptionsBuilder()//
-//                .include(AccountServer.class.getSimpleName())//
-//                .warmupIterations(3)//
-//                .warmupTime(TimeValue.seconds(10))//
-//                .measurementIterations(3)//
-//                .measurementTime(TimeValue.seconds(10))//
-//                .threads(CONCURRENCY)//
-//                .forks(1)//
-//                .build();
-//
-//        System.out.println("in com.freeb.thrift com.freeb.thrift.AccountServer main() === 4 === ");
-//        new Runner(opt).run();
-//        System.out.println("in com.freeb.thrift com.freeb.thrift.AccountServer main() === 5 === ");
-//    }
-
-    public static void main(String[] args) throws Exception {
-        AccountServer client = new AccountServer(args);
+    private void TestDaRpcThriftLatency(){
         StopWatch w = new StopWatch();
         w.start();
-        for(int i=0;i<2000;i++){
-            client.accClients.IdealResEfficiencyTest(10000,i);
+        for(int i=0;i<TEST_LOOP;i++){
+            accClients.IdealResEfficiencyTest(10000,i);
 //            client.accClients.IdealResEfficiencyTest(100,2);
         }
         long time = w.getExecutionTime();
-        System.out.println("time is "+time);
-
-//        System.out.println(client.toString());
-//        HalfTest(args);
-//        org.openjdk.jmh.runner.options.Options opt = new OptionsBuilder()//
-//                .include(AccountServer.class.getSimpleName())//
-//                .warmupIterations(1)//
-//                .measurementIterations(1)//
-//                .measurementTime(TimeValue.seconds(10))//
-//                .threads(CONCURRENCY)//
-//                .forks(1)//
-//                .build();
-//        initAccountService();
-        System.out.println("in com.freeb.thrift com.freeb.thrift.AccountServer main() === 4 === ");
-//        new Runner(opt).run();
-//        System.out.println("in com.freeb.thrift com.freeb.thrift.AccountServer main() === 5 === ");
-
+        System.out.println("time = "+time+"| exec round = "+TEST_LOOP);
     }
 
+    public static void main(String[] args) throws Exception {
+        AccountServer server = new AccountServer(args);
+        if(AccountServer.RDMA_MODE>0){
+            server.TestDaRpcThriftLatency();
+            System.out.println("com.freeb.thrift.AccountServer <main> RDMA latency finish");
+        }else if(AccountServer.RDMA_MODE == 0){
+            org.openjdk.jmh.runner.options.Options opt = new OptionsBuilder()
+                .include(AccountServer.class.getSimpleName())
+                .warmupIterations(1)
+                .measurementIterations(1)
+                .measurementTime(TimeValue.seconds(10))
+                .threads(CONCURRENCY)
+                .forks(1)
+                .build();
+            new Runner(opt).run();
+            System.out.println("com.freeb.thrift.AccountServer <main> JMH finish");
+        }else{
+            initAccountService();
+        }
+
+    }
 }

@@ -2,6 +2,7 @@ package com.freeb.jVerb;
 
 import com.ibm.disni.RdmaActiveEndpoint;
 import com.ibm.disni.RdmaActiveEndpointGroup;
+import com.ibm.disni.RdmaEndpoint;
 import com.ibm.disni.verbs.*;
 import org.apache.thrift.TException;
 import org.apache.thrift.TProcessor;
@@ -13,22 +14,31 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.util.concurrent.ArrayBlockingQueue;
 
 public class TRdmaServerEndpoint extends TRdmaEndpoint {
 
     private static final Logger logger = LoggerFactory.getLogger(TRdmaServerEndpoint.class);
 
-    private TRdmaServerGroup<? extends RdmaActiveEndpoint> group_;
+    private TRdmaServerGroup group_;
 //    private TProcessor processor_;
     private TProtocolFactory protocolFactory_;
+    private ArrayBlockingQueue<TRdmaServerJVerbTrans> transPool;
+    private ArrayBlockingQueue<TRdmaServerJVerbTrans> pendingTrans;
 
     private int clusterId;
 
 
-    public TRdmaServerEndpoint(TRdmaServerGroup<?extends RdmaActiveEndpoint> group, RdmaCmId idPriv, boolean serverSide) throws IOException {
+    public TRdmaServerEndpoint(TRdmaServerGroup group, RdmaCmId idPriv, boolean serverSide) throws IOException {
         super(group, idPriv, serverSide);
         this.group_=group;
+        this.clusterId = group_.newClusterId();
 //        this.processor_ = processor;
+        this.transPool = new ArrayBlockingQueue<>(group.recvQueueSize());
+        for(int i=0;i<group_.recvQueueSize();i++){
+            transPool.add(new TRdmaServerJVerbTrans());
+        }
+        this.pendingTrans = new ArrayBlockingQueue<>(group.recvQueueSize());
     }
 
     @Override
@@ -53,16 +63,21 @@ public class TRdmaServerEndpoint extends TRdmaEndpoint {
     }
 
     @Override
-    public void dispatchReceive( ByteBuffer recvBuffer, int ticket,int recvIndex) throws IOException {
+    public void dispatchReceive(ByteBuffer recvBuffer, int ticket,int recvIndex) throws IOException {
         //Step1 获取freeTrans TODO:trans可不可以池化 而不是新声明
-        TRdmaServerJVerbTrans trans = new TRdmaServerJVerbTrans();
-        TProtocol protocol = protocolFactory_.getProtocol(trans);
+        TRdmaServerJVerbTrans trans = transPool.poll();
 //      trans = group.getTrans();
+        if(trans ==null){
+            logger.info("no free events, must be overrunning server.. ");
+            throw new IOException("no free events, must be overrunning server.. ");
+
+        }
+        TProtocol protocol = protocolFactory_.getProtocol(trans);
 
         //Step2 填充trans数据
         trans.setEndpoint(this);
         trans.updateReadBuff(recvBuffer);
-
+        postRecv(recvIndex);
         //Step3 执行
         group_.processServerEvent(protocol);
 
@@ -71,6 +86,7 @@ public class TRdmaServerEndpoint extends TRdmaEndpoint {
     @Override
     public void dispatchSend(int index) throws IOException {
         this.freePostSend.add(sendCall[index]);
+
     }
 
     @Override

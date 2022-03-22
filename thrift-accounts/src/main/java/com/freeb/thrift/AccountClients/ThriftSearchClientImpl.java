@@ -5,6 +5,7 @@ import com.freeb.DaRPC.RawVersion.RdmaRpcResponse;
 import com.freeb.DaRPC.RawVersion.TRdmaClientRawTrans;
 import com.freeb.thrift.SearchService;
 import com.ibm.darpc.DaRPCClientEndpoint;
+import com.ibm.darpc.DaRPCStream;
 import org.apache.thrift.protocol.TBinaryProtocol;
 import org.apache.thrift.protocol.TProtocol;
 import org.apache.thrift.transport.TFramedTransport;
@@ -30,13 +31,23 @@ public class ThriftSearchClientImpl implements Closeable {
 		InetSocketAddress address = new InetSocketAddress(host, port);
 		System.out.println("ThriftSearchClientImpl@ create Endpoint 2 - start connect");
 		endpoint.connect(address,1000);
+		DaRPCStream<RdmaRpcRequest,RdmaRpcResponse> stream = endpoint.createStream();
 		System.out.println("ThriftSearchClientImpl@ create Endpoint 3 - end connect");
-		transport = new TRdmaClientRawTrans(endpoint,new RdmaRpcRequest(),new RdmaRpcResponse());
+		transport = new TRdmaClientRawTrans(endpoint,stream,new RdmaRpcRequest(),new RdmaRpcResponse());
 		transport.open();
 		System.out.println("ThriftSearchClientImpl@ create Endpoint 4");
 		protocol = new TBinaryProtocol(transport);
 		client = new SearchService.Client(protocol);
 		System.out.println("ThriftSearchClientImpl@ create Endpoint 5");
+	}
+
+	public ThriftSearchClientImpl(DaRPCClientEndpoint<RdmaRpcRequest,RdmaRpcResponse> endpoint, DaRPCStream<RdmaRpcRequest,RdmaRpcResponse> stream) {
+		transport = new TRdmaClientRawTrans(endpoint,stream,new RdmaRpcRequest(),new RdmaRpcResponse());
+
+		System.out.println("ThriftSearchClientImpl@ create Endpoint 6");
+		protocol = new TBinaryProtocol(transport);
+		client = new SearchService.Client(protocol);
+		System.out.println("ThriftSearchClientImpl@ create Endpoint 7");
 	}
 
 

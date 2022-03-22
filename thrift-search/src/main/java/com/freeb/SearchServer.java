@@ -6,6 +6,7 @@ import com.freeb.Utils.IPUtil;
 import com.freeb.thrift.SearchService;
 import com.freeb.thrift.SearchServer.SearchServiceServerImpl;
 
+import org.apache.commons.cli.*;
 import org.apache.thrift.protocol.TBinaryProtocol;
 import org.apache.thrift.server.TServer;
 import org.apache.thrift.server.TThreadedSelectorServer;
@@ -54,9 +55,27 @@ public class SearchServer {
 				server.launch(args);
 				return;
 			}
-			String serverHost = IPUtil.getIPAddress();
+			String serverHost="";
+			int port=0;
+			Option addressOption = Option.builder("a").required().desc("com.TRdma.server address").hasArg().build();
+			Option portOption = Option.builder("o").required().desc("com.TRdma.server port").hasArg().build();
+
+			Options options = new Options();
+			options.addOption(addressOption);
+			options.addOption(portOption);
+			CommandLineParser parser = new DefaultParser();
+
+			try {
+				CommandLine line = parser.parse(options, args);
+				serverHost = line.getOptionValue(addressOption.getOpt());
+				port = Integer.parseInt(line.getOptionValue(portOption.getOpt()));
+			} catch (ParseException e) {
+				HelpFormatter formatter = new HelpFormatter();
+				formatter.printHelp("com.TRdma.client.Client parse Args failed", options);
+				System.exit(-1);
+			}
 			System.out.println("init Server socket IP addr = "+serverHost);
-			InetSocketAddress serverAddress = new InetSocketAddress(serverHost, 8080);
+			InetSocketAddress serverAddress = new InetSocketAddress(serverHost, port);
 
 			TNonblockingServerTransport serverSocket = new TNonblockingServerSocket(serverAddress);
 

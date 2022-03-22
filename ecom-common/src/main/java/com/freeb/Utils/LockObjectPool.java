@@ -46,6 +46,21 @@ public class LockObjectPool<T> implements Closeable {
 		System.out.println("in LockObjectPool == 3 ==");
 	}
 
+	public LockObjectPool(int poolSize) {
+		this.poolSize = poolSize;
+
+		lockMap = new IdentityHashMap<>(poolSize * 2);
+
+		array = new ObjectWithLock[poolSize];
+
+	}
+	public void setObject(int pos,T object){
+		ObjectWithLock objectWithLock = new ObjectWithLock(object);
+		array[pos] = objectWithLock;
+		lockMap.put(object,objectWithLock);
+	}
+
+
 	public T borrow() {
 		int index = ThreadLocalRandom.current().nextInt(poolSize);
 		ObjectWithLock objectWithLock = array[index];

@@ -6,7 +6,9 @@ import com.freeb.thrift.SearchService;
 import com.ibm.disni.RdmaActiveEndpointGroup;
 import com.ibm.disni.RdmaServerEndpoint;
 import org.apache.commons.cli.*;
+import org.apache.thrift.TProcessor;
 import org.apache.thrift.protocol.TBinaryProtocol;
+import org.apache.thrift.protocol.TProtocolFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,7 +16,7 @@ import java.net.InetSocketAddress;
 
 public class TRdmaServerJVerb {
 
-    private RdmaActiveEndpointGroup<TRdmaServerEndpoint> group_;
+    private TRdmaServerGroup group_;
     private static final Logger logger = LoggerFactory.getLogger(TRdmaServerJVerb.class);
 
     private boolean testMode = true;
@@ -27,6 +29,9 @@ public class TRdmaServerJVerb {
     private int servicetimeout = 0;
     private boolean polling = false;
     private int maxinline = 0;
+    private int bufferSize = 1024;
+
+
 
     public void run() throws Exception{
         long[] clusterAffinities = new long[poolsize];
@@ -35,12 +40,11 @@ public class TRdmaServerJVerb {
             clusterAffinities[i] = cpu;
         }
         logger.info("running...server " + host + ", poolsize " + poolsize + ", maxinline " + maxinline + ", polling " + polling + ", recvQueue " + recvQueue + ", sendQueue " + sendQueue + ", wqSize " + wqSize + ", rpcservice-timeout " + servicetimeout);
-        TRdmaService rpcService = new TRdmaService(new SearchService.Processor<SearchService.Iface>(new SearchServiceServerImpl()));
-        rpcService.setProtocolFactory(new TBinaryProtocol.Factory());
+        TProcessor rpcService = new SearchService.Processor<SearchService.Iface>(new SearchServiceServerImpl());
         logger.info("rpcService Initialize Success");
-        group_ = new RdmaActiveEndpointGroup<TRdmaServerEndpoint>(1000, false, 128, 4, 128);
+        group_ = new TRdmaServerGroup(rpcService,new TBinaryProtocol.Factory(), servicetimeout, maxinline, recvQueue, sendQueue,bufferSize,clusterAffinities,polling,wqSize,32);
         logger.info("group Initialize Success");
-        RdmaServerEndpoint<DaRPCServerEndpoint<RdmaRpcRequest, RdmaRpcResponse>> serverEp = group.createServerEndpoint();
+        RdmaServerEndpoint<TRdmaServerEndpoint> serverEp = group_.createServerEndpoint();
         logger.info("server Ep Initialize Success");
         InetSocketAddress address = new InetSocketAddress(host, port);
         serverEp.bind(address, 100);
@@ -103,8 +107,8 @@ public class TRdmaServerJVerb {
                 sendQueue = Integer.parseInt(line.getOptionValue(sendQueueOption.getOpt()));
             }
             if (line.hasOption(serializedSizeOption.getOpt())) {
-                RdmaRpcRequest.SERIALIZED_SIZE = Integer.parseInt(line.getOptionValue(serializedSizeOption.getOpt()));
-                RdmaRpcResponse.SERIALIZED_SIZE = RdmaRpcRequest.SERIALIZED_SIZE;
+                bufferSize = Integer.parseInt(line.getOptionValue(serializedSizeOption.getOpt()));
+
             }
         } catch (ParseException e) {
             HelpFormatter formatter = new HelpFormatter();
@@ -114,6 +118,8 @@ public class TRdmaServerJVerb {
 
         this.run();
     }
+
+
 
     @Override
     public String toString() {

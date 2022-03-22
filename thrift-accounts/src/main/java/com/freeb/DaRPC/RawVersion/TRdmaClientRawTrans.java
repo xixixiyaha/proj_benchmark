@@ -53,11 +53,11 @@ public class TRdmaClientRawTrans extends TTransport {
         this.recvQueueDepth_ = recvQueueDepth;
     }
 
-    public TRdmaClientRawTrans(DaRPCClientEndpoint<RdmaRpcRequest,RdmaRpcResponse> endpoint, RdmaRpcRequest req, RdmaRpcResponse resp){
+    public TRdmaClientRawTrans(DaRPCClientEndpoint<RdmaRpcRequest,RdmaRpcResponse> endpoint,DaRPCStream<RdmaRpcRequest,RdmaRpcResponse> s, RdmaRpcRequest req, RdmaRpcResponse resp){
         this.endpoint_ = endpoint;
         this.req_ = req;
         this.resp_ = resp;
-
+        this.stream_ = s;
     }
 
 
@@ -67,7 +67,7 @@ public class TRdmaClientRawTrans extends TTransport {
             return;
         }
         RdmaRpcProtocol rpcProtocol = new RdmaRpcProtocol();
-        if (this.group_ != null) {
+        if (this.group_ == null) {
             this.group_ = DaRPCClientGroup.createClientGroup(rpcProtocol, 100, this.maxInline_, this.recvQueueDepth_, this.sendQueueDepth_);
         }
         InetSocketAddress address = new InetSocketAddress(this.host_, this.port_);
@@ -181,7 +181,7 @@ public class TRdmaClientRawTrans extends TTransport {
         this.resp_.setLimit(4);
         this.resp_.readFromParam(this.i32buf,0,4);
         this.resp_.consumeBuffer(4);
-        System.out.println("TRdmaClientRawTrans ReadFrame resp_ pos="+this.resp_.getBufferPosition());
+//        System.out.println("TRdmaClientRawTrans ReadFrame resp_ pos="+this.resp_.getBufferPosition());
 
         int size = decodeFrameSize(this.i32buf);
         if (size < 0) {
@@ -203,7 +203,7 @@ public class TRdmaClientRawTrans extends TTransport {
 
     @Override
     public void flush(){
-        System.out.println("TRdmaClientRawTrans Ready to flush()");
+//        System.out.println("TRdmaClientRawTrans Ready to flush()");
         byte[] buf = writeBuffer_.get();
         this.isRead = false;
 //        this.resp_=freeResponses.poll();
@@ -213,17 +213,17 @@ public class TRdmaClientRawTrans extends TTransport {
         this.req_.setLimit(4+len);
         this.req_.writeToParam(i32buf,0,4);
         this.req_.writeToParam(buf,0,len);
-        System.out.println("TRdmaClientRawTrans req_ len="+this.req_.getBufferPosition());
+//        System.out.println("TRdmaClientRawTrans req_ len="+this.req_.getBufferPosition());
 
         this.resp_.clear();
         //TODO 流控
         if(!testMode){
             // if it is not local test, send req to the HCA
             try {
-                System.out.println("TRdmaClientRawTrans future this.stream==null?"+(this.stream_ == null));
+//                System.out.println("TRdmaClientRawTrans future this.stream==null?"+(this.stream_ == null));
 
                 this.future_ = this.stream_.request(this.req_, this.resp_, false);
-                System.out.println("TRdmaClientRawTrans future tend");
+//                System.out.println("TRdmaClientRawTrans future tend");
 
             } catch (IOException e) {
                 e.printStackTrace();

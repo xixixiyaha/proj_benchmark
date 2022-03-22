@@ -91,32 +91,34 @@ public class SearchServiceImpl implements SearchService {
 
     @Override
     public List<Long> IdealResEfficiencyTest(Integer totalComputationLoad, Integer threadNum) {
-        long begintime = System.currentTimeMillis();
+        //TODO@high
+//        long begintime = System.currentTimeMillis();
         List<Long> results = new ArrayList<>();
-        Integer loopPerThread = totalComputationLoad/threadNum;
-        List<IdealComputationThread> threads = new ArrayList<>();
-        for(int i=0;i<threadNum;i++){
-            IdealComputationThread thread = new IdealComputationThread(loopPerThread);
-            thread.start();
-//            System.out.println("DBG@ threads len = "+threads.size());
-            threads.add(thread);
-//            System.out.println("DBG@ put "+i+" thread");
-        }
-        for(IdealComputationThread thread:threads){
-            try {
-                thread.join();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-        for(int i = 0; i<threadNum; i++){
-            results.add(threads.get(i).getComputationRe());
-        }
-        long endtime = System.currentTimeMillis();
-        long costtime = (endtime-begintime);
-        logger.info("beginTime = "+begintime);
-        logger.info("endTime = "+endtime);
-        logger.info("costTime = "+costtime);
+        results.add((long) (totalComputationLoad+threadNum));
+//        Integer loopPerThread = totalComputationLoad/threadNum;
+//        List<IdealComputationThread> threads = new ArrayList<>();
+//        for(int i=0;i<threadNum;i++){
+//            IdealComputationThread thread = new IdealComputationThread(loopPerThread);
+//            thread.start();
+////            System.out.println("DBG@ threads len = "+threads.size());
+//            threads.add(thread);
+////            System.out.println("DBG@ put "+i+" thread");
+//        }
+//        for(IdealComputationThread thread:threads){
+//            try {
+//                thread.join();
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//        for(int i = 0; i<threadNum; i++){
+//            results.add(threads.get(i).getComputationRe());
+//        }
+//        long endtime = System.currentTimeMillis();
+//        long costtime = (endtime-begintime);
+//        logger.info("beginTime = "+begintime);
+//        logger.info("endTime = "+endtime);
+//        logger.info("costTime = "+costtime);
         return results;
     }
 

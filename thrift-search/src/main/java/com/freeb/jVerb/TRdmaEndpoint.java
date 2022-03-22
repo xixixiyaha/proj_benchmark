@@ -108,10 +108,14 @@ public abstract class TRdmaEndpoint extends RdmaEndpoint {
     protected int pipeLength_ = 1;
 
 
-    public TRdmaEndpoint(TRdmaGroup<? extends RdmaActiveEndpoint> group, RdmaCmId idPriv, boolean serverSide) throws IOException {
+    public TRdmaEndpoint(TRdmaGroup<? extends RdmaEndpoint> group, RdmaCmId idPriv, boolean serverSide) throws IOException {
         super(group, idPriv, serverSide);
         this.rawMsgSize_ = 4+MAX_MESSAGE_SIZE;
 //        this.pipeLength = //TODO@high
+    }
+
+    protected void postRecv(int index) throws IOException {
+        recvCall[index].execute();
     }
 
     @Override

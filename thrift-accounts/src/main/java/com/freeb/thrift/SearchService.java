@@ -66,7 +66,7 @@ public class SearchService {
 
     public List<Long> IdealResEfficiencyTest(int totalComputationLoad, int threadName) throws org.apache.thrift.TException
     {
-      System.out.println("Search Service IdealResEfficiencyTest. begin send");
+//      System.out.println("Search Service IdealResEfficiencyTest. begin send");
       send_IdealResEfficiencyTest(totalComputationLoad, threadName);
       return recv_IdealResEfficiencyTest();
     }

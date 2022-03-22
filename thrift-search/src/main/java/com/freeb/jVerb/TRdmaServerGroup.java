@@ -8,6 +8,7 @@ import com.ibm.disni.verbs.IbvQP;
 import org.apache.thrift.TException;
 import org.apache.thrift.TProcessor;
 import org.apache.thrift.protocol.TProtocol;
+import org.apache.thrift.protocol.TProtocolFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,11 +30,15 @@ public class TRdmaServerGroup extends TRdmaGroup<TRdmaServerEndpoint> {
     private boolean polling;
     private int pollSize;
     private int clusterSize;
+    TProtocolFactory protocolFactory_;
 
 
-    public TRdmaServerGroup(TProcessor processor,int timeout, int maxinline, int recvQueue, int sendQueue,int bufferSize,long[] clusterAffinities, boolean polling, int pollSize, int clusterSize) throws Exception {
+
+
+    public TRdmaServerGroup(TProcessor processor,TProtocolFactory factory,int timeout, int maxinline, int recvQueue, int sendQueue,int bufferSize,long[] clusterAffinities, boolean polling, int pollSize, int clusterSize) throws Exception {
         super(timeout,maxinline,recvQueue,sendQueue,bufferSize);
         this.processor_ = processor;
+        this.protocolFactory_ = factory;
 
 //        deviceInstance = new ConcurrentHashMap<Integer, >();
         this.computeAffinities = clusterAffinities;
@@ -97,6 +102,12 @@ public class TRdmaServerGroup extends TRdmaGroup<TRdmaServerEndpoint> {
         }
     }
 
+    synchronized int newClusterId() {
+        int newClusterId = currentCluster;
+        currentCluster = (currentCluster + 1) % nbrOfClusters;
+        return newClusterId;
+    }
+
     public void close() throws IOException, InterruptedException {
         super.close();
         for(TRdmaNIC instance:deviceInstance.values()){
@@ -114,4 +125,8 @@ public class TRdmaServerGroup extends TRdmaGroup<TRdmaServerEndpoint> {
             e.printStackTrace();
         }
     }
+    public void setProtocolFactory(TProtocolFactory factory){
+        this.protocolFactory_ = factory;
+    }
+
 }
